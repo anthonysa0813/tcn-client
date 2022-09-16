@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
 
 export interface FormProp {
   email: string;
@@ -15,4 +15,8 @@ export interface UserResponse {
 export interface ContextInitial {
   user?: UserResponse;
   setUser?: Dispatch<SetStateAction<UserResponse | null>>;
+}
+
+export interface ChildProp {
+  children: JSX.Element | JSX.Element[];
 }

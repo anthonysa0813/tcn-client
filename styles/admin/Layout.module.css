@@ -1,0 +1,5 @@
+.mainGrid {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: auto 1fr;
+}

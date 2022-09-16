@@ -1,0 +1,25 @@
+.asideContainer {
+  padding: 40px;
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+  background: var(--bg-white);
+  color: var(--black);
+}
+
+.title {
+  margin-block-end: 52px;
+}
+
+.asideContainer ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}

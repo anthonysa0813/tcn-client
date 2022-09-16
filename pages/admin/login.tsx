@@ -19,7 +19,6 @@ const Login: FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if ([email, password].includes("")) {
-      console.log("algunos de los campos están vacios");
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -29,10 +28,12 @@ const Login: FC = () => {
     setError(false);
     loginFetchApi("auth/login", form).then((res) => {
       const { token, user } = res;
-      console.log("user", user);
+
       setUserGlobal(user);
       Cookies.set("token", token, { expires: 7 });
-      router.push("/admin");
+      if (token && Boolean(Object.keys(user).length > 0)) {
+        router.push("/admin");
+      }
     });
   };
 
