@@ -1,0 +1,29 @@
+.main-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.debug {
+  border: 3px solid brown;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.form-container h1 {
+  text-align: center;
+}
+
+.form-container input {
+  padding: 1rem;
+}
+
+.form-container button {
+  padding: 1rem;
+  margin-top: 1rem;
+}
