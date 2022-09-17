@@ -20,3 +20,18 @@ export interface ContextInitial {
 export interface ChildProp {
   children: JSX.Element | JSX.Element[];
 }
+
+export interface ClientResponse {
+  name: string;
+  usernames: string;
+  email: string;
+  _id?: string;
+  phone: string;
+  message: string;
+  __v?: string;
+  status: string;
+}
+
+export interface ClientData {
+  data: ClientResponse[];
+}
