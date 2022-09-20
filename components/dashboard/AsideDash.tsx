@@ -3,25 +3,39 @@ import React, { FC, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
+import { useRouter } from "next/router";
 
 const AsideDash: FC = () => {
   const { userGlobal } = useContext(UserContext);
-  console.log("context", userGlobal);
+  const router = useRouter()
+  const arrAsPath = router.asPath.split("/")
+  console.log(arrAsPath[arrAsPath.length - 1])
+
+  const pathActive = (path: string) => {
+    const pathName = arrAsPath[arrAsPath.length - 1]
+    if(pathName === path) {
+      return true
+    }else {
+      return false
+    }
+  }
+
   return (
     <aside className={styles.asideContainer}>
       <h1 className={styles.title}>Contact BPO</h1>
       <nav className="menu">
         <ul>
-          <Link href="/admin/clients">
-            <a>Lista de Clientes</a>
+          <Link href="/admin/clients" style={{display: "inline"}}>
+            <a  className={pathActive("clients") ? styles.activeLink : ""}>Lista de Clientes</a>
           </Link>
           <Link href="/admin/employees">
-            <a>Lista de Empleados</a>
+            <a className={pathActive("employees") ? styles.activeLink : ""}>Lista de Empleados</a>
           </Link>
         </ul>
       </nav>
       <div className={styles.profile}>
-        <h4>{userGlobal.name}</h4>
+        {/* <h4>{userGlobal.name}</h4> */}
+        <h4>Salir</h4>
         <BsChevronBarRight />
       </div>
     </aside>

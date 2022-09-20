@@ -22,8 +22,15 @@
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
+  padding-inline-start: 2rem;
 }
 
 .profile h4 {
   margin: 0;
+}
+
+.activeLink {
+  display: inline;
+  color: rgb(57, 57, 241);
+  font-weight: bold;
 }

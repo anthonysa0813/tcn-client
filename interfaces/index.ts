@@ -29,9 +29,32 @@ export interface ClientResponse {
   phone: string;
   message: string;
   __v?: string;
-  status: string;
+  status?: string;
 }
+
+export interface ClientInterface {
+  name: string,
+  surnames: string,
+  email: string,
+  phone: string,
+  message: string
+}
+
 
 export interface ClientData {
   data: ClientResponse[];
+}
+
+
+
+
+export interface EmployeeInterface  {
+  id: string,
+  name: string,
+  surnames: string,
+  email: string,
+  phone: string,
+  message: string,
+  status: true,
+  cv: string
 }

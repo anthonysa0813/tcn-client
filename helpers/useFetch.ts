@@ -21,3 +21,16 @@ export const getFetchApi = async (endpoint: string) => {
   const data = await response.json();
   return data;
 };
+
+export const changeStatus= async (endpoint: string, id: string) => {
+  try {
+    const response = await fetch(`http://localhost:5050/api/${endpoint}/${id}`, {
+      method: "PUT",
+    });
+    const data = await response.json();
+    console.log("data", data)
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

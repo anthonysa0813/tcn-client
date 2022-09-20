@@ -1,0 +1,27 @@
+.debug {
+    border: 3px solid brown;
+
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-white);
+    row-gap: 1.5rem;
+    padding: 40px;
+    background-color: white;
+    z-index: 1000;
+    border-radius: .5rem;
+    position: relative;
+}
+
+.closeIcon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+    color: var(--black);
+   
+}

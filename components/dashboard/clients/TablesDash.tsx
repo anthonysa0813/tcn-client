@@ -1,9 +1,21 @@
 import React from "react";
-import { Table } from "@nextui-org/react";
+import { Checkbox, Table } from "@nextui-org/react";
 import { ClientData, ClientResponse } from "../../../interfaces";
+import { changeStatus } from "../../../helpers/useFetch";
+import { useRouter } from "next/router";
+
 // import { ClientResponse } from "../../../interfaces";
 
 const TablesDash = ({ data }: ClientData) => {
+  const valuesHead = ["Estado", "Nombre Completo", "Email", "Mensaje", "Teléfono", "Status"]
+  const router = useRouter()
+  const changeStatusById = async (id: string) => {
+    const res = await changeStatus("clients", id)
+    if(res) {
+      router.reload()
+    }
+  }
+
   return (
     <Table
       aria-label="Example table with static content"
@@ -13,38 +25,31 @@ const TablesDash = ({ data }: ClientData) => {
       }}
     >
       <Table.Header>
-        <Table.Column>Nombre Completo</Table.Column>
-        <Table.Column>Email</Table.Column>
-        <Table.Column>Mensaje</Table.Column>
-        <Table.Column>Telefóno</Table.Column>
-        <Table.Column>Status</Table.Column>
+        {
+          valuesHead.map((value, index) => {
+            return (
+              <Table.Column key={index}>{value}</Table.Column>
+            )
+          })
+        }
       </Table.Header>
       <Table.Body>
         {data.map((user: ClientResponse) => {
           return (
             <Table.Row key={user._id}>
+              <Table.Cell>
+              <input type="checkbox" onClick={() => changeStatusById(user._id) } checked={user.status ? true : false }/>
+              </Table.Cell>
               <Table.Cell>{user.name}</Table.Cell>
               <Table.Cell>{user.email}</Table.Cell>
               <Table.Cell>{user.message}</Table.Cell>
               <Table.Cell>{user.phone}</Table.Cell>
-              <Table.Cell>{user.status}</Table.Cell>
+              <Table.Cell>{
+                  user.status ? "Atendido" : "Sin atender"
+                }</Table.Cell>
             </Table.Row>
           );
         })}
-        <Table.Row key="1">
-          <Table.Cell>Tony Reichert</Table.Cell>
-          <Table.Cell>CEO</Table.Cell>
-          <Table.Cell>Active</Table.Cell>
-          <Table.Cell>CEO</Table.Cell>
-          <Table.Cell>Active</Table.Cell>
-        </Table.Row>
-        <Table.Row key="2">
-          <Table.Cell>Zoey Lang</Table.Cell>
-          <Table.Cell>Technical Lead</Table.Cell>
-          <Table.Cell>Paused lorem</Table.Cell>
-          <Table.Cell>CEO</Table.Cell>
-          <Table.Cell>Active</Table.Cell>
-        </Table.Row>
       </Table.Body>
     </Table>
   );

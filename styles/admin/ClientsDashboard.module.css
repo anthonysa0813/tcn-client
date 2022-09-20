@@ -16,3 +16,7 @@
   padding: 24px 32px;
   background-color: var(--bg-white);
 }
+
+.text-black {
+  color: black;
+}
