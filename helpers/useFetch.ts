@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { FormProp } from "../interfaces";
+import { ClientInterface, FormProp } from "../interfaces";
 
 const token = Cookies.get("token");
 
@@ -33,4 +33,17 @@ export const changeStatus= async (endpoint: string, id: string) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const createUser = async (endpoint: string, dataUser: ClientInterface) => {
+  const response = await fetch(`http://localhost:5050/api/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Authorization": sessionStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataUser),
+  });
+  const data = await response.json();
+  return data;
 };

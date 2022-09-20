@@ -4,6 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const AsideDash: FC = () => {
   const { userGlobal } = useContext(UserContext);
@@ -18,6 +19,12 @@ const AsideDash: FC = () => {
     }else {
       return false
     }
+  }
+
+  const outSession = () => {
+    Cookies.remove("token")
+    sessionStorage.clear()
+    router.push("/admin")
   }
 
   return (
@@ -35,8 +42,8 @@ const AsideDash: FC = () => {
       </nav>
       <div className={styles.profile}>
         {/* <h4>{userGlobal.name}</h4> */}
-        <h4>Salir</h4>
-        <BsChevronBarRight />
+        <h4 onClick={outSession}>Salir</h4>
+        <BsChevronBarRight onClick={outSession} />
       </div>
     </aside>
   );

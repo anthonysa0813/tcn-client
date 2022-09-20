@@ -37,7 +37,7 @@ export interface ClientInterface {
   surnames: string,
   email: string,
   phone: string,
-  message: string
+  message?: string
 }
 
 

@@ -30,6 +30,7 @@ const Login: FC = () => {
       const { token, user } = res;
 
       setUserGlobal(user);
+      sessionStorage.setItem("token", token);
       Cookies.set("token", token, { expires: 7 });
       if (token && Boolean(Object.keys(user).length > 0)) {
         router.push("/admin");

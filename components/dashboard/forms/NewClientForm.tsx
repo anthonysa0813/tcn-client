@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "../../../styles/admin/form/NewClientForm.module.css";
 import {AiFillCloseCircle} from "react-icons/ai"
 import { Button, Input, Textarea } from '@nextui-org/react';
 import useForm from '../../../hooks/useForm';
 import { ClientInterface, ClientResponse } from '../../../interfaces';
+import useEffect from 'react';
+import {createUser} from "../../../helpers/useFetch"
+import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Prop {
     setModal: (state:boolean) => boolean;
 }
 
 const NewClientForm = ({setModal}: Prop) => {
-    const {email, name, surnames, phone, message,onChange, form} = useForm<ClientInterface>({
+ 
+    let {onChange, form, email, name, surnames, phone, message} = useForm<ClientInterface>({
         name: "",
         surnames: "",
         email: "",
@@ -18,20 +24,56 @@ const NewClientForm = ({setModal}: Prop) => {
         message: ""
     })
 
+    const [error, setErrror] = useState(false)
+    const notify = () => toast("El cliente fue creado");
+    
+
     const closeModal = () => {
         setModal(false);
     }
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+       if([email, surnames,phone, message, name].includes("")){
+            setErrror(true)
+            setTimeout(() => {
+                setErrror(false)
+            }, 2000 )
+            return;
+       }
+       createUser("clients", form).then(res => {
+        const {user} = res
+        setFormState({
+            name: "",
+            surnames: "",
+            email: "",
+            phone: "",
+            message: ""
+        })
+        if(user){
+            notify()
+        }
+       });
+
+    }
+
   return (
-    <form className={`${styles.formContainer}`}>
+    <form className={`${styles.formContainer}`} onSubmit={handleSubmit}>
         <AiFillCloseCircle className={styles.closeIcon} onClick={closeModal} />
         <h3>Agregar un Nuevo Cliente</h3>
+        <ToastContainer />
+        {
+            error &&
+            <div className={styles["alert-danger"]}>
+                Todos los campos son obligatorios
+            </div>
+        }
         <Input labelPlaceholder="Nombre" name="name" value={name} onChange={onChange} />
         <Input labelPlaceholder="Apellidos" name="surnames" value={surnames} onChange={onChange} />
         <Input labelPlaceholder="Email" name="email" value={email} onChange={onChange} />
         <Input labelPlaceholder="Telefono" name="phone" value={phone} onChange={onChange} />
         <Textarea placeholder="Mensaje" rows={4} name="message" value={message} onChange={onChange} />
-        <Button >
+        <Button type='submit'>
             Agregar
         </Button>
     </form>
