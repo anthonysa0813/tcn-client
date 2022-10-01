@@ -58,3 +58,14 @@ export interface EmployeeInterface  {
   status: true,
   cv: string
 }
+
+
+export interface Service {
+  _id: string,
+  title: string,
+  company: string,
+  description: string,
+  createdAt: string,
+  updatedAt: string,
+  __v?: number
+}

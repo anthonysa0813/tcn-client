@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import styles from "../../styles/admin/Login.module.css";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context/UserContext";
+import { Button, Input, Spacer } from "@nextui-org/react";
 
 const Login: FC = () => {
   const { email, password, form, onChange } = useForm<FormProp>({
@@ -45,23 +46,35 @@ const Login: FC = () => {
           className={` ${styles["form-container"]}`}
           onSubmit={handleSubmit}
         >
-          <h1>Login</h1>
+          <h1>ContactBpo Login</h1>
           {error && <span>Todos los campos son obligatorios</span>}
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={onChange}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onChange}
-          />
-          <button type="submit">Ingresar</button>
+          <Spacer y={1.5} />
+
+            <Input
+              type="email"
+              clearable
+              underlined
+              labelPlaceholder="Email"
+              name="email"
+              value={email}
+              onChange={onChange}
+              
+            />
+             <Spacer y={2.5} />
+            <Input
+              clearable
+              underlined
+              labelPlaceholder="Password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChange}
+            />
+          <Spacer y={1.5} />
+
+           <Button type="submit">
+              Ingresar
+          </Button>
         </form>
       </main>
     </>

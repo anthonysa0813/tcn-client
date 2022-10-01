@@ -17,6 +17,17 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
 }
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.debug {
+  border: 3px solid brown;
+}
+
+
 a {
   color: inherit;
   text-decoration: none;
@@ -46,3 +57,11 @@ a {
   background-color: var(--black);
   color: white;
 }
+
+
+/* main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 150px);
+} */

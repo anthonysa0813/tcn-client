@@ -1,0 +1,17 @@
+.header {
+  box-shadow: -1px 5px 11px -3px rgba(163,140,140,0.91);
+  -webkit-box-shadow: -1px 5px 11px -3px rgba(163,140,140,0.91);
+  -moz-box-shadow: -1px 5px 11px -3px rgba(163,140,140,0.91);
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.headerContainer nav ul {
+  display: flex;
+  column-gap: 1rem;
+}
