@@ -8,7 +8,6 @@
   --bg-green: #00a389;
   --bg-purple: #6e1dd6;
   --bg-black: #22242c;
-  --black: #22242c;
 }
 
 html,
@@ -65,3 +64,7 @@ a {
   align-items: center;
   height: calc(100vh - 150px);
 } */
+
+.wrapper h1 {
+  text-align: center;
+}
