@@ -140,6 +140,7 @@ const EditPage = ({data}: any) => {
             <div className={styles.field}>
                 <label htmlFor="">
                     País:
+                    <br />
                 <select name="callingCode" onChange={handleOption} className={styles.select} >
                     {
                         Object.keys(data.countriesNames).map( (country: any, index) => {

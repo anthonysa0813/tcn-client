@@ -64,11 +64,11 @@ export interface EmployeeInterface  {
 
 
 export interface Service {
-  _id: string,
+  _id?: string,
   title: string,
   company: string,
   description: string,
-  createdAt: string,
-  updatedAt: string,
+  createdAt?: string,
+  updatedAt?: string,
   __v?: number
 }

@@ -23,7 +23,7 @@ const ModalShowService = ({service, setShowModal}: Prop) => {
                 <h4>{service.company}</h4>
             </div>
             <div className="infoBody">
-                <p>{service.description}</p>
+                <p dangerouslySetInnerHTML={{ __html: service.description }}></p>
             </div>
             <div className="infoDate">
                 <span>Fecha de Publicación: {formatDate(service.createdAt)}</span>

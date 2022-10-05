@@ -12,6 +12,24 @@
 
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.gray {
+  background: var(--bg-gray300);
+}
+.purple {
+  background-color: var(--bg-purple);
+}
+.green {
+  background-color: var(--bg-green);
+}
+.dark {
+  background-color: var(--bg-black);
+}
+
+
 html,
 body {
   padding: 0;

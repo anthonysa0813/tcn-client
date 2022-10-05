@@ -30,8 +30,10 @@ const LayoutEmployee = ({children, name}: Prop) => {
                     </ul>
                 </nav>
             </div>
-            <div className={styles.mainProfile}>
-                {children}
+            <div className={`${styles.mainProfile}`}>
+                <div className="wrapper">
+                    {children}
+                </div>
             </div>
         </div>
     </main>

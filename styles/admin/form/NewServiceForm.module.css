@@ -1,0 +1,26 @@
+
+
+.form {
+ /* display: flex;
+ flex-direction: column;
+ row-gap: 2rem; */
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-block: 2rem
+}
+
+.button{
+    background: var(--bg-black);
+    color: white;
+    cursor: pointer;
+    padding: .5rem 1.5rem;
+    border-radius: .25rem;
+}
+
+.button:hover {
+    background: var(--bg-black100);
+
+}

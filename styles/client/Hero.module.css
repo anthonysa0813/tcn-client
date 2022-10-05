@@ -1,0 +1,12 @@
+.heroContainer {
+    color: white;
+    height: 500px;
+}
+
+.heroGrid {
+    height: inherit;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

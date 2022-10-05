@@ -44,19 +44,19 @@ const Navbar = () => {
                 <nav>
                     <ul>
                         <li>
-                            <Link href="/">
-                                <a>Servicios</a>
+                            <Link href="#services">
+                               <a>Servicios</a>
                             </Link>
                             </li>
                         <li>
-                            <Link href="/">
+                            <Link href="#team">
                              <a>
                              Nuestro Equipo
                              </a>
                             </Link>
                            </li>
                         <li>
-                            <Link href="/">
+                            <Link href="#clients">
                                 <a>Clientes</a>
                             </Link>
                             </li>
@@ -66,7 +66,7 @@ const Navbar = () => {
                             </Link>
                             </li>
                         <li>
-                            <Link href="/">
+                            <Link href="/user/register">
                                 <a>Trabaja con Nosotros</a>
                             </Link>
                             </li>

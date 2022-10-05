@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Hero from "../components/Hero";
 import Navbar from "../components/menu/Navbar";
 import styles from "../styles/client/Contact.module.css";
 
@@ -13,7 +14,7 @@ const ContactPage: NextPage = () => {
       </Head>
       <Navbar />
       <main>
-        <h1>ContactPage </h1>
+        {/* <Hero title="Contact" /> */}
       </main>
     </>
   );

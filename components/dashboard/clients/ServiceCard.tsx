@@ -17,7 +17,7 @@ const ServiceCard = ({service}: Prop) => {
     const [showModal, setShowModal] = useState(false);
    
     
-    const applicationJob = (idJob: string) => {
+    const applicationJob = (idJob: string = "") => {
         if(!employeeGlobal.id){
             const notify = () => toast.error("Necesitas de una cuenta registrada");
             notify()
@@ -46,11 +46,12 @@ const ServiceCard = ({service}: Prop) => {
             <h4 className={styles.companyTitle}>{service.company}</h4>
         </div>
         <div className={styles.infoContainer}>
-            <p>{service.description}</p>
+            {/* <p>{service.description}</p> */}
+            <p dangerouslySetInnerHTML={{ __html: service.description }}></p>
         </div>
         <div className={styles.actions}>
             <button className={styles.button} onClick={() => setShowModal(true)}>ver más a detalle</button>
-            <button className={styles.button} onClick={() => applicationJob(service._id)}>aplicar</button>
+            <button className={styles.button} onClick={() => applicationJob(service?._id)}>aplicar</button>
         </div>
     </div>
     </>
