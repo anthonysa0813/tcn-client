@@ -1,0 +1,63 @@
+.mainModal{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContainer {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.modalContainer form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    min-width: 400px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field input {
+    padding: .5rem .75rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+}
+
+.button {
+    padding: .5rem .75rem;
+    border: none;
+    outline: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    background-color: var(--bg-black);
+    color: white;
+    margin-block-start: 1rem;
+}
+
+.button:hover {
+    background-color: var(--bg-black100);
+}
+
+
+.form svg {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    font-size: 2rem;
+    background-color: white;
+    border-radius: 50%;
+}

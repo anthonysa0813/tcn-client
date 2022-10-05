@@ -1,0 +1,20 @@
+
+.applicationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.serviceCard {
+    border: 2px solid var(--bg-purple);
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.serviceCard button {
+    background-color: var(--bg-purple);
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: .25rem;
+}

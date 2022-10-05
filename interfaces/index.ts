@@ -54,9 +54,12 @@ export interface EmployeeInterface  {
   surnames: string,
   email: string,
   phone: string,
-  message: string,
-  status: true,
-  cv: string
+  status?: true,
+  cv: string,
+  callingCode: string,
+  typeJob: string,
+  service: string[] | [] ,
+  password: string
 }
 
 

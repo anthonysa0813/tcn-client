@@ -29,11 +29,10 @@ const CampaignPage = ({services}: ServiceProp) => {
                 {
                   services.map(service => {
                     return (<>
-                      <ServiceCard service={service} />
+                      <ServiceCard key={service._id} service={service} />
                     </>)
                   })
                 }
-
             </div>
           </div>
         </div>

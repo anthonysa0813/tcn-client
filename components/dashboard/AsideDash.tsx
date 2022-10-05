@@ -38,6 +38,9 @@ const AsideDash: FC = () => {
           <Link href="/admin/employees">
             <a className={pathActive("employees") ? styles.activeLink : ""}>Lista de Empleados</a>
           </Link>
+          <Link href="/admin/newService">
+            <a className={pathActive("newService") ? styles.activeLink : ""}>Crear nuevo Servicio</a>
+          </Link>
         </ul>
       </nav>
       <div className={styles.profile}>
