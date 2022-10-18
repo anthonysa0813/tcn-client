@@ -4,14 +4,19 @@ import Navbar from "../components/menu/Navbar";
 import styles from "../styles/client/Campaign.module.css";
 import { getFetchApi } from "../helpers/useFetch"
 import { Service } from "../interfaces";
-import ServiceCard from "../components/dashboard/clients/ServiceCard";
+// import ServiceCard from "../components/dashboard/clients/ServiceCard";
 import { useState } from "react";
+import dynamic from 'next/dynamic'
 
 interface ServiceProp {
   services: Service[] | [];
 }
 
-const CampaignPage = ({services}: ServiceProp) => {
+const ServiceCard = dynamic(() => import("../components/dashboard/clients/ServiceCard"), {
+ssr: false,
+});
+
+const CampaignPage = ({services}: ServiceProp ) => {
   const [showModal, setShowModal] = useState(false)
   return (
     <>
@@ -27,7 +32,7 @@ const CampaignPage = ({services}: ServiceProp) => {
             <h3>Campañas y Servicios</h3>
             <div className={styles.servicesGrid}>
                 {
-                  services.map(service => {
+                  services?.map(service => {
                     return (<>
                       <ServiceCard key={service._id} service={service} />
                     </>)

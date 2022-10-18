@@ -6,7 +6,7 @@ import MainDashboard from "./MainDashboard";
 
 const LayoutDashboard = ({ children }: ChildProp) => {
   return (
-    <div className={`${styles.mainGrid} `}>
+    <div className={`${styles.mainGrid}`}>
       <AsideDash />
       <MainDashboard>{children}</MainDashboard>
     </div>

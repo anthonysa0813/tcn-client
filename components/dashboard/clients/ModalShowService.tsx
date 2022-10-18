@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { formatDate } from '../../../helpers/formatDate';
 import { Service } from '../../../interfaces';
 import styles from "../../../styles/client/Campaign.module.css";
 import {IoIosCloseCircle} from "react-icons/io"
+import { useRouter } from 'next/router';
+import { EmployeeContext, EmployeeContextProps } from '../../../context/EmployeeContext';
+import { toast } from 'react-toastify';
 
 interface Prop {
     service: Service,
@@ -10,10 +13,34 @@ interface Prop {
 }
 
 const ModalShowService = ({service, setShowModal}: Prop) => {
+    const {employeeGlobal, setEmployeeGlobal} = useContext<EmployeeContextProps>(EmployeeContext);
+    const router = useRouter()
+   
 
     const closeModal = () => {
         setShowModal(false);
     }
+
+    const applicationJob = (idJob: string = "") => {
+        if(!employeeGlobal.id){
+            const notify = () => toast.error("Necesitas de una cuenta registrada");
+            notify();
+            setTimeout(() => {
+                router.push("/user/register")
+            }, 1500)
+        }
+        const employeeId = employeeGlobal.id;
+        fetch(`http://localhost:5050/api/employees/${employeeId}/${idJob}`, {
+            method: 'POST',
+        })
+            .then(res => res.json())
+            .then(data => {
+                const notify = () => toast.success("Aplicaste a este puesto");
+                notify()
+            })
+    }
+
+
   return (
     <div className={styles.modal}>
         <div className={styles.modalContainer}>
@@ -29,7 +56,7 @@ const ModalShowService = ({service, setShowModal}: Prop) => {
                 <span>Fecha de Publicación: {formatDate(service.createdAt)}</span>
             </div>
             <div className="actions">
-                <button className={styles.button}>Aplicar</button>
+                <button className={styles.button} onClick={() => applicationJob(service._id)}>Aplicar</button>
             </div>
         </div>
     </div>

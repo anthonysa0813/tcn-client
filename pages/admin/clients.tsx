@@ -15,7 +15,7 @@ const Clients = () => {
   const { userGlobal } = useContext(UserContext);
   const router = useRouter();
   const [clientsArr, setClientsArr] = useState([]);
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     // if (!token || Object.values(userGlobal).includes("")) {
     if (!token) {
@@ -28,13 +28,15 @@ const Clients = () => {
   }, []);
 
   const showModal = () => {
-    setModal(!modal)
-  }
+    setModal(!modal);
+  };
 
   return (
     <LayoutDashboard>
       <header className={styles.asideHead}>
-        <h1 className={styles["text-black"]}>Lista de todos los clientes ({clientsArr.length})</h1>
+        <h1 className={styles["text-black"]}>
+          Lista de todos los clientes ({clientsArr.length})
+        </h1>
         <ButtonPrimary
           onClick={() => showModal()}
           type="button"
@@ -43,11 +45,13 @@ const Clients = () => {
         />
       </header>
       <TablesDash data={clientsArr} />
-      {
-        modal && <ModalComponent>
+      {modal ? (
+        <ModalComponent>
           <NewClientForm setModal={setModal} />
         </ModalComponent>
-      }
+      ) : (
+        <></>
+      )}
     </LayoutDashboard>
   );
 };

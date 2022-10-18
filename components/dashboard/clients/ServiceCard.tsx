@@ -5,6 +5,7 @@ import styles from "../../../styles/client/Campaign.module.css";
 import ModalShowService from './ModalShowService';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 
 interface Prop {
@@ -15,15 +16,18 @@ interface Prop {
 const ServiceCard = ({service}: Prop) => {
     const {employeeGlobal, setEmployeeGlobal} = useContext<EmployeeContextProps>(EmployeeContext);
     const [showModal, setShowModal] = useState(false);
+    const router = useRouter()
    
     
     const applicationJob = (idJob: string = "") => {
         if(!employeeGlobal.id){
             const notify = () => toast.error("Necesitas de una cuenta registrada");
-            notify()
+            notify();
+            setTimeout(() => {
+                router.push("/user/register")
+            }, 1500)
         }
         const employeeId = employeeGlobal.id;
-        console.log(`http://localhost:5050/api/employees/${employeeId}/${idJob}`)
         fetch(`http://localhost:5050/api/employees/${employeeId}/${idJob}`, {
             method: 'POST',
         })

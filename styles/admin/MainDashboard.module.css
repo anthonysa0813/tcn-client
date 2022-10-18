@@ -1,4 +1,6 @@
 .mainContainer {
   padding: 40px 50px;
-  background: var(--bg-gray100);
+  background: var(--bg-white);
+  height: 100vh;
+  overflow-y: scroll;
 }

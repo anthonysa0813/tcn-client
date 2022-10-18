@@ -1,0 +1,102 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: 2rem;
+}
+
+.alert {
+  border: 2px solid var(--bg-blue300);
+  border-radius: 0.5rem;
+  color: var(--bg-blue200);
+  padding: 0.5rem 1.5rem;
+}
+.alertCotent {
+  display: flex;
+  align-items: center;
+}
+
+.subText {
+  color: var(--bg-gray300);
+  font-size: 10px;
+}
+
+.field {
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--bg-gray100);
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  position: relative;
+}
+
+.profileProfesional {
+  padding-block: 2rem;
+}
+
+.inputSection select {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--bg-blue200);
+  color: var(--bg-blue200);
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  row-gap: 1rem;
+}
+
+.inputSection button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.button svg {
+  margin-inline-end: 0.5rem;
+}
+
+.input {
+  border: none;
+  outline: none;
+  border: 1.5px solid var(--bg-gray300);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.titleHead {
+  display: flex;
+  align-items: center;
+  /* column-gap: 0.5rem; */
+  /* padding-inline: 1rem; */
+}
+
+.titleHeadSecondary {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 0.5rem;
+  column-gap: 0.5rem;
+  margin-block-start: 1rem;
+}
+
+.titleHead h3 {
+  margin: 0;
+}
+
+/* skills option */
+
+.experienceContainer {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 2rem;
+}
+
+.selection select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border-color: var(--bg-blue200);
+  color: var(--bg-blue200);
+}

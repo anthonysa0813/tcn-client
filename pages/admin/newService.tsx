@@ -6,6 +6,8 @@ import { Input } from '@nextui-org/react'
 import useForm from '../../hooks/useForm'
 import { createNewServicefetch } from '../../helpers/employeeFetch';
 import styles from "../../styles/admin/form/NewServiceForm.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
 	ssr: false,
@@ -16,6 +18,8 @@ interface FormProp {
     company: string,
     description?: string
 }
+
+const notify = () => toast.success("Se creó el servicio!");
 
 const NewServicePage = () => {
     const [descriptionState, setDescriptionState] = useState("")
@@ -40,12 +44,14 @@ const NewServicePage = () => {
         }
         setError(false);
         createNewServicefetch({title, company, description: descriptionState}).then((res) => {
-            console.log("res new service", res);
+           
+            notify()
         });
       };
 
   return (
     <LayoutDashboard>
+        <ToastContainer />
         <h1>Crear un nuevo servicio</h1>
         <div className="wrapper">
         <form onSubmit={handleSubmit} className={styles.form}>

@@ -1,23 +1,54 @@
 .profileGrid {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
-    min-height: 100vh;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  min-height: 100vh;
 }
 
 .asideMenu {
-    padding: 2rem;
-    width: 400px;
-    box-shadow:  5px 5px 80px #e1e1e1,
-    -5px -5px 80px #ffffff;
+  padding: 2rem;
+  width: auto;
+  box-shadow: 5px 5px 80px #e1e1e1, -2px -2px 80px #ffffff;
+  background-color: rgb(242, 246, 247);
 }
 
 .mainProfile {
-    padding: 2rem;
-    text-align: center;
-
+  padding: 2rem;
 }
 
 .asideMenu ul {
-    margin: 0;
+  margin: 0;
+}
+
+.boxMenu {
+  /* background-color: red; */
+  display: flex;
+  /* padding: 0.25rem 0.5rem; */
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--bg-black);
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.navigation {
+  margin-block-start: 2rem;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.link {
+  display: block;
+}
+
+.activeLink {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }

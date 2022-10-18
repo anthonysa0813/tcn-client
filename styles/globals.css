@@ -3,13 +3,17 @@
 :root {
   --bg-white: #ffffff;
   --bg-gray300: #8e8ea1;
+  --bg-gray100: #e1e1e1;
   --bg-white200: #f3f3f3;
-  --bg-gray100: #f9f9f9;
   --bg-green: #00a389;
   --bg-purple: #6e1dd6;
   --bg-black100: #131519;
   --bg-black: #22242c;
-
+  --bg-red: #990033;
+  --bg-blue200: #175676;
+  --bg-blue300: #175676;
+  --bg-blue100: #cce6f4;
+  --bg-blueLight: #f2f6f7;
 }
 
 html {
@@ -29,7 +33,6 @@ html {
   background-color: var(--bg-black);
 }
 
-
 html,
 body {
   padding: 0;
@@ -45,7 +48,6 @@ body {
 .debug {
   border: 3px solid brown;
 }
-
 
 a {
   color: inherit;
@@ -73,10 +75,9 @@ a {
 }
 
 .bg-dark {
-  background-color: var(--black);
+  background-color: var(--bg-black);
   color: white;
 }
-
 
 /* main {
   display: flex;
@@ -87,4 +88,12 @@ a {
 
 .wrapper h1 {
   text-align: center;
+}
+
+.text-success {
+  color: var(--bg-green);
+}
+
+.text-danger {
+  color: var(--bg-red);
 }

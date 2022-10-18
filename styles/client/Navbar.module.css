@@ -1,26 +1,18 @@
 .header {
-  box-shadow: -1px 5px 11px -3px rgba(163,140,140,0.91);
-  -webkit-box-shadow: -1px 5px 11px -3px rgba(163,140,140,0.91);
-  -moz-box-shadow: -1px 5px 11px -3px rgba(163,140,140,0.91);
+  background-color: rgb(242, 246, 247);
 }
 
 .headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
-
-
-
-
 
 .headerContainer nav ul {
   display: flex;
   column-gap: 1rem;
   align-items: center;
 }
-
 
 .headerContainer ul li {
   margin: 0;
@@ -37,7 +29,7 @@
 }
 
 .miniMenu {
-  display: none ;
+  display: none;
 }
 
 .user {
@@ -46,22 +38,35 @@
   border-radius: 50%;
 }
 
-.user:hover > .miniMenu {
+.iconUser:hover > .miniMenu {
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 100%;
-  left: -150%;
+  left: -10%;
   padding: 1rem;
   background-color: white;
   color: var(--bg-black);
-  border-radius: .4rem;
-  box-shadow:  20px 20px 80px #bebebe,
-             -20px -20px 80px #ffffff;
-
+  border-radius: 0.4rem;
+  box-shadow: 20px 20px 80px #e1e1e1, -5px -5px 80px #ffffff;
 }
-
 
 .miniMenu:hover {
   display: flex;
+}
+
+.iconUser {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.buttonDark {
+  background-color: var(--bg-black);
+  color: white;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
 }

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { loginFetchApi } from '../../helpers/useFetch';
 import 'react-toastify/dist/ReactToastify.css';
 import { EmployeeContext, EmployeeContextProps } from '../../context/EmployeeContext';
+import { useRouter } from 'next/router';
 
 interface Prop {
     setshowModalLogin: (state: boolean) => void;
@@ -20,6 +21,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
         password: ""
     }); 
     const {email, password} = form;
+    const router = useRouter()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({
             ...form,
@@ -46,6 +48,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
                 notify();
                 setTimeout(() => {
                     setshowModalLogin(false);
+                    router.push("/employee/profile")
                 }, 1500)
             }
             

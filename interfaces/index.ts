@@ -18,7 +18,7 @@ export interface ContextInitial {
 }
 
 export interface ChildProp {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | boolean;
 }
 
 export interface ClientResponse {
@@ -33,42 +33,40 @@ export interface ClientResponse {
 }
 
 export interface ClientInterface {
-  name: string,
-  surnames: string,
-  email: string,
-  phone: string,
-  message?: string
+  name: string;
+  surnames: string;
+  email: string;
+  phone: string;
+  message?: string;
 }
-
 
 export interface ClientData {
   data: ClientResponse[];
 }
 
-
-
-
-export interface EmployeeInterface  {
-  id: string,
-  name: string,
-  surnames: string,
-  email: string,
-  phone: string,
-  status?: true,
-  cv: string,
-  callingCode: string,
-  typeJob: string,
-  service: string[] | [] ,
-  password: string
+export interface EmployeeInterface {
+  id: string;
+  name: string;
+  surnames: string;
+  email: string;
+  phone?: string;
+  status?: true;
+  country?: string;
+  cv?: string;
+  callingCode?: string;
+  typeJob?: string;
+  service?: string[] | [];
+  password?: string;
+  message?: string;
 }
 
-
 export interface Service {
-  _id?: string,
-  title: string,
-  company: string,
-  description: string,
-  createdAt?: string,
-  updatedAt?: string,
-  __v?: number
+  _id?: string;
+  title: string;
+  company: string;
+  description: string;
+  createdAt?: string;
+  updatedAt?: string;
+  employees?: [];
+  __v?: number;
 }
