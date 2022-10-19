@@ -59,6 +59,7 @@ const EditPage = ({ data }: any) => {
     fetch(`http://localhost:5050/api/employees/${id}`)
       .then((res) => res.json())
       .then((data) => setFormValues(data));
+    localStorage.setItem("countries", JSON.stringify(data.countriesNames));
   }, [id]);
 
   const handleChange = (
@@ -286,6 +287,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // data de nombres de paises
   const res = await fetch("http://country.io/names.json");
   const data = await res.json();
+
   // data de código telefónico
   const resCode = await fetch("http://country.io/phone.json");
   const dataCode = await resCode.json();

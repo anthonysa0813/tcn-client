@@ -72,6 +72,20 @@
   /* padding-inline: 1rem; */
 }
 
+.infoLeft {
+  display: flex;
+  align-items: center;
+}
+
+.experienceHead {
+  justify-content: space-between;
+  align-items: center o !important;
+}
+
+.experienceHead button {
+  margin: 0;
+}
+
 .titleHeadSecondary {
   display: flex;
   align-items: center;

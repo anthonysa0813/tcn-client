@@ -70,3 +70,8 @@ export interface Service {
   employees?: [];
   __v?: number;
 }
+
+export interface CourntriesDataResponse {
+  countriesNames: any;
+  callingCode: string;
+}

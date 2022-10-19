@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap");
+* {
+  box-sizing: border-box;
+}
 
 :root {
   --bg-white: #ffffff;
@@ -96,4 +99,23 @@ a {
 
 .text-danger {
   color: var(--bg-red);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

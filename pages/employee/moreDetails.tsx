@@ -17,6 +17,8 @@ import EditorProfile from "../../components/EditorProfile/EditorProfile";
 import NewLanguage from "../../components/forms/NewLanguage";
 import useLang from "../../hooks/useLang";
 import ButtonPrimary from "../../components/buttons/Button";
+import ModalComponent from "../../components/dashboard/ModalComponent";
+import FormExperience from "../../components/employees/FormExperience";
 
 const MoreDetails = () => {
   const router = useRouter();
@@ -32,6 +34,11 @@ const MoreDetails = () => {
   useEffect(() => {
     showLang();
   }, [counterLang]);
+  const [showModalExperience, setshowModalExperience] = useState(false);
+
+  const openExperience = () => {
+    setshowModalExperience((state) => !state);
+  };
 
   return (
     <>
@@ -287,23 +294,41 @@ const MoreDetails = () => {
 
           <div className={styles.profileProfesional}>
             <div className="info">
-              <div className={styles.titleHead}>
-                <BsFillFileEarmarkTextFill
+              <div className={`${styles.titleHead} ${styles.experienceHead}`}>
+                <div className={styles.infoLeft}>
+                  <BsFillFileEarmarkTextFill
+                    style={{
+                      marginInline: ".5rem",
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
+                  <h3>Perfil Profesional y Experiencia: </h3>
+                </div>
+                <Button
+                  onPress={openExperience}
                   style={{
-                    marginInline: ".5rem",
-                    width: "20px",
-                    height: "20px",
+                    padding: 0,
+                    marginInlineStart: 0,
                   }}
-                />
-                <h3>Perfil Profesional y Experiencia: </h3>
+                  className={styles.button}
+                >
+                  <BsFillPlusCircleFill />
+                  <p>Agregar eperiencia</p>
+                </Button>
               </div>
               <span className={styles.subText}>
                 Los datos que ingreses será utilizados para futuras
                 postulaciones.
               </span>
             </div>
+            {showModalExperience && (
+              <ModalComponent>
+                <FormExperience openExperience={openExperience} />
+              </ModalComponent>
+            )}
           </div>
-          <EditorProfile />
+          {/* <EditorProfile /> */}
           <ButtonPrimary
             color="dark"
             content="Guardar"
