@@ -114,3 +114,21 @@
   border-color: var(--bg-blue200);
   color: var(--bg-blue200);
 }
+
+.listGridLang {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-block-start: 1rem;
+}
+
+.listGridLang span {
+  background-color: var(--bg-blue200);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1rem;
+}

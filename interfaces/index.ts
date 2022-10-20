@@ -75,3 +75,19 @@ export interface CourntriesDataResponse {
   countriesNames: any;
   callingCode: string;
 }
+
+export interface LangObject {
+  lang: string;
+  levelWriter: string;
+  levelOral: string;
+  idEmployee: string;
+}
+
+export interface LangResponse {
+  _id: string;
+  lang: string;
+  levelWriter: string;
+  levelOral: string;
+  employee: string;
+  __v?: number;
+}

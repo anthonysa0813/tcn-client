@@ -4,7 +4,7 @@ interface PropTypes {
   content: string;
   type: "submit" | "button" | "reset" | undefined;
   color: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ButtonPrimary = ({ content, type, color, onClick }: PropTypes) => {

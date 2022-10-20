@@ -5,6 +5,7 @@ import { CourntriesDataResponse } from "../../interfaces";
 import styles from "../../styles/employees/Experience.module.css";
 import {
   Area,
+  countriesDataResponse,
   dataListActivities,
   Months,
   nivelExperience,
@@ -12,6 +13,8 @@ import {
   years,
 } from "../../utils/activitiesToBussiness";
 import ButtonPrimary from "../buttons/Button";
+import DatalistInput from "react-datalist-input";
+import { useCurrentState } from "@nextui-org/react";
 
 interface Prop {
   openExperience: () => void;
@@ -20,14 +23,26 @@ interface Prop {
 const FormExperience = ({ openExperience }: Prop) => {
   const [countriesData, setCountriesData] = useState({} as Object);
   const [checkPresent, setCheckPresent] = useState(false);
+  const [activityValue, setActivityValue] = useState("");
+  const [nivelExp, setNivelExp] = useState("");
+  const [areaValue, setAreaValue] = useState("");
+  const [subAreaValue, setSubAreaValue] = useState("");
+  const [monthValue, setMonthValue] = useState("");
+  const [yearValue, setYearValue] = useState("");
+  const [montFinal, setMontFinal] = useState("");
+  const [yearFinal, setyearFinal] = useState("");
   useEffect(() => {
     const local: string = localStorage.getItem("countries") || "";
     const countries = JSON.parse(local);
     setCountriesData(countries);
   }, []);
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
-    <form className={styles.formGrid}>
+    <form className={styles.formGrid} onSubmit={onSubmit}>
       <div className="experienceHead">
         <h1 className={styles.title}>Añade una nueva Experiencia</h1>
         <div className={styles.boxClose}>
@@ -40,137 +55,74 @@ const FormExperience = ({ openExperience }: Prop) => {
           <input type="text" name="empresa" placeholder="Ingresa el nombre" />
         </div>
         <div className={styles.field}>
-          <label htmlFor="">Actividad de la empresa</label>
-          <input
-            list="activities"
-            name="activity"
-            id="activity"
-            placeholder="tecnología..."
+          <DatalistInput
+            className="dataList"
+            placeholder="call center"
+            label="Actividad de la empresa"
+            onSelect={(item) => setActivityValue(item.value)}
+            items={dataListActivities}
           />
-          <datalist id="activities">
-            {Object.values(dataListActivities).map((value) => {
-              return (
-                <option value={value} key={value}>
-                  {value}
-                </option>
-              );
-            })}
-          </datalist>
         </div>
         <div className={styles.field}>
           <label htmlFor="">Puesto</label>
           <input type="text" placeholder="nombre del puesto" />
         </div>
         <div className={styles.field}>
-          <label htmlFor="">Nivel de experiencia</label>
-          <input
-            list="experiences"
-            name="experience"
-            id="experience"
-            placeholder="tecnología..."
+          <DatalistInput
+            className="dataList"
+            placeholder=""
+            label="Nivel de experiencia"
+            onSelect={(item) => setNivelExp(item.value)}
+            items={nivelExperience}
           />
-          <datalist id="experiences">
-            {Object.values(nivelExperience).map((exp) => {
-              return (
-                <option value={exp} key={exp}>
-                  {exp}
-                </option>
-              );
-            })}
-          </datalist>
         </div>
         <div className={styles.field}>
-          <label htmlFor="">Área del Puesto</label>
-          <input
-            list="areas"
-            name="area"
-            id="area"
-            placeholder="tecnología..."
+          <DatalistInput
+            className="dataList"
+            placeholder=""
+            label="Área del Puesto"
+            onSelect={(item) => setAreaValue(item.value)}
+            items={Area}
           />
-          <datalist id="areas">
-            {Object.values(Area).map((a) => {
-              return (
-                <option value={a} key={a}>
-                  {a}
-                </option>
-              );
-            })}
-          </datalist>
         </div>
         <div className={styles.field}>
-          <label htmlFor="">Subárea</label>
-          <input
-            list="subareas"
-            name="subarea"
-            id="subarea"
-            placeholder="tecnología..."
+          <DatalistInput
+            className="dataList"
+            placeholder=""
+            label="Subárea"
+            onSelect={(item) => setSubAreaValue(item.value)}
+            items={subArea}
           />
-          <datalist id="subareas">
-            {Object.values(subArea).map((a) => {
-              return (
-                <option value={a} key={a}>
-                  {a}
-                </option>
-              );
-            })}
-          </datalist>
         </div>
         <div className={styles.field}>
-          <label htmlFor="">País</label>
-          <input
-            list="countries"
-            name="country"
-            id="country"
-            placeholder="Perú..."
+          <DatalistInput
+            className="dataList"
+            placeholder=""
+            label="País"
+            onSelect={(item) => setSubAreaValue(item.value)}
+            items={countriesDataResponse}
           />
-          <datalist id="countries">
-            {Object.values(countriesData).map((a) => {
-              return (
-                <option value={a} key={a}>
-                  {a}
-                </option>
-              );
-            })}
-          </datalist>
         </div>
         <div className={styles.fieldSecond}>
           <label htmlFor="">Fecha de Inicio</label>
           <div className={styles.fieldSecondaryGrid}>
             <div className={styles.firstInput}>
-              <span>Mes</span>
-              <input
-                list="startMonths"
-                name="startMonth"
-                id="startMonth"
-                placeholder="Febrero"
+              <DatalistInput
+                className="dataList"
+                placeholder="Enero"
+                label="Mes"
+                onSelect={(item) => setMonthValue(item.value)}
+                items={Months}
               />
-              <datalist id="startMonths">
-                {Object.values(Months).map((month) => {
-                  return (
-                    <option value={month} key={month}>
-                      {month}
-                    </option>
-                  );
-                })}
-              </datalist>
             </div>
             <div className={styles.secondInput}>
-              <span>Año</span>
-              <input
-                list="startYears"
-                name="startYear"
-                id="startYear"
-                placeholder="2019"
+              <DatalistInput
+                className="dataList"
+                placeholder=""
+                label="Año"
+                onSelect={(item) => setYearValue(item.value)}
+                items={years}
               />
-              <datalist id="startYears">
-                {Object.values(years).map((year) => {
-                  return (
-                    <option value={year} key={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </datalist>
             </div>
           </div>
         </div>
@@ -178,40 +130,22 @@ const FormExperience = ({ openExperience }: Prop) => {
           <label htmlFor="">Fecha de Fin</label>
           <div className={styles.fieldSecondaryGrid}>
             <div className={styles.firstInput}>
-              <span>Mes</span>
-              <input
-                list="endMonths"
-                name="endMonth"
-                id="endMonth"
-                placeholder="Diciembre"
+              <DatalistInput
+                className="dataList"
+                placeholder=""
+                label="Mes"
+                onSelect={(item) => setMontFinal(item.value)}
+                items={Months}
               />
-              <datalist id="endMonths">
-                {Object.values(Months).map((month) => {
-                  return (
-                    <option value={month} key={month}>
-                      {month}
-                    </option>
-                  );
-                })}
-              </datalist>
             </div>
             <div className={styles.secondInput}>
-              <span>Año</span>
-              <input
-                list="endYears"
-                name="endYear"
-                id="endYear"
-                placeholder="2022"
+              <DatalistInput
+                className="dataList"
+                placeholder=""
+                label="Año"
+                onSelect={(item) => setyearFinal(item.value)}
+                items={years}
               />
-              <datalist id="endYears">
-                {Object.values(years).map((year) => {
-                  return (
-                    <option value={year} key={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </datalist>
             </div>
             <div className={styles.presentField}>
               <input
@@ -235,7 +169,7 @@ const FormExperience = ({ openExperience }: Prop) => {
         color="dark"
         content="Guardar datos"
         onClick={() => console.log("jeje")}
-        type="button"
+        type="submit"
       />
     </form>
   );

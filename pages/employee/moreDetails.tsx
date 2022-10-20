@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Edit.module.css";
 import { ArrowLeft, Calling, InfoCircle, ArrowRight } from "react-iconly";
@@ -21,27 +21,33 @@ import ModalComponent from "../../components/dashboard/ModalComponent";
 import FormExperience from "../../components/employees/FormExperience";
 import FormNewLang from "../../components/employees/FormNewLang";
 import FormNewSkills from "../../components/employees/FormNewSkills";
+import { GetServerSideProps } from "next";
+import { API_URL_DEV } from "../../utils/constanstApi";
+import {
+  deleteLangByEmployee,
+  getAllLanguagesByEmployee,
+} from "../../apis/languages/useFetchLang";
+import {
+  EmployeeContext,
+  EmployeeContextProps,
+} from "../../context/EmployeeContext";
+import { LangResponse } from "../../interfaces";
+import { IoMdClose } from "react-icons/io";
 
 const MoreDetails = () => {
   const router = useRouter();
-  // const {
-  //   addCounter,
-  //   showLang,
-  //   counterLang,
-  //   language2,
-  //   language3,
-  //   language4,
-  //   close,
-  // } = useLang();
-  // useEffect(() => {
-  //   showLang();
-  // }, [counterLang]);
+
   const [showModalToLang, setShowModalToLang] = useState(false);
   const [showModalExperience, setshowModalExperience] = useState(false);
   const [showModalSkills, setShowModalSkills] = useState(false);
+  const { employeeGlobal, setEmployeeGlobal } =
+    useContext<EmployeeContextProps>(EmployeeContext);
+
+  const { id: idEmployee } = employeeGlobal;
   const openExperience = () => {
     setshowModalExperience((state) => !state);
   };
+  const [stateListLang, setStateListLang] = useState<LangResponse[] | []>([]);
 
   const openLang = () => {
     setShowModalToLang((state) => !state);
@@ -49,6 +55,24 @@ const MoreDetails = () => {
 
   const openSkill = () => {
     setShowModalSkills((state) => !state);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    getAllLanguagesByEmployee(idEmployee).then((res) => {
+      setStateListLang(res);
+    });
+  }, []);
+
+  const deleteLangCall = (idLang: string) => {
+    deleteLangByEmployee(idLang).then((res) => {
+      console.log(res);
+      const filterLang = stateListLang.filter((l) => l._id !== idLang);
+      setStateListLang(filterLang);
+    });
   };
 
   return (
@@ -77,7 +101,7 @@ const MoreDetails = () => {
             <ArrowRight />
           </Button>
         </div>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className={styles.field}>
             <div className="info">
               <div className={styles.titleHead}>
@@ -165,7 +189,7 @@ const MoreDetails = () => {
               </Button>
             </div>
           </div>
-          <div className={styles.field}>
+          <div className={`${styles.field}`}>
             <div className="info">
               <div className={styles.titleHead}>
                 <GiPublicSpeaker
@@ -180,6 +204,19 @@ const MoreDetails = () => {
               <span className={styles.subText}>
                 Agrega los idiomas que consideres que domincas
               </span>
+              <div className={styles.listGridLang}>
+                {stateListLang &&
+                  stateListLang.map((language) => {
+                    return (
+                      <span key={language._id}>
+                        {language.lang}
+                        <IoMdClose
+                          onClick={() => deleteLangCall(language._id)}
+                        />
+                      </span>
+                    );
+                  })}
+              </div>
             </div>
             <div className={styles.inputSection}>
               <Button
@@ -228,34 +265,54 @@ const MoreDetails = () => {
               </span>
             </div>
           </div>
-          {showModalExperience && (
-            <ModalComponent>
-              <FormExperience openExperience={openExperience} />
-            </ModalComponent>
-          )}
-          {showModalToLang && (
-            <ModalComponent>
-              <FormNewLang openLang={openLang} />
-            </ModalComponent>
-          )}
-
-          {showModalSkills && (
-            <ModalComponent>
-              <FormNewSkills openSkill={openSkill} />
-            </ModalComponent>
-          )}
 
           {/* <EditorProfile /> */}
           <ButtonPrimary
             color="dark"
             content="Guardar"
             onClick={() => console.log("click")}
-            type="button"
+            type="submit"
           />
         </form>
       </LayoutEmployee>
+
+      {showModalExperience && (
+        <ModalComponent>
+          <FormExperience openExperience={openExperience} />
+        </ModalComponent>
+      )}
+      {showModalToLang && (
+        <ModalComponent>
+          <FormNewLang
+            openLang={openLang}
+            setStateListLang={setStateListLang}
+            stateListLang={stateListLang}
+          />
+        </ModalComponent>
+      )}
+
+      {showModalSkills && (
+        <ModalComponent>
+          <FormNewSkills openSkill={openSkill} />
+        </ModalComponent>
+      )}
     </>
   );
 };
+
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   // data de nombres de paises
+//   const response = await fetch(`${API_URL_DEV}/language/all/${idEmployee}`);
+//   const data = await response.json();
+
+//   // current User
+//   return {
+//     props: {
+//       data: {
+//         languagesList: []
+//       },
+//     },
+//   };
+// };
 
 export default MoreDetails;
