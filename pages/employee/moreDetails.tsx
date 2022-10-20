@@ -11,7 +11,7 @@ import {
   BsFillPlusCircleFill,
   BsFillXCircleFill,
 } from "react-icons/bs";
-import { GiPublicSpeaker } from "react-icons/gi";
+import { GiPublicSpeaker, GiSkills } from "react-icons/gi";
 
 import EditorProfile from "../../components/EditorProfile/EditorProfile";
 import NewLanguage from "../../components/forms/NewLanguage";
@@ -19,25 +19,36 @@ import useLang from "../../hooks/useLang";
 import ButtonPrimary from "../../components/buttons/Button";
 import ModalComponent from "../../components/dashboard/ModalComponent";
 import FormExperience from "../../components/employees/FormExperience";
+import FormNewLang from "../../components/employees/FormNewLang";
+import FormNewSkills from "../../components/employees/FormNewSkills";
 
 const MoreDetails = () => {
   const router = useRouter();
-  const {
-    addCounter,
-    showLang,
-    counterLang,
-    language2,
-    language3,
-    language4,
-    close,
-  } = useLang();
-  useEffect(() => {
-    showLang();
-  }, [counterLang]);
+  // const {
+  //   addCounter,
+  //   showLang,
+  //   counterLang,
+  //   language2,
+  //   language3,
+  //   language4,
+  //   close,
+  // } = useLang();
+  // useEffect(() => {
+  //   showLang();
+  // }, [counterLang]);
+  const [showModalToLang, setShowModalToLang] = useState(false);
   const [showModalExperience, setshowModalExperience] = useState(false);
-
+  const [showModalSkills, setShowModalSkills] = useState(false);
   const openExperience = () => {
     setshowModalExperience((state) => !state);
+  };
+
+  const openLang = () => {
+    setShowModalToLang((state) => !state);
+  };
+
+  const openSkill = () => {
+    setShowModalSkills((state) => !state);
   };
 
   return (
@@ -125,6 +136,38 @@ const MoreDetails = () => {
           <div className={styles.field}>
             <div className="info">
               <div className={styles.titleHead}>
+                <GiSkills
+                  style={{
+                    marginInline: ".5rem",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+                <p>Añade tus Habilidades y Conocimientos: </p>
+              </div>
+              <span className={styles.subText}>
+                Escribe una palabra simple o compuesta.Ej: desarrollador
+                Frontend
+              </span>
+            </div>
+            <div className={styles.inputSection}>
+              <Button
+                onPress={() => setShowModalSkills(!showModalSkills)}
+                style={{
+                  marginTop: 20,
+                  padding: 0,
+                  marginInlineStart: 0,
+                }}
+                className={styles.button}
+              >
+                <BsFillPlusCircleFill />
+                <p>Agregar una habilidad </p>
+              </Button>
+            </div>
+          </div>
+          <div className={styles.field}>
+            <div className="info">
+              <div className={styles.titleHead}>
                 <GiPublicSpeaker
                   style={{
                     marginInline: ".5rem",
@@ -132,165 +175,27 @@ const MoreDetails = () => {
                     height: "20px",
                   }}
                 />
-                <p>Idioma: </p>
+                <p>Idioma(s): </p>
               </div>
               <span className={styles.subText}>
-                Ejmplo: {"Inglés - intermedio"}.
+                Agrega los idiomas que consideres que domincas
               </span>
-              <div className={styles.titleHeadSecondary}>
-                <BsFillArrowUpRightCircleFill />
-                <p>Nivel: </p>
-              </div>
             </div>
             <div className={styles.inputSection}>
-              <input type="text" className={styles.input} />
-              <select id="">
-                <option value="">Seleccione</option>
-                <option value="Principiante">Principiante</option>
-                <option value="Conversacional">Conversacional</option>
-                <option value="Fluido">Fluído</option>
-              </select>
               <Button
-                onPress={addCounter}
+                onPress={() => setShowModalToLang(!showModalToLang)}
                 style={{
                   marginTop: 20,
                   padding: 0,
                   marginInlineStart: 0,
-                  marginInlineEnd: "-1rem",
                 }}
                 className={styles.button}
               >
                 <BsFillPlusCircleFill />
-                <p>Agregar otro idioma</p>
+                <p>Agregar idioma</p>
               </Button>
             </div>
           </div>
-          {language2 && (
-            <>
-              <div className={styles.field}>
-                <div className="info">
-                  <div className={styles.titleHead}>
-                    <GiPublicSpeaker
-                      style={{
-                        marginInline: ".5rem",
-                        width: "20px",
-                        height: "20px",
-                      }}
-                    />
-                    <p>Idioma 2: </p>
-                  </div>
-                  <span className={styles.subText}>
-                    Ejmplo: {"Inglés - intermedio"}.
-                  </span>
-                  <div className={styles.titleHeadSecondary}>
-                    <BsFillArrowUpRightCircleFill />
-                    <p>Nivel: </p>
-                  </div>
-                </div>
-                <div className={styles.inputSection}>
-                  <input type="text" className={styles.input} />
-                  <select id="">
-                    <option value="">Seleccione</option>
-                    <option value="Principiante">Principiante</option>
-                    <option value="Conversacional">Conversacional</option>
-                    <option value="Fluido">Fluído</option>
-                  </select>
-                  <Button
-                    onPress={() => close(2)}
-                    style={{ marginTop: 20, padding: 0 }}
-                    className={styles.button}
-                  >
-                    <BsFillXCircleFill />
-                    <p>eliminar</p>
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
-          {language3 && (
-            <>
-              <div className={styles.field}>
-                <div className="info">
-                  <div className={styles.titleHead}>
-                    <GiPublicSpeaker
-                      style={{
-                        marginInline: ".5rem",
-                        width: "20px",
-                        height: "20px",
-                      }}
-                    />
-                    <p>Idioma 3: </p>
-                  </div>
-                  <span className={styles.subText}>
-                    Ejmplo: {"Inglés - intermedio"}.
-                  </span>
-                  <div className={styles.titleHeadSecondary}>
-                    <BsFillArrowUpRightCircleFill />
-                    <p>Nivel: </p>
-                  </div>
-                </div>
-                <div className={styles.inputSection}>
-                  <input type="text" className={styles.input} />
-                  <select id="">
-                    <option value="">Seleccione</option>
-                    <option value="Principiante">Principiante</option>
-                    <option value="Conversacional">Conversacional</option>
-                    <option value="Fluido">Fluído</option>
-                  </select>
-                  <Button
-                    onPress={() => close(3)}
-                    style={{ marginTop: 20, padding: 0 }}
-                    className={styles.button}
-                  >
-                    <BsFillXCircleFill />
-                    <p>eliminar</p>
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
-          {language4 && (
-            <>
-              <div className={styles.field}>
-                <div className="info">
-                  <div className={styles.titleHead}>
-                    <GiPublicSpeaker
-                      style={{
-                        marginInline: ".5rem",
-                        width: "20px",
-                        height: "20px",
-                      }}
-                    />
-                    <p>Idioma 4: </p>
-                  </div>
-                  <span className={styles.subText}>
-                    Ejmplo: {"Inglés - intermedio"}.
-                  </span>
-                  <div className={styles.titleHeadSecondary}>
-                    <BsFillArrowUpRightCircleFill />
-                    <p>Nivel: </p>
-                  </div>
-                </div>
-                <div className={styles.inputSection}>
-                  <input type="text" className={styles.input} />
-                  <select id="">
-                    <option value="">Seleccione</option>
-                    <option value="Principiante">Principiante</option>
-                    <option value="Conversacional">Conversacional</option>
-                    <option value="Fluido">Fluído</option>
-                  </select>
-                  <Button
-                    onPress={() => close(4)}
-                    style={{ marginTop: 20, padding: 0 }}
-                    className={styles.button}
-                  >
-                    <BsFillXCircleFill />
-                    <p>eliminar</p>
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
 
           <div className={styles.profileProfesional}>
             <div className="info">
@@ -322,12 +227,24 @@ const MoreDetails = () => {
                 postulaciones.
               </span>
             </div>
-            {showModalExperience && (
-              <ModalComponent>
-                <FormExperience openExperience={openExperience} />
-              </ModalComponent>
-            )}
           </div>
+          {showModalExperience && (
+            <ModalComponent>
+              <FormExperience openExperience={openExperience} />
+            </ModalComponent>
+          )}
+          {showModalToLang && (
+            <ModalComponent>
+              <FormNewLang openLang={openLang} />
+            </ModalComponent>
+          )}
+
+          {showModalSkills && (
+            <ModalComponent>
+              <FormNewSkills openSkill={openSkill} />
+            </ModalComponent>
+          )}
+
           {/* <EditorProfile /> */}
           <ButtonPrimary
             color="dark"

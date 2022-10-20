@@ -136,3 +136,55 @@ export const years = {
   2023: "2023",
   2024: "2024",
 };
+
+export const Languages = {
+  english: "Inglés",
+  chino: "Chino Mandarín",
+  coreano: "Coreano",
+  espanish: "Español",
+  frances: "Francés",
+  holandes: "Holandés",
+  italiano: "Italiano",
+  japones: "Japonés",
+  quechua: "Quechua",
+};
+
+export const nivels = {
+  basico: "Básico",
+  intermedio: "Intermedio",
+  avanzado: "Avanzado",
+  nativo: "Nativo",
+};
+
+export const skills = {
+  asistente: "Asistente Administrativo",
+  asistenteEjecutiva: "Asistente Ejecutiva",
+  devApple: "Especialista en código X de Apple",
+  devApi: "Desarrollador de API",
+  escritor: "Escritor de artículos",
+  contador: "Contador",
+  soporteChat: "Especialista en soporte de chat",
+  devExtensionToChrome: "Desarrollador de extensiones de Chrome",
+  devC: "Desarrollador C++",
+  llamadorFrio: "Llamador frío",
+  ventasSalientes: "Ventas salientes",
+  ventasEntrantes: "Ventas entrantes",
+  establecedorCitas: "Establecedor de citas",
+  servicioAlCliente: "Servicio al Cliente",
+  entradaDeDatos: "Entrada de datos",
+  mineroDeDatos: "Minero de datos",
+  expertoExcel: "Experto en Excel",
+  controladorCorreos: "Controlador de correo electrónico",
+  frontend: "Desarrollador front-end",
+  devIos: "Desarrollador iOS",
+  devLinux: "Desarrollador Linux",
+  powerPoint: "Power Point",
+  devPython: "Desarrollador Python",
+  devReact: "Desarrollador ReactJs",
+  devR: "Desarrollador R",
+  devSQL: "Desarrollador SQL",
+  asistVirtual: "Asistente Virtual",
+  devWorPress: "Desarrollador WorPress",
+  cad3D: "Diseño CAD 3D",
+  seo: "SEO",
+};
