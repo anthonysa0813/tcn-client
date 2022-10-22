@@ -91,3 +91,23 @@ export interface LangResponse {
   employee: string;
   __v?: number;
 }
+
+export interface Experience {
+  activyBussiness: string;
+  area: string;
+  country: string;
+  currentJob: boolean;
+  dateEnd: string;
+  dateStart: string;
+  description: string;
+  employee: string;
+  level: string;
+  nameBussiness: string;
+  subarea: string;
+  title: string;
+  _id?: string;
+  nameRef?: string;
+  emailRef?: string;
+  countryRef?: string;
+  phoneRef?: string;
+}

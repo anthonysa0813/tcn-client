@@ -77,8 +77,24 @@ a {
   border-radius: 8px;
 }
 
+.btn-outline_danger {
+  /* padding: 0.25rem 0.5rem !important; */
+  background-color: var(--bg-red) !important;
+  color: var(--bg-blue100) !important;
+}
+
 .bg-dark {
   background-color: var(--bg-black);
+  color: white;
+}
+
+.bg-primary {
+  background-color: var(--bg-blue200);
+  color: white;
+}
+
+.bg-danger {
+  background-color: var(--bg-red);
   color: white;
 }
 

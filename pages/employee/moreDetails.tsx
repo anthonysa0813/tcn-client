@@ -3,6 +3,8 @@ import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Edit.module.css";
 import { ArrowLeft, Calling, InfoCircle, ArrowRight } from "react-iconly";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { BiEditAlt } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 import { Button, Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import {
@@ -31,8 +33,10 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { LangResponse } from "../../interfaces";
+import { Experience, LangResponse } from "../../interfaces";
 import { IoMdClose } from "react-icons/io";
+import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
+import FormToDeleteExp from "../../components/employees/FormToDeleteExp";
 
 const MoreDetails = () => {
   const router = useRouter();
@@ -40,6 +44,10 @@ const MoreDetails = () => {
   const [showModalToLang, setShowModalToLang] = useState(false);
   const [showModalExperience, setshowModalExperience] = useState(false);
   const [showModalSkills, setShowModalSkills] = useState(false);
+  const [dataListExperiences, setDataListExperiences] = useState<
+    Experience[] | []
+  >([]);
+  const [showModalToDelete, setshowModalToDelete] = useState(false);
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
 
@@ -48,6 +56,10 @@ const MoreDetails = () => {
     setshowModalExperience((state) => !state);
   };
   const [stateListLang, setStateListLang] = useState<LangResponse[] | []>([]);
+  const [currentExperience, setcurrentExperience] = useState<Experience>(
+    {} as Experience
+  );
+  const [editMode, setEditMode] = useState(false);
 
   const openLang = () => {
     setShowModalToLang((state) => !state);
@@ -64,6 +76,9 @@ const MoreDetails = () => {
   useEffect(() => {
     getAllLanguagesByEmployee(idEmployee).then((res) => {
       setStateListLang(res);
+    });
+    getExperienceByEmployee("experiences", idEmployee).then((res) => {
+      setDataListExperiences(res);
     });
   }, []);
 
@@ -93,13 +108,13 @@ const MoreDetails = () => {
             <ArrowLeft />
             atrás
           </Button>
-          <Button
+          {/* <Button
             onPress={() => router.push("/employee/skills")}
             style={{ marginTop: 20, padding: 0 }}
           >
             Añadir habilidades
             <ArrowRight />
-          </Button>
+          </Button> */}
         </div>
         <form onSubmit={onSubmit}>
           <div className={styles.field}>
@@ -264,6 +279,43 @@ const MoreDetails = () => {
                 postulaciones.
               </span>
             </div>
+            <div className={styles.experiencesList}>
+              {dataListExperiences.length > 0 &&
+                dataListExperiences.map((exp) => {
+                  return (
+                    <div key={exp._id} className={styles.experienceGrid}>
+                      <div className={styles.infoExperience}>
+                        <h5>{exp.title}</h5>
+                        <span className={styles.titleBussiness}>
+                          {exp.nameBussiness}
+                        </span>
+                        <div className="placeAndDate">
+                          <span>
+                            {exp.dateStart} - {exp.dateEnd}, {exp.country}
+                          </span>
+                        </div>
+                        <div className="readMore">
+                          <span>Leer completo</span>
+                        </div>
+                      </div>
+                      <div className={styles.actionsExperiences}>
+                        <BiEditAlt
+                          onClick={() => {
+                            setEditMode((state) => !state);
+                            setcurrentExperience(exp);
+                          }}
+                        />
+                        <MdDelete
+                          onClick={() => {
+                            setcurrentExperience(exp);
+                            setshowModalToDelete((state) => !state);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
 
           {/* <EditorProfile /> */}
@@ -275,10 +327,36 @@ const MoreDetails = () => {
           />
         </form>
       </LayoutEmployee>
+      {showModalToDelete && (
+        <ModalComponent>
+          <FormToDeleteExp
+            setshowModalToDelete={setshowModalToDelete}
+            currentExperience={currentExperience}
+            setDataListExperiences={setDataListExperiences}
+            dataListExperiences={dataListExperiences}
+          />
+        </ModalComponent>
+      )}
 
       {showModalExperience && (
         <ModalComponent>
-          <FormExperience openExperience={openExperience} />
+          <FormExperience
+            openExperience={openExperience}
+            dataListExperiences={dataListExperiences}
+            setDataListExperiences={setDataListExperiences}
+          />
+        </ModalComponent>
+      )}
+      {editMode && (
+        <ModalComponent>
+          <FormExperience
+            openExperience={openExperience}
+            dataListExperiences={dataListExperiences}
+            setDataListExperiences={setDataListExperiences}
+            editMode={editMode}
+            currentExperience={currentExperience}
+            setEditMode={setEditMode}
+          />
         </ModalComponent>
       )}
       {showModalToLang && (

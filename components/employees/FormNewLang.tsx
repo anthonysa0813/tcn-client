@@ -31,7 +31,6 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
     let id: EmployeeInterface | null = null;
     id = JSON.parse(localStorage.getItem("employee") || "");
     setIdEmployee(id?.id || "");
-    console.log({ formLang, formOral, formWriter });
   }, [idEmployee, formLang, formOral, formWriter]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

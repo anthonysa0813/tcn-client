@@ -539,6 +539,14 @@ export const Languages = [
     id: uuidv4(),
     value: "Quechua",
   },
+  {
+    id: uuidv4(),
+    value: "Portugués",
+  },
+  {
+    id: uuidv4(),
+    value: "Aymara",
+  },
 ];
 
 export const nivels = [
@@ -549,6 +557,14 @@ export const nivels = [
 ];
 
 export const skills = [
+  {
+    id: uuidv4(),
+    value: "Power BI",
+  },
+  {
+    id: uuidv4(),
+    value: "Microsoft Office",
+  },
   {
     id: uuidv4(),
     value: "Asistente Administrativo",
@@ -659,7 +675,7 @@ export const skills = [
   },
   {
     id: uuidv4(),
-    value: "Desarrollador WorPress",
+    value: "Desarrollador WordPress",
   },
   {
     id: uuidv4(),

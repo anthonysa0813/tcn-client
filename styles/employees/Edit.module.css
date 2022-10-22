@@ -132,3 +132,42 @@
   align-items: center;
   column-gap: 1rem;
 }
+
+.experiencesList {
+  /* border: 3px solid brown; */
+  margin-block: 2rem;
+  padding: 2rem;
+}
+
+.experienceGrid {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 1rem;
+  padding-block-end: 1rem;
+  border-bottom: 0.5px solid var(--bg-gray100);
+}
+
+.infoExperience h5 {
+  color: var(--bg-blue200);
+}
+.infoExperience span {
+  font-size: 12px;
+  color: var(--bg-gray300);
+}
+.titleBussiness {
+  /* color: red !important; */
+  color: var(--bg-black) !important;
+  font-weight: 700;
+}
+
+.actionsExperiences {
+  display: flex;
+  column-gap: 1rem;
+}
+.actionsExperiences svg {
+  font-size: 20px;
+}
+
+.reference {
+  margin-block: 1rem;
+}

@@ -95,3 +95,17 @@
   border-radius: 0.5rem;
   color: var(--bg-black100);
 }
+
+.referenceField {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  border: 1px solid var(--bg-blue200);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.titleReference {
+  grid-column: 1/-1;
+}
