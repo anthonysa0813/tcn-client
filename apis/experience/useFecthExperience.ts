@@ -42,6 +42,7 @@ export const deleteExperience = async (
   return data;
 };
 
+// http://localhost:5050/api/experiences/unique/633a64c57aea5ece75d1a02e/635319f60caba5ed2ff43c4c
 export const updateExperience = async (
   endpoint: string,
   idEmployee: string,
@@ -57,6 +58,18 @@ export const updateExperience = async (
       },
       body: JSON.stringify(dataExp),
     }
+  );
+  const data = await response.json();
+  return data;
+};
+
+export const getUniqueExperience = async (
+  endpoint: string,
+  idEmployee: string,
+  idExperience: string
+) => {
+  const response = await fetch(
+    `${API_URL_DEV}/${endpoint}/${idEmployee}/${idExperience}`
   );
   const data = await response.json();
   return data;

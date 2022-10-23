@@ -171,3 +171,9 @@
 .reference {
   margin-block: 1rem;
 }
+
+.readMore span:hover {
+  color: var(--bg-black);
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -61,12 +61,6 @@ const FormExperience = ({
   const [montFinal, setMontFinal] = useState("");
   const [yearFinal, setyearFinal] = useState("");
   const [idEmployee, setIdEmployee] = useState("");
-  const [initialDateMonthExperience, setInitialDateMonthExperience] =
-    useState("");
-  const [initialDateYearExperience, setInitialDateYearExperience] =
-    useState("");
-  const [finalDateMonthExperience, setFinalDateMonthExperience] = useState("");
-  const [finalDateyearExperience, setFinalDateyearExperience] = useState("");
   const [currentExperienceId, setCurrentExperienceId] = useState("");
   const [initialForm, setInitialForm] = useState({
     nameBussiness: editMode ? currentExperience?.nameBussiness : "",
@@ -76,12 +70,6 @@ const FormExperience = ({
     emailRef: editMode ? currentExperience?.emailRef : "",
     phoneRef: editMode ? currentExperience?.phoneRef : "",
   });
-  // estado de la referencia
-  // const [nameUserRef, setNameUserRef] = useState("")
-  // const [countryRef, setCountryRef] = useState("")
-  // const [emailRef, setEmailRef] = useState("")
-  // const [phoneRef, setPhoneRef] = useState("")
-  // fin de estado de la referencia
 
   const {
     nameBussiness,

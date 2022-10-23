@@ -37,6 +37,7 @@ import { Experience, LangResponse } from "../../interfaces";
 import { IoMdClose } from "react-icons/io";
 import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
 import FormToDeleteExp from "../../components/employees/FormToDeleteExp";
+import ShowServiceById from "../../components/employees/ShowServiceById";
 
 const MoreDetails = () => {
   const router = useRouter();
@@ -44,6 +45,7 @@ const MoreDetails = () => {
   const [showModalToLang, setShowModalToLang] = useState(false);
   const [showModalExperience, setshowModalExperience] = useState(false);
   const [showModalSkills, setShowModalSkills] = useState(false);
+  const [showService, setShowService] = useState(false);
   const [dataListExperiences, setDataListExperiences] = useState<
     Experience[] | []
   >([]);
@@ -59,6 +61,7 @@ const MoreDetails = () => {
   const [currentExperience, setcurrentExperience] = useState<Experience>(
     {} as Experience
   );
+  const [currentIdExperience, setCurrentIdExperience] = useState("");
   const [editMode, setEditMode] = useState(false);
 
   const openLang = () => {
@@ -294,8 +297,15 @@ const MoreDetails = () => {
                             {exp.dateStart} - {exp.dateEnd}, {exp.country}
                           </span>
                         </div>
-                        <div className="readMore">
-                          <span>Leer completo</span>
+                        <div className={styles.readMore}>
+                          <span
+                            onClick={() => {
+                              setShowService(true);
+                              setCurrentIdExperience(exp._id || "");
+                            }}
+                          >
+                            Leer completo
+                          </span>
                         </div>
                       </div>
                       <div className={styles.actionsExperiences}>
@@ -344,6 +354,15 @@ const MoreDetails = () => {
             openExperience={openExperience}
             dataListExperiences={dataListExperiences}
             setDataListExperiences={setDataListExperiences}
+          />
+        </ModalComponent>
+      )}
+      {showService && (
+        <ModalComponent>
+          <ShowServiceById
+            idService={currentIdExperience}
+            idEmployee={employeeGlobal.id}
+            setShowService={setShowService}
           />
         </ModalComponent>
       )}
