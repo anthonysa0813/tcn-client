@@ -111,3 +111,10 @@ export interface Experience {
   countryRef?: string;
   phoneRef?: string;
 }
+
+export interface KnoledgeInterface {
+  name: string;
+  employee?: string;
+  _id?: string;
+  __v?: string;
+}

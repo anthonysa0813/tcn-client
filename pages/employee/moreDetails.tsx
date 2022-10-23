@@ -33,11 +33,15 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { Experience, LangResponse } from "../../interfaces";
+import { Experience, KnoledgeInterface, LangResponse } from "../../interfaces";
 import { IoMdClose } from "react-icons/io";
 import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
 import FormToDeleteExp from "../../components/employees/FormToDeleteExp";
 import ShowServiceById from "../../components/employees/ShowServiceById";
+import {
+  getKnoledges,
+  deleteKnoledgesFetch,
+} from "../../apis/knoledges/useKnoledges";
 
 const MoreDetails = () => {
   const router = useRouter();
@@ -46,6 +50,9 @@ const MoreDetails = () => {
   const [showModalExperience, setshowModalExperience] = useState(false);
   const [showModalSkills, setShowModalSkills] = useState(false);
   const [showService, setShowService] = useState(false);
+  const [knoledgesList, setKnoledgesList] = useState<KnoledgeInterface[] | []>(
+    []
+  );
   const [dataListExperiences, setDataListExperiences] = useState<
     Experience[] | []
   >([]);
@@ -83,13 +90,24 @@ const MoreDetails = () => {
     getExperienceByEmployee("experiences", idEmployee).then((res) => {
       setDataListExperiences(res);
     });
+    getKnoledges("knoledge", idEmployee).then((res) => {
+      setKnoledgesList(res);
+    });
   }, []);
 
   const deleteLangCall = (idLang: string) => {
     deleteLangByEmployee(idLang).then((res) => {
-      console.log(res);
       const filterLang = stateListLang.filter((l) => l._id !== idLang);
       setStateListLang(filterLang);
+    });
+  };
+
+  const deleteKnoledges = (idKnowledge: string) => {
+    deleteKnoledgesFetch("knoledge", idKnowledge).then((res) => {
+      const filterKnowledges = knoledgesList.filter(
+        (l) => l._id !== idKnowledge
+      );
+      setKnoledgesList(filterKnowledges);
     });
   };
 
@@ -191,6 +209,19 @@ const MoreDetails = () => {
                 Escribe una palabra simple o compuesta.Ej: desarrollador
                 Frontend
               </span>
+              <div className={styles.listGridLang}>
+                {knoledgesList &&
+                  knoledgesList.map((knoledge) => {
+                    return (
+                      <span key={knoledge._id}>
+                        {knoledge.name}
+                        <IoMdClose
+                          onClick={() => deleteKnoledges(knoledge._id)}
+                        />
+                      </span>
+                    );
+                  })}
+              </div>
             </div>
             <div className={styles.inputSection}>
               <Button
@@ -390,7 +421,12 @@ const MoreDetails = () => {
 
       {showModalSkills && (
         <ModalComponent>
-          <FormNewSkills openSkill={openSkill} />
+          <FormNewSkills
+            openSkill={openSkill}
+            idEmployee={idEmployee}
+            knoledgesList={knoledgesList}
+            setKnoledgesList={setKnoledgesList}
+          />
         </ModalComponent>
       )}
     </>
