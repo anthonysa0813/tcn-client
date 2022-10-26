@@ -28,6 +28,7 @@ import {
 } from "../../apis/experience/useFecthExperience";
 import { SetStateAction } from "react";
 import { getDate } from "../../helpers/getDate";
+import { monthsReturnValue } from "../../helpers/monthsValues";
 
 interface Prop {
   openExperience: () => void;
@@ -85,6 +86,10 @@ const FormExperience = ({
   const notifySuccess = () =>
     toast.success("Se ha agregado un nueva experiencia 👍");
   const notifySuccessEdit = () => toast.success("Se ha editado 👌");
+  const notifyErrorYear = () =>
+    toast.error("La fecha de inicio no puede ser mayor que la final");
+  const notifyErrorMonth = () =>
+    toast.error("El mes de inicio no puede ser mayor que la final");
 
   useEffect(() => {
     const local: string = localStorage.getItem("countries") || "";
@@ -119,6 +124,7 @@ const FormExperience = ({
     setSubAreaValue(currentExperience?.subarea || "");
     setActivityValue(currentExperience?.activyBussiness || "");
     setCountryRef(currentExperience?.countryRef || "");
+    setCheckPresent(currentExperience?.currentJob || false);
   }, [currentExperience]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -176,6 +182,16 @@ const FormExperience = ({
         }, 2000);
       });
     } else {
+      if (yearValue > yearFinal) {
+        notifyErrorYear();
+        return;
+      }
+      if (yearValue === yearFinal) {
+        if (monthsReturnValue[monthValue] > monthsReturnValue[montFinal]) {
+          notifyErrorMonth();
+          return;
+        }
+      }
       createExperienceApi("experiences", dataForm, idEmployee).then((res) => {
         console.log(res);
         notifySuccess();
@@ -198,7 +214,7 @@ const FormExperience = ({
       <div className="experienceHead">
         <ToastContainer />
         <h1 className={styles.title}>
-          {editMode ? "Editar" : "Añade una nueva Experiencia"}
+          {editMode ? "Editar" : "Añade una nueva Experiencia (*obligatorio)"}
         </h1>
         <div className={styles.boxClose}>
           <IoIosCloseCircle
@@ -209,7 +225,7 @@ const FormExperience = ({
       </div>
       <div className={styles.formBody}>
         <div className={styles.field}>
-          <label htmlFor="">Empresa</label>
+          <label htmlFor="">Empresa*</label>
           <input
             type="text"
             name="nameBussiness"
@@ -222,14 +238,14 @@ const FormExperience = ({
           <DatalistInput
             className="dataList"
             placeholder="call center"
-            label="Actividad de la empresa"
+            label="Actividad de la empresa*"
             onSelect={(item) => setActivityValue(item.value)}
             items={dataListActivities}
             value={activityValue}
           />
         </div>
         <div className={styles.field}>
-          <label htmlFor="">Puesto</label>
+          <label htmlFor="">Puesto*</label>
           <input
             type="text"
             name="title"
@@ -242,7 +258,7 @@ const FormExperience = ({
           <DatalistInput
             className="dataList"
             placeholder=""
-            label="Nivel de experiencia"
+            label="Nivel de experiencia*"
             onSelect={(item) => setNivelExp(item.value)}
             items={nivelExperience}
             value={nivelExp}
@@ -252,7 +268,7 @@ const FormExperience = ({
           <DatalistInput
             className="dataList"
             placeholder=""
-            label="Área del Puesto"
+            label="Área del Puesto*"
             onSelect={(item) => setAreaValue(item.value)}
             items={Area}
             value={areaValue}
@@ -262,7 +278,7 @@ const FormExperience = ({
           <DatalistInput
             className="dataList"
             placeholder=""
-            label="Subárea"
+            label="Subárea*"
             onSelect={(item) => setSubAreaValue(item.value)}
             items={subArea}
             value={subAreaValue}
@@ -272,14 +288,14 @@ const FormExperience = ({
           <DatalistInput
             className="dataList"
             placeholder=""
-            label="País"
+            label="País*"
             onSelect={(item) => setCountry(item.value)}
             items={countriesDataResponse}
             value={country}
           />
         </div>
         <div className={styles.fieldSecond}>
-          <label htmlFor="">Fecha de Inicio</label>
+          <label htmlFor="">Fecha de Inicio*</label>
           <div className={styles.fieldSecondaryGrid}>
             <div className={styles.firstInput}>
               <DatalistInput
@@ -305,7 +321,7 @@ const FormExperience = ({
           </div>
         </div>
         <div className={styles.fieldSecond}>
-          <label htmlFor="">Fecha de Fin</label>
+          <label htmlFor="">Fecha de Fin*</label>
           <div className={styles.fieldSecondaryGrid}>
             <div className={styles.firstInput}>
               <DatalistInput
@@ -333,7 +349,13 @@ const FormExperience = ({
                 id="present"
                 name="present"
                 value="present"
-                onClick={() => setCheckPresent(!checkPresent)}
+                onClick={() => {
+                  setCheckPresent(!checkPresent);
+                  setMonthValue("--");
+                  setYearValue("--");
+                  setMontFinal("--");
+                  setyearFinal("--");
+                }}
                 checked={checkPresent}
               />
               <span>Presente</span>
@@ -342,7 +364,7 @@ const FormExperience = ({
         </div>
         <div className={styles.referenceField}>
           <div className={styles.titleReference}>
-            <h5>Añade una referencia (*opcional)</h5>
+            <h5>Añade una referencia (*información opcional)</h5>
           </div>
 
           {/*
@@ -389,7 +411,7 @@ const FormExperience = ({
           </div>
         </div>
         <div className={styles.fieldTextArea}>
-          <span className="">Describa el puesto:</span>
+          <span className="">Describa el puesto(*obligatorio):</span>
           <textarea
             name="description"
             onChange={onChange}

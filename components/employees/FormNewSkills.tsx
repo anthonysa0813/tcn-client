@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { createKnoledge } from "../../apis/knoledges/useKnoledges";
 import { KnoledgeInterface } from "../../interfaces";
 import { v4 as uuidv4 } from "uuid";
+
 interface Prop {
   openSkill: () => void;
   idEmployee: string;
@@ -77,6 +78,9 @@ const FormNewSkills = ({
       value: "tecnología",
     },
   ];
+
+  // formik
+
   return (
     <form className={styles.formNewSkill} onSubmit={onSubmit}>
       <div className={styles.boxClose}>
@@ -105,7 +109,7 @@ const FormNewSkills = ({
         {tech && (
           <DatalistInput
             placeholder="Asistente"
-            label="Agrega una habilidad en Tecnología (*opcional)"
+            label="Agrega una habilidad en Tecnología"
             onSelect={(item) => setExpValue(item.value)}
             items={habilidadesTech}
             value={expValue}

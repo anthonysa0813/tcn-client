@@ -233,7 +233,7 @@ const MoreDetails = () => {
                 <p>URL LinkeDln: </p>
               </div>
               <span className={styles.subText}>
-                Comparte tu LinkeDin para saber más sobre ti.
+                Comparte tu LinkedIn para saber más sobre ti.
               </span>
             </div>
             <div className={styles.inputSection}>
