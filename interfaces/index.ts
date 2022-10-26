@@ -67,7 +67,7 @@ export interface Service {
   description: string;
   createdAt?: string;
   updatedAt?: string;
-  employees?: [];
+  employees?: any;
   __v?: number;
 }
 

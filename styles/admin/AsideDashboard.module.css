@@ -33,7 +33,7 @@
 
 .activeLink {
   display: inline;
-  color: rgb(57, 57, 241);
+  color: var(--bg-blue200);
   font-weight: bold;
   padding: 1rem;
   background-color: var(--bg-white);

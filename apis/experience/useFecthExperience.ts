@@ -1,5 +1,5 @@
 import { Experience } from "../../interfaces";
-import { API_URL_DEV } from "../../utils/constanstApi";
+import { API_URL } from "../../utils/constanstApi";
 
 // http://localhost:5050/api/experiences/633a64c57aea5ece75d1a02e
 export const createExperienceApi = async (
@@ -7,7 +7,7 @@ export const createExperienceApi = async (
   dataExp: Experience,
   idEmployee: string
 ) => {
-  const response = await fetch(`${API_URL_DEV}/${endpoint}/${idEmployee}`, {
+  const response = await fetch(`${API_URL}/${endpoint}/${idEmployee}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const getExperienceByEmployee = async (
   endpoint: string,
   idEmployee: string
 ) => {
-  const response = await fetch(`${API_URL_DEV}/${endpoint}/${idEmployee}`);
+  const response = await fetch(`${API_URL}/${endpoint}/${idEmployee}`);
   const data = await response.json();
   return data;
 };
@@ -33,7 +33,7 @@ export const deleteExperience = async (
   idExperience: string
 ) => {
   const response = await fetch(
-    `${API_URL_DEV}/${endpoint}/${idEmployee}/${idExperience}`,
+    `${API_URL}/${endpoint}/${idEmployee}/${idExperience}`,
     {
       method: "DELETE",
     }
@@ -50,7 +50,7 @@ export const updateExperience = async (
   dataExp: Experience
 ) => {
   const response = await fetch(
-    `${API_URL_DEV}/${endpoint}/${idEmployee}/${idExperience}`,
+    `${API_URL}/${endpoint}/${idEmployee}/${idExperience}`,
     {
       method: "PUT",
       headers: {
@@ -69,7 +69,7 @@ export const getUniqueExperience = async (
   idExperience: string
 ) => {
   const response = await fetch(
-    `${API_URL_DEV}/${endpoint}/${idEmployee}/${idExperience}`
+    `${API_URL}/${endpoint}/${idEmployee}/${idExperience}`
   );
   const data = await response.json();
   return data;

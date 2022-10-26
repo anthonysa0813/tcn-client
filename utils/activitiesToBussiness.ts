@@ -687,6 +687,49 @@ export const skills = [
   },
 ];
 
+export const habilidades = [
+  { id: uuidv4(), value: "Ventas salientes" },
+  { id: uuidv4(), value: "Llamador frío" },
+  { id: uuidv4(), value: "Establecedor de citas" },
+  { id: uuidv4(), value: "Ventas entrantes" },
+  { id: uuidv4(), value: "Servicio al Cliente" },
+  { id: uuidv4(), value: "Colecciones" },
+  { id: uuidv4(), value: "Back Office" },
+  { id: uuidv4(), value: "Helpdesk" },
+  { id: uuidv4(), value: "Service Desk" },
+  { id: uuidv4(), value: "Asistente Administrativo" },
+  { id: uuidv4(), value: "Asistente Ejecutiva" },
+  { id: uuidv4(), value: "Asistente Virtual" },
+  { id: uuidv4(), value: "Escritor de artículos" },
+  { id: uuidv4(), value: "Especialista en soporte de chat" },
+  { id: uuidv4(), value: "Entrada de datos" },
+  { id: uuidv4(), value: "Minero de datos" },
+  { id: uuidv4(), value: "Experto en Excel" },
+  { id: uuidv4(), value: "Controlador de correo electrónico" },
+  { id: uuidv4(), value: "Traductor" },
+  { id: uuidv4(), value: "Power BI" },
+  { id: uuidv4(), value: "Microsoft Office" },
+];
+
+export const habilidadesTech = [
+  { id: uuidv4(), value: "Especialista en código X de Apple" },
+  { id: uuidv4(), value: "Desarrollador de API" },
+  { id: uuidv4(), value: "Desarrollador de extensiones de Chrome" },
+  { id: uuidv4(), value: "Desarrollador C++" },
+  { id: uuidv4(), value: "Desarrollador front-end" },
+  { id: uuidv4(), value: "Desarrollador HTML" },
+  { id: uuidv4(), value: "Desarrollador iOS" },
+  { id: uuidv4(), value: "Desarrollador Linux" },
+  { id: uuidv4(), value: "Desarrollador Python" },
+  { id: uuidv4(), value: "Desarrollador React" },
+  { id: uuidv4(), value: "Desarrollador R" },
+  { id: uuidv4(), value: "Especialista SQL" },
+  { id: uuidv4(), value: "Escritor de artículos" },
+  { id: uuidv4(), value: "Desarrollador WordPress" },
+  { id: uuidv4(), value: "Diseño CAD 3D" },
+  { id: uuidv4(), value: "SEO" },
+];
+
 export const countriesDataResponse = [
   {
     id: uuidv4(),

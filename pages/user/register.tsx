@@ -2,104 +2,124 @@ import { Input } from "@nextui-org/react";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { ChangeEvent, FormEvent, FormEventHandler, MouseEvent, useEffect, useState, useContext } from "react";
-import { json } from "stream/consumers";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  FormEventHandler,
+  MouseEvent,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
+
 import Navbar from "../../components/menu/Navbar";
-import styles from "../../styles/users/Register.module.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import styles from "../../styles/users/RegisterUser.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { removeListener } from "process";
-import { EmployeeContext, EmployeeContextProps } from "../../context/EmployeeContext";
+import {
+  EmployeeContext,
+  EmployeeContextProps,
+} from "../../context/EmployeeContext";
+import ButtonPrimary from "../../components/buttons/Button";
 
-const RegisterPage: NextPage = ({data}: any) => {
-    
-    const [formValues, setFormValues] = useState({
-        name: "", 
-        surnames: "",
-        email: "",
-        callingCode: "", 
-        country: "", 
-        phone: "",
-        message: "",
-        cv: "",
-        typeJob: "",
-        password: "",
-        confirmPassword: "",
-    })
-    const {name, surnames, email, callingCode, country, message, cv, typeJob, phone, password, confirmPassword} = formValues;
-    const router = useRouter();
-    const notify = () => toast.success("Se registró satisfactoriamente!");
-    const {employeeGlobal, setEmployeeGlobal} = useContext<EmployeeContextProps>(EmployeeContext);
-    
+const RegisterPage: NextPage = ({ data }: any) => {
+  const [formValues, setFormValues] = useState({
+    name: "",
+    surnames: "",
+    email: "",
+    callingCode: "",
+    country: "",
+    phone: "",
+    message: "",
+    cv: "",
+    typeJob: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const {
+    name,
+    surnames,
+    email,
+    callingCode,
+    country,
+    message,
+    cv,
+    typeJob,
+    phone,
+    password,
+    confirmPassword,
+  } = formValues;
+  const router = useRouter();
+  const notify = () => toast.success("Se registró satisfactoriamente!");
+  const { employeeGlobal, setEmployeeGlobal } =
+    useContext<EmployeeContextProps>(EmployeeContext);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.value
-        });
-       console.log(e.target.value);
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+    console.log(e.target.value);
+  };
+
+  const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFormValues({
+      ...formValues,
+      callingCode: data.callingCode[e.target.value],
+      country: data.countriesNames[e.target.value],
+    });
+  };
+
+  const readInputTypeFile = (e: any) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.files[0],
+    });
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let dataform = new FormData();
+    dataform.append("name", name);
+    dataform.append("surnames", surnames);
+    dataform.append("email", email);
+    dataform.append("password", password);
+    dataform.append("callingCode", callingCode);
+    dataform.append("country", country);
+    dataform.append("message", message);
+    dataform.append("cv", cv);
+    dataform.append("typeJob", typeJob);
+    dataform.append("phone", phone);
+    sendData(dataform);
+  };
+
+  const sendData = async (dataObject: FormData) => {
+    try {
+      const res = await fetch(`${process.env.API_URL}/employees`, {
+        method: "POST",
+        body: dataObject,
+      });
+      const data = await res.json();
+      console.log(data);
+      if (Object.keys(data)) {
+        notify();
+        setTimeout(() => {
+          router.push("/campaign");
+        }, 2000);
+      }
+      setEmployeeGlobal(data);
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
-        setFormValues({
-            ...formValues,
-            callingCode: data.callingCode[e.target.value],
-            country: data.countriesNames[e.target.value]
-        });
-    }
-
-    const readInputTypeFile = (e: any) => {
-       setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.files[0]
-        })
-    }
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();      
-        let dataform = new FormData();
-        dataform.append("name", name);
-        dataform.append("surnames", surnames);
-        dataform.append("email", email);
-        dataform.append("password", password);
-        dataform.append("callingCode", callingCode);
-        dataform.append("country", country);
-        dataform.append("message", message);
-        dataform.append("cv", cv);
-        dataform.append("typeJob", typeJob);
-        dataform.append("phone", phone);
-        sendData(dataform);
-
-    }
-
-
-    const sendData = async (dataObject: FormData) => {
-        
-        try {
-            const res = await fetch(`http://localhost:5050/api/employees`, {
-                method: 'POST',
-                body: dataObject,
-                })
-            const data = await res.json()
-            console.log(data)
-            if(Object.keys(data)){
-                notify();
-                setTimeout(() => {
-                    router.push("/campaign")
-                }, 2000)
-            }
-            setEmployeeGlobal(data)
-            return data;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-  
+  };
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Head>
         <title>Contact Bpo | registrarse</title>
         <meta name="description" content="Generated by create next app" />
@@ -108,100 +128,163 @@ const RegisterPage: NextPage = ({data}: any) => {
       <Navbar />
       <main className={styles.main}>
         <div className="wrapper">
-            <h1>Registrarse</h1>
+          <h1>Registrarse</h1>
           <form className={styles.formContainer} onSubmit={handleSubmit}>
-            <div className={styles.field}>
-                <label>
+            <div className={styles.wrapper}>
+              <div className={styles.formContent}>
+                <div className={styles.field}>
+                  <label>
                     Nombres:
-                    <input type="text" name="name" value={name} onChange={handleChange}/>
-                </label>
-            </div>
-            <div className={styles.field}>
-                <label htmlFor="">
+                    <input
+                      type="text"
+                      name="name"
+                      value={name}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="">
                     Apellidos:
-                    <input type="text" name="surnames" value={surnames} onChange={handleChange}/>
-                </label>
-            </div>
-            <div className={styles.field}>
-                <label htmlFor="">
+                    <input
+                      type="text"
+                      name="surnames"
+                      value={surnames}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="">
                     Email:
-                    <input type="email" name="email" value={email} onChange={handleChange}/>
-                </label>
-            </div>
-            <div className={styles.field}>
-                <label htmlFor="">
+                    <input
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="">
                     Número de contacto:
-                    <input type="number" name="phone" value={phone} onChange={handleChange}/>
-                </label>
-            </div>
-            
-            <div className={styles.field}>
-                <label htmlFor="">
-                    Contraseña:
-                    <input type="password" name="password" value={password} onChange={handleChange}/>
-                </label>
-            </div>
+                    <input
+                      type="number"
+                      name="phone"
+                      value={phone}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
 
-            <div className={styles.field}>
-                <label htmlFor="">
+                <div className={styles.field}>
+                  <label htmlFor="">
+                    Contraseña:
+                    <input
+                      type="password"
+                      name="password"
+                      value={password}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="">
                     Repetir Contraseña:
-                    <input type="password" name="confirmPassword" value={confirmPassword} onChange={handleChange}/>
-                </label>
-            </div>
-            
-            
-            <div className={styles.field}>
-                <label htmlFor="">
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      onChange={handleChange}
+                    />
+                  </label>
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="">
                     País:
-                <select name="callingCode" onChange={handleOption} className={styles.select} >
-                    {
-                        Object.keys(data.countriesNames).map( (country: any, index) => {
-                            return (
-                                <option key={index}  value={country} >{data.countriesNames[country]}</option>
-                            )
-                        }) 
-                    }
-                </select>
-                </label>
-            </div>
-            <div className={styles.field}>
-                <label htmlFor="">
+                    <select
+                      name="callingCode"
+                      onChange={handleOption}
+                      className={styles.select}
+                    >
+                      {Object.keys(data.countriesNames).map(
+                        (country: any, index) => {
+                          return (
+                            <option key={index} value={country}>
+                              {data.countriesNames[country]}
+                            </option>
+                          );
+                        }
+                      )}
+                    </select>
+                  </label>
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="">
                     CV:
-                    <input type="file" name="cv" onChange={(readInputTypeFile)} />
-                </label>
-            </div>
-            <h5>¿En qué modo le gustaría trabajar?</h5>
-            <div className={styles.optionsJob}>
-                <div className="field">
-                    <label>
-                    <input type="radio" value="PRESENCIAL" name="typeJob" id="typeJob" onChange={handleChange} />
-                    Presencial
-                    </label>
+                    <input type="file" name="cv" onChange={readInputTypeFile} />
+                  </label>
                 </div>
-                
-                <div className="field">
+                <h5>¿En qué modo le gustaría trabajar?</h5>
+                <div className={styles.optionsJob}>
+                  <div className={styles.fieldSelect}>
                     <label>
-                    <input type="radio" value="REMOTO" name="typeJob" id="typeJob"  onChange={handleChange}/>
-                    Remoto
+                      <input
+                        type="radio"
+                        value="PRESENCIAL"
+                        name="typeJob"
+                        id="typeJob"
+                        onChange={handleChange}
+                      />
+                      Presencial
                     </label>
-                </div>
-                
-                <div className="field">
+                  </div>
+
+                  <div className="field">
                     <label>
-                    <input type="radio" value="HIBRIDO" name="typeJob" id="typeJob" onChange={handleChange} />
-                        Híbrido
+                      <input
+                        type="radio"
+                        value="REMOTO"
+                        name="typeJob"
+                        id="typeJob"
+                        onChange={handleChange}
+                      />
+                      Remoto
                     </label>
+                  </div>
+
+                  <div className="field">
+                    <label>
+                      <input
+                        type="radio"
+                        value="HIBRIDO"
+                        name="typeJob"
+                        id="typeJob"
+                        onChange={handleChange}
+                      />
+                      Híbrido
+                    </label>
+                  </div>
                 </div>
-            </div>
-            <div className={styles.fieldText}>
-                <label htmlFor="">
+                <div className={styles.fieldText}>
+                  <label htmlFor="">
                     Dejanós un mensaje:
-                    <textarea name="message" onChange={handleChange} id=""></textarea>
-                </label>
-            </div>
-            <div className={styles.buttonField}>
-                <button type="submit" className={styles.register}>Registrarse</button>
-                <button className={styles.account}>Ya tengo cuenta</button>
+                    <textarea
+                      name="message"
+                      onChange={handleChange}
+                      id=""
+                    ></textarea>
+                  </label>
+                </div>
+                <div className={styles.buttonField}>
+                  <button type="submit" className={styles.register}>
+                    Registrarse
+                  </button>
+                  <button className={styles.account}>Ya tengo cuenta</button>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -211,21 +294,21 @@ const RegisterPage: NextPage = ({data}: any) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    // data de nombres de paises
-    const res = await fetch("http://country.io/names.json");
-    const data = await res.json();
-    // data de código telefónico
-    const resCode = await fetch("http://country.io/phone.json");
-    const dataCode = await resCode.json();
+  // data de nombres de paises
+  const res = await fetch("http://country.io/names.json");
+  const data = await res.json();
+  // data de código telefónico
+  const resCode = await fetch("http://country.io/phone.json");
+  const dataCode = await resCode.json();
 
-    return {
-        props: {
-            data: {
-                countriesNames: data,
-                callingCode: dataCode
-            }
-        }
-    }
-}
+  return {
+    props: {
+      data: {
+        countriesNames: data,
+        callingCode: dataCode,
+      },
+    },
+  };
+};
 
 export default RegisterPage;

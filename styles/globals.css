@@ -76,6 +76,14 @@ a {
   border: none;
   padding: 13px 24px;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:active {
+  transform: scale(1.05);
 }
 
 .btn-outline_danger {

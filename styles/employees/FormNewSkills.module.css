@@ -2,7 +2,7 @@
   background-color: var(--bg-blueLight);
   padding: 2rem;
   border-radius: 0.5rem;
-  height: 300px;
+  height: auto;
   position: relative;
 }
 

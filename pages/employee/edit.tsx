@@ -19,6 +19,9 @@ import { ArrowRight } from "react-iconly";
 import { HiOutlineMail } from "react-icons/hi";
 import { BiWorld } from "react-icons/bi";
 import { AiFillFileText } from "react-icons/ai";
+import DatalistInput from "react-datalist-input";
+import { countriesDataResponse } from "../../utils/activitiesToBussiness";
+import { API_URL } from "../../utils/constanstApi";
 
 const EditPage = ({ data }: any) => {
   const [formValues, setFormValues] = useState({
@@ -47,6 +50,7 @@ const EditPage = ({ data }: any) => {
     password,
     confirmPassword,
   } = formValues;
+  const [countryCurrent, setCountryCurrent] = useState("");
   const router = useRouter();
   const notify = () => toast.success("Se actualizó satisfactoriamente!");
   const { employeeGlobal, setEmployeeGlobal } =
@@ -55,10 +59,13 @@ const EditPage = ({ data }: any) => {
   const { id } = employeeGlobal;
 
   useEffect(() => {
-    console.log(employeeGlobal);
-    fetch(`http://localhost:5050/api/employees/${id}`)
+    fetch(`${API_URL}/employees/${id}`)
       .then((res) => res.json())
-      .then((data) => setFormValues(data));
+      .then((data) => {
+        console.log("data :d", data);
+        setCountryCurrent(data.country);
+        setFormValues(data);
+      });
     localStorage.setItem("countries", JSON.stringify(data.countriesNames));
   }, [id]);
 
@@ -104,7 +111,7 @@ const EditPage = ({ data }: any) => {
 
   const sendData = async (dataObject: FormData) => {
     try {
-      const res = await fetch(`http://localhost:5050/api/employees/${id}`, {
+      const res = await fetch(`${API_URL}/employees/${id}`, {
         method: "PUT",
         body: dataObject,
       });
@@ -199,10 +206,11 @@ const EditPage = ({ data }: any) => {
             </span>
           </div>
           <div className="buttonContent">
-            <select
+            {/* <select
               name="callingCode"
               onChange={handleOption}
               className={styles.select}
+              value={country}
             >
               {Object.keys(data.countriesNames).map((country: any, index) => {
                 return (
@@ -211,7 +219,15 @@ const EditPage = ({ data }: any) => {
                   </option>
                 );
               })}
-            </select>
+            </select> */}
+            <DatalistInput
+              className="dataList"
+              placeholder=""
+              label="País"
+              onSelect={(item) => setCountryCurrent(item.value)}
+              items={countriesDataResponse}
+              value={countryCurrent}
+            />
           </div>
         </div>
         <div className={styles.field}>

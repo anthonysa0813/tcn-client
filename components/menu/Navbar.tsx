@@ -44,7 +44,7 @@ const Navbar = () => {
               <ul>
                 {!name && (
                   <>
-                    <li>
+                    {/* <li>
                       <Link href="#services">
                         <a>Servicios</a>
                       </Link>
@@ -63,7 +63,7 @@ const Navbar = () => {
                       <Link href="/">
                         <a>Contáctanos</a>
                       </Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link href="/user/register">
                         <a>Trabaja con Nosotros</a>

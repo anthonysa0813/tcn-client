@@ -24,7 +24,7 @@ import FormExperience from "../../components/employees/FormExperience";
 import FormNewLang from "../../components/employees/FormNewLang";
 import FormNewSkills from "../../components/employees/FormNewSkills";
 import { GetServerSideProps } from "next";
-import { API_URL_DEV } from "../../utils/constanstApi";
+import { API_URL } from "../../utils/constanstApi";
 import {
   deleteLangByEmployee,
   getAllLanguagesByEmployee,
@@ -42,6 +42,19 @@ import {
   getKnoledges,
   deleteKnoledgesFetch,
 } from "../../apis/knoledges/useKnoledges";
+import useForm from "../../hooks/useForm";
+import {
+  getEmployeeById,
+  saveInformationGeneral,
+} from "../../apis/employee/useEmployeeFetch";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+interface PropSaveInfo {
+  phone: string;
+  linkedin: string;
+  github: string;
+}
 
 const MoreDetails = () => {
   const router = useRouter();
@@ -64,12 +77,32 @@ const MoreDetails = () => {
   const openExperience = () => {
     setshowModalExperience((state) => !state);
   };
+  const [initialForm, setInitialForm] = useState({} as PropSaveInfo);
+
+  const [formValue, setFormValue] = useState({
+    phone: "",
+    github: "",
+    linkedin: "",
+  });
+  const { github, linkedin, phone } = formValue;
   const [stateListLang, setStateListLang] = useState<LangResponse[] | []>([]);
   const [currentExperience, setcurrentExperience] = useState<Experience>(
     {} as Experience
   );
   const [currentIdExperience, setCurrentIdExperience] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const [error, setError] = useState(false);
+  const notifyError = () => toast.error("Todos los campos son obligatorios");
+  const notifySuccess = () =>
+    toast.success("Se ha agregado un nueva experiencia 👍");
+  const notifySuccessEdit = () => toast.success("Se ha editado 👌");
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValue({
+      ...formValue,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const openLang = () => {
     setShowModalToLang((state) => !state);
@@ -81,6 +114,20 @@ const MoreDetails = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    saveInformationGeneral<PropSaveInfo>("employees", idEmployee, {
+      phone,
+      github,
+      linkedin,
+    })
+      .then((res) => {
+        console.log(res);
+        notifySuccessEdit();
+      })
+      .catch((err) => {
+        console.log(err);
+        notifyError;
+      });
   };
 
   useEffect(() => {
@@ -92,6 +139,19 @@ const MoreDetails = () => {
     });
     getKnoledges("knoledge", idEmployee).then((res) => {
       setKnoledgesList(res);
+    });
+    getEmployeeById("employees", idEmployee).then((res) => {
+      console.log("unique employee", res);
+      setInitialForm({
+        phone: res.phone || "",
+        linkedin: res.linkedin || "",
+        github: res.github,
+      });
+      setFormValue({
+        phone: res.phone || "",
+        linkedin: res.linkedin || "",
+        github: res.github,
+      });
     });
   }, []);
 
@@ -113,6 +173,7 @@ const MoreDetails = () => {
 
   return (
     <>
+      <ToastContainer />
       <LayoutEmployee name="Seguir editando">
         <div className={styles.alert}>
           <span className={styles.alertCotent}>
@@ -150,7 +211,13 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              <input type="number" className={styles.input} />
+              <input
+                type="number"
+                className={styles.input}
+                name="phone"
+                onChange={handleChangeInput}
+                value={phone}
+              />
             </div>
           </div>
           <div className={styles.field}>
@@ -170,7 +237,13 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              <input type="text" className={styles.input} />
+              <input
+                type="text"
+                className={styles.input}
+                name="linkedin"
+                onChange={handleChangeInput}
+                value={linkedin}
+              />
             </div>
           </div>
           <div className={styles.field}>
@@ -190,7 +263,13 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              <input type="text" className={styles.input} />
+              <input
+                type="text"
+                className={styles.input}
+                name="github"
+                onChange={handleChangeInput}
+                value={github}
+              />
             </div>
           </div>
           <div className={styles.field}>
@@ -216,7 +295,7 @@ const MoreDetails = () => {
                       <span key={knoledge._id}>
                         {knoledge.name}
                         <IoMdClose
-                          onClick={() => deleteKnoledges(knoledge._id)}
+                          onClick={() => deleteKnoledges(knoledge._id || "")}
                         />
                       </span>
                     );
@@ -435,7 +514,7 @@ const MoreDetails = () => {
 
 // export const getServerSideProps: GetServerSideProps = async (ctx) => {
 //   // data de nombres de paises
-//   const response = await fetch(`${API_URL_DEV}/language/all/${idEmployee}`);
+//   const response = await fetch(`${API_URL}/language/all/${idEmployee}`);
 //   const data = await response.json();
 
 //   // current User
