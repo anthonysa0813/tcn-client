@@ -9,6 +9,7 @@ import styles from "../../styles/client/Navbar.module.css";
 import ModalLogin from "../employees/ModalLogin";
 import { User } from "react-iconly";
 import { HiLogout } from "react-icons/hi";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const { employeeGlobal, setEmployeeGlobal } =
@@ -30,6 +31,7 @@ const Navbar = () => {
       password: "",
       service: [],
     });
+    Cookies.remove("token");
     router.push("/");
   };
 

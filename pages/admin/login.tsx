@@ -50,31 +50,28 @@ const Login: FC = () => {
           {error && <span>Todos los campos son obligatorios</span>}
           <Spacer y={1.5} />
 
-            <Input
-              type="email"
-              clearable
-              underlined
-              labelPlaceholder="Email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              
-            />
-             <Spacer y={2.5} />
-            <Input
-              clearable
-              underlined
-              labelPlaceholder="Password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-            />
+          <Input
+            type="email"
+            clearable
+            underlined
+            labelPlaceholder="Email"
+            name="email"
+            value={email}
+            onChange={onChange}
+          />
+          <Spacer y={2.5} />
+          <Input
+            clearable
+            underlined
+            labelPlaceholder="Password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+          />
           <Spacer y={1.5} />
 
-           <Button type="submit">
-              Ingresar
-          </Button>
+          <Button type="submit">Ingresar</Button>
         </form>
       </main>
     </>
