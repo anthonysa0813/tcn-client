@@ -7,14 +7,21 @@ import { useRouter } from "next/router";
 // import { ClientResponse } from "../../../interfaces";
 
 const TablesDash = ({ data }: ClientData) => {
-  const valuesHead = ["Estado", "Nombre Completo", "Email", "Mensaje", "Teléfono", "Status"]
-  const router = useRouter()
+  const valuesHead = [
+    "Estado",
+    "Nombre Completo",
+    "Email",
+    "Mensaje",
+    "Teléfono",
+    "Status",
+  ];
+  const router = useRouter();
   const changeStatusById = async (id: string) => {
-    const res = await changeStatus("clients", id)
-    if(res) {
-      router.reload()
+    const res = await changeStatus("clients", id);
+    if (res) {
+      router.reload();
     }
-  }
+  };
 
   return (
     <Table
@@ -25,28 +32,28 @@ const TablesDash = ({ data }: ClientData) => {
       }}
     >
       <Table.Header>
-        {
-          valuesHead.map((value, index) => {
-            return (
-              <Table.Column key={index}>{value}</Table.Column>
-            )
-          })
-        }
+        {valuesHead.map((value, index) => {
+          return <Table.Column key={index}>{value}</Table.Column>;
+        })}
       </Table.Header>
       <Table.Body>
         {data.map((user: ClientResponse) => {
           return (
             <Table.Row key={user._id}>
               <Table.Cell>
-              <input type="checkbox" onClick={() => changeStatusById(user._id) } checked={user.status ? true : false }/>
+                <input
+                  type="checkbox"
+                  onClick={() => changeStatusById(user._id || "")}
+                  checked={user.status ? true : false}
+                />
               </Table.Cell>
               <Table.Cell>{user.name}</Table.Cell>
               <Table.Cell>{user.email}</Table.Cell>
               <Table.Cell>{user.message}</Table.Cell>
               <Table.Cell>{user.phone}</Table.Cell>
-              <Table.Cell>{
-                  user.status ? "Atendido" : "Sin atender"
-                }</Table.Cell>
+              <Table.Cell>
+                {user.status ? "Atendido" : "Sin atender"}
+              </Table.Cell>
             </Table.Row>
           );
         })}
