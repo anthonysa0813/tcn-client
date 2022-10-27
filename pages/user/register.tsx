@@ -24,9 +24,20 @@ import {
 import ButtonPrimary from "../../components/buttons/Button";
 import Image from "next/image";
 import ModalLogin from "../../components/employees/ModalLogin";
+import { API_URL } from "../../utils/constanstApi";
+import { loginFetchApi } from "../../helpers/useFetch";
+import Cookies from "js-cookie";
+import { Loading } from "@nextui-org/react";
+
+interface FormInterface {
+  passwordFirst: string;
+  confirmPassword: string;
+  email: string;
+}
 
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     name: "",
     surnames: "",
@@ -55,6 +66,12 @@ const RegisterPage: NextPage = ({ data }: any) => {
   } = formValues;
   const router = useRouter();
   const notify = () => toast.success("Se registró satisfactoriamente!");
+  const notifyError = () => toast.error("Todos los campos son obligatorios");
+  const notifyPasswordNotEquals = () =>
+    toast.warning("Las contraseñas no coinciden");
+  const notifyEmailValidation = () => toast.warning("Email inválido");
+  const notifyPasswordCharacter = () =>
+    toast.warning("La contraseña debería de ser mayor a 5 caracteres");
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
 
@@ -96,23 +113,57 @@ const RegisterPage: NextPage = ({ data }: any) => {
     dataform.append("cv", cv);
     dataform.append("typeJob", typeJob);
     dataform.append("phone", phone);
+    if (
+      [
+        name,
+        surnames,
+        email,
+        password,
+        callingCode,
+        country,
+        cv,
+        phone,
+      ].includes("")
+    ) {
+      notifyError();
+      return;
+    }
+    if (confirmPassword !== password) {
+      notifyPasswordNotEquals();
+      return;
+    }
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      notifyEmailValidation();
+      return;
+    }
+    if (password.length <= 5) {
+      notifyPasswordCharacter();
+      return;
+    }
+    setIsLoading(true);
     sendData(dataform);
   };
-
   const sendData = async (dataObject: FormData) => {
     try {
-      const res = await fetch(`${process.env.API_URL}/employees`, {
+      const res = await fetch(`${API_URL}/employees`, {
         method: "POST",
         body: dataObject,
       });
       const data = await res.json();
-      console.log(data);
-      if (Object.keys(data)) {
-        notify();
-        setTimeout(() => {
-          router.push("/campaign");
-        }, 2000);
-      }
+      console.log("se creo ", data);
+      loginFetchApi("auth/employee/login", {
+        email: data.email,
+        password: data.password,
+      }).then((resposeLogin) => {
+        if (resposeLogin) {
+          notify();
+          Cookies.set("token", resposeLogin.token, { expires: 7 });
+          setIsLoading(false);
+          setTimeout(() => {
+            router.push("/campaign");
+          }, 1500);
+        }
+      });
       setEmployeeGlobal(data);
       return data;
     } catch (error) {
@@ -215,6 +266,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                         onChange={handleOption}
                         className={styles.select}
                       >
+                        <option value="--">Seleccione</option>
                         {Object.keys(data.countriesNames).map(
                           (country: any, index) => {
                             return (
@@ -247,6 +299,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                     >
                       Ya tengo cuenta
                     </button>
+                    {isLoading && <Loading>Loading</Loading>}
                   </div>
                 </div>
               </div>

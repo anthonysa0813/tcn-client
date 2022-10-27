@@ -45,6 +45,10 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
     }
 
     loginFetchApi("auth/employee/login", form).then((res) => {
+      if (res.message) {
+        const notifyErrorMessage = () => toast.error(res.message);
+        notifyErrorMessage();
+      }
       if (res.employee) {
         localStorage.setItem("employee", JSON.stringify(res.employee));
         sessionStorage.setItem("token", res.token);
