@@ -10,6 +10,7 @@ import ModalLogin from "../employees/ModalLogin";
 import { User } from "react-iconly";
 import { HiLogout } from "react-icons/hi";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 const Navbar = () => {
   const { employeeGlobal, setEmployeeGlobal } =
@@ -41,7 +42,14 @@ const Navbar = () => {
       <header className={styles.header}>
         <div className="wrapper">
           <div className={styles.headerContainer}>
-            <h1>ContactBpo</h1>
+            <div className="logoContainer">
+              <Image
+                src="/images/LogoContact.png"
+                alt="Logo de Contact bpo"
+                width={200}
+                height={100}
+              />
+            </div>
             <nav>
               <ul>
                 {!name && (
@@ -97,6 +105,7 @@ const Navbar = () => {
                     type="button"
                     className={styles.buttonDark}
                     onClick={logout}
+                    style={{ cursor: "pointer" }}
                   >
                     <HiLogout />
                   </button>

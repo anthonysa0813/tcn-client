@@ -28,7 +28,7 @@ const ApplicationsPage = () => {
   const getInfo = async (id: string) => {
     const res = await fetch(`${API_URL}/employees/${id}`);
     const data = await res.json();
-    console.log("data", data);
+    const setArr = new Set(data.service);
     setApplicationsState(data.service);
   };
   return (
@@ -36,9 +36,9 @@ const ApplicationsPage = () => {
       <LayoutEmployee name="aplicaciones de trabajo">
         <h4>Aplicaciones</h4>
         <div className={styles.applicationsGrid}>
-          {applicationsState.map((service: Service) => {
+          {applicationsState.map((service: Service, index) => {
             return (
-              <div key={service._id} className={styles.serviceCard}>
+              <div key={index} className={styles.serviceCard}>
                 <h4>{service.title}</h4>
                 <button>ver los detalles</button>
               </div>

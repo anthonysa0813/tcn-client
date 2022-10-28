@@ -14,6 +14,12 @@
 .alertCotent {
   display: flex;
   align-items: center;
+  font-size: 10px;
+}
+
+.alertCotent svg {
+  width: 50px;
+  height: 50px;
 }
 
 .subText {
@@ -25,7 +31,7 @@
   padding-block: 2rem;
   border-bottom: 1px solid var(--bg-gray100);
   display: grid;
-  grid-template-columns: 40% 1fr;
+  grid-template-columns: 1fr;
   position: relative;
 }
 
@@ -43,14 +49,9 @@
 .inputSection {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   row-gap: 1rem;
-}
-
-.inputSection button {
-  position: absolute;
-  top: 0;
-  right: 0;
+  margin-block-start: 1rem;
 }
 
 .button svg {
@@ -63,6 +64,7 @@
   border: 1.5px solid var(--bg-gray300);
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
+  width: 100%;
 }
 
 .titleHead {
@@ -73,17 +75,25 @@
 }
 
 .infoLeft {
+  /* display: flex; */
+  align-items: center;
+}
+
+.titleProfile {
   display: flex;
   align-items: center;
 }
 
 .experienceHead {
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
   align-items: center o !important;
 }
 
 .experienceHead button {
-  margin: 0;
+  margin-block: 1rem;
+  width: 100%;
 }
 
 .titleHeadSecondary {
@@ -136,7 +146,7 @@
 
 .experiencesList {
   /* border: 3px solid brown; */
-  margin-block: 2rem;
+  /* margin-block-start: 2rem; */
   padding: 2rem;
 }
 
@@ -177,4 +187,37 @@
   color: var(--bg-black);
   font-weight: 700;
   cursor: pointer;
+}
+
+@media screen and (min-width: 640px) {
+  .field {
+    grid-template-columns: 40% 1fr;
+  }
+
+  .inputSection {
+    width: 70%;
+  }
+
+  .alertCotent {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .inputSection button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .experienceHead {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .experienceHead button {
+    width: auto;
+  }
+  .alertCotent svg {
+    width: 25px;
+    height: 25px;
+  }
 }

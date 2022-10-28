@@ -86,7 +86,7 @@ const FormNewSkills = ({
       <div className={styles.boxClose}>
         <IoIosCloseCircle onClick={openSkill} className={styles.svg} />
       </div>
-      <h2>Añade una nueva Habilidad</h2>
+      <h1>Añade una nueva Habilidad</h1>
       <ToastContainer />
       <div className={styles.field}>
         <DatalistInput

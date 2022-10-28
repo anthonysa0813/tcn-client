@@ -1,5 +1,5 @@
 .mainModal {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
@@ -18,14 +18,18 @@
   border-radius: 1rem;
   text-align: center;
   position: relative;
+  width: 90%;
+  /* width: 90%; */
+  min-width: 300px;
+  max-width: 400px;
 }
 
 .modalContainer form {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  min-width: 400px;
 }
+
 .field {
   display: flex;
   flex-direction: column;

@@ -35,8 +35,14 @@ const ServiceCard = ({ service }: Prop) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        const notify = () => toast.success("Aplicaste a este puesto");
-        notify();
+        console.log("data", data);
+        if (data.messageError) {
+          const notifyError = () => toast.error(data.messageError);
+          notifyError();
+        } else {
+          const notify = () => toast.success("Aplicaste a este puesto");
+          notify();
+        }
       });
   };
 

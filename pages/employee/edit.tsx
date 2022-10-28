@@ -147,7 +147,7 @@ const EditPage = ({ data }: any) => {
               Porfavor, escribir tus nombres completos.
             </span>
           </div>
-          <div className="buttonContent">
+          <div className={styles.buttonContent}>
             <input
               type="text"
               name="name"
@@ -163,7 +163,7 @@ const EditPage = ({ data }: any) => {
               Porfavor, escribir tus Apellidos completos
             </span>
           </div>
-          <div className="buttonContent">
+          <div className={styles.buttonContent}>
             <input
               type="text"
               name="surnames"
@@ -180,7 +180,7 @@ const EditPage = ({ data }: any) => {
             </label>
             <span className={styles.subText}>Mantén un correo actualizado</span>
           </div>
-          <div className="buttonContent">
+          <div className={styles.buttonContent}>
             <input
               type="email"
               name="email"
@@ -205,7 +205,7 @@ const EditPage = ({ data }: any) => {
               usted.
             </span>
           </div>
-          <div className="buttonContent">
+          <div className={styles.buttonContent}>
             {/* <select
               name="callingCode"
               onChange={handleOption}
@@ -240,7 +240,7 @@ const EditPage = ({ data }: any) => {
               Comparte tu cv para conocer un poco más sobre ti
             </span>
           </div>
-          <div className="buttonContent">
+          <div className={styles.buttonContent}>
             <input type="file" name="cv" onChange={readInputTypeFile} />
             <a
               href={employeeGlobal.cv}

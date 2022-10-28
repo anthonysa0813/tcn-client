@@ -1,7 +1,7 @@
 .paymentsContainer {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 
 .info {
@@ -41,4 +41,12 @@
 .activeText {
   color: var(--bg-green);
   font-weight: 600;
+}
+
+@media screen and (min-width: 768px) {
+  .paymentsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
 }

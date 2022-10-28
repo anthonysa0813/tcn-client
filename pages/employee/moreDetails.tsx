@@ -230,7 +230,7 @@ const MoreDetails = () => {
                     height: "20px",
                   }}
                 />
-                <p>URL LinkeDln: </p>
+                <p>URL LinkedIn: </p>
               </div>
               <span className={styles.subText}>
                 Comparte tu LinkedIn para saber más sobre ti.
@@ -366,14 +366,20 @@ const MoreDetails = () => {
             <div className="info">
               <div className={`${styles.titleHead} ${styles.experienceHead}`}>
                 <div className={styles.infoLeft}>
-                  <BsFillFileEarmarkTextFill
-                    style={{
-                      marginInline: ".5rem",
-                      width: "20px",
-                      height: "20px",
-                    }}
-                  />
-                  <h3>Perfil Profesional y Experiencia: </h3>
+                  <div className={styles.titleProfile}>
+                    <BsFillFileEarmarkTextFill
+                      style={{
+                        marginInline: ".5rem",
+                        width: "20px",
+                        height: "20px",
+                      }}
+                    />
+                    <h3>Perfil Profesional y Experiencia: </h3>
+                  </div>
+                  <span className={styles.subText}>
+                    Los datos que ingreses será utilizados para futuras
+                    postulaciones.
+                  </span>
                 </div>
                 <Button
                   onPress={openExperience}
@@ -387,10 +393,6 @@ const MoreDetails = () => {
                   <p>Agregar eperiencia</p>
                 </Button>
               </div>
-              <span className={styles.subText}>
-                Los datos que ingreses será utilizados para futuras
-                postulaciones.
-              </span>
             </div>
             <div className={styles.experiencesList}>
               {dataListExperiences.length > 0 &&
@@ -436,15 +438,15 @@ const MoreDetails = () => {
                   );
                 })}
             </div>
+            <ButtonPrimary
+              color="dark"
+              content="Guardar"
+              onClick={() => console.log("click")}
+              type="submit"
+            />
           </div>
 
           {/* <EditorProfile /> */}
-          <ButtonPrimary
-            color="dark"
-            content="Guardar"
-            onClick={() => console.log("click")}
-            type="submit"
-          />
         </form>
       </LayoutEmployee>
       {showModalToDelete && (

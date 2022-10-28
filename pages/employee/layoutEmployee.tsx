@@ -22,7 +22,7 @@ interface Prop {
 
 const LayoutEmployee = ({ children, name }: Prop) => {
   const { employeeGlobal } = useContext(EmployeeContext);
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const arrAsPath = router.asPath;
   const { status } = employeeGlobal;
@@ -120,9 +120,7 @@ const LayoutEmployee = ({ children, name }: Prop) => {
               </nav>
             )}
           </div>
-          <div className={`${styles.mainProfile}`}>
-            <div className="wrapper">{children}</div>
-          </div>
+          <div className={`${styles.mainProfile}`}>{children}</div>
         </div>
       </main>
     </>

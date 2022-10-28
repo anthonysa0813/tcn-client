@@ -80,6 +80,10 @@ a {
   align-items: center;
   cursor: pointer;
   transition: all 0.3s;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .btn:active {
@@ -148,4 +152,10 @@ a {
 .react-datalist-input__listbox {
   height: 200px;
   overflow: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .btn {
+    width: auto;
+  }
 }

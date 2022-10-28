@@ -1,23 +1,24 @@
 .main {
   display: flex;
-  padding-block: 2rem;
+  padding-block: 1rem;
 }
 
 .wrapper {
-  width: 60%;
+  width: 90%;
   margin: 0 auto;
 }
 
 .mainContainer {
-  margin-block-start: 2rem;
+  margin-block-start: 1rem;
+  /* border: 3px solid brown; */
 }
 
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); */
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   gap: 1rem;
-  border: 3px solid brown;
 }
 
 .title {
@@ -33,6 +34,12 @@
   border: 1px solid #e1e1e1;
   border-radius: 0.5rem;
   padding-block: 1rem;
+
+  /* width: 100%; */
+}
+
+.card:hover {
+  background-color: var(--bg-blueLight);
 }
 
 .titleContainer {
@@ -43,6 +50,11 @@
 .infoContainer {
   padding: 1rem;
   max-height: 150px;
+  overflow: hidden;
+  /* border: 2px solid brown; */
+}
+
+.infoContainer p {
   white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -83,11 +95,18 @@
 }
 
 .modalContainer {
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 0.5rem;
   background-color: white;
-  max-width: 50%;
+  max-width: 80%;
   position: relative;
+  height: 400px;
+}
+
+.infoBody {
+  overflow: auto;
+  height: 200px;
+  /* border: 3px solid blue; */
 }
 
 .modalContainer svg {
@@ -101,3 +120,17 @@
 }
 
 /* media queries */
+@media screen and (min-width: 768px) {
+  .wrapper {
+    width: 60%;
+  }
+  .modalContainer {
+    width: 50%;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    max-width: 80%;
+    position: relative;
+    height: auto;
+  }
+}
