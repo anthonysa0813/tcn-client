@@ -31,7 +31,7 @@ const CampaignPage = ({ services }: ServiceProp) => {
       </Head>
       <Navbar />
       <main className={styles.main}>
-        <div className="wrapper">
+        <div className={styles.wrapper}>
           <div className={styles.mainContainer}>
             <h3>Campañas y Servicios</h3>
             <div className={styles.servicesGrid}>

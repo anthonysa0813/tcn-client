@@ -39,6 +39,7 @@ export const config = {
     "/admin/index",
     "/admin/listServices",
     "/admin/newService",
+    "/employee/profile",
     "/employee/:path*",
   ],
 };

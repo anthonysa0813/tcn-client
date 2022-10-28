@@ -295,6 +295,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                     </button>
                     <button
                       className={styles.account}
+                      type="button"
                       onClick={() => setshowModalLogin(true)}
                     >
                       Ya tengo cuenta
