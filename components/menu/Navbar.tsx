@@ -86,7 +86,7 @@ const Navbar = () => {
                     <User set="bold" primaryColor="black" />
                     {name} {surnames}
                     <div className={styles.miniMenu}>
-                      <Link href="/employee/profile">
+                      <Link href="/employee/edit">
                         <a>Perfil</a>
                       </Link>
                       <Link href="/employee/applications">
