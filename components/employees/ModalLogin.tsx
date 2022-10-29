@@ -10,6 +10,7 @@ import {
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
 import { useRouter } from "next/router";
+import { Loading } from "@nextui-org/react";
 
 interface Prop {
   setshowModalLogin: (state: boolean) => void;
@@ -26,6 +27,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
   });
   const { email, password } = form;
   const router = useRouter();
+  const [showLoading, setShowLoading] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
@@ -43,6 +45,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
       console.log("Todos los campos son obligatorios");
       return;
     }
+    setShowLoading(true);
 
     loginFetchApi("auth/employee/login", form).then((res) => {
       if (res.message) {
@@ -55,6 +58,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
         Cookies.set("token", res.token, { expires: 7 });
         setEmployeeGlobal(res.employee);
         notify();
+        setShowLoading(false);
         setTimeout(() => {
           setshowModalLogin(false);
           router.push("/employee/profile");
@@ -90,6 +94,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
               />
             </div>
             <button className={styles.button}>Iniciar Sesión</button>
+            {showLoading && <Loading />}
           </form>
         </div>
       </div>
