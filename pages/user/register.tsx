@@ -281,7 +281,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="">
-                      CV:
+                      CV(extensión del archivo: pdf):
                       <input
                         type="file"
                         name="cv"

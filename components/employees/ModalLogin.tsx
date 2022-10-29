@@ -17,6 +17,7 @@ interface Prop {
 }
 
 const notify = () => toast.success("Bienvenido!");
+const notifyWarning = () => toast.warning("email y password son requeridos");
 
 const ModalLogin = ({ setshowModalLogin }: Prop) => {
   const { employeeGlobal, setEmployeeGlobal } =
@@ -43,6 +44,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
     e.preventDefault();
     if (!email || !password) {
       console.log("Todos los campos son obligatorios");
+      notifyWarning();
       return;
     }
     setShowLoading(true);
@@ -51,6 +53,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
       if (res.message) {
         const notifyErrorMessage = () => toast.error(res.message);
         notifyErrorMessage();
+        setShowLoading(false);
       }
       if (res.employee) {
         localStorage.setItem("employee", JSON.stringify(res.employee));
