@@ -1,5 +1,6 @@
 .header {
-  background-color: rgb(242, 246, 247);
+  background-color: var(--bg-blueLight);
+  border-bottom: 1px solid var(--bg-gray100);
 }
 
 .headerContainer {
