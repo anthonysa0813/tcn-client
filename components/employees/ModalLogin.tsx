@@ -11,6 +11,7 @@ import {
 } from "../../context/EmployeeContext";
 import { useRouter } from "next/router";
 import { Loading } from "@nextui-org/react";
+import Link from "next/link";
 
 interface Prop {
   setshowModalLogin: (state: boolean) => void;
@@ -97,6 +98,9 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
               />
             </div>
             <button className={styles.button}>Iniciar Sesión</button>
+            <Link href={"/forgetPassword"}>
+              <a>Olvidé mi contraseña</a>
+            </Link>
             {showLoading && <Loading />}
           </form>
         </div>

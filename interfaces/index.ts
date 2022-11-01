@@ -118,3 +118,13 @@ export interface KnoledgeInterface {
   _id?: string;
   __v?: string;
 }
+
+export interface RequestSendNewPassword {
+  email: string;
+}
+
+export interface RequestResetPassword {
+  email: string;
+  password: string;
+  token: string | string[];
+}

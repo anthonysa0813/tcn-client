@@ -96,8 +96,11 @@ const Navbar = () => {
                   </span>
                 )}
                 {!name && (
-                  <li onClick={() => setshowModalLogin(true)}>
-                    <a>Login</a>
+                  <li
+                    className={styles.btn}
+                    onClick={() => setshowModalLogin(true)}
+                  >
+                    <a>Inicia sesión</a>
                   </li>
                 )}
                 {name && (

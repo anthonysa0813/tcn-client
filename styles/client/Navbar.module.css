@@ -73,6 +73,18 @@
   padding: 0.25rem;
 }
 
+.btn {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--bg-blue200);
+  color: var(--bg-white);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn:active {
+  transform: scale(0.9);
+}
+
 @media screen and (min-width: 540px) {
   .headerContainer {
     flex-direction: row;

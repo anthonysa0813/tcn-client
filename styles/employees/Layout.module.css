@@ -90,7 +90,7 @@
 
 @media screen and (min-width: 768px) {
   .mainProfile {
-    padding: 5rem;
+    padding: 2rem;
   }
   .profileGrid {
     grid-template-columns: auto 1fr;
@@ -98,5 +98,11 @@
   .asideMenu {
     padding: 2rem;
     position: static;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .mainProfile {
+    padding: 5rem;
   }
 }

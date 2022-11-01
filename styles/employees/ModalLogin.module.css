@@ -51,6 +51,11 @@
   background-color: var(--bg-black);
   color: white;
   margin-block-start: 1rem;
+  transition: all 0.3s;
+}
+
+.button:active {
+  transform: scale(0.9);
 }
 
 .button:hover {

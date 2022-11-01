@@ -1,3 +1,4 @@
+import { RequestResetPassword, RequestSendNewPassword } from "../../interfaces";
 import { API_URL } from "../../utils/constanstApi";
 
 // http://localhost:5050/api/knoledge/?hability=Desarrollador front-end
@@ -46,4 +47,34 @@ export const getEmployeeById = async (endpoint: string, idEmployee: string) => {
   const response = await fetch(`${API_URL}/${endpoint}/${idEmployee}`);
   const data = await response.json();
   return data;
+};
+
+export const sendEmailToNewPassword = async (
+  endpoint: string,
+  data: RequestSendNewPassword
+) => {
+  const response = await fetch(`${API_URL}/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const dataResponse = await response.json();
+  return dataResponse;
+};
+
+export const resetPassword = async (
+  endpoint: string,
+  data: RequestResetPassword
+) => {
+  const response = await fetch(`${API_URL}/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const dataResponse = await response.json();
+  return dataResponse;
 };

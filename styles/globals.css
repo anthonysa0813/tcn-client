@@ -154,6 +154,11 @@ a {
   overflow: auto;
 }
 
+input:focus {
+  border-width: 2px;
+  border-color: var(--bg-blue200);
+}
+
 @media screen and (min-width: 768px) {
   .btn {
     width: auto;
