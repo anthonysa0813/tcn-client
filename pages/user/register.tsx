@@ -1,12 +1,9 @@
-import { Input } from "@nextui-org/react";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, {
   ChangeEvent,
   FormEvent,
-  FormEventHandler,
-  MouseEvent,
   useEffect,
   useState,
   useContext,
@@ -39,6 +36,7 @@ interface FormInterface {
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const [formValues, setFormValues] = useState({} as EmployeeInterface);
   const {
     name,
@@ -150,12 +148,12 @@ const RegisterPage: NextPage = ({ data }: any) => {
         body: dataObject,
       });
       const data = await res.json();
-      console.log("se creo ", data);
       loginFetchApi("auth/employee/login", {
-        email: data.email,
-        password: data.password,
+        email: email,
+        password: password,
       }).then((resposeLogin) => {
         if (resposeLogin) {
+          // console.log("responseLogin", resposeLogin);
           notify();
           Cookies.set("token", resposeLogin.token, { expires: 7 });
           setIsLoading(false);
@@ -164,6 +162,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
           }, 1500);
         }
       });
+      console.log("dataaaa ====>", data);
       setEmployeeGlobal(data);
       return data;
     } catch (error) {
