@@ -17,7 +17,7 @@ import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
 
 type Props = {
-  data: EmployeeInterface[];
+  data: any;
   total: string | number;
   endpoint?: string;
 };
@@ -45,6 +45,12 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
       setDataList(res.users);
     });
   }, []);
+
+  useEffect(() => {
+    const getEmployee = data.map((user: any) => user.employee);
+    console.log("data=====> :D", getEmployee);
+    setDataList(getEmployee);
+  }, [data]);
 
   useEffect(() => {
     setLoading(true);
