@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const data = await response.json();
   return {
     props: {
-      services: data,
+      services: data.services,
     },
   };
 };

@@ -25,7 +25,7 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
     setShowModal(false);
   };
 
-  const applicationJob = (idJob: string = "") => {
+  const applicationJob = async (idJob: string = "") => {
     if (!employeeGlobal.id) {
       const notify = () => toast.error("Necesitas de una cuenta registrada");
       notify();
@@ -34,7 +34,7 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
       }, 1500);
     }
     const employeeId = employeeGlobal.id;
-    fetch(`${API_URL}/employees/${employeeId}/${idJob}`, {
+    await fetch(`${API_URL}/employees/${employeeId}/${idJob}`, {
       method: "POST",
     })
       .then((res) => res.json())
@@ -58,14 +58,14 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
         <div className="infoDate">
           <span>Fecha de Publicación: {formatDate(service.createdAt)}</span>
         </div>
-        <div className="actions">
+        {/* <div className="actions">
           <button
             className={styles.button}
             onClick={() => applicationJob(service._id)}
           >
             Aplicar
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

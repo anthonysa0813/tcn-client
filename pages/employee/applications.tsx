@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import {
   EmployeeContext,
   EmployeeContextProps,
@@ -8,10 +9,18 @@ import { EmployeeInterface, Service } from "../../interfaces";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Applications.module.css";
 import { API_URL } from "../../utils/constanstApi";
+import { IoIosArrowUp } from "react-icons/io";
+import "animate.css";
 
 interface DataProp {
   data: EmployeeInterface;
 }
+const CardCollapse = dynamic(
+  () => import("../../components/dashboard/employee/CardCollapse"),
+  {
+    ssr: false,
+  }
+);
 
 const ApplicationsPage = () => {
   const { employeeGlobal, setEmployeeGlobal } =
@@ -19,6 +28,8 @@ const ApplicationsPage = () => {
   const [applicationsState, setApplicationsState] = useState<Service[] | []>(
     []
   );
+  const [activeDetails, setActiveDetails] = useState(false);
+  const [currentService, setCurrentService] = useState("");
 
   useLayoutEffect(() => {
     getInfo(employeeGlobal.id);
@@ -34,16 +45,13 @@ const ApplicationsPage = () => {
   return (
     <>
       <LayoutEmployee name="aplicaciones de trabajo">
-        <h4>Aplicaciones</h4>
-        <div className={styles.applicationsGrid}>
-          {applicationsState.map((service: Service, index) => {
-            return (
-              <div key={index} className={styles.serviceCard}>
-                <h4>{service.title}</h4>
-                <button>ver los detalles</button>
-              </div>
-            );
-          })}
+        <div className={styles.wrapper}>
+          <h4>Mis Postulaciones</h4>
+          <div className={styles.applicationsGrid}>
+            {applicationsState.map((service: Service, index) => {
+              return <CardCollapse key={service._id} service={service} />;
+            })}
+          </div>
         </div>
       </LayoutEmployee>
     </>

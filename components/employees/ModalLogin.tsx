@@ -66,7 +66,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
         setTimeout(() => {
           setshowModalLogin(false);
           router.push("/employee/edit");
-        }, 1500);
+        }, 1000);
       }
     });
   };

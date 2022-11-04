@@ -7,6 +7,9 @@
   color: var(--black);
 }
 
+.imageContainer {
+}
+
 .title {
   margin-block-end: 52px;
 }

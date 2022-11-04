@@ -18,6 +18,10 @@
   height: 80px;
 }
 
+.field span {
+  color: var(--bg-red);
+}
+
 .registerSection {
   display: flex;
   justify-content: center;

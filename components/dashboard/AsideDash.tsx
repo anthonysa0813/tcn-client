@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import { Service } from "../../interfaces";
 import { Document } from "react-iconly";
 import ButtonPrimary from "../buttons/Button";
+import Image from "next/image";
 
 const AsideDash = () => {
   const { userGlobal } = useContext(UserContext);
@@ -32,15 +33,22 @@ const AsideDash = () => {
 
   return (
     <aside className={styles.asideContainer}>
-      <h1 className={styles.title}>Contact BPO</h1>
+      <h1 className="">
+        <Image
+          src="/images/LogoContact.png"
+          alt="Logo de Contact bpo"
+          width={200}
+          height={100}
+        />
+      </h1>
       <nav className="menu">
         <ul>
-          <Link href="/admin/clients" style={{ display: "inline" }}>
+          {/* <Link href="/admin/clients" style={{ display: "inline" }}>
             <a className={pathActive("clients") ? styles.activeLink : ""}>
               <Document set="bold" primaryColor="primary" />
               Lista de Clientes
             </a>
-          </Link>
+          </Link> */}
           <Link href="/admin/employees">
             <a className={pathActive("employees") ? styles.activeLink : ""}>
               <Document set="bold" primaryColor="primary" />

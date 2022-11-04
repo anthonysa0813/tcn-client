@@ -6,7 +6,7 @@ import ButtonPrimary from "../buttons/Button";
 import useForm from "../../hooks/useForm";
 import { EmployeeInterface, LangResponse } from "../../interfaces";
 import { createLang } from "../../apis/languages/useFetchLang";
-import { Button } from "@nextui-org/react";
+import { Button, Loading } from "@nextui-org/react";
 import DatalistInput from "react-datalist-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,9 +23,12 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
   const [formLang, setFormLang] = useState("");
   const [formOral, setFormOral] = useState("");
   const [formWriter, setFormWriter] = useState("");
+  const [formListen, setFormListen] = useState("");
+  const [formRead, setFormRead] = useState("");
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccess = () =>
     toast.success("Se ha agregado un nuevo idioma 👍");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let id: EmployeeInterface | null = null;
@@ -35,16 +38,19 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if ([formLang, formOral, formWriter].includes("")) {
+    if ([formLang, formOral, formWriter, formListen, formRead].includes("")) {
       setError(true);
       notifyError();
       return;
     }
+    setIsLoading(true);
 
     createLang("language", idEmployee, {
       lang: formLang,
       levelOral: formOral,
       levelWriter: formWriter,
+      levelRead: formRead,
+      levelListen: formListen,
       idEmployee,
     }).then((res) => {
       const existLang = stateListLang.find((l) => l._id === res._id);
@@ -52,6 +58,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
         setStateListLang([...stateListLang, res]);
       }
       notifySuccess();
+      setIsLoading(false);
       setTimeout(() => {
         openLang();
       }, 2000);
@@ -76,7 +83,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       <div className={styles.field}>
         <DatalistInput
           placeholder="Nivel"
-          label="Nivel de Escritura"
+          label=" Escritura"
           onSelect={(item) => setFormWriter(item.value)}
           items={nivels}
         />
@@ -84,14 +91,31 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       <div className={styles.field}>
         <DatalistInput
           placeholder="Nivel"
-          label="Nivel Oral"
+          label="Oral"
           onSelect={(item) => setFormOral(item.value)}
           items={nivels}
         />
       </div>
-      {/* <ButtonPrimary color="dark" content="Guardar idioma" type="submit" /> */}
-      {/* <button type="submit">Agregar idioma</button> */}
-      <Button type="submit">Guardar</Button>
+      <div className={styles.field}>
+        <DatalistInput
+          placeholder="Nivel"
+          label=" Escucha"
+          onSelect={(item) => setFormListen(item.value)}
+          items={nivels}
+        />
+      </div>
+      <div className={styles.field}>
+        <DatalistInput
+          placeholder="Nivel"
+          label=" Lectura"
+          onSelect={(item) => setFormRead(item.value)}
+          items={nivels}
+        />
+      </div>
+      <Button type="submit">
+        {isLoading && <Loading />}
+        Guardar
+      </Button>
     </form>
   );
 };

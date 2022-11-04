@@ -17,6 +17,7 @@ const Employees = () => {
   const router = useRouter();
   const [employeeData, setEmployeeData] = useState<EmployeeInterface[]>([]);
   const [showModalFilters, setShowModalFilters] = useState(false);
+  const [totalEmployee, setTotalEmployee] = useState(1);
 
   useEffect(() => {
     // if (!token || Object.values(userGlobal).includes("")) {
@@ -25,7 +26,8 @@ const Employees = () => {
     }
     getFetchApi("employees").then((res) => {
       // console.log("res", res);
-      setEmployeeData(res);
+      setEmployeeData(res.users);
+      setTotalEmployee(res.total);
     });
   }, []);
 
@@ -42,7 +44,11 @@ const Employees = () => {
             iconName="filter"
           />
         </div>
-        <TableToEmployee data={employeeData} />
+        <TableToEmployee
+          data={employeeData}
+          total={totalEmployee}
+          endpoint="employees"
+        />
       </LayoutDashboard>
       {showModalFilters && (
         <ModalComponent>

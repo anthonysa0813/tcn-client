@@ -48,15 +48,17 @@ const EditPage = ({ data }: any) => {
     typeJob,
     phone,
     password,
-    confirmPassword,
   } = formValues;
   const [countryCurrent, setCountryCurrent] = useState("");
   const router = useRouter();
   const notify = () => toast.success("Se actualizó satisfactoriamente!");
-  const { employeeGlobal, setEmployeeGlobal } =
-    useContext<EmployeeContextProps>(EmployeeContext);
+  const { employeeGlobal } = useContext<EmployeeContextProps>(EmployeeContext);
 
   const { id } = employeeGlobal;
+
+  useEffect(() => {
+    console.log("currentJob", employeeGlobal.typeJob);
+  }, []);
 
   useEffect(() => {
     fetch(`${API_URL}/employees/${id}`)
@@ -256,6 +258,7 @@ const EditPage = ({ data }: any) => {
           <h5 className={styles.titleJob}>
             ¿En qué modo le gustaría trabajar?
           </h5>
+
           <div className={styles.fieldJob}>
             <label>
               <input
@@ -263,6 +266,7 @@ const EditPage = ({ data }: any) => {
                 value="PRESENCIAL"
                 name="typeJob"
                 id="typeJob"
+                checked={typeJob === "PRESENCIAL" ? true : false}
                 onChange={handleChange}
               />
               Presencial
@@ -273,6 +277,7 @@ const EditPage = ({ data }: any) => {
                 value="REMOTO"
                 name="typeJob"
                 id="typeJob"
+                checked={typeJob === "REMOTO" ? true : false}
                 onChange={handleChange}
               />
               Remoto
@@ -282,6 +287,7 @@ const EditPage = ({ data }: any) => {
                 type="radio"
                 value="HIBRIDO"
                 name="typeJob"
+                checked={typeJob === "HIBRIDO" ? true : false}
                 id="typeJob"
                 onChange={handleChange}
               />

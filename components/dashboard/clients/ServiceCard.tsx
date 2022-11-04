@@ -43,7 +43,8 @@ const ServiceCard = ({ service }: Prop) => {
           const notify = () => toast.success("Aplicaste a este puesto");
           notify();
         }
-      });
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

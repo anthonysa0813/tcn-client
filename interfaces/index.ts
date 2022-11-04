@@ -52,12 +52,13 @@ export interface EmployeeInterface {
   phone?: string;
   status?: true;
   country?: string;
-  cv?: string;
+  cv?: any;
   callingCode?: string;
   typeJob?: string;
   service?: string[] | [];
-  password?: string;
+  password: string;
   message?: string;
+  confirmPassword?: string;
 }
 
 export interface Service {
@@ -80,6 +81,8 @@ export interface LangObject {
   lang: string;
   levelWriter: string;
   levelOral: string;
+  levelRead?: string;
+  levelListen?: string;
   idEmployee: string;
 }
 

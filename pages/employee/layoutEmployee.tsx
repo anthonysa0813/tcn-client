@@ -48,8 +48,11 @@ const LayoutEmployee = ({ children, name }: Prop) => {
           <div
             className={`${styles.asideMenu} ${showMenu ? styles.active : ""}`}
           >
-            <div className={styles.boxMenu}>
-              <AiOutlineMenu onClick={() => setShowMenu(!showMenu)} />
+            <div
+              className={styles.boxMenu}
+              onClick={() => setShowMenu(!showMenu)}
+            >
+              <AiOutlineMenu />
             </div>
             {showMenu && (
               <nav
@@ -105,7 +108,7 @@ const LayoutEmployee = ({ children, name }: Prop) => {
                     Cambiar la contraseña
                   </a>
                 </Link>
-                {status && (
+                {/* {false && (
                   <Link href="/employee/payments">
                     <a
                       className={
@@ -118,7 +121,7 @@ const LayoutEmployee = ({ children, name }: Prop) => {
                       Historial de pagos
                     </a>
                   </Link>
-                )}
+                )} */}
               </nav>
             )}
           </div>

@@ -53,6 +53,10 @@
   box-shadow: 20px 20px 80px #e1e1e1, -5px -5px 80px #ffffff;
 }
 
+.miniMenu a:hover {
+  color: var(--bg-blue300);
+}
+
 .miniMenu:hover {
   display: flex;
 }

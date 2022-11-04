@@ -5,7 +5,7 @@ import { ArrowLeft, Calling, InfoCircle, ArrowRight } from "react-iconly";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { Button, Tooltip } from "@nextui-org/react";
+import { Button, Loading, Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import {
   BsFillFileEarmarkTextFill,
@@ -72,7 +72,7 @@ const MoreDetails = () => {
   const [showModalToDelete, setshowModalToDelete] = useState(false);
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { id: idEmployee } = employeeGlobal;
   const openExperience = () => {
     setshowModalExperience((state) => !state);
@@ -114,6 +114,7 @@ const MoreDetails = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     saveInformationGeneral<PropSaveInfo>("employees", idEmployee, {
       phone,
@@ -122,6 +123,7 @@ const MoreDetails = () => {
     })
       .then((res) => {
         console.log(res);
+        setIsLoading(false);
         notifySuccessEdit();
       })
       .catch((err) => {
@@ -444,6 +446,7 @@ const MoreDetails = () => {
               onClick={() => console.log("click")}
               type="submit"
             />
+            {isLoading && <Loading style={{ marginTop: "1rem" }} />}
           </div>
 
           {/* <EditorProfile /> */}

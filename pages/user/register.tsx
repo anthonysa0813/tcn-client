@@ -28,6 +28,7 @@ import { API_URL } from "../../utils/constanstApi";
 import { loginFetchApi } from "../../helpers/useFetch";
 import Cookies from "js-cookie";
 import { Loading } from "@nextui-org/react";
+import { EmployeeInterface } from "../../interfaces";
 
 interface FormInterface {
   passwordFirst: string;
@@ -38,19 +39,7 @@ interface FormInterface {
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formValues, setFormValues] = useState({
-    name: "",
-    surnames: "",
-    email: "",
-    callingCode: "",
-    country: "",
-    phone: "",
-    message: "",
-    cv: "",
-    typeJob: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [formValues, setFormValues] = useState({} as EmployeeInterface);
   const {
     name,
     surnames,
@@ -72,8 +61,19 @@ const RegisterPage: NextPage = ({ data }: any) => {
   const notifyEmailValidation = () => toast.warning("Email inválido");
   const notifyPasswordCharacter = () =>
     toast.warning("La contraseña debería de ser mayor a 5 caracteres");
+  const notifyErrorExtension = () =>
+    toast.warning("La extensión del cv es incorrecto");
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
+
+  useEffect(() => {
+    if (cv) {
+      const extension = cv.type.split("/")[1];
+      if (extension !== "pdf") {
+        notifyErrorExtension();
+      }
+    }
+  }, [cv]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -106,13 +106,13 @@ const RegisterPage: NextPage = ({ data }: any) => {
     dataform.append("name", name);
     dataform.append("surnames", surnames);
     dataform.append("email", email);
-    dataform.append("password", password);
-    dataform.append("callingCode", callingCode);
-    dataform.append("country", country);
-    dataform.append("message", message);
+    dataform.append("password", password || "");
+    dataform.append("callingCode", callingCode || "");
+    dataform.append("country", country || "");
+    dataform.append("message", message || "");
     dataform.append("cv", cv);
-    dataform.append("typeJob", typeJob);
-    dataform.append("phone", phone);
+    dataform.append("typeJob", typeJob || "");
+    dataform.append("phone", phone || "");
     if (
       [
         name,
@@ -136,7 +136,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
       notifyEmailValidation();
       return;
     }
-    if (password.length <= 5) {
+    if (password?.length <= 5) {
       notifyPasswordCharacter();
       return;
     }
@@ -191,7 +191,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                 <div className={styles.formContent}>
                   <div className={styles.field}>
                     <label>
-                      Nombres:
+                      Nombres<span>(*)</span>:
                       <input
                         type="text"
                         name="name"
@@ -202,7 +202,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="">
-                      Apellidos:
+                      Apellidos<span>(*)</span>:
                       <input
                         type="text"
                         name="surnames"
@@ -213,7 +213,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="">
-                      Email:
+                      Email<span>(*)</span>:
                       <input
                         type="email"
                         name="email"
@@ -224,7 +224,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="">
-                      Número de contacto:
+                      Número de contacto<span>(*)</span>:
                       <input
                         type="number"
                         name="phone"
@@ -236,7 +236,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
 
                   <div className={styles.field}>
                     <label htmlFor="">
-                      Contraseña:
+                      Contraseña<span>(*)</span>:
                       <input
                         type="password"
                         name="password"
@@ -248,7 +248,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
 
                   <div className={styles.field}>
                     <label htmlFor="">
-                      Repetir Contraseña:
+                      Repetir Contraseña<span>(*)</span>:
                       <input
                         type="password"
                         name="confirmPassword"
@@ -260,7 +260,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
 
                   <div className={styles.field}>
                     <label htmlFor="">
-                      País:
+                      País<span>(*)</span>:
                       <select
                         name="callingCode"
                         onChange={handleOption}
@@ -281,7 +281,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="">
-                      CV(extensión del archivo: pdf):
+                      CV(extensión del archivo: pdf)<span>(*)</span>:
                       <input
                         type="file"
                         name="cv"
@@ -289,6 +289,10 @@ const RegisterPage: NextPage = ({ data }: any) => {
                       />
                     </label>
                   </div>
+                  <div className={styles.field}>
+                    <span>(*): Campo obligatorio</span>
+                  </div>
+
                   <div className={styles.buttonField}>
                     <button type="submit" className={styles.register}>
                       Registrarse

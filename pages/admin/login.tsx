@@ -34,7 +34,7 @@ const Login: FC = () => {
       sessionStorage.setItem("token", token);
       Cookies.set("token", token, { expires: 7 });
       if (token && Boolean(Object.keys(user).length > 0)) {
-        router.push("/admin");
+        router.push("/admin/employees");
       }
     });
   };

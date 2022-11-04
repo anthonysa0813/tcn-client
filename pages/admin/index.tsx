@@ -14,7 +14,6 @@ const HomeAdmin = () => {
   const router = useRouter();
   useEffect(() => {
     if (!token || Object.values(userGlobal).includes("")) {
-      console.log("entro");
       router.push("/admin/login");
     }
   }, []);
