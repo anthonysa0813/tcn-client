@@ -53,8 +53,10 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
     if (showLangInput) {
       getEmployeeFilterByLanguage("language", lang, nivelLang).then((res) => {
         const filterArr = res.filter((user: any) => user.employee !== null);
-        console.log("resuultados: ", filterArr);
-        setEmployeeData(filterArr);
+        const getEmployee = filterArr.map((user: any) => user.employee);
+        console.log("data=====> :D", getEmployee);
+        // setEmployeeData(filterArr);
+        setEmployeeData(getEmployee);
       });
     }
 
