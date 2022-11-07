@@ -1,10 +1,35 @@
+.aside {
+  background: var(--bg-blueLight);
+  height: auto;
+  grid-column: 1/-1;
+  padding: 2rem;
+}
+
+.aside .svgMenu {
+  position: fixed;
+  z-index: 10000000;
+  height: 25px;
+  width: 25px;
+  margin-bottom: 2rem;
+}
+
 .asideContainer {
-  padding: 40px;
+  padding: 2rem;
   display: grid;
   height: 100vh;
   grid-template-rows: auto 1fr auto;
   background: var(--bg-blueLight);
   color: var(--black);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+}
+
+.image {
+  display: none;
 }
 
 .imageContainer {
@@ -46,5 +71,9 @@
 @media screen and (min-width: 768px) {
   .asideContainer {
     grid-template-rows: auto 1fr auto;
+    padding: 20px;
+  }
+  .aside {
+    grid-column: 1/2;
   }
 }

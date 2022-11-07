@@ -58,6 +58,8 @@ export interface EmployeeInterface {
   service?: string[] | [];
   password: string;
   message?: string;
+  linkedin?: string;
+  github?: string;
   confirmPassword?: string;
 }
 
@@ -118,6 +120,7 @@ export interface Experience {
 export interface KnoledgeInterface {
   name: string;
   employee?: string;
+  level: string;
   _id?: string;
   __v?: string;
 }

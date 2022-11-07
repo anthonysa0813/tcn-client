@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import styles from "../../styles/employees/FormNewSkills.module.css";
 import {
-  habilidades,
-  habilidadesTech,
+  HabilitiesInNivelsExperience,
+  HabilitiesInTimeExperienceYears,
+  levels,
   skills,
+  Years,
 } from "../../utils/activitiesToBussiness";
 import ButtonPrimary from "../buttons/Button";
 import DatalistInput from "react-datalist-input";
@@ -31,21 +33,23 @@ const FormNewSkills = ({
 }: Prop) => {
   const [expValue, setExpValue] = useState("");
   const [optionValue, setOptionValue] = useState("");
-  const [client, setClient] = useState(false);
-  const [tech, setTech] = useState(false);
+  const [expYears, setExpYears] = useState(false);
+  const [expLevel, setExpLevel] = useState(false);
+  const [yearsValue, setYearsValue] = useState("");
+  const [levelValue, setLevelValue] = useState("");
   const [error, setError] = useState(false);
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccess = () =>
     toast.success("Se ha agregado un nueva Habilidad 👍");
 
   useEffect(() => {
-    if (optionValue === "atención al cliente") {
-      setClient(true);
-      setTech(false);
+    if (optionValue === "Habilidades en tiempo de experiencia(años)") {
+      setExpYears(true);
+      setExpLevel(false);
     }
-    if (optionValue === "tecnología") {
-      setClient(false);
-      setTech(true);
+    if (optionValue === "Habilidades por niveles") {
+      setExpYears(false);
+      setExpLevel(true);
     }
   }, [optionValue]);
 
@@ -60,6 +64,7 @@ const FormNewSkills = ({
     createKnoledge("knoledge", idEmployee, {
       name: expValue,
       employee: idEmployee,
+      level: expYears ? yearsValue : levelValue,
     }).then((res) => {
       console.log(res);
       notifySuccess();
@@ -71,11 +76,11 @@ const FormNewSkills = ({
   const options = [
     {
       id: uuidv4(),
-      value: "atención al cliente",
+      value: "Habilidades en tiempo de experiencia(años)",
     },
     {
       id: uuidv4(),
-      value: "tecnología",
+      value: "Habilidades por niveles",
     },
   ];
 
@@ -96,24 +101,42 @@ const FormNewSkills = ({
           items={options}
           value={optionValue}
         />
-        {client && (
-          <DatalistInput
-            placeholder="Asistente"
-            label="Agrega una habilidad y/o conocimiento que tengas"
-            onSelect={(item) => setExpValue(item.value)}
-            items={habilidades}
-            value={expValue}
-          />
+        {expYears && (
+          <>
+            <DatalistInput
+              placeholder="Call center"
+              label="Elige una opción"
+              onSelect={(item) => setExpValue(item.value)}
+              items={HabilitiesInTimeExperienceYears}
+              value={expValue}
+            />
+            <DatalistInput
+              placeholder="1"
+              label="Años en esta experiencia"
+              onSelect={(item) => setYearsValue(item.value)}
+              items={Years}
+              value={yearsValue}
+            />
+          </>
         )}
 
-        {tech && (
-          <DatalistInput
-            placeholder="Asistente"
-            label="Agrega una habilidad en Tecnología"
-            onSelect={(item) => setExpValue(item.value)}
-            items={habilidadesTech}
-            value={expValue}
-          />
+        {expLevel && (
+          <>
+            <DatalistInput
+              placeholder="Microsoft Office"
+              label="Elige una habilidad"
+              onSelect={(item) => setExpValue(item.value)}
+              items={HabilitiesInNivelsExperience}
+              value={expValue}
+            />
+            <DatalistInput
+              placeholder="Básico"
+              label="Añadir el nivel"
+              onSelect={(item) => setLevelValue(item.value)}
+              items={levels}
+              value={levelValue}
+            />
+          </>
         )}
 
         <ButtonPrimary

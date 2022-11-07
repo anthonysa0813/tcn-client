@@ -19,9 +19,10 @@ import { calculatePagination } from "../../../helpers/calculatePagination";
 type Props = {
   data: EmployeeInterface[];
   total: string | number;
+  offsetSliceValue: number;
 };
 
-const TableListStaticData = ({ data, total }: Props) => {
+const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
   const router = useRouter();
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
@@ -31,18 +32,12 @@ const TableListStaticData = ({ data, total }: Props) => {
   const [loading, setLoading] = useState(false);
   const [currentData, setcurrentData] = useState<EmployeeInterface[] | []>([]);
   const [initialSliceValue, setInitialSliceValue] = useState(0);
-  const [offsetSliceValue, setOffsetSliceValue] = useState(5);
 
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     setcurrentData(data.slice(initialSliceValue, offsetSliceValue));
-    console.log("current jeje", currentData);
-    console.log({
-      initialSliceValue,
-      offsetSliceValue,
-    });
-  }, [data, initialSliceValue, offsetSliceValue, currentData]);
+  }, [data, offsetSliceValue]);
 
   const resetDataList = () => {
     setPageNumber(0);
@@ -61,8 +56,7 @@ const TableListStaticData = ({ data, total }: Props) => {
           <Table.Column>Nombre</Table.Column>
           <Table.Column>Tlf</Table.Column>
           <Table.Column>email</Table.Column>
-          <Table.Column>Status</Table.Column>
-          <Table.Column>Status</Table.Column>
+          <Table.Column>Conocer más</Table.Column>
         </Table.Header>
         <Table.Body>
           {currentData.map((user: EmployeeInterface) => {
@@ -84,13 +78,6 @@ const TableListStaticData = ({ data, total }: Props) => {
                     <span>Ver información</span>
                   </Button>
                 </Table.Cell>
-                <Table.Cell>
-                  {user.status ? (
-                    <p className="text-success">Activo</p>
-                  ) : (
-                    <p className="text-danger">No activo</p>
-                  )}
-                </Table.Cell>
               </Table.Row>
             );
           })}
@@ -105,32 +92,36 @@ const TableListStaticData = ({ data, total }: Props) => {
         {...bindings}
       >
         <Modal.Header>
-          <Text id="modal-title" size={18}>
+          <Text id="modal-title" size={24} className={styles.title}>
             {currentEmployee.name} {currentEmployee.surnames}
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <div className="field">
-            <strong>Mensaje: </strong>
-            <p>{currentEmployee.message}</p>
-          </div>
-          <div className="field">
+          <div className={styles.field}>
             <strong>País:</strong>
             <p>{currentEmployee.country}</p>
           </div>
-          <div className="field">
+          <div className={styles.field}>
             <strong>Código de País:</strong>
-            <p>{currentEmployee.callingCode}</p>
+            <p>+{currentEmployee.callingCode}</p>
           </div>
-          <div className="field">
+          <div className={styles.field}>
             <strong>Email:</strong>
             <p>{currentEmployee.email}</p>
           </div>
-          <div className="field">
-            <strong># telefónico:</strong>
+          <div className={styles.field}>
+            <strong>Número telefónico:</strong>
             <p>{currentEmployee.phone}</p>
           </div>
-          <div className="field">
+          <div className={styles.field}>
+            <strong>LinkedIn:</strong>
+            <p>{currentEmployee.linkedin}</p>
+          </div>
+          <div className={styles.field}>
+            <strong>GitHub:</strong>
+            <p>{currentEmployee.github}</p>
+          </div>
+          <div className={styles.field}>
             <strong>Cv:</strong>
             <Button
               color="primary"
@@ -143,9 +134,13 @@ const TableListStaticData = ({ data, total }: Props) => {
               </Link>
             </Button>
           </div>
-          <div className="field">
+          <div className={styles.field}>
             <strong>Tipo de Trabajo:</strong>
             <p>{currentEmployee.typeJob}</p>
+          </div>
+          <div className={styles.field}>
+            <strong>Mensaje: </strong>
+            <p>{currentEmployee.message}</p>
           </div>
         </Modal.Body>
         <Modal.Footer>

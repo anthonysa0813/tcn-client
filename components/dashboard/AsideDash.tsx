@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { FC, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
@@ -7,14 +7,19 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { GetServerSideProps } from "next";
 import { Service } from "../../interfaces";
-import { Document } from "react-iconly";
+import { Document, PaperPlus } from "react-iconly";
 import ButtonPrimary from "../buttons/Button";
 import Image from "next/image";
+import { BiAlignLeft } from "react-icons/bi";
+import { GiCardboardBoxClosed } from "react-icons/gi";
+import { GrClose } from "react-icons/gr";
+import "animate.css";
 
 const AsideDash = () => {
   const { userGlobal } = useContext(UserContext);
   const router = useRouter();
   const arrAsPath = router.asPath.split("/");
+  const [showMenu, setShowMenu] = useState(false);
 
   const pathActive = (path: string) => {
     const pathName = arrAsPath[arrAsPath.length - 1];
@@ -32,49 +37,86 @@ const AsideDash = () => {
   };
 
   return (
-    <aside className={styles.asideContainer}>
-      <h1 className="">
-        <Image
-          src="/images/LogoContact.png"
-          alt="Logo de Contact bpo"
-          width={200}
-          height={100}
-        />
-      </h1>
-      <nav className="menu">
-        <ul>
-          {/* <Link href="/admin/clients" style={{ display: "inline" }}>
+    <>
+      <aside className={styles.aside}>
+        {showMenu ? (
+          <GrClose
+            className={styles.svgMenu}
+            onClick={() => {
+              setShowMenu((state) => !state);
+            }}
+          />
+        ) : (
+          <BiAlignLeft
+            className={styles.svgMenu}
+            onClick={() => {
+              setShowMenu((state) => !state);
+            }}
+          />
+        )}
+
+        {showMenu && (
+          <div className={styles.asideContainer}>
+            <div className="menuHeader">
+              <Image
+                src="/images/LogoContact.png"
+                alt="Logo de Contact bpo"
+                className={styles.image}
+                width={200}
+                height={100}
+              />
+            </div>
+
+            <nav
+              className={`${styles.menu}  animate__animated animate__fadeInLeft`}
+            >
+              <ul>
+                {/* <Link href="/admin/clients" style={{ display: "inline" }}>
             <a className={pathActive("clients") ? styles.activeLink : ""}>
-              <Document set="bold" primaryColor="primary" />
-              Lista de Clientes
+            <Document set="bold" primaryColor="primary" />
+            Lista de Clientes
             </a>
           </Link> */}
-          <Link href="/admin/employees">
-            <a className={pathActive("employees") ? styles.activeLink : ""}>
-              <Document set="bold" primaryColor="primary" />
-              Lista de Empleados
-            </a>
-          </Link>
-          <Link href="/admin/newService">
-            <a className={pathActive("newService") ? styles.activeLink : ""}>
-              <Document set="bold" primaryColor="primary" />
-              Crear nuevo Servicio
-            </a>
-          </Link>
-          <Link href="/admin/listServices">
-            <a className={pathActive("listServices") ? styles.activeLink : ""}>
-              <Document set="bold" primaryColor="primary" />
-              Campañas Disponibles
-            </a>
-          </Link>
-        </ul>
-      </nav>
-      <div className={styles.profile}>
-        {/* <h4>{userGlobal.name}</h4> */}
-        <h4 onClick={outSession}>Salir</h4>
-        <BsChevronBarRight onClick={outSession} />
-      </div>
-    </aside>
+                <Link href="/admin/employees">
+                  <a
+                    className={pathActive("employees") ? styles.activeLink : ""}
+                  >
+                    <Document set="bold" primaryColor="primary" />
+                    Lista de Empleados
+                  </a>
+                </Link>
+                <Link href="/admin/newService">
+                  <a
+                    className={
+                      pathActive("newService") ? styles.activeLink : ""
+                    }
+                  >
+                    {/* <Document set="bold" primaryColor="primary" /> */}
+                    <PaperPlus set="bold" primaryColor="primary" />
+                    Crear nuevo Servicio
+                  </a>
+                </Link>
+                <Link href="/admin/listServices">
+                  <a
+                    className={
+                      pathActive("listServices") ? styles.activeLink : ""
+                    }
+                  >
+                    <Document set="bold" primaryColor="primary" />
+                    Campañas Disponibles
+                  </a>
+                </Link>
+              </ul>
+            </nav>
+            <div className={styles.profile}>
+              {/* <h4>{userGlobal.name}</h4> */}
+              <h4 onClick={outSession}>Salir</h4>
+              <BsChevronBarRight onClick={outSession} />
+            </div>
+          </div>
+        )}
+      </aside>
+    </>
   );
 };
 

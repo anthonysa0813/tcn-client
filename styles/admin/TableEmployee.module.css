@@ -4,6 +4,22 @@
   margin-block: 1rem;
 }
 
+.title {
+  font-size: 2rem;
+  color: var(--bg-blue200);
+  text-transform: capitalize;
+}
+
+.field {
+  border-top: 1px solid var(--bg-white200);
+}
+
+.field strong {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--bg-blue200);
+}
+
 .loadingContainer {
   height: 400px;
   display: flex;

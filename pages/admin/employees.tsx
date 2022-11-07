@@ -34,7 +34,7 @@ const Employees = () => {
   return (
     <>
       <LayoutDashboard>
-        <h1>Lista de Empleados</h1>
+        <h1 className={styles.title}>Lista de Empleados</h1>
         <div className={styles.menu}>
           <ButtonPrimary
             color="dark"

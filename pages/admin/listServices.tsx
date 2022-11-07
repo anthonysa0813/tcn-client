@@ -14,6 +14,7 @@ import { CurrentUserContext } from "../../context/CurrentsEmployees";
 const ListServicesPage = () => {
   const [servicesArr, setServicesArr] = useState<Service[] | []>([]);
   const { setVisible, bindings } = useModal();
+  const [offsetSliceValue, setOffsetSliceValue] = useState(5);
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>({
     id: "",
     name: "",
@@ -41,14 +42,15 @@ const ListServicesPage = () => {
       });
   }, []);
 
-  const saveCurrentUsers = (employees: EmployeeInterface[] | []) => {
-    setCurrentUsersState(employees);
+  const watchAllEmployee = (data: EmployeeInterface[] | []) => {
+    console.log("estamos actiivoo", data.length);
+    setOffsetSliceValue(data.length);
   };
 
   return (
     <LayoutDashboard>
       <>
-        <h1>Lista de Campañas</h1>
+        <h1 className={styles.title}>Lista de Campañas</h1>
         <hr />
         {servicesArr.map((service: Service) => {
           return (
@@ -59,7 +61,7 @@ const ListServicesPage = () => {
                   size={"xs"}
                   style={{ padding: ".5rem" }}
                   color={"secondary"}
-                  onClick={() => saveCurrentUsers(service.employees)}
+                  onClick={() => watchAllEmployee(service.employees)}
                 >
                   {" "}
                   Ver Todos
@@ -68,6 +70,7 @@ const ListServicesPage = () => {
               <TableListStaticData
                 data={service.employees}
                 total={service.employees.length}
+                offsetSliceValue={offsetSliceValue}
               />
             </div>
           );

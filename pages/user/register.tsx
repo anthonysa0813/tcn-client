@@ -73,6 +73,10 @@ const RegisterPage: NextPage = ({ data }: any) => {
     }
   }, [cv]);
 
+  useEffect(() => {
+    console.log("form", formValues);
+  }, [country]);
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {

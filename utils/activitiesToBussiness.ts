@@ -687,8 +687,8 @@ export const skills = [
   },
 ];
 
-export const habilidades = [
-  { id: uuidv4(), value: "Ventas salientes" },
+export const HabilitiesInTimeExperienceYears = [
+  { id: uuidv4(), value: "Ventas" },
   { id: uuidv4(), value: "Llamador frío" },
   { id: uuidv4(), value: "Establecedor de citas" },
   { id: uuidv4(), value: "Ventas entrantes" },
@@ -707,15 +707,68 @@ export const habilidades = [
   { id: uuidv4(), value: "Experto en Excel" },
   { id: uuidv4(), value: "Controlador de correo electrónico" },
   { id: uuidv4(), value: "Traductor" },
-  { id: uuidv4(), value: "Power BI" },
-  { id: uuidv4(), value: "Microsoft Office" },
+  { id: uuidv4(), value: "Indicadores de operaciones en contact center" },
+  { id: uuidv4(), value: "Manejo de KPIs" },
+  { id: uuidv4(), value: "Reportería y control administrativo" },
+  { id: uuidv4(), value: "ISO 27001" },
+  { id: uuidv4(), value: "ISO 9001" },
 ];
 
-export const habilidadesTech = [
+export const Years = [
+  {
+    id: uuidv4(),
+    value: "menos de 1 año",
+  },
+  {
+    id: uuidv4(),
+    value: "1",
+  },
+  {
+    id: uuidv4(),
+    value: "2",
+  },
+  {
+    id: uuidv4(),
+    value: "3",
+  },
+  {
+    id: uuidv4(),
+    value: "4",
+  },
+  {
+    id: uuidv4(),
+    value: "5",
+  },
+  {
+    id: uuidv4(),
+    value: "más de 5",
+  },
+];
+
+export const levels = [
+  {
+    id: uuidv4(),
+    value: "Básico",
+  },
+  {
+    id: uuidv4(),
+    value: "Intermedio",
+  },
+  {
+    id: uuidv4(),
+    value: "Avanzado",
+  },
+];
+
+// habilidades por tiempo de experiencia
+
+// habilidades por nivel
+export const HabilitiesInNivelsExperience = [
   { id: uuidv4(), value: "Especialista en código X de Apple" },
   { id: uuidv4(), value: "Desarrollador de API" },
   { id: uuidv4(), value: "Desarrollador de extensiones de Chrome" },
   { id: uuidv4(), value: "Desarrollador C++" },
+  { id: uuidv4(), value: "Microsoft Office" },
   { id: uuidv4(), value: "Desarrollador front-end" },
   { id: uuidv4(), value: "Desarrollador HTML" },
   { id: uuidv4(), value: "Desarrollador iOS" },
@@ -724,10 +777,10 @@ export const habilidadesTech = [
   { id: uuidv4(), value: "Desarrollador React" },
   { id: uuidv4(), value: "Desarrollador R" },
   { id: uuidv4(), value: "Especialista SQL" },
-  { id: uuidv4(), value: "Escritor de artículos" },
   { id: uuidv4(), value: "Desarrollador WordPress" },
   { id: uuidv4(), value: "Diseño CAD 3D" },
   { id: uuidv4(), value: "SEO" },
+  { id: uuidv4(), value: "Power BI" },
 ];
 
 export const countriesDataResponse = [
