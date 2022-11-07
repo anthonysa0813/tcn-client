@@ -6,7 +6,10 @@ import Cookies from "js-cookie";
 import styles from "../../styles/admin/Login.module.css";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context/UserContext";
-import { Button, Input, Spacer } from "@nextui-org/react";
+import { Button, Input, Loading, Spacer } from "@nextui-org/react";
+import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login: FC = () => {
   const { email, password, form, onChange } = useForm<FormProp>({
@@ -15,7 +18,10 @@ const Login: FC = () => {
   });
   const { userGlobal, setUserGlobal } = useContext(UserContext);
   const [error, setError] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const router = useRouter();
+  const toastWarning = (message: string) => toast.warning(message);
+  const toastSuccess = (message: string) => toast.success(message);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,26 +33,47 @@ const Login: FC = () => {
       return;
     }
     setError(false);
+    setShowLoading(true);
     loginFetchApi("auth/login", form).then((res) => {
-      const { token, user } = res;
-
-      setUserGlobal(user);
-      sessionStorage.setItem("token", token);
-      Cookies.set("token", token, { expires: 7 });
-      if (token && Boolean(Object.keys(user).length > 0)) {
-        router.push("/admin/employees");
+      if (res.message) {
+        console.log(res.message);
+        setShowLoading(false);
+        toastWarning(res.message);
+      } else {
+        const { token, user } = res;
+        console.log(res);
+        setUserGlobal(user);
+        sessionStorage.setItem("token", token);
+        Cookies.set("token", token, { expires: 7 });
+        toastSuccess("Bienvenido...");
+        if (token && Boolean(Object.keys(user).length > 0)) {
+          router.push("/admin/employees");
+          setShowLoading(false);
+        }
       }
     });
   };
 
   return (
     <>
+      <ToastContainer />
       <main className={`${styles["main-container"]}`}>
         <form
           className={` ${styles["form-container"]}`}
           onSubmit={handleSubmit}
         >
-          <h1>ContactBpo Login</h1>
+          <div className={styles.logoContent}>
+            <Image
+              src="/images/LogoContact.png"
+              alt="Logo de Contact bpo"
+              className={styles.image}
+              width={200}
+              height={100}
+            />
+            <div className={styles.subtitle}>
+              <span>Admin</span>
+            </div>
+          </div>
           {error && <span>Todos los campos son obligatorios</span>}
           <Spacer y={1.5} />
 
@@ -72,6 +99,7 @@ const Login: FC = () => {
           <Spacer y={1.5} />
 
           <Button type="submit">Ingresar</Button>
+          {showLoading && <Loading />}
         </form>
       </main>
     </>

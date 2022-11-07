@@ -13,6 +13,22 @@
   display: flex;
   flex-direction: column;
   width: 400px;
+  padding: 1.25rem;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subtitle span {
+  font-size: 1.5rem;
+  color: var(--bg-blue200);
+}
+
+.logoContent {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-container h1 {
