@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
@@ -20,16 +20,20 @@ const AsideDash = () => {
   const router = useRouter();
   const arrAsPath = router.asPath.split("/");
   const [showMenu, setShowMenu] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(0);
 
   const setWindowDimensions = () => {
-    setWindowWidth(window.innerWidth);
+    if (window !== undefined) {
+      setWindowWidth(window.innerWidth);
+    }
   };
-  useEffect(() => {
-    window.addEventListener("resize", setWindowDimensions);
-    return () => {
-      window.removeEventListener("resize", setWindowDimensions);
-    };
+  useLayoutEffect(() => {
+    if (window !== undefined) {
+      window.addEventListener("resize", setWindowDimensions);
+      return () => {
+        window.removeEventListener("resize", setWindowDimensions);
+      };
+    }
   }, []);
 
   useEffect(() => {
