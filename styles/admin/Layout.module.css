@@ -6,6 +6,6 @@
 
 @media screen and (min-width: 768px) {
   .mainGrid {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(auto, 300px) 1fr;
   }
 }

@@ -20,6 +20,21 @@ const AsideDash = () => {
   const router = useRouter();
   const arrAsPath = router.asPath.split("/");
   const [showMenu, setShowMenu] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const setWindowDimensions = () => {
+    setWindowWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", setWindowDimensions);
+    return () => {
+      window.removeEventListener("resize", setWindowDimensions);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowMenu(true);
+  }, [windowWidth]);
 
   const pathActive = (path: string) => {
     const pathName = arrAsPath[arrAsPath.length - 1];

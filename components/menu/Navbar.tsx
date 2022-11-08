@@ -48,6 +48,7 @@ const Navbar = () => {
                 alt="Logo de Contact bpo"
                 width={200}
                 height={100}
+                onClick={() => router.push("/")}
               />
             </div>
             <nav>
@@ -75,7 +76,7 @@ const Navbar = () => {
                       </Link>
                     </li> */}
                     <li>
-                      <Link href="/user/register">
+                      <Link href="/campaign">
                         <a>Trabaja con Nosotros</a>
                       </Link>
                     </li>

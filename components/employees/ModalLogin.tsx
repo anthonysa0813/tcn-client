@@ -12,6 +12,8 @@ import {
 import { useRouter } from "next/router";
 import { Loading } from "@nextui-org/react";
 import Link from "next/link";
+import InputWithIcon from "../buttons/InputWithIcon";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 interface Prop {
   setshowModalLogin: (state: boolean) => void;
@@ -36,6 +38,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
       [e.target.name]: e.target.value,
     });
   };
+  const [showPass, setShowPass] = useState(false);
 
   const closeModal = () => {
     setshowModalLogin(false);
@@ -78,7 +81,10 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
         <div className={styles.modalContainer}>
           <h3>Inicia Sesión</h3>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <IoIosCloseCircle onClick={closeModal} />
+            <IoIosCloseCircle
+              onClick={closeModal}
+              className={styles.iconClose}
+            />
             <div className={styles.field}>
               <label>Email: </label>
               <input
@@ -88,15 +94,24 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
                 onChange={handleChange}
               />
             </div>
-            <div className={styles.field}>
+            <div className={`${styles.field} `}>
               <label>Password: </label>
-              <input
-                type="password"
+              <InputWithIcon
+                type={showPass ? "text" : "password"}
                 name="password"
                 value={password}
                 onChange={handleChange}
-              />
+              >
+                {showPass ? (
+                  <AiFillEyeInvisible
+                    onClick={() => setShowPass((state) => !state)}
+                  />
+                ) : (
+                  <AiFillEye onClick={() => setShowPass((state) => !state)} />
+                )}
+              </InputWithIcon>
             </div>
+
             <button className={styles.button}>Iniciar Sesión</button>
             <Link href={"/forgetPassword"}>
               <a>Olvidé mi contraseña</a>

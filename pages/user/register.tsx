@@ -36,6 +36,7 @@ interface FormInterface {
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   const [formValues, setFormValues] = useState({} as EmployeeInterface);
   const {
@@ -241,7 +242,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                     <label htmlFor="">
                       Contraseña<span>(*)</span>:
                       <input
-                        type="password"
+                        type={showPass ? "text" : "password"}
                         name="password"
                         value={password}
                         onChange={handleChange}
@@ -253,7 +254,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
                     <label htmlFor="">
                       Repetir Contraseña<span>(*)</span>:
                       <input
-                        type="password"
+                        type={showPass ? "text" : "password"}
                         name="confirmPassword"
                         value={confirmPassword}
                         onChange={handleChange}
@@ -294,6 +295,13 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
                   <div className={styles.field}>
                     <span>(*): Campo obligatorio</span>
+                    <div className={styles.fieldRow}>
+                      <input
+                        type="checkbox"
+                        onClick={() => setShowPass((state) => !state)}
+                      />
+                      <span>Mostrar las contraseñas</span>
+                    </div>
                   </div>
 
                   <div className={styles.buttonField}>

@@ -40,6 +40,7 @@
   border: none;
   outline: none;
   border-bottom: 1px solid;
+  background-color: transparent;
 }
 
 .button {
@@ -62,10 +63,10 @@
   background-color: var(--bg-black100);
 }
 
-.form svg {
+.form .iconClose {
   position: absolute;
-  top: -1rem;
-  right: -1rem;
+  top: 0;
+  right: 0;
   font-size: 2rem;
   background-color: white;
   border-radius: 50%;

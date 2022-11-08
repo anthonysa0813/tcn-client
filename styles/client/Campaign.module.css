@@ -111,11 +111,12 @@
 .modalContainer svg {
   font-size: 2rem;
   position: absolute;
-  right: -16px;
-  top: -16px;
+  right: 0;
+  top: 0;
   background-color: white;
   border-radius: 50%;
   padding: 0;
+  cursor: pointer;
 }
 
 /* media queries */
