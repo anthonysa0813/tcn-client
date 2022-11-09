@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
@@ -8,6 +8,7 @@ import { createNewServicefetch } from "../../helpers/employeeFetch";
 import styles from "../../styles/admin/form/NewServiceForm.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../../context/UserContext";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -28,6 +29,17 @@ const NewServicePage = () => {
     company: "",
   });
   const [error, setError] = useState(false);
+  const { userGlobal } = useContext(UserContext);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const { role } = userGlobal;
+
+  useEffect(() => {
+    console.log("role", role);
+    if (role !== "ROLE_ADMIN") {
+      console.log("es admin");
+      setIsDisabled(true);
+    }
+  }, [role]);
 
   const handleChange = (e: string) => {
     setDescriptionState(e);
@@ -55,9 +67,16 @@ const NewServicePage = () => {
   return (
     <LayoutDashboard>
       <ToastContainer />
-      <h1 className={styles.title}>Crear un nuevo servicio</h1>
+
       <div className="wrapper">
         <form onSubmit={handleSubmit} className={styles.form}>
+          <h1 className={styles.title}>Crear un nuevo servicio</h1>
+          {role !== "ADMIN_ROLE" && (
+            <p className={styles.alert}>
+              Únicamente los usuarios con un role <span>ADMIN_ROLE</span>,
+              podrán crear.
+            </p>
+          )}
           <div className={styles.field}>
             <label>Título:</label>
             <Input
@@ -87,7 +106,13 @@ const NewServicePage = () => {
               theme="snow"
             />
           </div>
-          <button type="submit" className={styles.button}>
+          <button
+            type={role !== "ADMIN_ROLE" ? "button" : "submit"}
+            className={`${styles.button} ${
+              role !== "ADMIN_ROLE" ? styles.inactive : ""
+            }`}
+            // disabled={true}
+          >
             Crear
           </button>
         </form>

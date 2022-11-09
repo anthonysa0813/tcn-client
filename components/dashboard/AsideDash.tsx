@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { GetServerSideProps } from "next";
 import { Service } from "../../interfaces";
-import { Document, PaperPlus } from "react-iconly";
+import { Document, PaperPlus, People } from "react-iconly";
 import ButtonPrimary from "../buttons/Button";
 import Image from "next/image";
 import { BiAlignLeft } from "react-icons/bi";
@@ -27,6 +27,11 @@ const AsideDash = () => {
       setWindowWidth(window.innerWidth);
     }
   };
+
+  useEffect(() => {
+    console.log("superAdmin", userGlobal);
+  }, []);
+
   useLayoutEffect(() => {
     if (window !== undefined) {
       window.addEventListener("resize", setWindowDimensions);
@@ -58,22 +63,23 @@ const AsideDash = () => {
   return (
     <>
       <aside className={styles.aside}>
-        {showMenu ? (
-          <GrClose
-            className={styles.svgMenu}
-            onClick={() => {
-              setShowMenu((state) => !state);
-            }}
-          />
-        ) : (
-          <BiAlignLeft
-            className={styles.svgMenu}
-            onClick={() => {
-              setShowMenu((state) => !state);
-            }}
-          />
-        )}
-
+        <div className={styles.boxIcon}>
+          {showMenu ? (
+            <GrClose
+              className={styles.svgMenu}
+              onClick={() => {
+                setShowMenu((state) => !state);
+              }}
+            />
+          ) : (
+            <BiAlignLeft
+              className={styles.svgMenu}
+              onClick={() => {
+                setShowMenu((state) => !state);
+              }}
+            />
+          )}
+        </div>
         {showMenu && (
           <div className={styles.asideContainer}>
             <div className="menuHeader">
@@ -125,6 +131,18 @@ const AsideDash = () => {
                     Campañas Disponibles
                   </a>
                 </Link>
+                {userGlobal.superAdmin && (
+                  <Link href="/admin/changeRole">
+                    <a
+                      className={
+                        pathActive("changeRole") ? styles.activeLink : ""
+                      }
+                    >
+                      <People set="bold" primaryColor="primary" />
+                      Cambiar role a un usuario
+                    </a>
+                  </Link>
+                )}
               </ul>
             </nav>
             <div className={styles.profile}>

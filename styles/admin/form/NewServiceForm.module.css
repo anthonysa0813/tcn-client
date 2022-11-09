@@ -10,10 +10,22 @@
  row-gap: 2rem; */
 }
 
+.alert {
+  color: var(--bg-red);
+}
+
+.alert span {
+  font-weight: 700;
+}
+
 .field {
   display: flex;
   flex-direction: column;
   margin-block: 2rem;
+}
+
+.inactive {
+  background-color: var(--bg-gray100) !important;
 }
 
 .button {

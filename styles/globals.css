@@ -15,7 +15,7 @@
   --bg-black: #22242c;
   --bg-red: #990033;
   --bg-blue200: #175676;
-  --bg-blue300: #175676;
+  --bg-bluePrimary: #0072f5;
   --bg-blue100: #cce6f4;
   --bg-blueLight: #f2f6f7;
 }
@@ -35,6 +35,14 @@ html {
 }
 .dark {
   background-color: var(--bg-black);
+}
+
+.primary {
+  background-color: var(--bg-bluePrimary) !important;
+}
+
+.red {
+  background-color: var(--bg-red) !important;
 }
 
 html,

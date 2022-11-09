@@ -1,0 +1,50 @@
+.mainGrid h1 {
+  font-size: 2rem;
+  color: var(--bg-blue200);
+}
+.searchField {
+  display: flex;
+  width: 50%;
+  column-gap: 0.5rem;
+}
+
+.searchField input {
+  width: 100%;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  border: 1px solid var(--bg-black);
+  padding: 0.25rem 0.5rem;
+}
+
+.searchField input:focus {
+  border: 2px solid var(--bg-blue200);
+}
+
+.fieldUser {
+  margin-block: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: var(--bg-blueLight);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: var(--bg-bluePrimary);
+  color: var(--bg-white);
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.button:active {
+  transform: scale(0.95);
+}

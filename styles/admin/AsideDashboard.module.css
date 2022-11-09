@@ -69,6 +69,9 @@
   background-color: var(--bg-white);
   border-radius: 0.5rem;
 }
+.boxIcon {
+  display: block;
+}
 
 @media screen and (min-width: 768px) {
   .asideContainer {
@@ -85,5 +88,8 @@
     grid-column: 1/2;
     width: auto;
     padding: 10px;
+  }
+  .boxIcon {
+    display: none;
   }
 }

@@ -17,7 +17,6 @@ export const loginFetchApi = async (endpoint: string, dataUser: FormProp) => {
 };
 
 export const getFetchApi = async (endpoint: string) => {
-  console.log("token client", token);
   const response = await fetch(`${API_URL}/${endpoint}`);
   const data = await response.json();
   return data;
@@ -29,7 +28,6 @@ export const changeStatus = async (endpoint: string, id: string) => {
       method: "PUT",
     });
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
     console.log(error);

@@ -10,6 +10,7 @@ export interface UserResponse {
   role: string;
   name: string;
   id?: string;
+  superAdmin?: boolean;
 }
 
 export interface ContextInitial {
