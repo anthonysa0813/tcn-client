@@ -32,7 +32,7 @@
 
 .active {
   width: 100%;
-
+  position: fixed;
   height: 100vh;
   background-color: var(--bg-blueLight);
 
@@ -73,13 +73,10 @@
 }
 
 .navigation {
-  margin-block-start: 2rem;
-}
-
-.navigation {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  margin-block-start: 2rem;
 }
 
 .link {

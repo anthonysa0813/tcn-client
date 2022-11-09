@@ -21,6 +21,7 @@ interface FormProp {
 }
 
 const notify = () => toast.success("Se creó el servicio!");
+const notifyWarning = (message: string) => toast.warning(message);
 
 const NewServicePage = () => {
   const [descriptionState, setDescriptionState] = useState("");
@@ -49,6 +50,7 @@ const NewServicePage = () => {
     e.preventDefault();
     if ([title, company, descriptionState].includes("")) {
       setError(true);
+      notifyWarning("Están vaciós algunos campos...");
       setTimeout(() => {
         setError(false);
       }, 2000);

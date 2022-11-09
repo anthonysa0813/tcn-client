@@ -113,9 +113,16 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
             </div>
 
             <button className={styles.button}>Iniciar Sesión</button>
-            <Link href={"/forgetPassword"}>
-              <a>Olvidé mi contraseña</a>
-            </Link>
+            <div className={`${styles.field} text-center`}>
+              <Link href={"/forgetPassword"}>
+                <a>Olvidé mi contraseña</a>
+              </Link>
+            </div>
+            <div className={`${styles.field} text-center`}>
+              <Link href={"/admin"}>
+                <a>¿Eres admin?</a>
+              </Link>
+            </div>
             {showLoading && <Loading />}
           </form>
         </div>

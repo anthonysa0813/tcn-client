@@ -16,12 +16,17 @@
   background-color: var(--bg-white);
   padding: 2rem;
   border-radius: 1rem;
-  text-align: center;
+
   position: relative;
   width: 90%;
   /* width: 90%; */
   min-width: 300px;
   max-width: 400px;
+}
+
+.modalContainer h3 {
+  text-align: center;
+  color: var(--bg-blue200);
 }
 
 .modalContainer form {
@@ -33,6 +38,14 @@
 .field {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+.field a {
+  font-weight: 700;
+}
+.field a:hover {
+  color: var(--bg-blue200);
 }
 
 .field input {
@@ -53,6 +66,9 @@
   color: white;
   margin-block-start: 1rem;
   transition: all 0.3s;
+}
+.button:hover {
+  background-color: var(--bg-black100);
 }
 
 .button:active {

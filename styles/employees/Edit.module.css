@@ -9,12 +9,14 @@
   border: 2px solid var(--bg-blue300);
   border-radius: 0.5rem;
   color: var(--bg-blue200);
-  padding: 0.5rem 1.5rem;
 }
 .alertCotent {
   display: flex;
   align-items: center;
   font-size: 10px;
+  border: 2px solid var(--bg-blue200);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .alertCotent svg {
@@ -200,6 +202,9 @@
 
   .alertCotent {
     font-size: 16px;
+  }
+  .alertCotent {
+    width: 80%;
   }
 }
 
