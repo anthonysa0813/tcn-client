@@ -97,3 +97,14 @@ export const chenageStatusJobFetch = async (
   const dataResponse = await response.json();
   return dataResponse;
 };
+
+export const searchEmployeeByFilter = async (
+  endpoint: string,
+  query: string,
+  valueQuery: string
+) => {
+  // http://localhost:5050/api/employees/search?statusJob=DESCARTADO
+  const response = await fetch(`${API_URL}/${endpoint}?${query}=${valueQuery}`);
+  const dataResponse = await response.json();
+  return dataResponse;
+};

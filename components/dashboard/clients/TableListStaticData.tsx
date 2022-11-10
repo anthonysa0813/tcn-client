@@ -15,6 +15,7 @@ import Link from "next/link";
 import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
+import DropDownSelect from "../../buttons/DrownDownSelect";
 
 type Props = {
   data: EmployeeInterface[];
@@ -39,10 +40,6 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
     setcurrentData(data.slice(initialSliceValue, offsetSliceValue));
   }, [data, offsetSliceValue]);
 
-  const resetDataList = () => {
-    setPageNumber(0);
-  };
-
   return (
     <>
       <Table
@@ -57,6 +54,7 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
           <Table.Column>Tlf</Table.Column>
           <Table.Column>email</Table.Column>
           <Table.Column>Conocer más</Table.Column>
+          <Table.Column>Estado</Table.Column>
         </Table.Header>
         <Table.Body>
           {currentData.map((user: EmployeeInterface) => {
@@ -77,6 +75,12 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
                   >
                     <span>Ver información</span>
                   </Button>
+                </Table.Cell>
+                <Table.Cell>
+                  <DropDownSelect
+                    idUser={user.id}
+                    statusUser={user.statusJob || ""}
+                  />
                 </Table.Cell>
               </Table.Row>
             );

@@ -9,12 +9,28 @@ import { EmployeeInterface } from "../../interfaces";
 import {
   getEmployeeByFilterHability,
   getEmployeeFilterByLanguage,
+  searchEmployeeByFilter,
 } from "../../apis/employee/useEmployeeFetch";
+import useForm from "../../hooks/useForm";
 
 interface Prop {
   setShowModalFilters: React.Dispatch<React.SetStateAction<boolean>>;
   setEmployeeData: React.Dispatch<React.SetStateAction<EmployeeInterface[]>>;
 }
+
+const options = [
+  { id: uuidv4(), value: "idiomas" },
+  { id: uuidv4(), value: "habilidades y/o conocimientos" },
+  { id: uuidv4(), value: "email" },
+  { id: uuidv4(), value: "dni" },
+  { id: uuidv4(), value: "estado" },
+];
+
+const optionStatusJob = [
+  { id: uuidv4(), value: "DESCARTADO" },
+  { id: uuidv4(), value: "SELECCIONADO" },
+  { id: uuidv4(), value: "CONTRATADO" },
+];
 
 const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
   const [mainValue, setMainValue] = useState("");
@@ -23,28 +39,63 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
   const [nivelLang, setNivelLang] = useState("");
   const [showSkillInput, setShowSkillInput] = useState(false);
   const [skillValue, setSkillValue] = useState("");
+  const [dniState, setDniState] = useState(false);
+  const [emailState, setEmailState] = useState(false);
+  const [stateJobState, setStateJobState] = useState(false);
+  const [statusJob, setStatusJob] = useState("");
+  // const [emailValue, setEmailValue] = useState("")
   // getEmployeeByFilterHability;
   // getEmployeeFilterByLanguage;
 
-  const options = [
-    { id: uuidv4(), value: "idiomas" },
-    { id: uuidv4(), value: "habilidades y/o conocimientos" },
-  ];
+  const { dni, email, onChange } = useForm({
+    email: "",
+    dni: "",
+  });
 
   useEffect(() => {
-    if (mainValue === "idiomas") {
-      setShowLangInput(true);
-    } else {
-      setShowLangInput(false);
-    }
-    if (mainValue === "habilidades y/o conocimientos") {
-      setShowSkillInput(true);
-    } else {
-      setShowSkillInput(false);
-    }
-    if (mainValue === "") {
-      setShowSkillInput(false);
-      setShowLangInput(false);
+    switch (mainValue) {
+      case "idiomas":
+        setShowLangInput(true);
+        setShowSkillInput(false);
+        setDniState(false);
+        setEmailState(false);
+        setStateJobState(false);
+        break;
+      case "habilidades y/o conocimientos":
+        setShowSkillInput(true);
+        setShowLangInput(false);
+        setDniState(false);
+        setEmailState(false);
+        setStateJobState(false);
+        break;
+      case "dni":
+        setDniState(true);
+        setShowSkillInput(false);
+        setShowLangInput(false);
+        setEmailState(false);
+        setStateJobState(false);
+        break;
+      case "email":
+        setEmailState(true);
+        setDniState(false);
+        setShowSkillInput(false);
+        setShowLangInput(false);
+        setStateJobState(false);
+        break;
+      case "estado":
+        setStateJobState(true);
+        setEmailState(false);
+        setDniState(false);
+        setShowSkillInput(false);
+        setShowLangInput(false);
+        break;
+      default:
+        setShowLangInput(false);
+        setShowSkillInput(false);
+        setEmailState(false);
+        setDniState(false);
+        setStateJobState(false);
+        break;
     }
   }, [mainValue]);
 
@@ -62,9 +113,28 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
 
     if (showSkillInput) {
       getEmployeeByFilterHability("knoledge", skillValue).then((res) => {
-        console.log(res);
         let newArr = res.map((userResponse: any) => userResponse.employee);
         setEmployeeData(newArr);
+      });
+    }
+    if (dniState) {
+      searchEmployeeByFilter("employees/search", "dni", dni).then((res) => {
+        setEmployeeData(res);
+      });
+    }
+
+    if (statusJob) {
+      searchEmployeeByFilter("employees/search", "statusJob", statusJob).then(
+        (res) => {
+          setEmployeeData(res);
+        }
+      );
+    }
+
+    if (email) {
+      searchEmployeeByFilter("employees/search", "email", email).then((res) => {
+        console.log("res email", res);
+        setEmployeeData(res);
       });
     }
   };
@@ -77,12 +147,12 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
           className={styles.svg}
         />
       </div>
-      <h1>Elige las siguientes opciones</h1>
+      <h1>Busca usuarios mediante filtros</h1>
       <div className={styles.container}>
         <DatalistInput
           className={styles.dataList}
           placeholder=""
-          label="Busca por idioma ó habilidades"
+          label="Elige las siguientes opciones:"
           onSelect={(item) => setMainValue(item.value)}
           items={options}
           value={mainValue}
@@ -115,6 +185,36 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
             onSelect={(item) => setSkillValue(item.value)}
             items={skills}
             value={skillValue}
+          />
+        )}
+        {dniState && (
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="Escribe el número de identidad"
+            value={dni}
+            name="dni"
+            onChange={onChange}
+          />
+        )}
+        {emailState && (
+          <input
+            type="email"
+            className={styles.input}
+            placeholder="example@example.com"
+            value={email}
+            name="email"
+            onChange={onChange}
+          />
+        )}
+        {stateJobState && (
+          <DatalistInput
+            className={styles.dataList}
+            placeholder=""
+            label="Busca usuarios por su estado:"
+            onSelect={(item) => setStatusJob(item.value)}
+            items={optionStatusJob}
+            value={statusJob}
           />
         )}
       </div>

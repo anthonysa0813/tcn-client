@@ -28,3 +28,14 @@
 .boxClose svg {
   font-size: 30px;
 }
+
+.input {
+  padding: 5px;
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  border: 1px solid var(--bg-gray200);
+}
+.input:focus {
+  border-color: var(--bg-blue200);
+}

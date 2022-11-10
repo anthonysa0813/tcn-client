@@ -70,7 +70,7 @@ const ServiceCard = ({ service }: Prop) => {
             className={styles.button}
             onClick={() => applicationJob(service?._id)}
           >
-            aplicar
+            Postular
           </button>
         </div>
       </div>
