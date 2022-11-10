@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Button,
   Modal,
@@ -15,6 +15,8 @@ import Link from "next/link";
 import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
+import { UserContext } from "../../../context/UserContext";
+import DropDownSelect from "../../buttons/DrownDownSelect";
 
 type Props = {
   data: EmployeeInterface[];
@@ -28,6 +30,7 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
   );
+  const { userGlobal } = useContext(UserContext);
   const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
   const [loading, setLoading] = useState(false);
 
@@ -44,6 +47,7 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
     getFetchApi(endpoint).then((res) => {
       setDataList(res.users);
     });
+    console.log("global user :D", userGlobal);
   }, []);
 
   useEffect(() => {
@@ -99,11 +103,13 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
             {/* <Table.Column>Mensaje</Table.Column> */}
             <Table.Column>Telefóno</Table.Column>
             <Table.Column>Información general</Table.Column>
+            <Table.Column>Estado</Table.Column>
           </Table.Header>
           <Table.Body>
             {dataList.length === 0 ? (
               <Table.Row>
                 <Table.Cell>{"No existen más datos"}</Table.Cell>
+                <Table.Cell>{""}</Table.Cell>
                 <Table.Cell>{""}</Table.Cell>
                 <Table.Cell>{""}</Table.Cell>
                 <Table.Cell>{""}</Table.Cell>
@@ -126,6 +132,12 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
                       >
                         <span>Ver información</span>
                       </Button>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <DropDownSelect
+                        statusUser={user.statusJob ? user.statusJob : ""}
+                        idUser={user.id}
+                      />
                     </Table.Cell>
                   </Table.Row>
                 );

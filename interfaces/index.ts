@@ -62,6 +62,12 @@ export interface EmployeeInterface {
   linkedin?: string;
   github?: string;
   confirmPassword?: string;
+  statusJob?: string;
+}
+
+export interface ChangeStatusRequest {
+  idEmployee: string;
+  statusOption: string;
 }
 
 export interface Service {

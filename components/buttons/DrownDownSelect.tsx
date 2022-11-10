@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "@nextui-org/react";
-// import { chenageStatusJobFetch } from "../../apis/employee/useEmployeeFetch";
+import { chenageStatusJobFetch } from "../../apis/employee/useEmployeeFetch";
 
 interface Prop {
   statusUser: string;
@@ -17,16 +17,16 @@ const DropDownSelect = ({ statusUser, idUser }: Prop) => {
 
   const changeStatus = (value: string) => {
     setStateStatus(value);
-    // chenageStatusJobFetch("employees/change-status-job", {
-    //   idEmployee: idUser,
-    //   statusOption: value,
-    // }).then((res: any) => {
-    //   console.log(res);
-    //   console.log("data: D", {
-    //     idEmployee: idUser,
-    //     statusOption: value,
-    //   });
-    // });
+    chenageStatusJobFetch("employees/change-status-job", {
+      idEmployee: idUser,
+      statusOption: value,
+    }).then((res) => {
+      console.log(res);
+      console.log("data: D", {
+        idEmployee: idUser,
+        statusOption: value,
+      });
+    });
   };
 
   return (
