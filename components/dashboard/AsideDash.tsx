@@ -29,10 +29,6 @@ const AsideDash = () => {
   };
 
   useEffect(() => {
-    console.log("superAdmin", userGlobal);
-  }, []);
-
-  useLayoutEffect(() => {
     if (window !== undefined) {
       window.addEventListener("resize", setWindowDimensions);
       return () => {
