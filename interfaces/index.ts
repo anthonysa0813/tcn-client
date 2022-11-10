@@ -63,6 +63,7 @@ export interface EmployeeInterface {
   github?: string;
   confirmPassword?: string;
   statusJob?: string;
+  dni?: string;
 }
 
 export interface ChangeStatusRequest {

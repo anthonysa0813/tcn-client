@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Button,
   Modal,
@@ -16,6 +16,7 @@ import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
 import DropDownSelect from "../../buttons/DrownDownSelect";
+import { UserContext } from "../../../context/UserContext";
 
 type Props = {
   data: EmployeeInterface[];
@@ -33,6 +34,7 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
   const [loading, setLoading] = useState(false);
   const [currentData, setcurrentData] = useState<EmployeeInterface[] | []>([]);
   const [initialSliceValue, setInitialSliceValue] = useState(0);
+  const { userGlobal } = useContext(UserContext);
 
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -77,10 +79,14 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
                   </Button>
                 </Table.Cell>
                 <Table.Cell>
-                  <DropDownSelect
-                    idUser={user.id}
-                    statusUser={user.statusJob || ""}
-                  />
+                  {userGlobal.role === "ADMIN_ROLE" ? (
+                    <DropDownSelect
+                      idUser={user.id}
+                      statusUser={user.statusJob || ""}
+                    />
+                  ) : (
+                    <span>{user.statusJob}</span>
+                  )}
                 </Table.Cell>
               </Table.Row>
             );

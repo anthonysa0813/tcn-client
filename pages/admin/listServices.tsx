@@ -9,7 +9,6 @@ import Link from "next/link";
 import { API_URL } from "../../utils/constanstApi";
 import { randomId } from "../../helpers/randomID";
 import TableListStaticData from "../../components/dashboard/clients/TableListStaticData";
-import { CurrentUserContext } from "../../context/CurrentsEmployees";
 
 const ListServicesPage = () => {
   const [servicesArr, setServicesArr] = useState<Service[] | []>([]);
@@ -30,9 +29,6 @@ const ListServicesPage = () => {
     message: "",
     country: "",
   });
-
-  const { currentUsersState, setCurrentUsersState } =
-    useContext(CurrentUserContext);
 
   useEffect(() => {
     fetch(`${API_URL}/services`)

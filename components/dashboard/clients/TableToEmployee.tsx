@@ -134,10 +134,14 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
                       </Button>
                     </Table.Cell>
                     <Table.Cell>
-                      <DropDownSelect
-                        statusUser={user.statusJob ? user.statusJob : ""}
-                        idUser={user.id}
-                      />
+                      {userGlobal.role === "ADMIN_ROLE" ? (
+                        <DropDownSelect
+                          statusUser={user.statusJob ? user.statusJob : ""}
+                          idUser={user.id}
+                        />
+                      ) : (
+                        <span>{user.statusJob}</span>
+                      )}
                     </Table.Cell>
                   </Table.Row>
                 );
