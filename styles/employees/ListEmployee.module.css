@@ -14,8 +14,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
   border-radius: 0.5rem;
   padding-inline: 1rem;
   color: white;
-  background-color: #17c964;
+  padding: 13px 24px;
+  background-color: var(--bg-green100);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buttonExcel:hover {
+  background-color: var(--bg-green);
+}
+
+.buttonExcel:active {
+  transform: scale(0.9);
 }
