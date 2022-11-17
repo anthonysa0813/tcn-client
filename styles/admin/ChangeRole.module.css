@@ -48,3 +48,19 @@
 .button:active {
   transform: scale(0.95);
 }
+
+.watchAllUsersButton {
+  background-color: white;
+  color: var(--bg-green);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  border: 2px solid var(--bg-green);
+  margin-block: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.watchAllUsersButton:hover {
+  background-color: var(--bg-green);
+  color: white;
+}

@@ -15,7 +15,7 @@ import {
 } from "react-icons/bs";
 import { GiPublicSpeaker, GiSkills } from "react-icons/gi";
 
-import EditorProfile from "../../components/EditorProfile/EditorProfile";
+import EditorProfile from "../../components/editorProfile/EditorProfile";
 import NewLanguage from "../../components/forms/NewLanguage";
 import useLang from "../../hooks/useLang";
 import ButtonPrimary from "../../components/buttons/Button";

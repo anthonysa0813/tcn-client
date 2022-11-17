@@ -54,7 +54,10 @@
 }
 
 .miniMenu a:hover {
-  color: var(--bg-blue300);
+  color: var(--bg-blue200);
+  background-color: var(--bg-blueLight);
+  padding: 0.25rem;
+  border-radius: 0.4rem;
 }
 
 .miniMenu:hover {

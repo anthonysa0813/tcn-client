@@ -1,0 +1,30 @@
+.info {
+  width: 50%;
+}
+
+.field input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  border: 1px solid var(--bg-gray200);
+  padding: 0.25rem;
+}
+
+.field input:focus {
+  border: 2px solid var(--bg-blue200);
+}
+
+.field {
+  display: flex;
+  column-gap: 1rem;
+  margin-block: 1rem;
+  align-items: center;
+}
+
+.fieldButton button {
+  padding: 0.5rem;
+  background-color: var(--bg-black);
+  color: white;
+  border-radius: 0.5rem;
+}

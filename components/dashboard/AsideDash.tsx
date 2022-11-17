@@ -5,13 +5,9 @@ import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { GetServerSideProps } from "next";
-import { Service } from "../../interfaces";
-import { Document, PaperPlus, People } from "react-iconly";
-import ButtonPrimary from "../buttons/Button";
+import { AddUser, Document, PaperPlus, Password, People } from "react-iconly";
 import Image from "next/image";
 import { BiAlignLeft } from "react-icons/bi";
-import { GiCardboardBoxClosed } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import "animate.css";
 
@@ -98,46 +94,59 @@ const AsideDash = () => {
             Lista de Clientes
             </a>
           </Link> */}
-                <Link href="/admin/employees">
-                  <a
-                    className={pathActive("employees") ? styles.activeLink : ""}
-                  >
-                    <Document set="bold" primaryColor="primary" />
-                    Lista de Empleados
-                  </a>
+                <Link
+                  href="/admin/employees"
+                  className={pathActive("employees") ? styles.activeLink : ""}
+                >
+                  <Document set="bold" primaryColor="primary" />
+                  Lista de Empleados
                 </Link>
-                <Link href="/admin/newService">
-                  <a
-                    className={
-                      pathActive("newService") ? styles.activeLink : ""
-                    }
-                  >
-                    {/* <Document set="bold" primaryColor="primary" /> */}
-                    <PaperPlus set="bold" primaryColor="primary" />
-                    Crear nuevo Servicio
-                  </a>
+                <Link
+                  href="/admin/newService"
+                  className={pathActive("newService") ? styles.activeLink : ""}
+                >
+                  <PaperPlus set="bold" primaryColor="primary" />
+                  Crear nuevo Puesto
                 </Link>
-                <Link href="/admin/listServices">
-                  <a
-                    className={
-                      pathActive("listServices") ? styles.activeLink : ""
-                    }
-                  >
-                    <Document set="bold" primaryColor="primary" />
-                    Campañas Disponibles
-                  </a>
+                <Link
+                  href="/admin/changePassword"
+                  className={
+                    pathActive("changePassword") ? styles.activeLink : ""
+                  }
+                >
+                  <Password set="bold" primaryColor="primary" />
+                  Editar información
+                </Link>
+                <Link
+                  href="/admin/listServices"
+                  className={
+                    pathActive("listServices") ? styles.activeLink : ""
+                  }
+                >
+                  <Document set="bold" primaryColor="primary" />
+                  Puestos Disponibles
                 </Link>
                 {userGlobal.superAdmin && (
-                  <Link href="/admin/changeRole">
-                    <a
+                  <>
+                    <Link
+                      href="/admin/changeRole"
                       className={
                         pathActive("changeRole") ? styles.activeLink : ""
                       }
                     >
                       <People set="bold" primaryColor="primary" />
                       Cambiar role a un usuario
-                    </a>
-                  </Link>
+                    </Link>
+                    <Link
+                      href="/admin/createNewUser"
+                      className={
+                        pathActive("createNewUser") ? styles.activeLink : ""
+                      }
+                    >
+                      <AddUser set="bold" primaryColor="primary" />
+                      Crear un nuevo usuario
+                    </Link>
+                  </>
                 )}
               </ul>
             </nav>

@@ -76,9 +76,7 @@ const Navbar = () => {
                       </Link>
                     </li> */}
                     <li>
-                      <Link href="/campaign">
-                        <a>Trabaja con Nosotros</a>
-                      </Link>
+                      <Link href="/campaign">Trabaja con Nosotros</Link>
                     </li>
                   </>
                 )}
@@ -87,12 +85,8 @@ const Navbar = () => {
                     <User set="bold" primaryColor="black" />
                     {name} {surnames}
                     <div className={styles.miniMenu}>
-                      <Link href="/employee/edit">
-                        <a>Perfil</a>
-                      </Link>
-                      <Link href="/employee/applications">
-                        <a> postulaciones</a>
-                      </Link>
+                      <Link href="/employee/edit">Perfil</Link>
+                      <Link href="/employee/applications">postulaciones</Link>
                     </div>
                   </span>
                 )}

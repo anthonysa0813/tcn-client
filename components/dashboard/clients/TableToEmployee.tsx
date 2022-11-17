@@ -97,10 +97,8 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
           }}
         >
           <Table.Header>
-            {/* <Table.Column>Estado</Table.Column> */}
             <Table.Column>Nombre Completo</Table.Column>
             <Table.Column>Email</Table.Column>
-            {/* <Table.Column>Mensaje</Table.Column> */}
             <Table.Column>Telefóno</Table.Column>
             <Table.Column>Información general</Table.Column>
             <Table.Column>Estado</Table.Column>
@@ -206,7 +204,8 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
               style={{ marginBlock: "1rem" }}
             >
               <Link href={currentEmployee.cv || ""}>
-                <a target="_blank">abrir el enlace del cv</a>
+                {/* <a target="_blank">abrir el enlace del cv</a> */}
+                cv :D
               </Link>
             </Button>
           </div>
@@ -229,7 +228,4 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
   );
 };
 
-// <Link href={user.cv || ""}>
-//   <a target="_blank">Ver información</a>
-// </Link>
 export default TableToEmployee;

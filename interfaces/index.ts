@@ -11,6 +11,7 @@ export interface UserResponse {
   name: string;
   id?: string;
   superAdmin?: boolean;
+  password?: string;
 }
 
 export interface ContextInitial {

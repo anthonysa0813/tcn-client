@@ -57,51 +57,47 @@ const LayoutEmployee = ({ children, name }: Prop) => {
                   !showMenu ? "animate__slideOutLeft" : ""
                 }`}
               >
-                <Link href="/campaign">
-                  <a
-                    className={pathActive("/campaign") ? styles.activeLink : ""}
-                  >
-                    <Work
-                      set="bold"
-                      primaryColor="primary"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                    Ver Campañas Disponibles
-                  </a>
+                <Link
+                  href="/campaign"
+                  className={pathActive("/campaign") ? styles.activeLink : ""}
+                >
+                  <Work
+                    set="bold"
+                    primaryColor="primary"
+                    style={{ width: "20px", height: "20px" }}
+                  />
+                  Ver Campañas Disponibles
                 </Link>
-                <Link href="/employee/edit">
-                  <a
-                    className={
-                      pathActive("/employee/edit") ? styles.activeLink : ""
-                    }
-                  >
-                    <EditSquare set="bold" primaryColor="primary" />
-                    Editar Información
-                  </a>
+                <Link
+                  href="/employee/edit"
+                  className={
+                    pathActive("/employee/edit") ? styles.activeLink : ""
+                  }
+                >
+                  <EditSquare set="bold" primaryColor="primary" />
+                  Editar Información
                 </Link>
-                <Link href="/employee/applications">
-                  <a
-                    className={
-                      pathActive("/employee/applications")
-                        ? styles.activeLink
-                        : ""
-                    }
-                  >
-                    <ArrowUpSquare set="bold" primaryColor="primary" />
-                    Ver postulaciones
-                  </a>
+                <Link
+                  href="/employee/applications"
+                  className={
+                    pathActive("/employee/applications")
+                      ? styles.activeLink
+                      : ""
+                  }
+                >
+                  <ArrowUpSquare set="bold" primaryColor="primary" />
+                  Ver postulaciones
                 </Link>
-                <Link href="/employee/changePassword">
-                  <a
-                    className={
-                      pathActive("/employee/changePassword")
-                        ? styles.activeLink
-                        : ""
-                    }
-                  >
-                    <Password set="bold" primaryColor="primary  " />
-                    Cambiar la contraseña
-                  </a>
+                <Link
+                  href="/employee/changePassword"
+                  className={
+                    pathActive("/employee/changePassword")
+                      ? styles.activeLink
+                      : ""
+                  }
+                >
+                  <Password set="bold" primaryColor="primary  " />
+                  Cambiar la contraseña
                 </Link>
                 {/* {false && (
                   <Link href="/employee/payments">

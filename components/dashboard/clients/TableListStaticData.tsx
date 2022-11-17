@@ -139,9 +139,10 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
               size="sm"
               style={{ marginBlock: "1rem" }}
             >
-              <Link href={currentEmployee.cv || ""}>
+              {/* <Link href={currentEmployee.cv || ""}>
                 <a target="_blank">abrir el enlace del cv</a>
-              </Link>
+              </Link> */}
+              ejeje cv
             </Button>
           </div>
           <div className={styles.field}>
@@ -163,7 +164,4 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
   );
 };
 
-// <Link href={user.cv || ""}>
-//   <a target="_blank">Ver información</a>
-// </Link>
 export default TableListStaticData;

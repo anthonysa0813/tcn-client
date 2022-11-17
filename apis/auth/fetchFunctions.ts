@@ -22,3 +22,22 @@ export const updateUserAuth = async (
   const dataResponse = await response.json();
   return dataResponse;
 };
+
+export const getAllUsers = async (endpoint: string) => {
+  const response = await fetch(`${API_URL}/${endpoint}`);
+  const data = await response.json();
+  return data;
+};
+
+// http://localhost:5050/api/auth/register
+export const createUserAuth = async (endpoint: string, data: UserResponse) => {
+  const response = await fetch(`${API_URL}/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const dataResponse = await response.json();
+  return dataResponse;
+};
