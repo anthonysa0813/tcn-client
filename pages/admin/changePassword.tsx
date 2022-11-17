@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import useForm from "../../hooks/useForm";
-import styles from "../../styles/admin/editInfo.module.css";
+import styles from "../../styles/admin/EditInfo.module.css";
 import { UserContext } from "../../context/UserContext";
 import { updateUserAuth } from "../../apis/auth/fetchFunctions";
 import Cookies from "js-cookie";
