@@ -17,12 +17,10 @@ const Clients = () => {
   const [clientsArr, setClientsArr] = useState([]);
   const [modal, setModal] = useState(false);
   useEffect(() => {
-    // if (!token || Object.values(userGlobal).includes("")) {
     if (!token) {
       router.push("/admin/login");
     }
     getFetchApi("clients").then((res) => {
-      // console.log("res", res);
       setClientsArr(res);
     });
   }, []);

@@ -35,7 +35,6 @@ const Employees = () => {
   const [exportData, setExportData] = useState<PropCSV[] | []>([]);
 
   useEffect(() => {
-    // if (!token || Object.values(userGlobal).includes("")) {
     if (!token) {
       router.push("/admin/login");
     }
