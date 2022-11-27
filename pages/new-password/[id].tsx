@@ -6,7 +6,10 @@ import styles from "../../styles/employees/ForgetPassword.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { resetPassword } from "../../apis/employee/useEmployeeFetch";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
+import { Button, TextField } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const NewPasswordPage = () => {
   // const router = useRouter()
@@ -59,6 +62,30 @@ const NewPasswordPage = () => {
     });
   };
 
+  const { handleSubmit, errors, touched, getFieldProps } = useFormik({
+    initialValues: {
+      password: "",
+      repeatPassword: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      resetPassword("employees/new-password", {
+        email: currentEmail,
+        password: values.password,
+        token,
+      }).then((res) => {
+        console.log(res);
+        messageSuccess();
+      });
+    },
+    validationSchema: Yup.object({
+      password: Yup.string().required("Requerido"),
+      repeatPassword: Yup.string()
+        .required("Requerido")
+        .oneOf([Yup.ref("password"), null], "Las contraseñas no son iguales"),
+    }),
+  });
+
   return (
     <>
       <Navbar />
@@ -66,27 +93,41 @@ const NewPasswordPage = () => {
       <section className={styles.container}>
         <h4>Recuperar Contraseña</h4>
         <span>Te enviaremos un mensaje de confirmación a tu correo: </span>
-        <form className={styles.form} onSubmit={onSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="">Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChange}
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              size="small"
+              {...getFieldProps("password")}
             />
+            {errors.password && touched.password && (
+              <span className="text-danger ">{errors.password} </span>
+            )}
           </div>
           <div className={styles.field}>
-            <label htmlFor="">Repetir Password:</label>
-            <input
+            <TextField
+              id="outlined-basic"
+              label="Repetir Password"
+              variant="outlined"
+              size="small"
+              {...getFieldProps("repeatPassword")}
+            />
+            {errors.repeatPassword && touched.repeatPassword && (
+              <span className="text-danger ">{errors.repeatPassword} </span>
+            )}
+            {/* <input
               type="password"
               name="repeatPassword"
               value={repeatPassword}
               onChange={onChange}
-            />
+            /> */}
           </div>
           <div className="field">
-            <ButtonPrimary color="dark" content="Enviar" type="submit" />
+            <Button variant="contained" type="submit">
+              Actualizar
+            </Button>
           </div>
         </form>
       </section>

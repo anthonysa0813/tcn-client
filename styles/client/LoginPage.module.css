@@ -1,0 +1,84 @@
+.mainLogin {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr auto;
+  /* border: 3px solid brown; */
+}
+
+.drawContainer {
+  /* border: 2px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.form h4 {
+  text-align: center;
+  color: var(--bg-blue200);
+}
+
+.formPaper {
+  padding: 1.5rem;
+  min-width: 350px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-blueLight);
+  color: var(--bg-black200);
+  grid-column: 1/-1;
+  padding: 1rem;
+}
+
+.textSm {
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.footer span {
+  display: flex;
+  align-items: center;
+  color: var(--bg-blue200);
+}
+
+.footer span svg {
+  font-size: 0.85rem;
+}
+
+.fieldCenter {
+  text-align: center;
+}
+
+/* forget Password */
+
+.menu {
+  display: flex;
+  align-items: center;
+  /* border: 2px solid blue; */
+  width: 30%;
+  justify-content: space-around;
+}
+
+.menu span {
+  cursor: pointer;
+}

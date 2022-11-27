@@ -24,7 +24,7 @@ const ForgetPassword = () => {
     }
 
     sendEmailToNewPassword("employees/forget-password", form).then((res) => {
-      console.log("res", res);
+      console.log("res", res, form);
       localStorage.setItem("email", email);
       if (res.message === "Hubo un error") {
         toastAlertNotExistEmail();

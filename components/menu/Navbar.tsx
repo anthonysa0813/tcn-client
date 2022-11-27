@@ -55,26 +55,6 @@ const Navbar = () => {
               <ul>
                 {!name && (
                   <>
-                    {/* <li>
-                      <Link href="#services">
-                        <a>Servicios</a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#team">
-                        <a>Nuestro Equipo</a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#clients">
-                        <a>Clientes</a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/">
-                        <a>Contáctanos</a>
-                      </Link>
-                    </li> */}
                     <li>
                       <Link href="/campaign">Trabaja con Nosotros</Link>
                     </li>
@@ -91,11 +71,8 @@ const Navbar = () => {
                   </span>
                 )}
                 {!name && (
-                  <li
-                    className={styles.btn}
-                    onClick={() => setshowModalLogin(true)}
-                  >
-                    <a>Inicia sesión</a>
+                  <li className={styles.btn}>
+                    <Link href="/login">Inicia sesión</Link>
                   </li>
                 )}
                 {name && (

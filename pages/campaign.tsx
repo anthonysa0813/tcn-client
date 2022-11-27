@@ -33,7 +33,7 @@ const CampaignPage = ({ services }: ServiceProp) => {
       <main className={styles.main}>
         <div className={styles.wrapper}>
           <div className={styles.mainContainer}>
-            <h3>Campañas y Servicios</h3>
+            <h3>Puestos de trabajos</h3>
             <div className={styles.servicesGrid}>
               {services?.map((service) => {
                 return (
