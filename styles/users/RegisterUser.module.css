@@ -40,6 +40,11 @@
   width: 80%;
 }
 
+.wrapper p {
+  margin-block-end: 1rem;
+  color: var(--bg-gray300);
+}
+
 .formContent {
   width: 100%;
   display: grid;

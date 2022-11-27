@@ -30,6 +30,7 @@ import { loginFetchApi } from "../../../helpers/useFetch";
 import { Loading } from "@nextui-org/react";
 import { BounceLoader } from "react-spinners";
 import BeatLoader from "react-spinners/BeatLoader";
+import Link from "next/link";
 
 interface Prop {
   setShowForgetPasswordForm: Dispatch<SetStateAction<boolean>>;
@@ -146,6 +147,11 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
         <div className={styles.field}>
           <Button color="primary" type="submit">
             Entrar
+          </Button>
+        </div>
+        <div className={styles.field}>
+          <Button color="primary" type="button">
+            <Link href="/user/register">registrarme</Link>
           </Button>
         </div>
         <div className={styles.fieldCenter}>

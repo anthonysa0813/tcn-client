@@ -38,6 +38,7 @@ import {
   TextField,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { BeatLoader } from "react-spinners";
@@ -51,6 +52,7 @@ interface FormInterface {
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDesabled, setIsDesabled] = useState(false);
 
   const [formValues, setFormValues] = useState({} as EmployeeInterface);
   const [cvValue, setCvValue] = useState("" as any);
@@ -137,6 +139,13 @@ const RegisterPage: NextPage = ({ data }: any) => {
   });
 
   const { country, email, name, password, phone, surnames } = values;
+  useEffect(() => {
+    if ([country, email, name, password, phone, surnames].includes("")) {
+      setIsDesabled(true);
+    } else {
+      setIsDesabled(false);
+    }
+  }, [country, email, name, password, phone, surnames]);
   const sendData = async (dataObject: FormData) => {
     try {
       const res = await fetch(`${API_URL}/employees`, {
@@ -227,11 +236,16 @@ const RegisterPage: NextPage = ({ data }: any) => {
             <h1>Registrate</h1>
             <form className={styles.formContainer} onSubmit={handleSubmit}>
               <div className={styles.wrapper}>
+                <p>
+                  llena el formulario, postula y mantén el seguimiento a tus
+                  postulaciones.
+                </p>
                 <div className={styles.formContent}>
                   <div className={styles.field}>
                     <TextField
                       id="outlined-basic"
                       label="Nombres"
+                      type="text"
                       variant="outlined"
                       sx={{ width: "100%" }}
                       size="small"
@@ -406,12 +420,21 @@ const RegisterPage: NextPage = ({ data }: any) => {
                   </div>
 
                   <div className={styles.buttonField}>
-                    <button type="submit" className={styles.register}>
-                      Registrarse
-                    </button>
-                    <button className={styles.account} type="button">
-                      <Link href="/login">Ya tengo cuenta</Link>
-                    </button>
+                    <div className={styles.field}>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                        disabled={isDesabled}
+                      >
+                        registrarme
+                      </Button>
+                    </div>
+                    <div className={styles.field}>
+                      <Button color="secondary" type="button">
+                        <Link href="/login">Ya tengo cuenta</Link>
+                      </Button>
+                    </div>
                     {isLoading && <BeatLoader color="#0072f5" />}
                   </div>
                 </div>
