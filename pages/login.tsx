@@ -6,6 +6,7 @@ import styles from "../styles/client/LoginPage.module.css";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import LoginClient from "../components/dashboard/clients/LoginClient";
 import ForgetPassForm from "../components/dashboard/clients/ForgetPassForm";
+import Footer from "../components/dashboard/clients/Footer";
 
 const LoginPage = () => {
   const [showForgetPasswordForm, setShowForgetPasswordForm] = useState(false);
@@ -41,11 +42,7 @@ const LoginPage = () => {
             )}
           </Paper>
         </div>
-        <div className={styles.footer}>
-          <span>
-            Contact | Copyright 2022 <CopyrightIcon />
-          </span>
-        </div>
+        <Footer />
       </main>
     </>
   );

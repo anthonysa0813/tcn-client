@@ -9,7 +9,6 @@ import React, {
   useContext,
 } from "react";
 
-import Navbar from "../../components/menu/Navbar";
 import styles from "../../styles/users/RegisterUser.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,14 +17,30 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import ButtonPrimary from "../../components/buttons/Button";
-import Image from "next/image";
+
 import ModalLogin from "../../components/employees/ModalLogin";
 import { API_URL } from "../../utils/constanstApi";
 import { loginFetchApi } from "../../helpers/useFetch";
 import Cookies from "js-cookie";
 import { Loading } from "@nextui-org/react";
 import { EmployeeInterface } from "../../interfaces";
+import Image from "next/image";
+import Footer from "../../components/dashboard/clients/Footer";
+import Link from "next/link";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { BeatLoader } from "react-spinners";
 
 interface FormInterface {
   passwordFirst: string;
@@ -36,24 +51,11 @@ interface FormInterface {
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showPass, setShowPass] = useState(false);
 
   const [formValues, setFormValues] = useState({} as EmployeeInterface);
-  const {
-    name,
-    surnames,
-    email,
-    callingCode,
-    country,
-    message,
-    cv,
-    typeJob,
-    phone,
-    password,
-    confirmPassword,
-  } = formValues;
+  const [cvValue, setCvValue] = useState("" as any);
   const router = useRouter();
-  const notify = () => toast.success("Se registró satisfactoriamente!");
+  const notifySuccess = () => toast.success("Se registró satisfactoriamente!");
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifyPasswordNotEquals = () =>
     toast.warning("Las contraseñas no coinciden");
@@ -66,27 +68,24 @@ const RegisterPage: NextPage = ({ data }: any) => {
     useContext<EmployeeContextProps>(EmployeeContext);
 
   useEffect(() => {
-    if (cv) {
-      const extension = cv.type.split("/")[1];
+    if (cvValue) {
+      const extension = cvValue.type.split("/")[1];
       if (extension !== "pdf") {
         notifyErrorExtension();
       }
     }
-  }, [cv]);
+    console.log(cvValue);
+  }, [cvValue]);
 
-  useEffect(() => {
-    console.log("form", formValues);
-  }, [country]);
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-    console.log(e.target.value);
-  };
+  // const handleChange = (
+  //   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  // ) => {
+  //   setFormValues({
+  //     ...formValues,
+  //     [e.target.name]: e.target.value,
+  //   });
+  //   console.log(e.target.value);
+  // };
 
   const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
     setFormValues({
@@ -97,55 +96,47 @@ const RegisterPage: NextPage = ({ data }: any) => {
   };
 
   const readInputTypeFile = (e: any) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.files[0],
-    });
+    setCvValue(e.target.files[0]);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let dataform = new FormData();
-    dataform.append("name", name);
-    dataform.append("surnames", surnames);
-    dataform.append("email", email);
-    dataform.append("password", password || "");
-    dataform.append("callingCode", callingCode || "");
-    dataform.append("country", country || "");
-    dataform.append("message", message || "");
-    dataform.append("cv", cv);
-    dataform.append("typeJob", typeJob || "");
-    dataform.append("phone", phone || "");
-    if (
-      [
-        name,
-        surnames,
-        email,
-        password,
-        callingCode,
-        country,
-        cv,
-        phone,
-      ].includes("")
-    ) {
-      notifyError();
-      return;
-    }
-    if (confirmPassword !== password) {
-      notifyPasswordNotEquals();
-      return;
-    }
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      notifyEmailValidation();
-      return;
-    }
-    if (password?.length <= 5) {
-      notifyPasswordCharacter();
-      return;
-    }
-    setIsLoading(true);
-    sendData(dataform);
-  };
+  // new logic
+  const { errors, touched, getFieldProps, values } = useFormik({
+    initialValues: {
+      name: "",
+      surnames: "",
+      email: "",
+      password: "",
+      country: "",
+      phone: "",
+      repeatPassword: "",
+    },
+    onSubmit: (values) => {
+      setIsLoading(true);
+      let dataform = new FormData();
+      dataform.append("name", values.name);
+      dataform.append("surnames", values.surnames);
+      dataform.append("email", values.email);
+      dataform.append("password", values.password || "");
+      // dataform.append("callingCode", callingCode || "");
+      dataform.append("country", values.country || "");
+      dataform.append("cv", cvValue);
+      dataform.append("phone", values.phone || "");
+      console.log("dataform", dataform);
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Requerido"),
+      surnames: Yup.string().required("Requerido"),
+      email: Yup.string().email("Debe de ser un email").required("Requerido"),
+      password: Yup.string().required("Requerido"),
+      repeatPassword: Yup.string()
+        .required("Requerido")
+        .oneOf([Yup.ref("password"), null], "Las contraseñas no son iguales"),
+      country: Yup.string().required("Requerido"),
+      phone: Yup.string().required("Requerido"),
+    }),
+  });
+
+  const { country, email, name, password, phone, surnames } = values;
   const sendData = async (dataObject: FormData) => {
     try {
       const res = await fetch(`${API_URL}/employees`, {
@@ -159,7 +150,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
       }).then((resposeLogin) => {
         if (resposeLogin) {
           // console.log("responseLogin", resposeLogin);
-          notify();
+          notifySuccess();
           Cookies.set("token", resposeLogin.token, { expires: 7 });
           setIsLoading(false);
           setTimeout(() => {
@@ -175,6 +166,43 @@ const RegisterPage: NextPage = ({ data }: any) => {
     }
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let dataform = new FormData();
+    dataform.append("name", name);
+    dataform.append("surnames", surnames);
+    dataform.append("email", email);
+    dataform.append("password", password || "");
+    //  dataform.append("callingCode", callingCode || "");
+    dataform.append("country", country || "");
+    //  dataform.append("message", message || "");
+    dataform.append("cv", cvValue);
+    //  dataform.append("typeJob", typeJob || "");
+    dataform.append("phone", phone || "");
+    console.log("dataform", dataform);
+    setIsLoading(true);
+    sendData(dataform);
+  };
+
+  const [valuesSupport, setValuesSupport] = useState({
+    password: "",
+    showPassword: false,
+    showRepeatPassword: false,
+  });
+
+  const handleClickShowPassword = () => {
+    setValuesSupport({
+      ...valuesSupport,
+      showPassword: !valuesSupport.showPassword,
+    });
+  };
+
+  const handleClickShowRepeatPassword = () => {
+    setValuesSupport({
+      ...valuesSupport,
+      showRepeatPassword: !valuesSupport.showRepeatPassword,
+    });
+  };
   return (
     <>
       {showModalLogin && <ModalLogin setshowModalLogin={setshowModalLogin} />}
@@ -186,7 +214,14 @@ const RegisterPage: NextPage = ({ data }: any) => {
       </Head>
       {/* <Navbar /> */}
       <main className={styles.main}>
-        <div className={styles.bannerColumn}></div>
+        <div className={styles.bannerColumn}>
+          <Image
+            src="/images/draw4.svg"
+            alt="draw animado para registro"
+            width={500}
+            height={500}
+          />
+        </div>
         <div className={styles.registerSection}>
           <div className="wrapper">
             <h1>Registrate</h1>
@@ -194,134 +229,197 @@ const RegisterPage: NextPage = ({ data }: any) => {
               <div className={styles.wrapper}>
                 <div className={styles.formContent}>
                   <div className={styles.field}>
-                    <label>
-                      Nombres<span>(*)</span>:
-                      <input
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={handleChange}
-                      />
-                    </label>
+                    <TextField
+                      id="outlined-basic"
+                      label="Nombres"
+                      variant="outlined"
+                      sx={{ width: "100%" }}
+                      size="small"
+                      {...getFieldProps("name")}
+                    />
+                    {errors.name && touched.name && (
+                      <span className="text-danger ">{errors.name} </span>
+                    )}
                   </div>
                   <div className={styles.field}>
-                    <label htmlFor="">
-                      Apellidos<span>(*)</span>:
-                      <input
-                        type="text"
-                        name="surnames"
-                        value={surnames}
-                        onChange={handleChange}
-                      />
-                    </label>
+                    <TextField
+                      id="outlined-basic"
+                      label="Apellidos"
+                      variant="outlined"
+                      sx={{ width: "100%" }}
+                      size="small"
+                      {...getFieldProps("surnames")}
+                    />
+                    {errors.surnames && touched.surnames && (
+                      <span className="text-danger ">{errors.surnames} </span>
+                    )}
                   </div>
                   <div className={styles.field}>
-                    <label htmlFor="">
-                      Email<span>(*)</span>:
-                      <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                      />
-                    </label>
+                    <TextField
+                      id="outlined-basic"
+                      label="Email"
+                      type="email"
+                      variant="outlined"
+                      sx={{ width: "100%" }}
+                      size="small"
+                      {...getFieldProps("email")}
+                    />
+                    {errors.email && touched.email && (
+                      <span className="text-danger ">{errors.email} </span>
+                    )}
                   </div>
                   <div className={styles.field}>
-                    <label htmlFor="">
-                      Número de contacto<span>(*)</span>:
-                      <input
-                        type="number"
-                        name="phone"
-                        value={phone}
-                        onChange={handleChange}
-                      />
-                    </label>
-                  </div>
-
-                  <div className={styles.field}>
-                    <label htmlFor="">
-                      Contraseña<span>(*)</span>:
-                      <input
-                        type={showPass ? "text" : "password"}
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                      />
-                    </label>
+                    <TextField
+                      id="outlined-basic"
+                      label="Número Telefónico"
+                      variant="outlined"
+                      type="number"
+                      sx={{ width: "100%" }}
+                      size="small"
+                      {...getFieldProps("phone")}
+                    />
+                    {errors.phone && touched.phone && (
+                      <span className="text-danger ">{errors.phone} </span>
+                    )}
                   </div>
 
                   <div className={styles.field}>
-                    <label htmlFor="">
-                      Repetir Contraseña<span>(*)</span>:
-                      <input
-                        type={showPass ? "text" : "password"}
-                        name="confirmPassword"
-                        value={confirmPassword}
-                        onChange={handleChange}
+                    <FormControl
+                      sx={{ width: "100%" }}
+                      size="small"
+                      variant="outlined"
+                    >
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Password
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={valuesSupport.showPassword ? "text" : "password"}
+                        {...getFieldProps("password")}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              // onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {valuesSupport.showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Password"
                       />
-                    </label>
+                      {errors.password && touched.password && (
+                        <span className="text-danger ">{errors.password} </span>
+                      )}
+                    </FormControl>
                   </div>
 
                   <div className={styles.field}>
-                    <label htmlFor="">
-                      País<span>(*)</span>:
-                      <select
-                        name="callingCode"
-                        onChange={handleOption}
-                        className={styles.select}
+                    <FormControl
+                      sx={{ width: "100%" }}
+                      size="small"
+                      variant="outlined"
+                    >
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Password
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={
+                          valuesSupport.showRepeatPassword ? "text" : "password"
+                        }
+                        {...getFieldProps("repeatPassword")}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowRepeatPassword}
+                              // onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {valuesSupport.showRepeatPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Password"
+                      />
+                      {errors.repeatPassword && touched.repeatPassword && (
+                        <span className="text-danger ">
+                          {errors.repeatPassword}{" "}
+                        </span>
+                      )}
+                    </FormControl>
+                  </div>
+
+                  <div className={styles.field}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        País
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="País"
+                        size="small"
+                        {...getFieldProps("country")}
                       >
-                        <option value="--">Seleccione</option>
+                        <MenuItem value={""}>Seleccione</MenuItem>
                         {Object.keys(data.countriesNames).map(
                           (country: any, index) => {
                             return (
-                              <option key={index} value={country}>
+                              <MenuItem key={index} value={country}>
+                                {" "}
                                 {data.countriesNames[country]}
-                              </option>
+                              </MenuItem>
                             );
                           }
                         )}
-                      </select>
-                    </label>
+                      </Select>
+                    </FormControl>
+                    {errors.country && touched.country && (
+                      <span className="text-danger ">{errors.country} </span>
+                    )}
                   </div>
                   <div className={styles.field}>
-                    <label htmlFor="">
-                      CV(extensión del archivo: pdf)<span>(*)</span>:
+                    <label className="custom-file-upload">
+                      {/* CV(extensión del archivo: pdf)<span>(*)</span>: */}
                       <input
                         type="file"
                         name="cv"
                         onChange={readInputTypeFile}
+                        // {...getFieldProps("cv")}
                       />
                     </label>
-                  </div>
-                  <div className={styles.field}>
-                    <span>(*): Campo obligatorio</span>
-                    <div className={styles.fieldRow}>
-                      <input
-                        type="checkbox"
-                        onClick={() => setShowPass((state) => !state)}
-                      />
-                      <span>Mostrar las contraseñas</span>
-                    </div>
+                    {cvValue && (
+                      <p className={styles.titlePdf}>{cvValue.name}</p>
+                    )}
                   </div>
 
                   <div className={styles.buttonField}>
                     <button type="submit" className={styles.register}>
                       Registrarse
                     </button>
-                    <button
-                      className={styles.account}
-                      type="button"
-                      onClick={() => setshowModalLogin(true)}
-                    >
-                      Ya tengo cuenta
+                    <button className={styles.account} type="button">
+                      <Link href="/login">Ya tengo cuenta</Link>
                     </button>
-                    {isLoading && <Loading>Loading</Loading>}
+                    {isLoading && <BeatLoader color="#0072f5" />}
                   </div>
                 </div>
               </div>
             </form>
           </div>
         </div>
+        <Footer />
       </main>
     </>
   );

@@ -5,17 +5,9 @@
   grid-template-columns: 1fr;
 }
 .bannerColumn {
-  background-image: linear-gradient(
-      0deg,
-      rgba(158, 204, 250, 0.468) 0%,
-      rgba(58, 145, 244, 0.575) 100%
-    ),
-    url("../../public/images/banner1.jpg");
-  /* background-position: ; */
-  background-repeat: no-repeat;
-  background-size: cover;
-  grid-column: 1/-1;
-  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .field span {
@@ -115,10 +107,6 @@
 .field input {
   display: block;
   width: 100%;
-  border-radius: 0.25rem;
-  border: none;
-  border: 1px solid var(--bg-gray300);
-  padding: 0.25rem;
 }
 
 .select {
@@ -128,15 +116,25 @@
   padding: 0.25rem;
   width: 100%;
 }
-.field input[type="file"] {
-  background-color: var(--bg-black);
-  color: white;
-  border: none;
+.field input[type="file"]::file-selector-button {
+  border: 2px solid var(--bg-bluePrimary);
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.2em;
+  background-color: var(--bg-blueLight);
+  transition: 1s;
+  width: 100%;
 }
 
+.field input[type="file"]::file-selector-button:hover {
+  background-color: var(--bg-gray100);
+}
 .fieldText textarea {
   border-radius: 0.25rem;
   width: 100%;
+}
+
+.titlePdf {
+  color: var(--bg-gray200);
 }
 
 .buttonField {
@@ -146,13 +144,12 @@
   row-gap: 1rem;
   justify-content: center;
   align-items: center;
-  margin-block: 2rem;
 }
 
 .buttonField .register {
   background-color: var(--bg-black);
   color: white;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem;
   border-radius: 0.25rem;
   transition: 0.3s all ease;
 }
@@ -217,6 +214,7 @@
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr auto;
   }
   .formContent {
     display: grid;

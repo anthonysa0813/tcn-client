@@ -38,29 +38,9 @@
   flex-direction: column;
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--bg-blueLight);
-  color: var(--bg-black200);
-  grid-column: 1/-1;
-  padding: 1rem;
-}
-
 .textSm {
   font-size: 0.85rem;
   cursor: pointer;
-}
-
-.footer span {
-  display: flex;
-  align-items: center;
-  color: var(--bg-blue200);
-}
-
-.footer span svg {
-  font-size: 0.85rem;
 }
 
 .fieldCenter {
