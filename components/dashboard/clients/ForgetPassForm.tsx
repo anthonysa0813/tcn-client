@@ -73,7 +73,7 @@ const ForgetPassForm = ({ setShowForgetPasswordForm }: Prop) => {
       </div>
 
       <div className={styles.field}>
-        <Button color="primary" type="submit">
+        <Button color="primary" variant="contained" type="submit">
           Enviar
         </Button>
       </div>
