@@ -3,11 +3,9 @@
   height: 100vh;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr auto;
-  /* border: 3px solid brown; */
 }
 
 .drawContainer {
-  /* border: 2px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +72,6 @@
 .menu {
   display: flex;
   align-items: center;
-  /* border: 2px solid blue; */
   width: 30%;
   justify-content: space-around;
 }

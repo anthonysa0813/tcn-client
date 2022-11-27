@@ -12,7 +12,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const NewPasswordPage = () => {
-  // const router = useRouter()
   const { query } = useRouter();
   const token = query.id || "";
 
@@ -25,42 +24,9 @@ const NewPasswordPage = () => {
   const [currentEmail, setCurrentEmail] = useState("");
 
   useEffect(() => {
-    console.log("jeje");
     const emailUser = localStorage.getItem("email");
     setCurrentEmail(emailUser || "");
   }, []);
-
-  const { password, repeatPassword, onChange } = useForm({
-    password: "",
-    repeatPassword: "",
-  });
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if ([password, repeatPassword].includes("")) {
-      fieldsEmptys();
-      return;
-    }
-
-    if (password !== repeatPassword) {
-      passwordNotEquals();
-      return;
-    }
-
-    if (password.length < 6) {
-      moreCharacters();
-      return;
-    }
-
-    resetPassword("employees/new-password", {
-      email: currentEmail,
-      password,
-      token,
-    }).then((res) => {
-      messageSuccess();
-    });
-  };
 
   const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues: {
