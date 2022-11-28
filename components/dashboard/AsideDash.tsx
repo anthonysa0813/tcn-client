@@ -9,7 +9,6 @@ import { AddUser, Document, PaperPlus, Password, People } from "react-iconly";
 import Image from "next/image";
 import { BiAlignLeft } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
-import "animate.css";
 
 const AsideDash = () => {
   const { userGlobal } = useContext(UserContext);

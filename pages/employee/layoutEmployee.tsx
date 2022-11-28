@@ -1,18 +1,11 @@
 import React, { useState, useContext } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import Navbar from "../../components/menu/Navbar";
 import styles from "../../styles/employees/Layout.module.css";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { BsKeyFill } from "react-icons/bs";
-import {
-  Work,
-  EditSquare,
-  ArrowUpSquare,
-  Password,
-  Wallet,
-} from "react-iconly";
+
+import { Work, EditSquare, ArrowUpSquare, Password } from "react-iconly";
 import { EmployeeContext } from "../../context/EmployeeContext";
 
 interface Prop {

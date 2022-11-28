@@ -35,10 +35,7 @@ const CardCollapse = ({ service }: Prop) => {
       </div>
       {currentService === service._id && (
         <div className={styles.serviceCardBody}>
-          <p
-            dangerouslySetInnerHTML={{ __html: service.description }}
-            className={`animate__animated animate__fadeIn`}
-          ></p>
+          <p dangerouslySetInnerHTML={{ __html: service.description }}></p>
         </div>
       )}
     </div>

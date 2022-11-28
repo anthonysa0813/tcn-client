@@ -5,16 +5,11 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { EmployeeInterface, Service } from "../../interfaces";
+import { Service } from "../../interfaces";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Applications.module.css";
 import { API_URL } from "../../utils/constanstApi";
-// import { IoIosArrowUp } from "react-icons/io";
-import "animate.css";
 
-// interface DataProp {
-//   data: EmployeeInterface;
-// }
 const CardCollapse = dynamic(
   () => import("../../components/dashboard/employee/CardCollapse"),
   {
