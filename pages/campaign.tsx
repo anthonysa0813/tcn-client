@@ -1,11 +1,10 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Navbar from "../components/menu/Navbar";
 import styles from "../styles/client/Campaign.module.css";
-import { getFetchApi } from "../helpers/useFetch";
 import { Service } from "../interfaces";
 // import ServiceCard from "../components/dashboard/clients/ServiceCard";
-import { useState } from "react";
+// import { useState } from "react";
 import dynamic from "next/dynamic";
 import { API_URL } from "../utils/constanstApi";
 
@@ -21,7 +20,6 @@ const ServiceCard = dynamic(
 );
 
 const CampaignPage = ({ services }: ServiceProp) => {
-  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <Head>

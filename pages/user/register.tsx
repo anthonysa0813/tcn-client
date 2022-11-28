@@ -12,7 +12,6 @@ import React, {
 import styles from "../../styles/users/RegisterUser.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { removeListener } from "process";
 import {
   EmployeeContext,
   EmployeeContextProps,
@@ -22,26 +21,15 @@ import ModalLogin from "../../components/employees/ModalLogin";
 import { API_URL } from "../../utils/constanstApi";
 import { loginFetchApi } from "../../helpers/useFetch";
 import Cookies from "js-cookie";
-import { Loading } from "@nextui-org/react";
 import { EmployeeInterface } from "../../interfaces";
 import Image from "next/image";
 import Footer from "../../components/dashboard/clients/Footer";
-import Link from "next/link";
+// import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { BeatLoader } from "react-spinners";
+
+// import { Visibility, VisibilityOff } from "@mui/icons-material";
+// import { BeatLoader } from "react-spinners";
 // import RegisterForm from "../../components/dashboard/forms/RegisterForm";
 import dynamic from "next/dynamic";
 
@@ -86,27 +74,17 @@ const RegisterPage: NextPage = ({ data }: any) => {
     console.log(cvValue);
   }, [cvValue]);
 
-  // const handleChange = (
-  //   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  // ) => {
+  // const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
   //   setFormValues({
   //     ...formValues,
-  //     [e.target.name]: e.target.value,
+  //     callingCode: data.callingCode[e.target.value],
+  //     country: data.countriesNames[e.target.value],
   //   });
-  //   console.log(e.target.value);
   // };
 
-  const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFormValues({
-      ...formValues,
-      callingCode: data.callingCode[e.target.value],
-      country: data.countriesNames[e.target.value],
-    });
-  };
-
-  const readInputTypeFile = (e: any) => {
-    setCvValue(e.target.files[0]);
-  };
+  // const readInputTypeFile = (e: any) => {
+  //   setCvValue(e.target.files[0]);
+  // };
 
   // new logic
   const { errors, touched, getFieldProps, values } = useFormik({

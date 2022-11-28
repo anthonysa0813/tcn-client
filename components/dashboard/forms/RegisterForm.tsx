@@ -11,24 +11,48 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Link from "next/link";
-import { BeatLoader } from "react-spinners";
+// import { BeatLoader } from "react-spinners";
+import dynamic from "next/dist/shared/lib/dynamic";
 
 interface Prop {
   data: any;
 }
+
+const FormControl = dynamic(() =>
+  import("@mui/material/FormControl").then((res) => res.default)
+);
+const IconButton = dynamic(() =>
+  import("@mui/material/IconButton").then((res) => res.default)
+);
+const InputAdornment = dynamic(() =>
+  import("@mui/material/InputAdornment").then((res) => res.default)
+);
+const InputLabel = dynamic(() =>
+  import("@mui/material/InputLabel").then((res) => res.default)
+);
+const OutlinedInput = dynamic(() =>
+  import("@mui/material/OutlinedInput").then((res) => res.default)
+);
+const TextField = dynamic(() =>
+  import("@mui/material/TextField").then((res) => res.default)
+);
+const Select = dynamic(() =>
+  import("@mui/material/Select").then((res) => res.default)
+);
+
+const MenuItem = dynamic(() =>
+  import("@mui/material/MenuItem").then((res) => res.default)
+);
+
+const Button = dynamic(() =>
+  import("@mui/material/Button").then((res) => res.default)
+);
+
+const BeatLoader = dynamic(() =>
+  import("react-spinners/BeatLoader").then((res) => res.default)
+);
 
 const RegisterForm = ({ data }: Prop) => {
   const router = useRouter();

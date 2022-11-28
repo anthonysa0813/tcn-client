@@ -1,23 +1,28 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
 import styles from "../../styles/client/Navbar.module.css";
-import ModalLogin from "../employees/ModalLogin";
-import { User } from "react-iconly";
-import { HiLogout } from "react-icons/hi";
+// import PersonIcon from "@mui/icons-material/Person";
+// import LogoutIcon from "@mui/icons-material/Logout";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const PersonIcon = dynamic(() =>
+  import("@mui/icons-material/Person").then((res) => res.default)
+);
+const LogoutIcon = dynamic(() =>
+  import("@mui/icons-material/Logout").then((res) => res.default)
+);
 
 const Navbar = () => {
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
   const { name, surnames } = employeeGlobal;
   const router = useRouter();
-  const [showModalLogin, setshowModalLogin] = useState(false);
   const logout = () => {
     setEmployeeGlobal({
       id: "",
@@ -37,7 +42,6 @@ const Navbar = () => {
 
   return (
     <>
-      {showModalLogin && <ModalLogin setshowModalLogin={setshowModalLogin} />}
       <header className={styles.header}>
         <div className="wrapper">
           <div className={styles.headerContainer}>
@@ -61,7 +65,8 @@ const Navbar = () => {
                 )}
                 {name && (
                   <span className={styles.iconUser}>
-                    <User set="bold" primaryColor="black" />
+                    {/* <User set="bold" primaryColor="black" /> */}
+                    <PersonIcon />
                     {name} {surnames}
                     <div className={styles.miniMenu}>
                       <Link href="/employee/edit">Perfil</Link>
@@ -81,7 +86,8 @@ const Navbar = () => {
                     onClick={logout}
                     style={{ cursor: "pointer" }}
                   >
-                    <HiLogout />
+                    <LogoutIcon />
+                    salir
                   </button>
                 )}
               </ul>
