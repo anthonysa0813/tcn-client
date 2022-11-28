@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import {
@@ -6,8 +5,6 @@ import {
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
 import styles from "../../styles/client/Navbar.module.css";
-// import PersonIcon from "@mui/icons-material/Person";
-// import LogoutIcon from "@mui/icons-material/Logout";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -17,6 +14,8 @@ const PersonIcon = dynamic(() =>
 const LogoutIcon = dynamic(() =>
   import("@mui/icons-material/Logout").then((res) => res.default)
 );
+
+const Link = dynamic(() => import("next/link").then((res) => res.default));
 
 const Navbar = () => {
   const { employeeGlobal, setEmployeeGlobal } =

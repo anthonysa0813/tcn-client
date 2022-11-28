@@ -31,7 +31,7 @@ const ServiceCard = ({ service }: Prop) => {
       notify();
       setTimeout(() => {
         router.push("/user/register");
-      }, 250);
+      }, 700);
     }
     const employeeId = employeeGlobal.id;
     fetch(`${API_URL}/employees/${employeeId}/${idJob}`, {
