@@ -1,29 +1,31 @@
 import React, { useState } from "react";
-import { Paper } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/client/LoginPage.module.css";
-// import LoginClient from "../components/dashboard/clients/LoginClient";
-// import ForgetPassForm from '../components/dashboard/clients/ForgetPassForm';
-// import Footer from "../components/dashboard/clients/Footer";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+
+const ForgetPassForm = dynamic(() =>
+  import("../components/dashboard/clients/ForgetPassForm").then(
+    (res) => res.default
+  )
+);
+const LoginClient = dynamic(() =>
+  import("../components/dashboard/clients/LoginClient").then(
+    (res) => res.default
+  )
+);
+const Footer = dynamic(() =>
+  import("../components/dashboard/clients/Footer").then((res) => res.default)
+);
+
+const Paper = dynamic(() =>
+  import("@mui/material/Paper").then((res) => res.default)
+);
 
 const LoginPage = () => {
   const [showForgetPasswordForm, setShowForgetPasswordForm] = useState(false);
-  const ForgetPassForm = dynamic(() =>
-    import("../components/dashboard/clients/ForgetPassForm").then(
-      (res) => res.default
-    )
-  );
-  const LoginClient = dynamic(() =>
-    import("../components/dashboard/clients/LoginClient").then(
-      (res) => res.default
-    )
-  );
-  const Footer = dynamic(() =>
-    import("../components/dashboard/clients/Footer").then((res) => res.default)
-  );
-
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -39,7 +41,7 @@ const LoginPage = () => {
             alt="Logo de Contact bpo"
             width={500}
             height={500}
-            // onClick={() => router.push("/")}
+            onClick={() => router.push("/")}
           />
         </div>
         <div className={styles.formContainer}>

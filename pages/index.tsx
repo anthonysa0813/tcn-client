@@ -14,10 +14,10 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <main>
-        <Hero title="Main Page" bg="purple" id="main"/>
-        <Hero title="Servicios" bg="dark" id="services"/>
-        <Hero title="Nuestro Equipo" bg="green" id="team"/>
-        <Hero title="Clientes"  bg="gray" id="clients"/>
+        <Hero title="Main Page" bg="purple" id="main" />
+        <Hero title="Servicios" bg="dark" id="services" />
+        <Hero title="Nuestro Equipo" bg="green" id="team" />
+        <Hero title="Clientes" bg="gray" id="clients" />
       </main>
     </>
   );

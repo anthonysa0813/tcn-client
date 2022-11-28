@@ -1,23 +1,26 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "../../../styles/client/LoginPage.module.css";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import {
-  Button,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+// import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { sendEmailToNewPassword } from "../../../apis/employee/useEmployeeFetch";
 import { toast, ToastContainer } from "react-toastify";
-
+import dynamic from "next/dynamic";
 interface Prop {
   setShowForgetPasswordForm: Dispatch<SetStateAction<boolean>>;
 }
+
+const ArrowBackIosNewIcon = dynamic(() =>
+  import("@mui/icons-material/ArrowBackIosNew").then((res) => res.default)
+);
+
+const Button = dynamic(() =>
+  import("@mui/material/Button").then((res) => res.default)
+);
+
+const TextField = dynamic(() =>
+  import("@mui/material/TextField").then((res) => res.default)
+);
 
 const ForgetPassForm = ({ setShowForgetPasswordForm }: Prop) => {
   // const [values, setValues] = useState({

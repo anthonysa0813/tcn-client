@@ -1,40 +1,68 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-  CSSProperties,
-} from "react";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  Button,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
+// import { Visibility, VisibilityOff } from "@mui/icons-material";
+// import {
+//   Button,
+//   FormControl,
+//   IconButton,
+//   InputAdornment,
+//   InputLabel,
+//   OutlinedInput,
+//   TextField,
+// } from "@mui/material";
 import styles from "../../../styles/client/LoginPage.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import ClipLoader from "react-spinners/ClipLoader";
 import { toast, ToastContainer } from "react-toastify";
 import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
 import { loginFetchApi } from "../../../helpers/useFetch";
-import { Loading } from "@nextui-org/react";
-import { BounceLoader } from "react-spinners";
-import BeatLoader from "react-spinners/BeatLoader";
-import Link from "next/link";
+// import BeatLoader from "react-spinners/BeatLoader";
+// import Link from "next/link";
+import dynamic from "next/dynamic";
 
 interface Prop {
   setShowForgetPasswordForm: Dispatch<SetStateAction<boolean>>;
 }
+
+const Visibility = dynamic(() =>
+  import("@mui/icons-material/Visibility").then((res) => res.default)
+);
+
+const VisibilityOff = dynamic(() =>
+  import("@mui/icons-material/VisibilityOff").then((res) => res.default)
+);
+
+const Button = dynamic(() =>
+  import("@mui/material/Button").then((res) => res.default)
+);
+
+const FormControl = dynamic(() =>
+  import("@mui/material/FormControl").then((res) => res.default)
+);
+const IconButton = dynamic(() =>
+  import("@mui/material/IconButton").then((res) => res.default)
+);
+const InputAdornment = dynamic(() =>
+  import("@mui/material/InputAdornment").then((res) => res.default)
+);
+const InputLabel = dynamic(() =>
+  import("@mui/material/InputLabel").then((res) => res.default)
+);
+const OutlinedInput = dynamic(() =>
+  import("@mui/material/OutlinedInput").then((res) => res.default)
+);
+const TextField = dynamic(() =>
+  import("@mui/material/TextField").then((res) => res.default)
+);
+
+const BeatLoader = dynamic(() =>
+  import("react-spinners/BeatLoader").then((res) => res.default)
+);
+const Link = dynamic(() => import("next/link").then((res) => res.default));
 
 const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
   const [values, setValues] = useState({
@@ -150,7 +178,7 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
         <div className={styles.field}>
           {/* <Button color="primary" variant="outlined" type="button">
           </Button> */}
-            <Link href="/user/register">registrarme</Link>
+          <Link href="/user/register">registrarme</Link>
         </div>
         <div className={styles.fieldCenter}>
           {loading && <BeatLoader color="#0072f5" />}

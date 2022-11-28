@@ -5,15 +5,19 @@ import {
 } from "../../../context/EmployeeContext";
 import { Service } from "../../../interfaces/index";
 import styles from "../../../styles/client/Campaign.module.css";
-import ModalShowService from "./ModalShowService";
+// import ModalShowService from "./ModalShowService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { API_URL } from "../../../utils/constanstApi";
+import dynamic from "next/dynamic";
 
 interface Prop {
   service: Service;
 }
+const ModalShowService = dynamic(() =>
+  import("./ModalShowService").then((res) => res.default)
+);
 
 const ServiceCard = ({ service }: Prop) => {
   const { employeeGlobal, setEmployeeGlobal } =
@@ -27,7 +31,7 @@ const ServiceCard = ({ service }: Prop) => {
       notify();
       setTimeout(() => {
         router.push("/user/register");
-      }, 1500);
+      }, 250);
     }
     const employeeId = employeeGlobal.id;
     fetch(`${API_URL}/employees/${employeeId}/${idJob}`, {

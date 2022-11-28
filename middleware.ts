@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { jwtVerify } from "jose";
+
 import type { NextRequest } from "next/server";
 
 //3S1unaM3ssagePubl1c
