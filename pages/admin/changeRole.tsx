@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ButtonPrimary from "../../components/buttons/Button";
 import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import useForm from "../../hooks/useForm";
 import styles from "../../styles/admin/ChangeRole.module.css";
@@ -13,7 +12,7 @@ import {
 import { UserResponse } from "../../interfaces";
 import { Loading } from "@nextui-org/react";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 const ChangeRole = () => {
   const { email, onChange } = useForm({ email: "" });
@@ -27,7 +26,16 @@ const ChangeRole = () => {
   const [showAllUsers, setShowAllUsers] = useState(false);
   const [showUniqueUser, setShowUniqueUser] = useState(false);
   const [userUniqueInfo, setUserUniqueInfo] = useState({} as UserResponse);
-  const router = useRouter();
+  const SearchForm = dynamic(() =>
+    import("../../components/dashboard/forms/SearchUserForm").then(
+      (res) => res.default
+    )
+  );
+  const UniqueUser = dynamic(() =>
+    import("../../components/dashboard/tables/UniqueUser").then(
+      (res) => res.default
+    )
+  );
 
   useEffect(() => {
     getAllUsers("auth").then((res) => {
@@ -106,17 +114,8 @@ const ChangeRole = () => {
       <div className={styles.mainGrid}>
         <h1>Busca y activa una cuenta como administrador</h1>
         <ToastContainer />
-        <form className={styles.searchField} onSubmit={onSubmit}>
-          <input
-            type="email"
-            placeholder="example@gmail.com"
-            name="email"
-            value={email}
-            onChange={onChange}
-          />
-          <ButtonPrimary color="dark" content="Buscar" type="submit" />
-        </form>
 
+        <SearchForm onSubmit={onSubmit} email={email} onChange={onChange} />
         <div className="actionWatchAllUsers">
           <button
             className={styles.watchAllUsersButton}
@@ -130,48 +129,19 @@ const ChangeRole = () => {
         </div>
         {loading && <Loading />}
         {showUniqueUser && (
-          <div className={styles.fieldUser}>
-            <div className={styles.field}>
-              <span>{userUniqueInfo.email}</span>
-            </div>
-            <div className={styles.field}>
-              <span>{userUniqueInfo.role}</span>
-            </div>
-            <div className={styles.field}>
-              <button
-                className={`${styles.button} ${
-                  userUniqueInfo.role === "ADMIN_ROLE" ? "red" : "primary"
-                }`}
-                onClick={() => changeStatusFunction(userUniqueInfo)}
-              >
-                {userUniqueInfo.role === "ADMIN_ROLE"
-                  ? "desactivar"
-                  : "activar"}
-              </button>
-            </div>
-          </div>
+          <UniqueUser
+            userUniqueInfo={userUniqueInfo}
+            changeStatusFunction={changeStatusFunction}
+          />
         )}
         {showAllUsers &&
           usersData.map((user) => {
             return (
-              <div className={styles.fieldUser} key={user.id}>
-                <div className={styles.field}>
-                  <span>{user.email}</span>
-                </div>
-                <div className={styles.field}>
-                  <span>{user.role}</span>
-                </div>
-                <div className={styles.field}>
-                  <button
-                    className={`${styles.button} ${
-                      user.role === "ADMIN_ROLE" ? "red" : "primary"
-                    }`}
-                    onClick={() => changeStatusFunction(user)}
-                  >
-                    {user.role === "ADMIN_ROLE" ? "desactivar" : "activar"}
-                  </button>
-                </div>
-              </div>
+              <UniqueUser
+                key={user.id}
+                userUniqueInfo={user}
+                changeStatusFunction={changeStatusFunction}
+              />
             );
           })}
       </div>

@@ -1,9 +1,7 @@
 import Cookies from "js-cookie";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { CSVLink } from "react-csv";
 import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
-import { UserContext } from "../../context/UserContext";
 import { getFetchApi } from "../../helpers/useFetch";
 import { EmployeeInterface } from "../../interfaces";
 import TableToEmployee from "../../components/dashboard/clients/TableToEmployee";
@@ -11,7 +9,7 @@ import ButtonPrimary from "../../components/buttons/Button";
 import styles from "../../styles/employees/ListEmployee.module.css";
 import ModalComponent from "../../components/dashboard/ModalComponent";
 import ModalFilter from "../../components/employees/ModalFilter";
-import { utils, writeFile } from "xlsx";
+// import { utils, writeFile } from "xlsx";
 import { RiFileExcel2Fill } from "react-icons/ri";
 import { generateExcelFile } from "../../helpers/exportFileExcel";
 interface PropCSV {
@@ -27,7 +25,6 @@ interface PropCSV {
 
 const Employees = () => {
   const token = Cookies.get("token");
-  const { userGlobal } = useContext(UserContext);
   const router = useRouter();
   const [employeeData, setEmployeeData] = useState<EmployeeInterface[]>([]);
   const [showModalFilters, setShowModalFilters] = useState(false);
@@ -56,14 +53,14 @@ const Employees = () => {
       };
     });
     setExportData(arrToExportExcel);
-  }, []);
+  }, [token, router, employeeData]);
 
-  const exportExcelFile = () => {
-    let wb = utils.book_new();
-    let ws = utils.json_to_sheet(exportData);
-    utils.book_append_sheet(wb, ws, "Lista de Empleados");
-    writeFile(wb, "ListaDeEmpleados.xlsx");
-  };
+  // const exportExcelFile = () => {
+  //   let wb = utils.book_new();
+  //   let ws = utils.json_to_sheet(exportData);
+  //   utils.book_append_sheet(wb, ws, "Lista de Empleados");
+  //   writeFile(wb, "ListaDeEmpleados.xlsx");
+  // };
 
   return (
     <>

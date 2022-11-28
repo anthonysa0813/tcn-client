@@ -23,7 +23,7 @@ const Clients = () => {
     getFetchApi("clients").then((res) => {
       setClientsArr(res);
     });
-  }, []);
+  }, [token, router]);
 
   const showModal = () => {
     setModal(!modal);

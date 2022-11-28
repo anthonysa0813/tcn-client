@@ -17,7 +17,6 @@ const Navbar = () => {
     useContext<EmployeeContextProps>(EmployeeContext);
   const { name, surnames } = employeeGlobal;
   const router = useRouter();
-  //   console.log("employeeGlobal", name);
   const [showModalLogin, setshowModalLogin] = useState(false);
   const logout = () => {
     setEmployeeGlobal({

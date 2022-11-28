@@ -42,6 +42,8 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { BeatLoader } from "react-spinners";
+// import RegisterForm from "../../components/dashboard/forms/RegisterForm";
+import dynamic from "next/dynamic";
 
 interface FormInterface {
   passwordFirst: string;
@@ -53,6 +55,11 @@ const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDesabled, setIsDesabled] = useState(false);
+  const RegisterForm = dynamic(() =>
+    import("../../components/dashboard/forms/RegisterForm").then(
+      (res) => res.default
+    )
+  );
 
   const [formValues, setFormValues] = useState({} as EmployeeInterface);
   const [cvValue, setCvValue] = useState("" as any);
@@ -234,212 +241,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
         <div className={styles.registerSection}>
           <div className="wrapper">
             <h1>Registrate</h1>
-            <form className={styles.formContainer} onSubmit={handleSubmit}>
-              <div className={styles.wrapper}>
-                <p>
-                  llena el formulario, postula y mantén el seguimiento a tus
-                  postulaciones.
-                </p>
-                <div className={styles.formContent}>
-                  <div className={styles.field}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Nombres"
-                      type="text"
-                      variant="outlined"
-                      sx={{ width: "100%" }}
-                      size="small"
-                      {...getFieldProps("name")}
-                    />
-                    {errors.name && touched.name && (
-                      <span className="text-danger ">{errors.name} </span>
-                    )}
-                  </div>
-                  <div className={styles.field}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Apellidos"
-                      variant="outlined"
-                      sx={{ width: "100%" }}
-                      size="small"
-                      {...getFieldProps("surnames")}
-                    />
-                    {errors.surnames && touched.surnames && (
-                      <span className="text-danger ">{errors.surnames} </span>
-                    )}
-                  </div>
-                  <div className={styles.field}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Email"
-                      type="email"
-                      variant="outlined"
-                      sx={{ width: "100%" }}
-                      size="small"
-                      {...getFieldProps("email")}
-                    />
-                    {errors.email && touched.email && (
-                      <span className="text-danger ">{errors.email} </span>
-                    )}
-                  </div>
-                  <div className={styles.field}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Número Telefónico"
-                      variant="outlined"
-                      type="number"
-                      sx={{ width: "100%" }}
-                      size="small"
-                      {...getFieldProps("phone")}
-                    />
-                    {errors.phone && touched.phone && (
-                      <span className="text-danger ">{errors.phone} </span>
-                    )}
-                  </div>
-
-                  <div className={styles.field}>
-                    <FormControl
-                      sx={{ width: "100%" }}
-                      size="small"
-                      variant="outlined"
-                    >
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Password
-                      </InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={valuesSupport.showPassword ? "text" : "password"}
-                        {...getFieldProps("password")}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              // onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {valuesSupport.showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Password"
-                      />
-                      {errors.password && touched.password && (
-                        <span className="text-danger ">{errors.password} </span>
-                      )}
-                    </FormControl>
-                  </div>
-
-                  <div className={styles.field}>
-                    <FormControl
-                      sx={{ width: "100%" }}
-                      size="small"
-                      variant="outlined"
-                    >
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Password
-                      </InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={
-                          valuesSupport.showRepeatPassword ? "text" : "password"
-                        }
-                        {...getFieldProps("repeatPassword")}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowRepeatPassword}
-                              // onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {valuesSupport.showRepeatPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Password"
-                      />
-                      {errors.repeatPassword && touched.repeatPassword && (
-                        <span className="text-danger ">
-                          {errors.repeatPassword}{" "}
-                        </span>
-                      )}
-                    </FormControl>
-                  </div>
-
-                  <div className={styles.field}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        País
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="País"
-                        size="small"
-                        {...getFieldProps("country")}
-                      >
-                        <MenuItem value={""}>Seleccione</MenuItem>
-                        {Object.keys(data.countriesNames).map(
-                          (country: any, index) => {
-                            return (
-                              <MenuItem key={index} value={country}>
-                                {" "}
-                                {data.countriesNames[country]}
-                              </MenuItem>
-                            );
-                          }
-                        )}
-                      </Select>
-                    </FormControl>
-                    {errors.country && touched.country && (
-                      <span className="text-danger ">{errors.country} </span>
-                    )}
-                  </div>
-                  <div className={styles.field}>
-                    <label className="custom-file-upload">
-                      {/* CV(extensión del archivo: pdf)<span>(*)</span>: */}
-                      <input
-                        type="file"
-                        name="cv"
-                        onChange={readInputTypeFile}
-                        // {...getFieldProps("cv")}
-                      />
-                    </label>
-                    {cvValue && (
-                      <p className={styles.titlePdf}>{cvValue.name}</p>
-                    )}
-                  </div>
-
-                  <div className={styles.buttonField}>
-                    <div className={styles.field}>
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                        disabled={isDesabled}
-                      >
-                        registrarme
-                      </Button>
-                    </div>
-                    <div className={styles.field}>
-                      <Button color="secondary" type="button">
-                        <Link href="/login">Ya tengo cuenta</Link>
-                      </Button>
-                    </div>
-                    {isLoading && <BeatLoader color="#0072f5" />}
-                  </div>
-                </div>
-              </div>
-            </form>
+            <RegisterForm data={data} />
           </div>
         </div>
         <Footer />

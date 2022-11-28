@@ -23,7 +23,7 @@ const ShowServiceById = ({
         setExperence(res);
       }
     );
-  }, []);
+  }, [idEmployee, idService]);
 
   return (
     <section className={styles.showServiceGrid}>

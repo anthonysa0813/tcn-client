@@ -57,19 +57,17 @@ const EditPage = ({ data }: any) => {
   const { id } = employeeGlobal;
 
   useEffect(() => {
-    console.log("currentJob", employeeGlobal.typeJob);
-  }, []);
-
-  useEffect(() => {
     fetch(`${API_URL}/employees/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data :d", data);
         setCountryCurrent(data.country);
         setFormValues(data);
       });
-    localStorage.setItem("countries", JSON.stringify(data.countriesNames));
-  }, [id]);
+    localStorage.setItem(
+      "countries",
+      JSON.stringify(data.countriesNames || "")
+    );
+  }, [id, data]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -80,13 +78,13 @@ const EditPage = ({ data }: any) => {
     });
   };
 
-  const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFormValues({
-      ...formValues,
-      callingCode: data.callingCode[e.target.value],
-      country: data.countriesNames[e.target.value],
-    });
-  };
+  // const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
+  //   setFormValues({
+  //     ...formValues,
+  //     callingCode: data.callingCode[e.target.value],
+  //     country: data.countriesNames[e.target.value],
+  //   });
+  // };
 
   const readInputTypeFile = (e: any) => {
     setFormValues({

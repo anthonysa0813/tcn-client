@@ -1,20 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Button,
-  Modal,
-  Pagination,
-  Table,
-  Text,
-  useModal,
-  Loading,
-} from "@nextui-org/react";
+import { Button, Modal, Table, Text, useModal } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { EmployeeInterface } from "../../../interfaces";
-import { changeStatus, getFetchApi } from "../../../helpers/useFetch";
-import Link from "next/link";
-import ModalUser from "../employee/ModalUser";
+// import { changeStatus, getFetchApi } from "../../../helpers/useFetch";
+// import Link from "next/link";
+// import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
-import { calculatePagination } from "../../../helpers/calculatePagination";
+// import { calculatePagination } from "../../../helpers/calculatePagination";
 import DropDownSelect from "../../buttons/DrownDownSelect";
 import { UserContext } from "../../../context/UserContext";
 
@@ -25,22 +17,22 @@ type Props = {
 };
 
 const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
-  const router = useRouter();
+  // const router = useRouter();
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
   );
-  const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
-  const [loading, setLoading] = useState(false);
+  // const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
+  // const [loading, setLoading] = useState(false);
   const [currentData, setcurrentData] = useState<EmployeeInterface[] | []>([]);
   const [initialSliceValue, setInitialSliceValue] = useState(0);
   const { userGlobal } = useContext(UserContext);
 
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     setcurrentData(data.slice(initialSliceValue, offsetSliceValue));
-  }, [data, offsetSliceValue]);
+  }, [data, offsetSliceValue, initialSliceValue]);
 
   return (
     <>

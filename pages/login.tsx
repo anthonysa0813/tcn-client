@@ -3,13 +3,26 @@ import { Paper } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/client/LoginPage.module.css";
-import CopyrightIcon from "@mui/icons-material/Copyright";
-import LoginClient from "../components/dashboard/clients/LoginClient";
-import ForgetPassForm from "../components/dashboard/clients/ForgetPassForm";
-import Footer from "../components/dashboard/clients/Footer";
+// import LoginClient from "../components/dashboard/clients/LoginClient";
+// import ForgetPassForm from '../components/dashboard/clients/ForgetPassForm';
+// import Footer from "../components/dashboard/clients/Footer";
+import dynamic from "next/dynamic";
 
 const LoginPage = () => {
   const [showForgetPasswordForm, setShowForgetPasswordForm] = useState(false);
+  const ForgetPassForm = dynamic(() =>
+    import("../components/dashboard/clients/ForgetPassForm").then(
+      (res) => res.default
+    )
+  );
+  const LoginClient = dynamic(() =>
+    import("../components/dashboard/clients/LoginClient").then(
+      (res) => res.default
+    )
+  );
+  const Footer = dynamic(() =>
+    import("../components/dashboard/clients/Footer").then((res) => res.default)
+  );
 
   return (
     <>

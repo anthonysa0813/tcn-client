@@ -1,5 +1,5 @@
-import { GetServerSideProps } from "next";
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+// import { GetServerSideProps } from "next";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import {
   EmployeeContext,
@@ -9,12 +9,12 @@ import { EmployeeInterface, Service } from "../../interfaces";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Applications.module.css";
 import { API_URL } from "../../utils/constanstApi";
-import { IoIosArrowUp } from "react-icons/io";
+// import { IoIosArrowUp } from "react-icons/io";
 import "animate.css";
 
-interface DataProp {
-  data: EmployeeInterface;
-}
+// interface DataProp {
+//   data: EmployeeInterface;
+// }
 const CardCollapse = dynamic(
   () => import("../../components/dashboard/employee/CardCollapse"),
   {
@@ -23,23 +23,21 @@ const CardCollapse = dynamic(
 );
 
 const ApplicationsPage = () => {
-  const { employeeGlobal, setEmployeeGlobal } =
-    useContext<EmployeeContextProps>(EmployeeContext);
+  const { employeeGlobal } = useContext<EmployeeContextProps>(EmployeeContext);
   const [applicationsState, setApplicationsState] = useState<Service[] | []>(
     []
   );
-  const [activeDetails, setActiveDetails] = useState(false);
-  const [currentService, setCurrentService] = useState("");
+  // const [activeDetails, setActiveDetails] = useState(false);
+  // const [currentService, setCurrentService] = useState("");
 
   useLayoutEffect(() => {
     getInfo(employeeGlobal.id);
-    console.log("employeeGlobal ========= ", employeeGlobal);
-  }, []);
+  }, [employeeGlobal]);
 
   const getInfo = async (id: string) => {
     const res = await fetch(`${API_URL}/employees/${id}`);
     const data = await res.json();
-    const setArr = new Set(data.service);
+    // const setArr = new Set(data.service);
     setApplicationsState(data.service);
   };
   return (

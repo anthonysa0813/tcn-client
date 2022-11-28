@@ -20,9 +20,9 @@ interface Prop {
 }
 
 const ForgetPassForm = ({ setShowForgetPasswordForm }: Prop) => {
-  const [values, setValues] = useState({
-    email: "",
-  });
+  // const [values, setValues] = useState({
+  //   email: "",
+  // });
   const toastAlertNotExistEmail = () => toast.error("El email no existe");
   const toastAlertSuccess = () =>
     toast.success("hemos enviado un mensaje a tu correo...");

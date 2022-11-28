@@ -10,9 +10,9 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { EmployeeInterface } from "../../../interfaces";
-import { changeStatus, getFetchApi } from "../../../helpers/useFetch";
+import { getFetchApi } from "../../../helpers/useFetch";
 import Link from "next/link";
-import ModalUser from "../employee/ModalUser";
+// import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
 import { UserContext } from "../../../context/UserContext";
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
-  const router = useRouter();
+  // const router = useRouter();
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
@@ -47,8 +47,7 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
     getFetchApi(endpoint).then((res) => {
       setDataList(res.users);
     });
-    console.log("global user :D", userGlobal);
-  }, []);
+  }, [endpoint]);
 
   useEffect(() => {
     setDataList(data);
@@ -66,7 +65,7 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
         }
       }
     );
-  }, [pageNumber]);
+  }, [pageNumber, endpoint]);
 
   const resetDataList = () => {
     setPageNumber(0);

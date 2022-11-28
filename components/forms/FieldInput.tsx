@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../styles/employees/Edit.module.css";
-import { GiPublicSpeaker } from "react-icons/gi";
 
 const FieldInput = () => {
   return (

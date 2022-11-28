@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Edit.module.css";
-import { ArrowLeft, Calling, InfoCircle, ArrowRight } from "react-iconly";
+import { ArrowLeft, Calling, InfoCircle } from "react-iconly";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { Button, Loading, Tooltip } from "@nextui-org/react";
+import { Button, Loading } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import {
   BsFillFileEarmarkTextFill,
-  BsFillArrowUpRightCircleFill,
   BsFillPlusCircleFill,
-  BsFillXCircleFill,
 } from "react-icons/bs";
 import { GiPublicSpeaker, GiSkills } from "react-icons/gi";
 import ButtonPrimary from "../../components/buttons/Button";
@@ -19,8 +17,6 @@ import ModalComponent from "../../components/dashboard/ModalComponent";
 import FormExperience from "../../components/employees/FormExperience";
 import FormNewLang from "../../components/employees/FormNewLang";
 import FormNewSkills from "../../components/employees/FormNewSkills";
-import { GetServerSideProps } from "next";
-import { API_URL } from "../../utils/constanstApi";
 import {
   deleteLangByEmployee,
   getAllLanguagesByEmployee,
@@ -38,7 +34,6 @@ import {
   getKnoledges,
   deleteKnoledgesFetch,
 } from "../../apis/knoledges/useKnoledges";
-import useForm from "../../hooks/useForm";
 import {
   getEmployeeById,
   saveInformationGeneral,
@@ -151,7 +146,7 @@ const MoreDetails = () => {
         github: res.github,
       });
     });
-  }, []);
+  }, [idEmployee]);
 
   const deleteLangCall = (idLang: string) => {
     deleteLangByEmployee(idLang).then((res) => {

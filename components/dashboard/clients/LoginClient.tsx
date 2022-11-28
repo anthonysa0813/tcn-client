@@ -44,7 +44,7 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
   });
   const notifySuccess = () => toast.success("Bienvenido!");
   // const notifyError = () => toast.warning("email y/o password son incorrectos");
-  const { employeeGlobal, setEmployeeGlobal } =
+  const { setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -55,10 +55,8 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       setLoading(true);
       loginFetchApi("auth/employee/login", values).then((res) => {
-        console.log(res);
         if (res.message) {
           const notifyErrorMessage = () => toast.error(res.message);
           notifyErrorMessage();
@@ -73,7 +71,7 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
           notifySuccess();
           setTimeout(() => {
             router.push("/employee/edit");
-          }, 1000);
+          }, 500);
         }
       });
     },
