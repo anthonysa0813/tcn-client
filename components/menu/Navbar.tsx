@@ -6,7 +6,6 @@ import {
 } from "../../context/EmployeeContext";
 import styles from "../../styles/client/Navbar.module.css";
 import Cookies from "js-cookie";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 const PersonIcon = dynamic(() =>
   import("@mui/icons-material/Person").then((res) => res.default)
@@ -14,6 +13,8 @@ const PersonIcon = dynamic(() =>
 const LogoutIcon = dynamic(() =>
   import("@mui/icons-material/Logout").then((res) => res.default)
 );
+
+const Image = dynamic(() => import("next/image").then((res) => res.default));
 
 const Link = dynamic(() => import("next/link").then((res) => res.default));
 
@@ -53,7 +54,7 @@ const Navbar = () => {
                 onClick={() => router.push("/")}
               />
             </div>
-            <nav>
+            <nav className={styles.menu}>
               <ul>
                 {!name && (
                   <>

@@ -58,6 +58,7 @@ const ForgetPassForm = ({ setShowForgetPasswordForm }: Prop) => {
           Volver
         </span>
       </div>
+      <h4>Restauración de contraseña</h4>
       <p>Te enviaremos los siguientes pasos a tu correo</p>
       <ToastContainer />
       <div className={styles.field}>

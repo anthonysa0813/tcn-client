@@ -10,7 +10,7 @@ import { Button, Input, Loading, Spacer } from "@nextui-org/react";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import dynamic from "next/dynamic";
 
 const Login: FC = () => {
   const { email, password, form, onChange } = useForm<FormProp>({
@@ -96,19 +96,6 @@ const Login: FC = () => {
             value={password}
             onChange={onChange}
           />
-          {/* <Spacer y={1.6} />
-          <Input.Password
-            labelPlaceholder="Custom icons"
-            visibleIcon={<AiFillEye fill="currentColor" />}
-            hiddenIcon={<AiFillEyeInvisible fill="currentColor" />}
-          /> */}
-
-          {/* <Input
-            clearable
-            underlined
-            labelPlaceholder="Password"
-            type="password"
-          /> */}
           <Spacer y={1.5} />
 
           <Button type="submit">Ingresar</Button>

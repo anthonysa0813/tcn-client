@@ -70,6 +70,10 @@
   position: relative;
 }
 
+.menu a {
+  width: 100%;
+}
+
 .buttonDark {
   background-color: var(--bg-black);
   color: white;
