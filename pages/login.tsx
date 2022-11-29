@@ -23,6 +23,10 @@ const Paper = dynamic(() =>
   import("@mui/material/Paper").then((res) => res.default)
 );
 
+const ArrowBackIosNewIcon = dynamic(() =>
+  import("@mui/icons-material/ArrowBackIosNew").then((res) => res.default)
+);
+
 const LoginPage = () => {
   const [showForgetPasswordForm, setShowForgetPasswordForm] = useState(false);
   const router = useRouter();
@@ -45,6 +49,10 @@ const LoginPage = () => {
           />
         </div>
         <div className={styles.formContainer}>
+          <div className={styles.back} onClick={() => router.push("/")}>
+            <ArrowBackIosNewIcon />
+            <span>Volver a la página principal</span>
+          </div>
           <Paper elevation={2} className={styles.formPaper}>
             {showForgetPasswordForm ? (
               <ForgetPassForm

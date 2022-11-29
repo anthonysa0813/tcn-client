@@ -373,7 +373,7 @@ const RegisterForm = ({ data }: Prop) => {
               </Button>
             </div>
             <div className={styles.field}>
-              <Button color="secondary" type="button">
+              <Button color="primary" type="button">
                 <Link href="/login">Ya tengo cuenta</Link>
               </Button>
             </div>

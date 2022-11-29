@@ -10,6 +10,18 @@
   align-items: center;
 }
 
+.back {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.back:hover {
+  color: var(--bg-gray300);
+}
+
 .field span {
   color: var(--bg-red);
 }

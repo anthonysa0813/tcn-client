@@ -11,10 +11,28 @@
   align-items: center;
 }
 
+.back {
+  display: flex;
+  justify-self: flex-end;
+  align-self: flex-start;
+
+  position: absolute;
+  top: 50px;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.back:hover {
+  color: var(--bg-gray300);
+}
+
 .formContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .form {

@@ -1,14 +1,18 @@
 import Link from "next/link";
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { AddUser, Document, PaperPlus, Password, People } from "react-iconly";
-import Image from "next/image";
+// import Image from "next/image";
 import { BiAlignLeft } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
+import dynamic from "next/dynamic";
+
+const Image = dynamic(() => import("next/image").then((res) => res.default));
+// import MenuIcon from '@mui/icons-material/Menu';
 
 const AsideDash = () => {
   const { userGlobal } = useContext(UserContext);

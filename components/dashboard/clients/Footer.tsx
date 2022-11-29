@@ -1,12 +1,16 @@
 import React from "react";
-import CopyrightIcon from "@mui/icons-material/Copyright";
 import styles from "../../../styles/client/Footer.module.css";
+import dynamic from "next/dist/shared/lib/dynamic";
+
+const CopyrightIcon = dynamic(() =>
+  import("@mui/icons-material/Copyright").then((res) => res.default)
+);
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
       <span>
-        Contact | Copyright 2022 <CopyrightIcon />
+        Contact BPO | Copyright 2022 <CopyrightIcon />
       </span>
     </div>
   );

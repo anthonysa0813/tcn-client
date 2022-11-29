@@ -1,14 +1,7 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useState,
-  useContext,
-} from "react";
-
+import React, { FormEvent, useEffect, useState, useContext } from "react";
 import styles from "../../styles/users/RegisterUser.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,28 +9,29 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-
-import ModalLogin from "../../components/employees/ModalLogin";
 import { API_URL } from "../../utils/constanstApi";
 import { loginFetchApi } from "../../helpers/useFetch";
 import Cookies from "js-cookie";
 import { EmployeeInterface } from "../../interfaces";
-import Image from "next/image";
-import Footer from "../../components/dashboard/clients/Footer";
-// import Link from "next/link";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
-// import { BeatLoader } from "react-spinners";
-// import RegisterForm from "../../components/dashboard/forms/RegisterForm";
 import dynamic from "next/dynamic";
-
 interface FormInterface {
   passwordFirst: string;
   confirmPassword: string;
   email: string;
 }
+
+const ArrowBackIosNewIcon = dynamic(() =>
+  import("@mui/icons-material/ArrowBackIosNew").then((res) => res.default)
+);
+
+const Image = dynamic(() => import("next/image").then((res) => res.default));
+
+const Footer = dynamic(() =>
+  import("../../components/dashboard/clients/Footer").then((res) => res.default)
+);
 
 const RegisterPage: NextPage = ({ data }: any) => {
   const [showModalLogin, setshowModalLogin] = useState(false);
@@ -73,19 +67,6 @@ const RegisterPage: NextPage = ({ data }: any) => {
     }
     console.log(cvValue);
   }, [cvValue]);
-
-  // const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
-  //   setFormValues({
-  //     ...formValues,
-  //     callingCode: data.callingCode[e.target.value],
-  //     country: data.countriesNames[e.target.value],
-  //   });
-  // };
-
-  // const readInputTypeFile = (e: any) => {
-  //   setCvValue(e.target.files[0]);
-  // };
-
   // new logic
   const { errors, touched, getFieldProps, values } = useFormik({
     initialValues: {
@@ -199,7 +180,6 @@ const RegisterPage: NextPage = ({ data }: any) => {
   };
   return (
     <>
-      {showModalLogin && <ModalLogin setshowModalLogin={setshowModalLogin} />}
       <ToastContainer />
       <Head>
         <title>Contact Bpo | registrarse</title>
@@ -218,6 +198,10 @@ const RegisterPage: NextPage = ({ data }: any) => {
         </div>
         <div className={styles.registerSection}>
           <div className="wrapper">
+            <div className={styles.back} onClick={() => router.push("/")}>
+              <ArrowBackIosNewIcon />
+              <span>Volver a la página principal</span>
+            </div>
             <h1>Registrate</h1>
             <RegisterForm data={data} />
           </div>

@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import LayoutEmployee from "./layoutEmployee";
+// import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Edit.module.css";
-import { ArrowLeft, Calling, InfoCircle } from "react-iconly";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Button, Loading } from "@nextui-org/react";
 import { useRouter } from "next/router";
-import {
-  BsFillFileEarmarkTextFill,
-  BsFillPlusCircleFill,
-} from "react-icons/bs";
-import { GiPublicSpeaker, GiSkills } from "react-icons/gi";
+
 import ButtonPrimary from "../../components/buttons/Button";
 import ModalComponent from "../../components/dashboard/ModalComponent";
 import FormExperience from "../../components/employees/FormExperience";
@@ -26,7 +20,6 @@ import {
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
 import { Experience, KnoledgeInterface, LangResponse } from "../../interfaces";
-import { IoMdClose } from "react-icons/io";
 import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
 import FormToDeleteExp from "../../components/employees/FormToDeleteExp";
 import ShowServiceById from "../../components/employees/ShowServiceById";
@@ -40,6 +33,56 @@ import {
 } from "../../apis/employee/useEmployeeFetch";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dynamic from "next/dynamic";
+
+const LayoutEmployee = dynamic(() =>
+  import("./layoutEmployee").then((res) => res.default)
+);
+
+// import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+const ArrowLeft = dynamic(() =>
+  import("@mui/icons-material/KeyboardBackspace").then((res) => res.default)
+);
+
+// import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
+const Calling = dynamic(() =>
+  import("@mui/icons-material/PhoneCallback").then((res) => res.default)
+);
+
+// import LinkedInIcon from '@mui/icons-material/LinkedIn';
+const FaLinkedin = dynamic(() =>
+  import("@mui/icons-material/LinkedIn").then((res) => res.default)
+);
+
+// import GitHubIcon from '@mui/icons-material/GitHub';
+const FaGithub = dynamic(() =>
+  import("@mui/icons-material/GitHub").then((res) => res.default)
+);
+
+// import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+const InfoCircle = dynamic(() =>
+  import("@mui/icons-material/AccessibilityNew").then((res) => res.default)
+);
+
+//import GroupIcon from '@mui/icons-material/Group';
+const GiPublicSpeaker = dynamic(() =>
+  import("@mui/icons-material/Group").then((res) => res.default)
+);
+
+// import ArticleIcon from '@mui/icons-material/Article';
+const BsFillFileEarmarkTextFill = dynamic(() =>
+  import("@mui/icons-material/Article").then((res) => res.default)
+);
+
+//import AddCircleIcon from '@mui/icons-material/AddCircle';
+const BsFillPlusCircleFill = dynamic(() =>
+  import("@mui/icons-material/AddCircle").then((res) => res.default)
+);
+
+// import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+const IoMdClose = dynamic(() =>
+  import("@mui/icons-material/HighlightOff").then((res) => res.default)
+);
 
 interface PropSaveInfo {
   phone: string;
@@ -170,7 +213,7 @@ const MoreDetails = () => {
       <LayoutEmployee name="Seguir editando">
         <div className={styles.alert}>
           <span className={styles.alertCotent}>
-            <InfoCircle set="bold" primaryColor="currentColor" />
+            <InfoCircle />
             Tú información es importante para nosotros, porfavor date el tiempo
             de completar todos los espacios.
           </span>
@@ -195,7 +238,7 @@ const MoreDetails = () => {
           <div className={styles.field}>
             <div className="info">
               <div className={styles.titleHead}>
-                <Calling set="bold" style={{ marginInline: ".5rem" }} />
+                <Calling />
                 <p>Número Telefónico: </p>
               </div>
               <span className={styles.subText}>
@@ -268,13 +311,7 @@ const MoreDetails = () => {
           <div className={styles.field}>
             <div className="info">
               <div className={styles.titleHead}>
-                <GiSkills
-                  style={{
-                    marginInline: ".5rem",
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
+                <GiPublicSpeaker />
                 <p>Añade tus Habilidades y Conocimientos: </p>
               </div>
               <span className={styles.subText}>
@@ -360,13 +397,7 @@ const MoreDetails = () => {
               <div className={`${styles.titleHead} ${styles.experienceHead}`}>
                 <div className={styles.infoLeft}>
                   <div className={styles.titleProfile}>
-                    <BsFillFileEarmarkTextFill
-                      style={{
-                        marginInline: ".5rem",
-                        width: "20px",
-                        height: "20px",
-                      }}
-                    />
+                    <BsFillFileEarmarkTextFill style={{ fontSize: 32 }} />
                     <h3>Perfil Profesional y Experiencia: </h3>
                   </div>
                   <span className={styles.subText}>
@@ -383,7 +414,7 @@ const MoreDetails = () => {
                   className={styles.button}
                 >
                   <BsFillPlusCircleFill />
-                  <p>Agregar eperiencia</p>
+                  <p>Agregar experiencia</p>
                 </Button>
               </div>
             </div>

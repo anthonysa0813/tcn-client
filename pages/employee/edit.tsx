@@ -5,7 +5,6 @@ import React, {
   FormEvent,
   useEffect,
 } from "react";
-import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/users/Register.module.css";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,14 +13,39 @@ import {
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
 import { GetServerSideProps } from "next";
-import { Button, Tooltip } from "@nextui-org/react";
-import { ArrowRight } from "react-iconly";
-import { HiOutlineMail } from "react-icons/hi";
-import { BiWorld } from "react-icons/bi";
-import { AiFillFileText } from "react-icons/ai";
 import DatalistInput from "react-datalist-input";
 import { countriesDataResponse } from "../../utils/activitiesToBussiness";
 import { API_URL } from "../../utils/constanstApi";
+import dynamic from "next/dynamic";
+
+// new icons material ui
+
+const MailIcon = dynamic(() =>
+  import("@mui/icons-material/Mail").then((res) => res.default)
+);
+const PublicIcon = dynamic(() =>
+  import("@mui/icons-material/Public").then((res) => res.default)
+);
+
+const FileIcon = dynamic(() =>
+  import("@mui/icons-material/InsertDriveFile").then((res) => res.default)
+);
+
+const LayoutEmployee = dynamic(() =>
+  import("./layoutEmployee").then((res) => res.default)
+);
+
+const ArrowForwardIcon = dynamic(() =>
+  import("@mui/icons-material/ArrowForward").then((res) => res.default)
+);
+
+const Button = dynamic(() =>
+  import("@mui/material/Button").then((res) => res.default)
+);
+
+const Tooltip = dynamic(() =>
+  import("@mui/material/Tooltip").then((res) => res.default)
+);
 
 const EditPage = ({ data }: any) => {
   const [formValues, setFormValues] = useState({
@@ -127,16 +151,20 @@ const EditPage = ({ data }: any) => {
     <LayoutEmployee name="editar información">
       <h1>Edita tu información</h1>
       <div className={styles.nextAction}>
-        <Tooltip
-          content={
-            "Sí haz actualizado algun campo, primero guarda la información antes de ir a la siguiente pestaña..."
-          }
+        <Button
           color="primary"
+          onClick={() => router.push("/employee/moreDetails")}
         >
-          <Button onPress={() => router.push("/employee/moreDetails")}>
-            agrega más información <ArrowRight />
-          </Button>
-        </Tooltip>
+          <Tooltip
+            color="primary"
+            title="Sí ha realizado un cambio, asegúrese en guardarlo antes de salir de ésta pestaña"
+            arrow
+          >
+            <span className={styles.buttonText}>
+              agrega más información <ArrowForwardIcon />
+            </span>
+          </Tooltip>
+        </Button>
       </div>
       <ToastContainer />
       <form className={styles.formContainer} onSubmit={handleSubmit}>
@@ -175,7 +203,7 @@ const EditPage = ({ data }: any) => {
         <div className={styles.field}>
           <div className={styles.textInfo}>
             <label htmlFor="" className={styles.label}>
-              <HiOutlineMail style={{ height: "30px", width: 30 }} />
+              <MailIcon style={{ height: "30px", width: 30 }} />
               Email:
             </label>
             <span className={styles.subText}>Mantén un correo actualizado</span>
@@ -197,7 +225,7 @@ const EditPage = ({ data }: any) => {
             "
               className={styles.label}
             >
-              <BiWorld style={{ height: "30px", width: 30 }} />
+              <PublicIcon style={{ height: "30px", width: 30 }} />
               Dónde vives:
             </label>
             <span className={styles.subText}>
@@ -206,20 +234,6 @@ const EditPage = ({ data }: any) => {
             </span>
           </div>
           <div className={styles.buttonContent}>
-            {/* <select
-              name="callingCode"
-              onChange={handleOption}
-              className={styles.select}
-              value={country}
-            >
-              {Object.keys(data.countriesNames).map((country: any, index) => {
-                return (
-                  <option key={index} value={country}>
-                    {data.countriesNames[country]}
-                  </option>
-                );
-              })}
-            </select> */}
             <DatalistInput
               className="dataList"
               placeholder=""
@@ -233,7 +247,7 @@ const EditPage = ({ data }: any) => {
         <div className={styles.field}>
           <div className={styles.textInfo}>
             <label htmlFor="" className={styles.label}>
-              <AiFillFileText style={{ height: "30px", width: 30 }} />
+              <FileIcon style={{ height: "30px", width: 30 }} />
               CV:
             </label>
             <span className={styles.subText}>
@@ -252,7 +266,7 @@ const EditPage = ({ data }: any) => {
             </a>
           </div>
         </div>
-        <div className={styles.optionsJob}>
+        {/* <div className={styles.optionsJob}>
           <h5 className={styles.titleJob}>
             ¿En qué modo le gustaría trabajar?
           </h5>
@@ -292,7 +306,7 @@ const EditPage = ({ data }: any) => {
               Híbrido
             </label>
           </div>
-        </div>
+        </div> */}
         <div className={styles.buttonField}>
           <button type="submit" className={styles.register}>
             Editar
