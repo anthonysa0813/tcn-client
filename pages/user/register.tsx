@@ -1,5 +1,4 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useState, useContext } from "react";
 import styles from "../../styles/users/RegisterUser.module.css";
@@ -17,17 +16,13 @@ import { EmployeeInterface } from "../../interfaces";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import dynamic from "next/dynamic";
-interface FormInterface {
-  passwordFirst: string;
-  confirmPassword: string;
-  email: string;
-}
 
 const ArrowBackIosNewIcon = dynamic(() =>
   import("@mui/icons-material/ArrowBackIosNew").then((res) => res.default)
 );
 
 const Image = dynamic(() => import("next/image").then((res) => res.default));
+const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 const Footer = dynamic(() =>
   import("../../components/dashboard/clients/Footer").then((res) => res.default)
@@ -199,8 +194,10 @@ const RegisterPage: NextPage = ({ data }: any) => {
         <div className={styles.registerSection}>
           <div className="wrapper">
             <div className={styles.back} onClick={() => router.push("/")}>
-              <ArrowBackIosNewIcon />
-              <span>Volver a la página principal</span>
+              <span>
+                <ArrowBackIosNewIcon />
+                Volver a la página principal
+              </span>
             </div>
             <h1>Registrate</h1>
             <RegisterForm data={data} />

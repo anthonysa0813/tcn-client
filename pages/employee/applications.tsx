@@ -6,7 +6,6 @@ import {
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
 import { Service } from "../../interfaces";
-import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Applications.module.css";
 import { API_URL } from "../../utils/constanstApi";
 
@@ -17,13 +16,15 @@ const CardCollapse = dynamic(
   }
 );
 
+const LayoutEmployee = dynamic(() => import("./layoutEmployee"), {
+  ssr: false,
+});
+
 const ApplicationsPage = () => {
   const { employeeGlobal } = useContext<EmployeeContextProps>(EmployeeContext);
   const [applicationsState, setApplicationsState] = useState<Service[] | []>(
     []
   );
-  // const [activeDetails, setActiveDetails] = useState(false);
-  // const [currentService, setCurrentService] = useState("");
 
   useLayoutEffect(() => {
     getInfo(employeeGlobal.id);
@@ -32,7 +33,6 @@ const ApplicationsPage = () => {
   const getInfo = async (id: string) => {
     const res = await fetch(`${API_URL}/employees/${id}`);
     const data = await res.json();
-    // const setArr = new Set(data.service);
     setApplicationsState(data.service);
   };
   return (

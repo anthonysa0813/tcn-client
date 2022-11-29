@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { IoIosArrowUp } from "react-icons/io";
 import styles from "../../../styles/employees/Applications.module.css";
 import { Service } from "../../../interfaces/index";
+import dynamic from "next/dynamic";
 
 interface Prop {
   service: Service;
 }
+
+const IoIosArrowUp = dynamic(
+  () => import("@mui/icons-material/KeyboardArrowUp")
+);
 
 const CardCollapse = ({ service }: Prop) => {
   const [activeDetails, setActiveDetails] = useState(false);

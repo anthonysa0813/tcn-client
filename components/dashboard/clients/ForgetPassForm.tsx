@@ -1,6 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styles from "../../../styles/client/LoginPage.module.css";
-// import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { sendEmailToNewPassword } from "../../../apis/employee/useEmployeeFetch";
@@ -23,9 +22,6 @@ const TextField = dynamic(() =>
 );
 
 const ForgetPassForm = ({ setShowForgetPasswordForm }: Prop) => {
-  // const [values, setValues] = useState({
-  //   email: "",
-  // });
   const toastAlertNotExistEmail = () => toast.error("El email no existe");
   const toastAlertSuccess = () =>
     toast.success("hemos enviado un mensaje a tu correo...");
@@ -57,8 +53,10 @@ const ForgetPassForm = ({ setShowForgetPasswordForm }: Prop) => {
         className={styles.menu}
         onClick={() => setShowForgetPasswordForm((state) => !state)}
       >
-        <ArrowBackIosNewIcon />
-        <span>Volver</span>
+        <span>
+          <ArrowBackIosNewIcon />
+          Volver
+        </span>
       </div>
       <p>Te enviaremos los siguientes pasos a tu correo</p>
       <ToastContainer />

@@ -1,16 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-// import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Edit.module.css";
-import { BiEditAlt } from "react-icons/bi";
-import { MdDelete } from "react-icons/md";
-// import {  Loading } from "@nextui-org/react";
 import { useRouter } from "next/router";
-
-// import ButtonPrimary from "../../components/buttons/Button";
-// import ModalComponent from '../../components/dashboard/ModalComponent';
-// import FormExperience from '../../components/employees/FormExperience';
-// import FormNewLang from "../../components/employees/FormNewLang";
-// import FormNewSkills from "../../components/employees/FormNewSkills";
 import {
   deleteLangByEmployee,
   getAllLanguagesByEmployee,
@@ -21,7 +11,6 @@ import {
 } from "../../context/EmployeeContext";
 import { Experience, KnoledgeInterface, LangResponse } from "../../interfaces";
 import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
-
 import {
   getKnoledges,
   deleteKnoledgesFetch,
@@ -58,9 +47,14 @@ const FaGithub = dynamic(() =>
   import("@mui/icons-material/GitHub").then((res) => res.default)
 );
 
-// import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
-const InfoCircle = dynamic(() =>
-  import("@mui/icons-material/AccessibilityNew").then((res) => res.default)
+// import EditIcon from '@mui/icons-material/Edit';
+const EditIcon = dynamic(() =>
+  import("@mui/icons-material/Edit").then((res) => res.default)
+);
+
+// import DeleteIcon from '@mui/icons-material/Delete';
+const DeleteIcon = dynamic(() =>
+  import("@mui/icons-material/Delete").then((res) => res.default)
 );
 
 //import GroupIcon from '@mui/icons-material/Group';
@@ -125,6 +119,9 @@ const ShowServiceById = dynamic(() =>
   )
 );
 
+const AlertIcon = dynamic(() =>
+  import("@mui/icons-material/Error").then((res) => res.default)
+);
 interface PropSaveInfo {
   phone: string;
   linkedin: string;
@@ -254,7 +251,7 @@ const MoreDetails = () => {
       <LayoutEmployee name="Seguir editando">
         <div className={styles.alert}>
           <span className={styles.alertCotent}>
-            <InfoCircle />
+            <AlertIcon />
             Tú información es importante para nosotros, porfavor date el tiempo
             de completar todos los espacios.
           </span>
@@ -267,13 +264,6 @@ const MoreDetails = () => {
             <ArrowLeft />
             atrás
           </Button>
-          {/* <Button
-            onClick={() => router.push("/employee/skills")}
-            style={{ marginTop: 20, padding: 0 }}
-          >
-            Añadir habilidades
-            <ArrowRight />
-          </Button> */}
         </div>
         <form onSubmit={onSubmit}>
           <div className={styles.field}>
@@ -486,13 +476,13 @@ const MoreDetails = () => {
                         </div>
                       </div>
                       <div className={styles.actionsExperiences}>
-                        <BiEditAlt
+                        <EditIcon
                           onClick={() => {
                             setEditMode((state) => !state);
                             setcurrentExperience(exp);
                           }}
                         />
-                        <MdDelete
+                        <DeleteIcon
                           onClick={() => {
                             setcurrentExperience(exp);
                             setshowModalToDelete((state) => !state);
@@ -511,8 +501,6 @@ const MoreDetails = () => {
             />
             {isLoading && <Loading style={{ marginTop: "1rem" }} />}
           </div>
-
-          {/* <EditorProfile /> */}
         </form>
       </LayoutEmployee>
       {showModalToDelete && (

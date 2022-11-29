@@ -164,7 +164,7 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
           </Button>
         </div>
         <div className={styles.field}>
-          <Button color="primary" variant="outlined" type="button">
+          <Button color="primary" variant="text" type="button">
             <Link href="/user/register">registrarme</Link>
           </Button>
         </div>

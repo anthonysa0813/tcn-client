@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/client/LoginPage.module.css";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -10,6 +8,10 @@ const ForgetPassForm = dynamic(() =>
     (res) => res.default
   )
 );
+
+const Image = dynamic(() => import("next/image").then((res) => res.default));
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 const LoginClient = dynamic(() =>
   import("../components/dashboard/clients/LoginClient").then(
     (res) => res.default
@@ -50,8 +52,10 @@ const LoginPage = () => {
         </div>
         <div className={styles.formContainer}>
           <div className={styles.back} onClick={() => router.push("/")}>
-            <ArrowBackIosNewIcon />
-            <span>Volver a la página principal</span>
+            <span>
+              <ArrowBackIosNewIcon />
+              Volver a la página principal
+            </span>
           </div>
           <Paper elevation={2} className={styles.formPaper}>
             {showForgetPasswordForm ? (
