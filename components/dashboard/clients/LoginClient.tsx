@@ -1,14 +1,4 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
-// import {
-//   Button,
-//   FormControl,
-//   IconButton,
-//   InputAdornment,
-//   InputLabel,
-//   OutlinedInput,
-//   TextField,
-// } from "@mui/material";
 import styles from "../../../styles/client/LoginPage.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -20,8 +10,6 @@ import {
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
 import { loginFetchApi } from "../../../helpers/useFetch";
-// import BeatLoader from "react-spinners/BeatLoader";
-// import Link from "next/link";
 import dynamic from "next/dynamic";
 
 interface Prop {

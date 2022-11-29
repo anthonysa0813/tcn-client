@@ -3,14 +3,14 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "../../styles/employees/Edit.module.css";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { Button, Loading } from "@nextui-org/react";
+// import {  Loading } from "@nextui-org/react";
 import { useRouter } from "next/router";
 
-import ButtonPrimary from "../../components/buttons/Button";
-import ModalComponent from "../../components/dashboard/ModalComponent";
-import FormExperience from "../../components/employees/FormExperience";
-import FormNewLang from "../../components/employees/FormNewLang";
-import FormNewSkills from "../../components/employees/FormNewSkills";
+// import ButtonPrimary from "../../components/buttons/Button";
+// import ModalComponent from '../../components/dashboard/ModalComponent';
+// import FormExperience from '../../components/employees/FormExperience';
+// import FormNewLang from "../../components/employees/FormNewLang";
+// import FormNewSkills from "../../components/employees/FormNewSkills";
 import {
   deleteLangByEmployee,
   getAllLanguagesByEmployee,
@@ -21,8 +21,7 @@ import {
 } from "../../context/EmployeeContext";
 import { Experience, KnoledgeInterface, LangResponse } from "../../interfaces";
 import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
-import FormToDeleteExp from "../../components/employees/FormToDeleteExp";
-import ShowServiceById from "../../components/employees/ShowServiceById";
+
 import {
   getKnoledges,
   deleteKnoledgesFetch,
@@ -82,6 +81,48 @@ const BsFillPlusCircleFill = dynamic(() =>
 // import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 const IoMdClose = dynamic(() =>
   import("@mui/icons-material/HighlightOff").then((res) => res.default)
+);
+
+// import Button from '@mui/material/Button';
+const Button = dynamic(() =>
+  import("@mui/material/Button").then((res) => res.default)
+);
+
+const Loading = dynamic(() =>
+  import("react-spinners/BeatLoader").then((res) => res.default)
+);
+
+const ButtonPrimary = dynamic(() =>
+  import("../../components/buttons/Button").then((res) => res.default)
+);
+
+// ../../components/dashboard/ModalComponent
+const ModalComponent = dynamic(() =>
+  import("../../components/dashboard/ModalComponent").then((res) => res.default)
+);
+
+const FormExperience = dynamic(() =>
+  import("../../components/employees/FormExperience").then((res) => res.default)
+);
+
+const FormNewLang = dynamic(() =>
+  import("../../components/employees/FormNewLang").then((res) => res.default)
+);
+// ../../components/employees/FormNewSkills
+const FormNewSkills = dynamic(() =>
+  import("../../components/employees/FormNewSkills").then((res) => res.default)
+);
+
+const FormToDeleteExp = dynamic(() =>
+  import("../../components/employees/FormToDeleteExp").then(
+    (res) => res.default
+  )
+);
+
+const ShowServiceById = dynamic(() =>
+  import("../../components/employees/ShowServiceById").then(
+    (res) => res.default
+  )
 );
 
 interface PropSaveInfo {
@@ -220,14 +261,14 @@ const MoreDetails = () => {
         </div>
         <div className={styles.menu}>
           <Button
-            onPress={() => router.back()}
+            onClick={() => router.back()}
             style={{ marginTop: 20, padding: 0 }}
           >
             <ArrowLeft />
             atrás
           </Button>
           {/* <Button
-            onPress={() => router.push("/employee/skills")}
+            onClick={() => router.push("/employee/skills")}
             style={{ marginTop: 20, padding: 0 }}
           >
             Añadir habilidades
@@ -334,7 +375,7 @@ const MoreDetails = () => {
             </div>
             <div className={styles.inputSection}>
               <Button
-                onPress={() => setShowModalSkills(!showModalSkills)}
+                onClick={() => setShowModalSkills(!showModalSkills)}
                 style={{
                   marginTop: 20,
                   padding: 0,
@@ -378,7 +419,7 @@ const MoreDetails = () => {
             </div>
             <div className={styles.inputSection}>
               <Button
-                onPress={() => setShowModalToLang(!showModalToLang)}
+                onClick={() => setShowModalToLang(!showModalToLang)}
                 style={{
                   marginTop: 20,
                   padding: 0,
@@ -406,7 +447,7 @@ const MoreDetails = () => {
                   </span>
                 </div>
                 <Button
-                  onPress={openExperience}
+                  onClick={openExperience}
                   style={{
                     padding: 0,
                     marginInlineStart: 0,
