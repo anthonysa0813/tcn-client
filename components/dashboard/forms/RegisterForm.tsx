@@ -11,8 +11,8 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import Link from "next/link";
+// import { Visibility, VisibilityOff } from "@mui/icons-material";
+// import Link from "next/link";
 // import { BeatLoader } from "react-spinners";
 import dynamic from "next/dist/shared/lib/dynamic";
 
@@ -50,9 +50,22 @@ const Button = dynamic(() =>
   import("@mui/material/Button").then((res) => res.default)
 );
 
+const Tooltip = dynamic(() =>
+  import("@mui/material/Tooltip").then((res) => res.default)
+);
+
 const BeatLoader = dynamic(() =>
   import("react-spinners/BeatLoader").then((res) => res.default)
 );
+
+const Visibility = dynamic(() =>
+  import("@mui/icons-material/Visibility").then((res) => res.default)
+);
+const VisibilityOff = dynamic(() =>
+  import("@mui/icons-material/VisibilityOff").then((res) => res.default)
+);
+
+const Link = dynamic(() => import("next/link").then((res) => res.default));
 
 const RegisterForm = ({ data }: Prop) => {
   const router = useRouter();
@@ -278,7 +291,7 @@ const RegisterForm = ({ data }: Prop) => {
           <div className={styles.field}>
             <FormControl sx={{ width: "100%" }} size="small" variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
-                Password
+                Repetir Password
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -308,7 +321,7 @@ const RegisterForm = ({ data }: Prop) => {
             </FormControl>
           </div>
 
-          <div className={styles.field}>
+          <div className={`${styles.field} ${styles.country}`}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">País</InputLabel>
               <Select
@@ -333,15 +346,17 @@ const RegisterForm = ({ data }: Prop) => {
               <span className="text-danger ">{errors.country} </span>
             )}
           </div>
-          <div className={styles.field}>
-            <label className="custom-file-upload">
-              {/* CV(extensión del archivo: pdf)<span>(*)</span>: */}
-              <input
-                type="file"
-                name="cv"
-                onChange={readInputTypeFile}
-                // {...getFieldProps("cv")}
-              />
+          <div className={`${styles.field} ${styles["custom-file-upload"]}`}>
+            <label>
+              <Tooltip title="cv en pdf" arrow>
+                <input
+                  type="file"
+                  name="cv"
+                  aria-label="cv"
+                  onChange={readInputTypeFile}
+                  // {...getFieldProps("cv")}
+                />
+              </Tooltip>
             </label>
             {cvValue && <p className={styles.titlePdf}>{cvValue.name}</p>}
           </div>

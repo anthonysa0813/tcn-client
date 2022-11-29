@@ -121,9 +121,16 @@
   padding: 0.25rem;
   width: 100%;
 }
+
+.custom-file-upload label {
+  font-size: 0.85rem;
+  color: var(--bg-gray300);
+}
 .field input[type="file"]::file-selector-button {
   border: 2px solid var(--bg-bluePrimary);
-  padding: 0.5rem 0.5rem;
+  content: "cv";
+  padding: 0.5rem;
+
   border-radius: 0.2em;
   background-color: var(--bg-blueLight);
   transition: 1s;
