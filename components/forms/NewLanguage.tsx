@@ -1,9 +1,9 @@
 import React from "react";
-import { GiPublicSpeaker } from "react-icons/gi";
-import {
-  BsFillFileEarmarkTextFill,
-  BsFillArrowUpRightCircleFill,
-} from "react-icons/bs";
+// import { GiPublicSpeaker } from "react-icons/gi";
+// import {
+//   BsFillFileEarmarkTextFill,
+//   BsFillArrowUpRightCircleFill,
+// } from "react-icons/bs";
 import styles from "../../styles/employees/Edit.module.css";
 
 const NewLanguage = () => {
@@ -11,18 +11,18 @@ const NewLanguage = () => {
     <div className={styles.field}>
       <div className="info">
         <div className={styles.titleHead}>
-          <GiPublicSpeaker
+          {/* <GiPublicSpeaker
             style={{
               marginInline: ".5rem",
               width: "20px",
               height: "20px",
             }}
-          />
+          /> */}
           <p>Idioma: </p>
         </div>
         <span className={styles.subText}>Ejmplo: {"Inglés - intermedio"}.</span>
         <div className={styles.titleHeadSecondary}>
-          <BsFillArrowUpRightCircleFill />
+          {/* <BsFillArrowUpRightCircleFill /> */}
           <p>Nivel: </p>
         </div>
       </div>
