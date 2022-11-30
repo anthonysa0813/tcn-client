@@ -1,14 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-} from "react";
-import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
+import React, { useState, useRef } from "react";
 import generator from "generate-password";
 import styles from "../../styles/admin/CreateNewUser.module.css";
-import { BsFillKeyFill } from "react-icons/bs";
 import DatalistInput from "react-datalist-input";
 import { v4 as uuid } from "uuid";
 import useForm from "../../hooks/useForm";
@@ -16,6 +8,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastSuccess, toastWarning } from "../../helpers/alerts";
 import { createUserAuth } from "../../apis/auth/fetchFunctions";
+import dynamic from "next/dynamic";
+
+const KeyIcon = dynamic(() =>
+  import("@mui/icons-material/Key").then((res) => res.default)
+);
+
+const LayoutDashboard = dynamic(() =>
+  import("../../components/dashboard/LayoutDashboard").then(
+    (res) => res.default
+  )
+);
 
 const roles = [
   { id: uuid(), value: "ADMIN_ROLE" },
@@ -114,7 +117,7 @@ const CreateNewUser = () => {
               <label htmlFor="name">Password:</label>
               <button onClick={generatePassword} type="button">
                 {" "}
-                <BsFillKeyFill />
+                <KeyIcon style={{ fontSize: "16px" }} />
                 <span>Generar Password</span>
               </button>
             </div>

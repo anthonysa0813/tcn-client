@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
+import React, { useState, useContext } from "react";
 import useForm from "../../hooks/useForm";
 import styles from "../../styles/admin/EditInfo.module.css";
 import { UserContext } from "../../context/UserContext";
@@ -7,6 +6,13 @@ import { updateUserAuth } from "../../apis/auth/fetchFunctions";
 import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dynamic from "next/dynamic";
+
+const LayoutDashboard = dynamic(
+  import("../../components/dashboard/LayoutDashboard").then(
+    (res) => res.default
+  )
+);
 
 const ChangePassword = () => {
   const { userGlobal } = useContext(UserContext);

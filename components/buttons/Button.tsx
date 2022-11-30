@@ -1,7 +1,5 @@
-import React, { MouseEventHandler } from "react";
-import { icons } from "react-icons/lib";
-import { AiTwotoneFilter } from "react-icons/ai";
-import { BiFilterAlt } from "react-icons/bi";
+import React from "react";
+import dynamic from "next/dynamic";
 
 interface PropTypes {
   content: string;
@@ -10,6 +8,10 @@ interface PropTypes {
   onClick?: () => void;
   iconName?: string;
 }
+
+const FilterIcon = dynamic(() =>
+  import("@mui/icons-material/FilterAlt").then((res) => res.default)
+);
 
 const ButtonPrimary = ({
   content,
@@ -20,7 +22,7 @@ const ButtonPrimary = ({
 }: PropTypes) => {
   return (
     <button type={type} className={`bg-${color} btn`} onClick={onClick}>
-      {iconName === "filter" && <BiFilterAlt />}
+      {iconName === "filter" && <FilterIcon />}
       {content}
     </button>
   );

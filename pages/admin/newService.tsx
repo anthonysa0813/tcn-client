@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
+// import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { Input } from "@nextui-org/react";
@@ -14,6 +14,12 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
+
+const LayoutDashboard = dynamic(
+  import("../../components/dashboard/LayoutDashboard").then(
+    (res) => res.default
+  )
+);
 interface FormProp {
   title: string;
   company: string;

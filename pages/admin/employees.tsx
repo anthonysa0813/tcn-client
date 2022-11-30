@@ -1,17 +1,11 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import { getFetchApi } from "../../helpers/useFetch";
 import { EmployeeInterface } from "../../interfaces";
-import TableToEmployee from "../../components/dashboard/clients/TableToEmployee";
-import ButtonPrimary from "../../components/buttons/Button";
 import styles from "../../styles/employees/ListEmployee.module.css";
-import ModalComponent from "../../components/dashboard/ModalComponent";
-import ModalFilter from "../../components/employees/ModalFilter";
-// import { utils, writeFile } from "xlsx";
-import { RiFileExcel2Fill } from "react-icons/ri";
 import { generateExcelFile } from "../../helpers/exportFileExcel";
+import dynamic from "next/dynamic";
 interface PropCSV {
   nombre: string;
   apellidos: string;
@@ -22,6 +16,34 @@ interface PropCSV {
   email: string;
   estado: string;
 }
+
+const DownloadIcon = dynamic(() =>
+  import("@mui/icons-material/FileDownload").then((res) => res.default)
+);
+
+const LayoutDashboard = dynamic(() =>
+  import("../../components/dashboard/LayoutDashboard").then(
+    (res) => res.default
+  )
+);
+
+const TableToEmployee = dynamic(() =>
+  import("../../components/dashboard/clients/TableToEmployee").then(
+    (res) => res.default
+  )
+);
+
+const ButtonPrimary = dynamic(() =>
+  import("../../components/buttons/Button").then((res) => res.default)
+);
+
+const ModalComponent = dynamic(() =>
+  import("../../components/dashboard/ModalComponent").then((res) => res.default)
+);
+
+const ModalFilter = dynamic(() =>
+  import("../../components/employees/ModalFilter").then((res) => res.default)
+);
 
 const Employees = () => {
   const token = Cookies.get("token");
@@ -72,7 +94,7 @@ const Employees = () => {
               className={styles.buttonExcel}
               onClick={() => generateExcelFile(exportData)}
             >
-              <RiFileExcel2Fill />
+              <DownloadIcon />
               Descargar Lista
             </button>
           </div>

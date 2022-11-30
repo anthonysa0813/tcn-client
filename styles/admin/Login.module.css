@@ -1,4 +1,4 @@
-.main-container {
+.main {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -9,38 +9,33 @@
   border: 3px solid brown;
 }
 
-.form-container {
+.form {
+  /* border: 2px solid brown; */
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  padding: 1.25rem;
+  row-gap: 1rem;
 }
 
-.subtitle {
-  display: flex;
-  justify-content: flex-end;
+.field {
+  width: 100%;
 }
 
-.subtitle span {
-  font-size: 1.5rem;
-  color: var(--bg-blue200);
+.field div {
+  width: 100%;
 }
 
-.logoContent {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-container h1 {
+.fieldCenter {
   text-align: center;
 }
 
-.form-container input {
-  padding: 1rem;
-  background-color: white;
+.imageContainer {
+  position: relative;
 }
 
-.form-container button {
-  padding: 1rem;
-  margin-top: 1rem;
+.imageContainer h5 {
+  position: absolute;
+  right: 25%;
+  top: 70%;
+  color: var(--bg-blue200);
 }

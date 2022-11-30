@@ -1,18 +1,48 @@
 import Link from "next/link";
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
-import { BsChevronBarRight } from "react-icons/bs";
 import styles from "../../styles/admin/AsideDashboard.module.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { AddUser, Document, PaperPlus, Password, People } from "react-iconly";
-// import Image from "next/image";
-import { BiAlignLeft } from "react-icons/bi";
-import { GrClose } from "react-icons/gr";
 import dynamic from "next/dynamic";
 
 const Image = dynamic(() => import("next/image").then((res) => res.default));
-// import MenuIcon from '@mui/icons-material/Menu';
+
+const FileIcon = dynamic(() =>
+  import("@mui/icons-material/Article").then((res) => res.default)
+);
+
+const FilePlusIcon = dynamic(() =>
+  import("@mui/icons-material/Difference").then((res) => res.default)
+);
+
+const KeyIcon = dynamic(() =>
+  import("@mui/icons-material/VpnKey").then((res) => res.default)
+);
+
+const JobIcon = dynamic(() =>
+  import("@mui/icons-material/Work").then((res) => res.default)
+);
+
+const RoleIcon = dynamic(() =>
+  import("@mui/icons-material/SupervisedUserCircle").then((res) => res.default)
+);
+
+const NewUserIcon = dynamic(() =>
+  import("@mui/icons-material/PersonAddAlt").then((res) => res.default)
+);
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
+
+const MenuIcon = dynamic(() =>
+  import("@mui/icons-material/menu").then((res) => res.default)
+);
+
+const LogoutIcon = dynamic(() =>
+  import("@mui/icons-material/Logout").then((res) => res.default)
+);
 
 const AsideDash = () => {
   const { userGlobal } = useContext(UserContext);
@@ -60,14 +90,14 @@ const AsideDash = () => {
       <aside className={styles.aside}>
         <div className={styles.boxIcon}>
           {showMenu ? (
-            <GrClose
+            <CloseIcon
               className={styles.svgMenu}
               onClick={() => {
                 setShowMenu((state) => !state);
               }}
             />
           ) : (
-            <BiAlignLeft
+            <MenuIcon
               className={styles.svgMenu}
               onClick={() => {
                 setShowMenu((state) => !state);
@@ -91,24 +121,18 @@ const AsideDash = () => {
               className={`${styles.menu}  animate__animated animate__fadeInLeft`}
             >
               <ul>
-                {/* <Link href="/admin/clients" style={{ display: "inline" }}>
-            <a className={pathActive("clients") ? styles.activeLink : ""}>
-            <Document set="bold" primaryColor="primary" />
-            Lista de Clientes
-            </a>
-          </Link> */}
                 <Link
                   href="/admin/employees"
                   className={pathActive("employees") ? styles.activeLink : ""}
                 >
-                  <Document set="bold" primaryColor="primary" />
+                  <FileIcon />
                   Lista de Empleados
                 </Link>
                 <Link
                   href="/admin/newService"
                   className={pathActive("newService") ? styles.activeLink : ""}
                 >
-                  <PaperPlus set="bold" primaryColor="primary" />
+                  <FilePlusIcon />
                   Crear nuevo Puesto
                 </Link>
                 <Link
@@ -117,7 +141,7 @@ const AsideDash = () => {
                     pathActive("changePassword") ? styles.activeLink : ""
                   }
                 >
-                  <Password set="bold" primaryColor="primary" />
+                  <KeyIcon />
                   Editar información
                 </Link>
                 <Link
@@ -126,7 +150,7 @@ const AsideDash = () => {
                     pathActive("listServices") ? styles.activeLink : ""
                   }
                 >
-                  <Document set="bold" primaryColor="primary" />
+                  <JobIcon />
                   Puestos Disponibles
                 </Link>
                 {userGlobal.superAdmin && (
@@ -137,7 +161,7 @@ const AsideDash = () => {
                         pathActive("changeRole") ? styles.activeLink : ""
                       }
                     >
-                      <People set="bold" primaryColor="primary" />
+                      <RoleIcon />
                       Cambiar role a un usuario
                     </Link>
                     <Link
@@ -146,7 +170,7 @@ const AsideDash = () => {
                         pathActive("createNewUser") ? styles.activeLink : ""
                       }
                     >
-                      <AddUser set="bold" primaryColor="primary" />
+                      <NewUserIcon />
                       Crear un nuevo usuario
                     </Link>
                   </>
@@ -156,7 +180,7 @@ const AsideDash = () => {
             <div className={styles.profile}>
               {/* <h4>{userGlobal.name}</h4> */}
               <h4 onClick={outSession}>Salir</h4>
-              <BsChevronBarRight onClick={outSession} />
+              <LogoutIcon onClick={outSession} />
             </div>
           </div>
         )}

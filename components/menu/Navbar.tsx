@@ -55,42 +55,34 @@ const Navbar = () => {
               />
             </div>
             <nav className={styles.menu}>
-              <ul>
-                {!name && (
-                  <>
-                    <li>
-                      <Link href="/campaign">Trabaja con Nosotros</Link>
-                    </li>
-                  </>
-                )}
-                {name && (
-                  <span className={styles.iconUser}>
-                    {/* <User set="bold" primaryColor="black" /> */}
-                    <PersonIcon />
-                    {name} {surnames}
-                    <div className={styles.miniMenu}>
-                      <Link href="/employee/edit">Perfil</Link>
-                      <Link href="/employee/applications">postulaciones</Link>
-                    </div>
-                  </span>
-                )}
-                {!name && (
-                  <li className={styles.btn}>
-                    <Link href="/login">Inicia sesión</Link>
-                  </li>
-                )}
-                {name && (
-                  <button
-                    type="button"
-                    className={styles.buttonDark}
-                    onClick={logout}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <LogoutIcon />
-                    salir
-                  </button>
-                )}
-              </ul>
+              {!name && <Link href="/campaign">Puestos Disponibles</Link>}
+              {name && (
+                <span className={styles.iconUser}>
+                  {/* <User set="bold" primaryColor="black" /> */}
+                  <PersonIcon />
+                  {name} {surnames}
+                  <div className={styles.miniMenu}>
+                    <Link href="/employee/edit">Perfil</Link>
+                    <Link href="/employee/applications">postulaciones</Link>
+                  </div>
+                </span>
+              )}
+              {!name && (
+                <Link href="/login" className={styles.btn}>
+                  <span>Inicia sesión</span>
+                </Link>
+              )}
+              {name && (
+                <button
+                  type="button"
+                  className={styles.buttonDark}
+                  onClick={logout}
+                  style={{ cursor: "pointer" }}
+                >
+                  <LogoutIcon />
+                  salir
+                </button>
+              )}
             </nav>
           </div>
         </div>
