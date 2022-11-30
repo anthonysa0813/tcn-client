@@ -4,7 +4,6 @@ import styles from "../../styles/admin/ModalFilter.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { Languages, nivels, skills } from "../../utils/activitiesToBussiness";
 import ButtonPrimary from "../buttons/Button";
-import { IoIosCloseCircle } from "react-icons/io";
 import { EmployeeInterface } from "../../interfaces";
 import {
   getEmployeeByFilterHability,
@@ -12,6 +11,11 @@ import {
   searchEmployeeByFilter,
 } from "../../apis/employee/useEmployeeFetch";
 import useForm from "../../hooks/useForm";
+import dynamic from "next/dynamic";
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
 
 interface Prop {
   setShowModalFilters: React.Dispatch<React.SetStateAction<boolean>>;
@@ -142,7 +146,7 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
   return (
     <form className={styles.modalFilterGrid} onSubmit={onSubmit}>
       <div className={styles.boxClose}>
-        <IoIosCloseCircle
+        <CloseIcon
           onClick={() => setShowModalFilters((state) => !state)}
           className={styles.svg}
         />

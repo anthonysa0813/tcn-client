@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const Link = dynamic(() => import("next/link").then((res) => res.default));
 
 const MenuIcon = dynamic(() =>
-  import("@mui/icons-material/Menu").then((res) => res.default)
+  import("@mui/icons-material/MenuOpen").then((res) => res.default)
 );
 const WorkIcon = dynamic(() =>
   import("@mui/icons-material/BusinessCenter").then((res) => res.default)
@@ -54,7 +54,7 @@ const AsideMenuEmployee = () => {
             className={pathActive("/campaign") ? styles.activeLink : ""}
           >
             <WorkIcon style={{ width: "20px", height: "20px" }} />
-            Ver Campañas Disponibles
+            Ver Puestos Disponibles
           </Link>
           <Link
             href="/employee/edit"

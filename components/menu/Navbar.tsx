@@ -79,8 +79,8 @@ const Navbar = () => {
                   onClick={logout}
                   style={{ cursor: "pointer" }}
                 >
+                  <span>salir</span>
                   <LogoutIcon />
-                  salir
                 </button>
               )}
             </nav>

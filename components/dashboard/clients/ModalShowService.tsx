@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { formatDate } from "../../../helpers/formatDate";
 import { Service } from "../../../interfaces";
 import styles from "../../../styles/client/Campaign.module.css";
-import { IoIosCloseCircle } from "react-icons/io";
 import { useRouter } from "next/router";
 import {
   EmployeeContext,
@@ -10,6 +9,11 @@ import {
 } from "../../../context/EmployeeContext";
 import { toast } from "react-toastify";
 import { API_URL } from "../../../utils/constanstApi";
+import dynamic from "next/dynamic";
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
 
 interface Prop {
   service: Service;
@@ -47,7 +51,7 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
   return (
     <div className={styles.modal}>
       <div className={styles.modalContainer}>
-        <IoIosCloseCircle onClick={closeModal} />
+        <CloseIcon onClick={closeModal} />
         <div className="headModal">
           <h4>{service.title}</h4>
           <h4>{service.company}</h4>

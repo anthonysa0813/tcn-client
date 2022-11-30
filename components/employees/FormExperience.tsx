@@ -1,11 +1,6 @@
 import { GetServerSideProps } from "next";
 import React, { useEffect, useState } from "react";
-import { IoIosCloseCircle } from "react-icons/io";
-import {
-  CourntriesDataResponse,
-  EmployeeInterface,
-  Experience,
-} from "../../interfaces";
+import { EmployeeInterface, Experience } from "../../interfaces";
 import styles from "../../styles/employees/Experience.module.css";
 import {
   Area,
@@ -16,9 +11,8 @@ import {
   subArea,
   years,
 } from "../../utils/activitiesToBussiness";
-import ButtonPrimary from "../buttons/Button";
+// import ButtonPrimary from "../buttons/Button";
 import DatalistInput from "react-datalist-input";
-import { useCurrentState } from "@nextui-org/react";
 import useForm from "../../hooks/useForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,7 +23,15 @@ import {
 import { SetStateAction } from "react";
 import { getDate } from "../../helpers/getDate";
 import { monthsReturnValue } from "../../helpers/monthsValues";
+import dynamic from "next/dynamic";
 
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
+
+const ButtonPrimary = dynamic(() =>
+  import("../buttons/Button").then((res) => res.default)
+);
 interface Prop {
   openExperience: () => void;
   dataListExperiences: Experience[] | [];
@@ -217,7 +219,7 @@ const FormExperience = ({
           {editMode ? "Editar" : "Añade una nueva Experiencia (*obligatorio)"}
         </h1>
         <div className={styles.boxClose}>
-          <IoIosCloseCircle
+          <CloseIcon
             onClick={editMode ? closeEditMode : openExperience}
             className={styles.svg}
           />

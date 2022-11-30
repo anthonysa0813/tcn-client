@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { IoIosCloseCircle } from "react-icons/io";
 import styles from "../../styles/employees/FormNewSkills.module.css";
 import {
   HabilitiesInNivelsExperience,
   HabilitiesInTimeExperienceYears,
   levels,
-  skills,
   Years,
 } from "../../utils/activitiesToBussiness";
-import ButtonPrimary from "../buttons/Button";
 import DatalistInput from "react-datalist-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createKnoledge } from "../../apis/knoledges/useKnoledges";
 import { KnoledgeInterface } from "../../interfaces";
 import { v4 as uuidv4 } from "uuid";
+
+import dynamic from "next/dynamic";
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
+const ButtonPrimary = dynamic(() =>
+  import("../buttons/Button").then((res) => res.default)
+);
 
 interface Prop {
   openSkill: () => void;
@@ -89,7 +95,7 @@ const FormNewSkills = ({
   return (
     <form className={styles.formNewSkill} onSubmit={onSubmit}>
       <div className={styles.boxClose}>
-        <IoIosCloseCircle onClick={openSkill} className={styles.svg} />
+        <CloseIcon onClick={openSkill} className={styles.svg} />
       </div>
       <h1>Añade una nueva Habilidad</h1>
       <ToastContainer />

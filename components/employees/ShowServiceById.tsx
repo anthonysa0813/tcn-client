@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { IoIosCloseCircle } from "react-icons/io";
 import { getUniqueExperience } from "../../apis/experience/useFecthExperience";
 import styles from "../../styles/employees/ShowServiceById.module.css";
 import { Experience } from "../../interfaces/index";
+import dynamic from "next/dynamic";
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
 
 interface Prop {
   idService: string;
@@ -28,7 +32,7 @@ const ShowServiceById = ({
   return (
     <section className={styles.showServiceGrid}>
       <div className={styles.boxClose}>
-        <IoIosCloseCircle
+        <CloseIcon
           onClick={() => setShowService(false)}
           className={styles.svg}
         />

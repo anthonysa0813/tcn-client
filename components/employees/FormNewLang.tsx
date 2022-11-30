@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { IoIosCloseCircle } from "react-icons/io";
 import styles from "../../styles/employees/FormNewLang.module.css";
 import { Languages, nivels } from "../../utils/activitiesToBussiness";
-import ButtonPrimary from "../buttons/Button";
-import useForm from "../../hooks/useForm";
 import { EmployeeInterface, LangResponse } from "../../interfaces";
 import { createLang } from "../../apis/languages/useFetchLang";
 import { Button, Loading } from "@nextui-org/react";
 import DatalistInput from "react-datalist-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dynamic from "next/dynamic";
 
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
 interface Prop {
   openLang: () => void;
   setStateListLang: (state: any) => void;
@@ -70,7 +71,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       <h2>Agrea un nuevo idioma</h2>
       <ToastContainer />
       <div className={styles.boxClose}>
-        <IoIosCloseCircle onClick={openLang} className={styles.svg} />
+        <CloseIcon onClick={openLang} className={styles.svg} />
       </div>
       <div className={styles.field}>
         <DatalistInput
