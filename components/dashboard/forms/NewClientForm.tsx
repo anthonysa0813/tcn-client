@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import styles from "../../../styles/admin/form/NewClientForm.module.css";
-import { AiFillCloseCircle } from "react-icons/ai";
 import { Button, Input, Textarea } from "@nextui-org/react";
 import useForm from "../../../hooks/useForm";
 import { ClientInterface, ClientResponse } from "../../../interfaces";
-import useEffect from "react";
 import { createUser } from "../../../helpers/useFetch";
-import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dynamic from "next/dynamic";
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
 
 interface Prop {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,7 +59,7 @@ const NewClientForm = ({ setModal }: Prop) => {
 
   return (
     <form className={`${styles.formContainer}`} onSubmit={handleSubmit}>
-      <AiFillCloseCircle className={styles.closeIcon} onClick={closeModal} />
+      <CloseIcon className={styles.closeIcon} onClick={closeModal} />
       <h3>Agregar un Nuevo Cliente</h3>
       <ToastContainer />
       {error && (
