@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useContext } from "react";
 import styles from "../../styles/employees/ModalLogin.module.css";
-import { IoIosCloseCircle } from "react-icons/io";
+// import { CloseIcon } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import { loginFetchApi } from "../../helpers/useFetch";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,7 +13,13 @@ import { useRouter } from "next/router";
 import { Loading } from "@nextui-org/react";
 import Link from "next/link";
 import InputWithIcon from "../buttons/InputWithIcon";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+// import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+
+import dynamic from "next/dynamic";
+
+const CloseIcon = dynamic(() =>
+  import("@mui/icons-material/Close").then((res) => res.default)
+);
 
 interface Prop {
   setshowModalLogin: (state: boolean) => void;
@@ -81,10 +87,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
         <div className={styles.modalContainer}>
           <h3>Inicia Sesión</h3>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <IoIosCloseCircle
-              onClick={closeModal}
-              className={styles.iconClose}
-            />
+            <CloseIcon onClick={closeModal} className={styles.iconClose} />
             <div className={styles.field}>
               <label>Email: </label>
               <input
@@ -96,7 +99,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
             </div>
             <div className={`${styles.field} `}>
               <label>Password: </label>
-              <InputWithIcon
+              {/* <InputWithIcon
                 type={showPass ? "text" : "password"}
                 name="password"
                 value={password}
@@ -109,7 +112,7 @@ const ModalLogin = ({ setshowModalLogin }: Prop) => {
                 ) : (
                   <AiFillEye onClick={() => setShowPass((state) => !state)} />
                 )}
-              </InputWithIcon>
+              </InputWithIcon> */}
             </div>
 
             <button className={styles.button}>Iniciar Sesión</button>
