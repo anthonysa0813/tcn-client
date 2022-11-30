@@ -37,7 +37,7 @@ const CloseIcon = dynamic(() =>
 );
 
 const MenuIcon = dynamic(() =>
-  import("@mui/icons-material/menu").then((res) => res.default)
+  import("@mui/icons-material/Menu").then((res) => res.default)
 );
 
 const LogoutIcon = dynamic(() =>
