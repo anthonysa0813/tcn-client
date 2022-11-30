@@ -44,31 +44,20 @@ const LogoutIcon = dynamic(() =>
   import("@mui/icons-material/Logout").then((res) => res.default)
 );
 
+//import Tooltip from '@mui/material/Tooltip';
+const Tooltip = dynamic(() =>
+  import("@mui/material/Tooltip").then((res) => res.default)
+);
+
+const IconButton = dynamic(() =>
+  import("@mui/material/IconButton").then((res) => res.default)
+);
+
 const AsideDash = () => {
   const { userGlobal } = useContext(UserContext);
   const router = useRouter();
   const arrAsPath = router.asPath.split("/");
   const [showMenu, setShowMenu] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(0);
-
-  const setWindowDimensions = () => {
-    if (window !== undefined) {
-      setWindowWidth(window.innerWidth);
-    }
-  };
-
-  useEffect(() => {
-    if (window !== undefined) {
-      window.addEventListener("resize", setWindowDimensions);
-      return () => {
-        window.removeEventListener("resize", setWindowDimensions);
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    setShowMenu(true);
-  }, [windowWidth]);
 
   const pathActive = (path: string) => {
     const pathName = arrAsPath[arrAsPath.length - 1];
@@ -88,102 +77,155 @@ const AsideDash = () => {
   return (
     <>
       <aside className={styles.aside}>
-        <div className={styles.boxIcon}>
+        <div
+          className={styles.boxIcon}
+          onClick={() => {
+            console.log("click :D");
+            console.log("showMenu", showMenu);
+            setShowMenu((state) => !state);
+          }}
+        >
           {showMenu ? (
-            <CloseIcon
-              className={styles.svgMenu}
-              onClick={() => {
-                setShowMenu((state) => !state);
-              }}
-            />
-          ) : (
-            <MenuIcon
-              className={styles.svgMenu}
-              onClick={() => {
-                setShowMenu((state) => !state);
-              }}
-            />
-          )}
-        </div>
-        {showMenu && (
-          <div className={styles.asideContainer}>
-            <div className="menuHeader">
+            <>
               <Image
                 src="/images/LogoContact.png"
                 alt="Logo de Contact bpo"
-                className={styles.image}
-                width={200}
+                width={150}
                 height={100}
+                onClick={() => router.push("/")}
               />
-            </div>
+              <CloseIcon className={styles.svgMenu} />
+            </>
+          ) : (
+            <MenuIcon className={styles.svgMenu} />
+          )}
+        </div>
 
-            <nav
-              className={`${styles.menu}  animate__animated animate__fadeInLeft`}
-            >
-              <ul>
-                <Link
-                  href="/admin/employees"
-                  className={pathActive("employees") ? styles.activeLink : ""}
+        <div className={styles.asideContainer}>
+          <nav
+            className={`${styles.menu}  animate__animated animate__fadeInLeft`}
+          >
+            <Tooltip title="Ver lista de empleadores" arrow placement="right">
+              <Link
+                href="/admin/employees"
+                className={pathActive("employees") ? styles.activeLink : ""}
+              >
+                <FileIcon />
+
+                <span
+                  className={`${showMenu ? styles.textBlock : styles.textNone}`}
                 >
-                  <FileIcon />
+                  {" "}
                   Lista de Empleados
-                </Link>
-                <Link
-                  href="/admin/newService"
-                  className={pathActive("newService") ? styles.activeLink : ""}
+                </span>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Crear Nuevo Puesto" arrow placement="right">
+              <Link
+                href="/admin/newService"
+                className={pathActive("newService") ? styles.activeLink : ""}
+              >
+                <FilePlusIcon />
+
+                <span
+                  className={`${showMenu ? styles.textBlock : styles.textNone}`}
                 >
-                  <FilePlusIcon />
+                  {" "}
                   Crear nuevo Puesto
-                </Link>
-                <Link
-                  href="/admin/changePassword"
-                  className={
-                    pathActive("changePassword") ? styles.activeLink : ""
-                  }
+                </span>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Cambiar contraseña" arrow placement="right">
+              <Link
+                href="/admin/changePassword"
+                className={
+                  pathActive("changePassword") ? styles.activeLink : ""
+                }
+              >
+                <KeyIcon />
+
+                <span
+                  className={`${showMenu ? styles.textBlock : styles.textNone}`}
                 >
-                  <KeyIcon />
+                  {" "}
                   Editar información
-                </Link>
-                <Link
-                  href="/admin/listServices"
-                  className={
-                    pathActive("listServices") ? styles.activeLink : ""
-                  }
+                </span>
+              </Link>
+            </Tooltip>
+
+            <Tooltip
+              title="Puestos Disponibles"
+              arrow
+              placement="right"
+              color="dark"
+            >
+              <Link
+                href="/admin/listServices"
+                className={pathActive("listServices") ? styles.activeLink : ""}
+              >
+                <JobIcon />
+                <span
+                  className={`${showMenu ? styles.textBlock : styles.textNone}`}
                 >
-                  <JobIcon />
+                  {" "}
                   Puestos Disponibles
-                </Link>
-                {userGlobal.superAdmin && (
-                  <>
-                    <Link
-                      href="/admin/changeRole"
-                      className={
-                        pathActive("changeRole") ? styles.activeLink : ""
-                      }
+                </span>
+              </Link>
+            </Tooltip>
+            {userGlobal.superAdmin && (
+              <>
+                <Tooltip
+                  title="Cambiar role a un usuario"
+                  arrow
+                  placement="right"
+                >
+                  <Link
+                    href="/admin/changeRole"
+                    className={
+                      pathActive("changeRole") ? styles.activeLink : ""
+                    }
+                  >
+                    <RoleIcon />
+                    <span
+                      className={`${
+                        showMenu ? styles.textBlock : styles.textNone
+                      }`}
                     >
-                      <RoleIcon />
                       Cambiar role a un usuario
-                    </Link>
-                    <Link
-                      href="/admin/createNewUser"
-                      className={
-                        pathActive("createNewUser") ? styles.activeLink : ""
-                      }
+                    </span>
+                  </Link>
+                </Tooltip>
+                <Tooltip arrow title="Crear un nuevo usuario" placement="right">
+                  <Link
+                    href="/admin/createNewUser"
+                    className={
+                      pathActive("createNewUser") ? styles.activeLink : ""
+                    }
+                  >
+                    <NewUserIcon />
+                    <span
+                      className={`${
+                        showMenu ? styles.textBlock : styles.textNone
+                      }`}
                     >
-                      <NewUserIcon />
                       Crear un nuevo usuario
-                    </Link>
-                  </>
-                )}
-              </ul>
-            </nav>
-            <div className={styles.profile}>
-              {/* <h4>{userGlobal.name}</h4> */}
-              <h4 onClick={outSession}>Salir</h4>
-              <LogoutIcon onClick={outSession} />
-            </div>
+                    </span>
+                  </Link>
+                </Tooltip>
+              </>
+            )}
+          </nav>
+          <div className={styles.profile}>
+            <h4
+              onClick={outSession}
+              className={`${showMenu ? styles.TextBlock : styles.textNone}`}
+            >
+              Salir
+            </h4>
+
+            <LogoutIcon onClick={outSession} />
           </div>
-        )}
+        </div>
       </aside>
     </>
   );

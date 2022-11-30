@@ -75,7 +75,7 @@ const Employees = () => {
       };
     });
     setExportData(arrToExportExcel);
-  }, [token, router, employeeData]);
+  }, []);
 
   // const exportExcelFile = () => {
   //   let wb = utils.book_new();
