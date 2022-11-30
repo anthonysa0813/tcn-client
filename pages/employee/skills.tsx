@@ -3,9 +3,16 @@ import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/employees/Edit.module.css";
 import { Button, Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/router";
-import { ArrowLeft, InfoCircle } from "react-iconly";
+// import { ArrowLeft, InfoCircle } from "react-iconly";
 import SkillOption from "../../components/forms/SkillOption";
 import ButtonPrimary from "../../components/buttons/Button";
+import dynamic from "next/dynamic";
+
+const FormNewSkills = dynamic(() =>
+  import("../../components/employees/FormNewSkills").then((res) => res.default)
+);
+
+dynamic;
 
 const SkillsPage = () => {
   const router = useRouter();
@@ -16,7 +23,7 @@ const SkillsPage = () => {
           onPress={() => router.back()}
           style={{ marginTop: 20, padding: 0 }}
         >
-          <ArrowLeft />
+          {/* <ArrowLeft /> */}
           atrás
         </Button>
       </div>
@@ -24,7 +31,7 @@ const SkillsPage = () => {
         <h3>Habilidades</h3>
         <div className={styles.alert}>
           <span className={styles.alertCotent}>
-            <InfoCircle set="bold" primaryColor="currentColor" />
+            {/* <InfoCircle set="bold" primaryColor="currentColor" /> */}
             Seleccione únicamente las habilidades que usted tenga conocimientos.
           </span>
         </div>
