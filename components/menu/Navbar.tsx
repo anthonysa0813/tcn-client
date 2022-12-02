@@ -55,7 +55,11 @@ const Navbar = () => {
               />
             </div>
             <nav className={styles.menu}>
-              {!name && <Link href="/campaign">Puestos Disponibles</Link>}
+              {!name && (
+                <a onClick={() => router.push("/campaign")}>
+                  Puestos Disponibles
+                </a>
+              )}
               {name && (
                 <span className={styles.iconUser}>
                   {/* <User set="bold" primaryColor="black" /> */}
