@@ -54,7 +54,7 @@
   box-shadow: 20px 20px 80px #e1e1e1, -5px -5px 80px #ffffff;
 }
 
-.miniMenu a:hover {
+.miniMenu .anclea:hover {
   color: var(--bg-blue200);
   background-color: var(--bg-blueLight);
   padding: 0.25rem;

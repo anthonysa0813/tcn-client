@@ -56,9 +56,9 @@ const Navbar = () => {
             </div>
             <nav className={styles.menu}>
               {!name && (
-                <a onClick={() => router.push("/campaign")}>
-                  Puestos Disponibles
-                </a>
+                <Link href="/campaign" className={styles.ancle}>
+                  <span>Puestos disponibles</span>
+                </Link>
               )}
               {name && (
                 <span className={styles.iconUser}>
