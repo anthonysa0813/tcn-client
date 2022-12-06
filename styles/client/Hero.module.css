@@ -59,6 +59,17 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
 }
+.reSize {
+  object-fit: contain !important;
+}
+
+.empresas {
+  padding: 2rem;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .services {
   height: auto;

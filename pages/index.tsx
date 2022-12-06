@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import ServiceIconCard from "../components/cards/ServiceIconCard";
+import Slider from "../components/carousel/Slider";
 import Hero from "../components/Hero";
 import Navbar from "../components/menu/Navbar";
 // import styles from "../styles/Home.module.css";
@@ -67,6 +68,11 @@ const Home: NextPage = () => {
                 imageUrl="https://www.contactbpo.pe/img/service4.png"
               />
             </div>
+          </div>
+        </Hero>
+        <Hero bg="blueLight" nameHero="empresas">
+          <div className="wrapper">
+            <Slider />
           </div>
         </Hero>
       </main>
