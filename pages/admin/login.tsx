@@ -70,17 +70,14 @@ const LoginAdminForm = () => {
       password: "",
     },
     onSubmit: (values) => {
-      console.log("values", values);
       setLoading(true);
       loginFetchApi("auth/login", values).then((res) => {
         if (res.message) {
-          console.log(res.message);
           setShowLoading(false);
           setLoading(false);
           toastWarning(res.message);
         } else {
           const { token, user } = res;
-          console.log(res);
           setUserGlobal(user);
           sessionStorage.setItem("token", token);
           Cookies.set("token", token, { expires: 7 });

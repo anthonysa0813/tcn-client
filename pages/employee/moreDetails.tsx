@@ -27,57 +27,46 @@ const LayoutEmployee = dynamic(() =>
   import("./layoutEmployee").then((res) => res.default)
 );
 
-// import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 const ArrowLeft = dynamic(() =>
   import("@mui/icons-material/KeyboardBackspace").then((res) => res.default)
 );
 
-// import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 const Calling = dynamic(() =>
   import("@mui/icons-material/PhoneCallback").then((res) => res.default)
 );
 
-// import LinkedInIcon from '@mui/icons-material/LinkedIn';
 const FaLinkedin = dynamic(() =>
   import("@mui/icons-material/LinkedIn").then((res) => res.default)
 );
 
-// import GitHubIcon from '@mui/icons-material/GitHub';
 const FaGithub = dynamic(() =>
   import("@mui/icons-material/GitHub").then((res) => res.default)
 );
 
-// import EditIcon from '@mui/icons-material/Edit';
 const EditIcon = dynamic(() =>
   import("@mui/icons-material/Edit").then((res) => res.default)
 );
 
-// import DeleteIcon from '@mui/icons-material/Delete';
 const DeleteIcon = dynamic(() =>
   import("@mui/icons-material/Delete").then((res) => res.default)
 );
 
-//import GroupIcon from '@mui/icons-material/Group';
 const GiPublicSpeaker = dynamic(() =>
   import("@mui/icons-material/Group").then((res) => res.default)
 );
 
-// import ArticleIcon from '@mui/icons-material/Article';
 const BsFillFileEarmarkTextFill = dynamic(() =>
   import("@mui/icons-material/Article").then((res) => res.default)
 );
 
-//import AddCircleIcon from '@mui/icons-material/AddCircle';
 const BsFillPlusCircleFill = dynamic(() =>
   import("@mui/icons-material/AddCircle").then((res) => res.default)
 );
 
-// import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 const IoMdClose = dynamic(() =>
   import("@mui/icons-material/HighlightOff").then((res) => res.default)
 );
 
-// import Button from '@mui/material/Button';
 const Button = dynamic(() =>
   import("@mui/material/Button").then((res) => res.default)
 );
@@ -90,7 +79,6 @@ const ButtonPrimary = dynamic(() =>
   import("../../components/buttons/Button").then((res) => res.default)
 );
 
-// ../../components/dashboard/ModalComponent
 const ModalComponent = dynamic(() =>
   import("../../components/dashboard/ModalComponent").then((res) => res.default)
 );
@@ -102,7 +90,7 @@ const FormExperience = dynamic(() =>
 const FormNewLang = dynamic(() =>
   import("../../components/employees/FormNewLang").then((res) => res.default)
 );
-// ../../components/employees/FormNewSkills
+
 const FormNewSkills = dynamic(() =>
   import("../../components/employees/FormNewSkills").then((res) => res.default)
 );
@@ -163,10 +151,7 @@ const MoreDetails = () => {
   );
   const [currentIdExperience, setCurrentIdExperience] = useState("");
   const [editMode, setEditMode] = useState(false);
-  const [error, setError] = useState(false);
   const notifyError = () => toast.error("Todos los campos son obligatorios");
-  const notifySuccess = () =>
-    toast.success("Se ha agregado un nueva experiencia 👍");
   const notifySuccessEdit = () => toast.success("Se ha editado 👌");
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,7 +179,6 @@ const MoreDetails = () => {
       linkedin,
     })
       .then((res) => {
-        console.log(res);
         setIsLoading(false);
         notifySuccessEdit();
       })
@@ -215,7 +199,6 @@ const MoreDetails = () => {
       setKnoledgesList(res);
     });
     getEmployeeById("employees", idEmployee).then((res) => {
-      console.log("unique employee", res);
       setInitialForm({
         phone: res.phone || "",
         linkedin: res.linkedin || "",

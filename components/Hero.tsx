@@ -1,22 +1,25 @@
-import React from 'react';
+import React from "react";
 import styles from "../styles/client/Hero.module.css";
 
 interface Prop {
-    title: string;
-    bg: string;
-    id: string
+  title?: string;
+  bg?: string;
+  id?: string;
+  children?: JSX.Element | JSX.Element[];
+  nameHero?: string;
 }
 
-const Hero = ({title, bg, id}: Prop) => {
+const Hero = ({ title, bg, id, children, nameHero }: Prop) => {
   return (
-    <div className={`${styles.heroContainer} ${bg}`} id={id}>
-        <div className="wrapper">
-            <div className={styles.heroGrid}>
-                <h1>{title}</h1>
-            </div>
-        </div>
+    <div
+      className={`${
+        nameHero ? styles[nameHero] : styles.heroContainer
+      } bg-${bg}`}
+      id={id}
+    >
+      {children}
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

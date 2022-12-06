@@ -58,7 +58,6 @@ const Employees = () => {
       router.push("/admin/login");
     }
     getFetchApi("employees").then((res) => {
-      console.log("res", res);
       setEmployeeData(res.users);
       setTotalEmployee(res.total);
     });
@@ -76,13 +75,6 @@ const Employees = () => {
     });
     setExportData(arrToExportExcel);
   }, []);
-
-  // const exportExcelFile = () => {
-  //   let wb = utils.book_new();
-  //   let ws = utils.json_to_sheet(exportData);
-  //   utils.book_append_sheet(wb, ws, "Lista de Empleados");
-  //   writeFile(wb, "ListaDeEmpleados.xlsx");
-  // };
 
   return (
     <>
@@ -106,11 +98,7 @@ const Employees = () => {
             iconName="filter"
           />
         </div>
-        <TableToEmployee
-          data={employeeData}
-          total={totalEmployee}
-          endpoint="employees"
-        />
+        <TableToEmployee total={totalEmployee} endpoint="employees" />
       </LayoutDashboard>
       {showModalFilters && (
         <ModalComponent>

@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["www.contactbpo.pe"],
+  },
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

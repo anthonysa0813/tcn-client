@@ -39,7 +39,6 @@ const ChangeRole = () => {
 
   useEffect(() => {
     getAllUsers("auth").then((res) => {
-      console.log(res);
       setUsersData(res);
     });
   }, []);
@@ -56,7 +55,6 @@ const ChangeRole = () => {
     setShowAllUsers(false);
     searchUserAuth(`auth/search/${email}`).then((res) => {
       if (res.message) {
-        console.log(res);
         toastError(res.message);
         setLoading(false);
         setShowUniqueUser(false);
@@ -97,13 +95,11 @@ const ChangeRole = () => {
     if (user.role === "ADMIN_ROLE") {
       desactiveUser(user);
       getAllUsers("auth").then((res) => {
-        console.log(res);
         setUsersData(res);
       });
     } else {
       activeUser(user);
       getAllUsers("auth").then((res) => {
-        console.log(res);
         setUsersData(res);
       });
     }

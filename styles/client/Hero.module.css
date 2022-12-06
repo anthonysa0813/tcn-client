@@ -1,12 +1,75 @@
 .heroContainer {
-    color: white;
-    height: 500px;
+  color: white;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
 }
 
 .heroGrid {
-    height: inherit;
+  height: inherit;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroPortada {
+  /* background-image: linear-gradient(to right, #6db4f255, #6db4f239),
+    url("../../public/images/hero1.jpg"); */
+  background-image: url("https://www.contactbpo.pe/img/home-section.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.heroPortada .wrapper {
+  width: 50% !important;
+}
+
+.heroContainer h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--bg-gray200);
+  /* background-color: #cee4fe; */
+}
+
+.heroContainer span {
+  color: var(--bg-white);
+}
+
+.heroTitle {
+  padding: 3rem 2rem;
+}
+
+.heroTitle h1 {
+  font-size: 1.5rem;
+  color: #96c1f2;
+  font-weight: 500;
+}
+
+.heroTitle span {
+  color: var(--bg-blue200);
+  font-weight: 800;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.services {
+  height: auto;
+  padding: 3rem;
+}
+
+@media screen and (min-width: 768px) {
+  .services {
     height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
 }

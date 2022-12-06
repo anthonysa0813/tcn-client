@@ -47,11 +47,9 @@ const ChangePassword = () => {
     const token = Cookies.get("token");
     updateUserAuth("auth", { ...userGlobal, password: password }, token || "")
       .then((res) => {
-        console.log(res);
         alertSuccess("Se ha actualizado");
       })
       .catch((err) => {
-        console.log(err);
         alertDanger("Ocurrió un error");
       });
   };

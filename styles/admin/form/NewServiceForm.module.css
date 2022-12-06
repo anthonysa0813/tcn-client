@@ -6,8 +6,8 @@
 
 .form {
   /* display: flex;
- flex-direction: column;
- row-gap: 2rem; */
+  flex-direction: column;
+  row-gap: 2rem; */
 }
 
 .alert {
@@ -24,6 +24,10 @@
   margin-block: 2rem;
 }
 
+.subwrapper {
+  width: 100%;
+}
+
 .inactive {
   background-color: var(--bg-gray100) !important;
 }
@@ -38,4 +42,10 @@
 
 .button:hover {
   background: var(--bg-black100);
+}
+
+@media screen and (min-width: 768px) {
+  .subwrapper {
+    width: 50%;
+  }
 }

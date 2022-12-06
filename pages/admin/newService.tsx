@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-// import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { Input } from "@nextui-org/react";
@@ -41,9 +40,7 @@ const NewServicePage = () => {
   const { role } = userGlobal;
 
   useEffect(() => {
-    console.log("role", role);
     if (role !== "ROLE_ADMIN") {
-      console.log("es admin");
       setIsDisabled(true);
     }
   }, [role]);
@@ -85,29 +82,31 @@ const NewServicePage = () => {
               podrán crear.
             </p>
           )}
-          <div className={styles.field}>
-            <label>Título:</label>
-            <Input
-              type="text"
-              clearable
-              underlined
-              name="title"
-              value={title}
-              onChange={onChange}
-            />
+          <div className={styles.subwrapper}>
+            <div className={styles.field}>
+              <label>Título:</label>
+              <Input
+                type="text"
+                clearable
+                underlined
+                name="title"
+                value={title}
+                onChange={onChange}
+              />
+            </div>
+            <div className={styles.field}>
+              <label>Nombre de la compañia:</label>
+              <Input
+                type="text"
+                clearable
+                underlined
+                name="company"
+                value={company}
+                onChange={onChange}
+              />
+            </div>
           </div>
-          <div className={styles.field}>
-            <label>Nombre de la compañia:</label>
-            <Input
-              type="text"
-              clearable
-              underlined
-              name="company"
-              value={company}
-              onChange={onChange}
-            />
-          </div>
-          <div className={styles.field}>
+          <div className={styles.field} style={{ marginBlock: "3rem" }}>
             <QuillNoSSRWrapper
               value={descriptionState}
               onChange={handleChange}

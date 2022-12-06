@@ -108,6 +108,9 @@
   margin-left: 0.5rem;
 }
 
+/* hero portada */
+
+/* end hero portada */
 @media (max-width: 600px) {
   .grid {
     width: 100%;

@@ -8,23 +8,20 @@ import {
   useModal,
   Loading,
 } from "@nextui-org/react";
-import { useRouter } from "next/router";
 import { EmployeeInterface } from "../../../interfaces";
 import { getFetchApi } from "../../../helpers/useFetch";
 import Link from "next/link";
-// import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
 import { UserContext } from "../../../context/UserContext";
 import DropDownSelect from "../../buttons/DrownDownSelect";
 
 type Props = {
-  data: EmployeeInterface[];
   total: string | number;
   endpoint?: string;
 };
 
-const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
+const TableToEmployee = ({ total, endpoint = "" }: Props) => {
   // const router = useRouter();
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
@@ -34,24 +31,25 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
   const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
   const [loading, setLoading] = useState(false);
 
-  const [pageNumber, setPageNumber] = useState(0);
-
-  // const changeStatusById = async (id: string) => {
-  //   const res = await changeStatus("employees", id);
-  //   if (res) {
-  //     router.reload();
-  //   }
-  // };
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    getFetchApi(endpoint).then((res) => {
-      setDataList(res.users);
-    });
+    if (pageNumber === 1) {
+      getFetchApi(`${endpoint}?offset=${0}&limit=${5}`).then((res) => {
+        setDataList(res.users);
+      });
+    } else {
+      getFetchApi(`${endpoint}?offset=${pageNumber * 5}&limit=${5}`).then(
+        (res) => {
+          setDataList(res.users);
+        }
+      );
+    }
   }, [endpoint]);
 
-  useEffect(() => {
-    setDataList(data);
-  }, [data]);
+  // useEffect(() => {
+  //   setDataList(data);
+  // }, [data]);
 
   useEffect(() => {
     setLoading(true);
@@ -148,13 +146,13 @@ const TableToEmployee = ({ data, total, endpoint = "" }: Props) => {
         </Table>
       )}
       <div className={styles.actions}>
-        <Button color="primary" auto onClick={() => resetDataList()}>
+        {/* <Button color="primary" auto onClick={() => resetDataList()}>
           Página: 0
-        </Button>
+        </Button> */}
         <Pagination
           total={calculatePagination(Number(total), 5)}
           initialPage={pageNumber}
-          onChange={(page: number) => setPageNumber(page)}
+          onChange={(page: number) => setPageNumber(page - 1)}
         />
       </div>
       <Modal

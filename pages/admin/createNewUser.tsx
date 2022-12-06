@@ -36,11 +36,6 @@ const CreateNewUser = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState(false);
-  // useEffect(() => {
-  //   if (passwordInputRef.current) {
-  //     console.log("password: ", passwordInputRef.current.value);
-  //   }
-  // }, []);
 
   const generatePassword = () => {
     const passRandom = generator.generate({
@@ -50,10 +45,6 @@ const CreateNewUser = () => {
     if (passwordInputRef.current) {
       passwordInputRef.current.value = passRandom;
     }
-    // setInitialForm({
-    //   ...initialForm,
-    //   password: passRandom,
-    // });
   };
 
   const isAdmin = () => {
@@ -62,19 +53,7 @@ const CreateNewUser = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if ([email, names, password, roleValue].includes("")) {
-    //   toastWarning("todos los campos son obligatorios");
-    //   return;
-    // }
     if (passwordInputRef.current) {
-      console.log("form", {
-        names,
-        email,
-        password: passwordInputRef.current.value,
-        role: roleValue,
-        superAdmin: isSuperAdmin,
-      });
-
       createUserAuth("auth/register", {
         name: names,
         email,

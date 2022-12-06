@@ -39,7 +39,6 @@ const ListServicesPage = () => {
   }, []);
 
   const watchAllEmployee = (data: EmployeeInterface[] | []) => {
-    console.log("estamos actiivoo", data.length);
     setOffsetSliceValue(data.length);
   };
 

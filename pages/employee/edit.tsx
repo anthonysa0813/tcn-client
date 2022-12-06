@@ -101,15 +101,7 @@ const EditPage = ({ data }: any) => {
       [e.target.name]: e.target.value,
     });
   };
-
-  // const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
-  //   setFormValues({
-  //     ...formValues,
-  //     callingCode: data.callingCode[e.target.value],
-  //     country: data.countriesNames[e.target.value],
-  //   });
-  // };
-
+  
   const readInputTypeFile = (e: any) => {
     setFormValues({
       ...formValues,

@@ -18,6 +18,12 @@
   --bg-red: #990033;
   --bg-blue200: #175676;
   --bg-bluePrimary: #0072f5;
+  --bg-blueSecondary: #b7d5f8;
+  --bg-blueSecondary200: #cee4fe;
+  --bg-blueSecondary300: #5ea2ef;
+  --bg-blueSecondary400: #0072f5;
+  --bg-blueSecondary500: #009ada;
+
   --bg-blue100: #cce6f4;
   --bg-blueLight: #f2f6f7;
 }
@@ -88,7 +94,7 @@ a {
 
 .btn {
   border: none;
-  padding: 13px 24px;
+  padding: 0.5rem;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -115,6 +121,13 @@ a {
   color: white;
 }
 
+.bg-blueLight {
+  background-color: var(--bg-blueLight);
+}
+
+.bg-blueSecondary {
+  background-color: var(--bg-blueSecondary500);
+}
 .bg-primary {
   background-color: var(--bg-blue200);
   color: white;

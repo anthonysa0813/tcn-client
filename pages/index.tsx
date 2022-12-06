@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import ServiceIconCard from "../components/cards/ServiceIconCard";
 import Hero from "../components/Hero";
 import Navbar from "../components/menu/Navbar";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
+import styles from "../styles/client/Hero.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -14,10 +16,59 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <main>
-        <Hero title="Main Page" bg="purple" id="main" />
-        <Hero title="Servicios" bg="dark" id="services" />
-        <Hero title="Nuestro Equipo" bg="green" id="team" />
-        <Hero title="Clientes" bg="gray" id="clients" />
+        <Hero id="main">
+          <div className={`${styles.heroContainer} ${styles.heroPortada}`}>
+            <div className="wrapper ">
+              <h1>
+                Ofrecemos soluciones tecnológicas <span>multicanal</span> y
+                <span> desarrollo de plataformas digitales</span> utilizando la
+                <span> innovación</span> como base para diseñar y ejecutar cada
+                proyecto.
+              </h1>
+            </div>
+          </div>
+        </Hero>
+        <div className={styles.heroTitle}>
+          <div className="wrapper ">
+            <h1>
+              Nos encanta lo que hacemos, por eso tenemos los mejores <br />{" "}
+              <span>servicios adecuados a la necesidad de cada cliente.</span>
+            </h1>
+          </div>
+        </div>
+        <Hero bg="blueSecondary" nameHero="services">
+          <div className="wrapper">
+            <div className={styles.servicesGrid}>
+              <ServiceIconCard
+                description="Sabemos que somos la cara de nuestros clientes. La calidad de servicio es lo más importante."
+                title="ATENCIÓN INBOUND"
+                imageUrl="https://www.contactbpo.pe/img/service1.png"
+                borderActive
+              />
+
+              <ServiceIconCard
+                description="Consolidamos todos los canales digitales y tradicionales con Inbound Marketing para maximizar tus ventas."
+                title="VENTAS MULTICANAL"
+                imageUrl="https://www.contactbpo.pe/img/service2.png"
+                borderActive
+              />
+
+              <ServiceIconCard
+                description="Gestionamos cobranzas preventivas, medias y tardías utilizando diversos canales de comunicación."
+                title="COBRANZAS"
+                imageUrl="https://www.contactbpo.pe/img/service3.png"
+                borderActive
+              />
+
+              <ServiceIconCard
+                description="Desarrollamos plataformas Web, Móvil e Inteligencia Artificial para generar eficiencia en los negocios."
+                title="INNOVACIÓN DIGITAL
+"
+                imageUrl="https://www.contactbpo.pe/img/service4.png"
+              />
+            </div>
+          </div>
+        </Hero>
       </main>
     </>
   );
