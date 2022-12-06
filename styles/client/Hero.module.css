@@ -9,7 +9,7 @@
 
 .heroGrid {
   height: inherit;
-  height: 500px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,9 +59,6 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
 }
-.reSize {
-  object-fit: contain !important;
-}
 
 .empresas {
   padding: 2rem;
@@ -78,7 +75,6 @@
 
 @media screen and (min-width: 768px) {
   .services {
-    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;

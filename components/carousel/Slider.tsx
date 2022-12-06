@@ -75,9 +75,9 @@ const Slider = () => {
         </div>{" "}
         <div className={styles.slide}>
           <Image
-            src="/images/logos/tortas_gabyy.png"
+            src="/images/logos/tortas.png"
             alt="Tortas de Gaby"
-            width={250}
+            width={100}
             height={100}
           />
         </div>{" "}
