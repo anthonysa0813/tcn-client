@@ -31,10 +31,17 @@ const Home: NextPage = () => {
         </Hero>
         <div className={styles.heroTitle}>
           <div className="wrapper ">
-            <h1>
-              Nos encanta lo que hacemos, por eso tenemos los mejores <br />{" "}
-              <span>servicios adecuados a la necesidad de cada cliente.</span>
-            </h1>
+            <div className={styles.textContainer}>
+              <div className={styles.textContent}>
+                <h1>
+                  Nos encanta lo que hacemos, por eso tenemos los mejores
+                  <span>
+                    {" "}
+                    servicios adecuados a la necesidad de cada cliente.
+                  </span>
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
         <Hero bg="blueSecondary" nameHero="services">
@@ -72,6 +79,17 @@ const Home: NextPage = () => {
         </Hero>
         <Hero bg="blueLight" nameHero="empresas">
           <div className="wrapper">
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: "1.5rem",
+                color: "#8e8ea1",
+                fontWeight: "lighter",
+                marginBottom: "1.5rem",
+              }}
+            >
+              Ellos confían en nosotros
+            </h2>
             <Slider />
           </div>
         </Hero>

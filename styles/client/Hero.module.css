@@ -16,8 +16,6 @@
 }
 
 .heroPortada {
-  /* background-image: linear-gradient(to right, #6db4f255, #6db4f239),
-    url("../../public/images/hero1.jpg"); */
   background-image: url("https://www.contactbpo.pe/img/home-section.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,10 +27,17 @@
 }
 
 .heroContainer h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   color: var(--bg-gray200);
-  /* background-color: #cee4fe; */
+}
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+}
+.textContent {
+  width: 100%;
 }
 
 .heroContainer span {
@@ -46,7 +51,7 @@
 .heroTitle h1 {
   font-size: 1.5rem;
   color: #96c1f2;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .heroTitle span {
@@ -78,5 +83,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .heroContainer h1 {
+    font-size: 2rem;
+  }
+
+  .textContent {
+    width: 50%;
   }
 }

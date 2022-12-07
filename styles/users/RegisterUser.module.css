@@ -12,15 +12,12 @@
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
+  margin-block-start: 2rem;
 }
 
 .back span {
-  display: flex;
-  align-items: center;
-  width: 40%;
   cursor: pointer;
   transition: all 0.5s;
-  column-gap: 0.75rem;
 }
 
 .back:hover {
