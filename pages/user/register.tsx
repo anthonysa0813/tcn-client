@@ -194,10 +194,8 @@ const RegisterPage: NextPage = ({ data }: any) => {
         <div className={styles.registerSection}>
           <div className="wrapper">
             <div className={styles.back} onClick={() => router.push("/")}>
-              <span>
-                <ArrowBackIosNewIcon />
-                Volver a la página principal
-              </span>
+              <ArrowBackIosNewIcon />
+              <span>Volver a la página principal</span>
             </div>
             <h1>Registrate</h1>
             <RegisterForm data={data} />

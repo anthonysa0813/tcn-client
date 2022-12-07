@@ -1,11 +1,17 @@
 .main {
   height: 100vh;
+  padding-block: 1rem;
 }
 .bannerColumn {
   display: flex;
   justify-content: center;
   align-items: center;
   display: none;
+}
+.back {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
 }
 
 .back span {
@@ -29,7 +35,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
 }
 
 .registerSection h1 {
@@ -239,6 +244,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr auto;
+    padding: 0;
   }
   .formContent {
     display: grid;
