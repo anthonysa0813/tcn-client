@@ -240,12 +240,9 @@ const MoreDetails = () => {
           </span>
         </div>
         <div className={styles.menu}>
-          <Button
-            onClick={() => router.back()}
-            style={{ marginTop: 20, padding: 0 }}
-          >
+          <Button onClick={() => router.back()} className={styles.buttonBack}>
             <ArrowLeft />
-            atrás
+            <span>atrás</span>
           </Button>
         </div>
         <form onSubmit={onSubmit}>

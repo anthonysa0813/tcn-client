@@ -1,13 +1,11 @@
 .main {
   height: 100vh;
-
-  display: grid;
-  grid-template-columns: 1fr;
 }
 .bannerColumn {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 
 .back span {
@@ -31,6 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 }
 
 .registerSection h1 {
@@ -212,7 +211,7 @@
 /* media queries */
 
 @media screen and (min-width: 540px) {
-  .main {
+  /* .main {
     height: 100vh;
 
     display: grid;
@@ -228,9 +227,9 @@
   .formContent {
     display: grid;
     grid-template-columns: 1fr;
-    /* border: 3px solid brown; */
+   
     gap: 1rem;
-  }
+  } */
 }
 
 @media screen and (min-width: 720px) {
@@ -246,5 +245,10 @@
     grid-template-columns: repeat(2, 1fr);
     /* border: 3px solid brown; */
     gap: 1rem;
+  }
+
+  .bannerColumn {
+    display: flex;
+    padding: 1rem;
   }
 }

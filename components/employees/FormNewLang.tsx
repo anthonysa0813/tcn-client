@@ -12,6 +12,10 @@ import dynamic from "next/dynamic";
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
 );
+
+const ButtonPrimary = dynamic(() =>
+  import("../buttons/Button").then((res) => res.default)
+);
 interface Prop {
   openLang: () => void;
   setStateListLang: (state: any) => void;
@@ -113,7 +117,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
           items={nivels}
         />
       </div>
-      <Button type="submit">
+      <Button type="submit" style={{ background: "#11181C" }}>
         {isLoading && <Loading />}
         Guardar
       </Button>

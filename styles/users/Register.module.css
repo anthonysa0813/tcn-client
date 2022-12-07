@@ -4,9 +4,6 @@
 }
 
 .formContainer {
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem; */
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
@@ -35,6 +32,10 @@
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
+}
+
+.buttonContent input:focus {
+  border: 2px solid var(--bg-blue200);
 }
 
 .buttonContent {

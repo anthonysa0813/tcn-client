@@ -6,7 +6,9 @@
   flex-direction: column; */
   row-gap: 1rem;
   position: relative;
-  overflow: auto;
+  height: auto;
+  min-height: 500px;
+  max-height: 500px;
 }
 
 .formLang h2 {
@@ -26,6 +28,10 @@
   outline: none;
   border: 1px solid var(--bg-black100);
   padding: 0.25rem 0.5rem;
+}
+
+.field input:focus {
+  border: 2px solid var(--bg-blue200);
 }
 
 .boxClose {
