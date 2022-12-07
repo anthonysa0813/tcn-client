@@ -10,8 +10,7 @@
   margin: auto;
   overflow: hidden;
   position: relative;
-  width: 80%;
-  /* border: 2px solid brown; */
+  width: 100%;
 }
 
 .slider .slide-track {
