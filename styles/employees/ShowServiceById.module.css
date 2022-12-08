@@ -1,9 +1,9 @@
 .showServiceGrid {
   background-color: var(--bg-blueLight);
-  padding: 1rem 3rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   position: relative;
-  min-width: 400px;
+  min-width: 300px;
   max-width: 600px;
   overflow: auto;
 }
@@ -22,7 +22,7 @@
 }
 
 .infoHead h1 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   color: var(--bg-blue200);
 }
 .infHead .nameBussiness {
@@ -67,4 +67,13 @@
 .fieldRef .field span {
   color: var(--bg-black);
   font-size: 0.85rem;
+}
+
+@media screen and (min-width: 768px) {
+  .infoHead h1 {
+    font-size: 2.5rem;
+  }
+  .showServiceGrid {
+    padding: 1rem 2rem;
+  }
 }

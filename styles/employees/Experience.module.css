@@ -34,7 +34,7 @@
 
 .formBody {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
@@ -49,6 +49,10 @@
   border: none;
   outline: none;
   border: 1px solid #e1e1e1;
+}
+
+.field input:focus {
+  border: 2px solid var(--bg-blue200);
 }
 
 .fieldSecondaryGrid {
@@ -99,7 +103,7 @@
 .referenceField {
   grid-column: 1/-1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
   border: 1px solid var(--bg-blue200);
   padding: 1rem;
@@ -108,4 +112,10 @@
 
 .titleReference {
   grid-column: 1/-1;
+}
+
+@media screen and (min-width: 1850px) {
+  .fieldSecond {
+    /* grid-column: 1/2; */
+  }
 }

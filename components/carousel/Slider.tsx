@@ -112,11 +112,19 @@ const Slider = () => {
             width={250}
             height={100}
           />
-        </div>
+        </div>{" "}
         <div className={styles.slide}>
           <Image
             src="/images/logos/vipa.png"
             alt="Logo de Vipa"
+            width={250}
+            height={100}
+          />
+        </div>{" "}
+        <div className={styles.slide}>
+          <Image
+            src="/images/logos/comunal.png"
+            alt="Logo de Comunal"
             width={250}
             height={100}
           />

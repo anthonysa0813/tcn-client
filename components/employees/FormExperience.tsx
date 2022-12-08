@@ -227,7 +227,9 @@ const FormExperience = ({
       </div>
       <div className={styles.formBody}>
         <div className={styles.field}>
-          <label htmlFor="">Empresa*</label>
+          <label htmlFor="">
+            Empresa<span>*</span>
+          </label>
           <input
             type="text"
             name="nameBussiness"
@@ -247,7 +249,9 @@ const FormExperience = ({
           />
         </div>
         <div className={styles.field}>
-          <label htmlFor="">Puesto*</label>
+          <label htmlFor="">
+            Puesto<span>*</span>
+          </label>
           <input
             type="text"
             name="title"
@@ -297,7 +301,9 @@ const FormExperience = ({
           />
         </div>
         <div className={styles.fieldSecond}>
-          <label htmlFor="">Fecha de Inicio*</label>
+          <label htmlFor="">
+            Fecha de Inicio<span>*</span>
+          </label>
           <div className={styles.fieldSecondaryGrid}>
             <div className={styles.firstInput}>
               <DatalistInput
@@ -323,7 +329,9 @@ const FormExperience = ({
           </div>
         </div>
         <div className={styles.fieldSecond}>
-          <label htmlFor="">Fecha de Fin*</label>
+          <label htmlFor="">
+            Fecha de Fin<span>*</span>
+          </label>
           <div className={styles.fieldSecondaryGrid}>
             <div className={styles.firstInput}>
               <DatalistInput

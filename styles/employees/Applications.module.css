@@ -33,6 +33,11 @@
 }
 
 .serviceCardBody {
+  transition: all 0.3s ease;
+}
+
+.serviceCardBody p {
+  opacity: 1;
 }
 
 .serviceCard button {
