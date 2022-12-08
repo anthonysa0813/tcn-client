@@ -56,7 +56,7 @@ const ChangePassword = () => {
 
   return (
     <LayoutDashboard>
-      <h3>Edita tu información Personal</h3>
+      <h3 className={styles.title}>Edita tu información Personal</h3>
       <form className={styles.info} onSubmit={onSubmit}>
         {error && <span>Debes de ingresar una clave</span>}
         <ToastContainer />

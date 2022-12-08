@@ -1,7 +1,8 @@
 .menu {
   display: flex;
   justify-content: flex-end;
-  column-gap: 1rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .title {
@@ -15,6 +16,7 @@
   justify-content: center;
   align-items: center;
   border: none;
+  width: 100%;
   border-radius: 0.5rem;
   color: white;
   padding: 0.5rem;

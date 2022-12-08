@@ -81,7 +81,7 @@ const Employees = () => {
       <LayoutDashboard>
         <h1 className={styles.title}>Lista de Empleados</h1>
         <div className={styles.menu}>
-          <div className="actions">
+          <div className={styles.actions}>
             <button
               className={styles.buttonExcel}
               onClick={() => generateExcelFile(exportData)}

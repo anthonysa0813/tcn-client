@@ -1,5 +1,5 @@
 .title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--bg-blue200);
   font-weight: bold;
 }
@@ -47,5 +47,9 @@
 @media screen and (min-width: 768px) {
   .subwrapper {
     width: 50%;
+  }
+
+  .title {
+    font-size: 2rem;
   }
 }

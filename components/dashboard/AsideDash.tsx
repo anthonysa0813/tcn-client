@@ -80,8 +80,6 @@ const AsideDash = () => {
         <div
           className={styles.boxIcon}
           onClick={() => {
-            console.log("click :D");
-            console.log("showMenu", showMenu);
             setShowMenu((state) => !state);
           }}
         >
@@ -103,7 +101,9 @@ const AsideDash = () => {
 
         <div className={styles.asideContainer}>
           <nav
-            className={`${styles.menu}  animate__animated animate__fadeInLeft`}
+            className={`${styles.menu}  animate__animated  border ${
+              showMenu ? "animate__fadeInLeft" : "animate__fadeInRight"
+            }`}
           >
             <Tooltip title="Ver lista de empleadores" arrow placement="right">
               <Link

@@ -78,8 +78,11 @@
 .titleHead {
   display: flex;
   align-items: center;
-  /* column-gap: 0.5rem; */
+  column-gap: 0.5rem;
   /* padding-inline: 1rem; */
+}
+.titleHead p {
+  font-weight: 500;
 }
 
 .infoLeft {
