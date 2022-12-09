@@ -14,6 +14,7 @@ import { KnoledgeInterface } from "../../interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 import dynamic from "next/dynamic";
+import { Loading } from "@nextui-org/react";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -43,6 +44,7 @@ const FormNewSkills = ({
   const [expLevel, setExpLevel] = useState(false);
   const [yearsValue, setYearsValue] = useState("");
   const [levelValue, setLevelValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccess = () =>
@@ -67,6 +69,7 @@ const FormNewSkills = ({
       notifyError();
       return;
     }
+    setIsLoading(true);
     createKnoledge("knoledge", idEmployee, {
       name: expValue,
       employee: idEmployee,
@@ -74,6 +77,7 @@ const FormNewSkills = ({
     }).then((res) => {
       console.log(res);
       notifySuccess();
+      setIsLoading(false);
       setExpValue("");
       setKnoledgesList([...knoledgesList, res]);
     });
@@ -151,6 +155,9 @@ const FormNewSkills = ({
           onClick={() => console.log("guardando skills")}
           type="submit"
         />
+        <div className="field" style={{ marginBlock: "1rem" }}>
+          {isLoading && <Loading />}
+        </div>
       </div>
     </form>
   );

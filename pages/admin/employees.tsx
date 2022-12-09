@@ -52,6 +52,7 @@ const Employees = () => {
   const [showModalFilters, setShowModalFilters] = useState(false);
   const [totalEmployee, setTotalEmployee] = useState(1);
   const [exportData, setExportData] = useState<PropCSV[] | []>([]);
+  const [totalEmployees, setTotalEmployees] = useState<EmployeeInterface[]>([]);
 
   useEffect(() => {
     if (!token) {
@@ -59,6 +60,7 @@ const Employees = () => {
     }
     getFetchApi("employees").then((res) => {
       setEmployeeData(res.users);
+      setTotalEmployees(res.users);
       setTotalEmployee(res.total);
     });
     const arrToExportExcel = employeeData.map((employee) => {
@@ -84,7 +86,7 @@ const Employees = () => {
           <div className={styles.actions}>
             <button
               className={styles.buttonExcel}
-              onClick={() => generateExcelFile(exportData)}
+              onClick={() => generateExcelFile(totalEmployees)}
             >
               <DownloadIcon />
               Descargar Lista

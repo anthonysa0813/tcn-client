@@ -371,7 +371,7 @@ const MoreDetails = () => {
                 <p>Idioma(s): </p>
               </div>
               <span className={styles.subText}>
-                Agrega los idiomas que consideres que domincas
+                Agrega los idiomas que consideres que dominas
               </span>
               <div className={styles.listGridLang}>
                 {stateListLang &&

@@ -22,7 +22,6 @@ type Props = {
 };
 
 const TableToEmployee = ({ total, endpoint = "" }: Props) => {
-  // const router = useRouter();
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
@@ -47,10 +46,6 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
     }
   }, [endpoint]);
 
-  // useEffect(() => {
-  //   setDataList(data);
-  // }, [data]);
-
   useEffect(() => {
     setLoading(true);
     getFetchApi(`${endpoint}?offset=${pageNumber * 5}&limit=${5}`).then(
@@ -64,20 +59,6 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
       }
     );
   }, [pageNumber, endpoint]);
-
-  const resetDataList = () => {
-    setPageNumber(0);
-    getFetchApi(`${endpoint}?offset=${pageNumber}&limit=${5}`).then((res) => {
-      setDataList(res.users);
-      if (res.users.length > 0) {
-        setLoading(false);
-        setPageNumber(0);
-      } else {
-        setLoading(false);
-        setPageNumber(0);
-      }
-    });
-  };
 
   return (
     <>
@@ -146,9 +127,6 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
         </Table>
       )}
       <div className={styles.actions}>
-        {/* <Button color="primary" auto onClick={() => resetDataList()}>
-          Página: 0
-        </Button> */}
         <Pagination
           total={calculatePagination(Number(total), 5)}
           initialPage={pageNumber}
@@ -200,10 +178,7 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
               size="sm"
               style={{ marginBlock: "1rem" }}
             >
-              <Link href={currentEmployee.cv || ""}>
-                {/* <a target="_blank">abrir el enlace del cv</a> */}
-                cv :D
-              </Link>
+              <Link href={currentEmployee.cv || ""}>abrir CV</Link>
             </Button>
           </div>
           <div className={styles.field}>

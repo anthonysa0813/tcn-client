@@ -24,6 +24,7 @@ import { SetStateAction } from "react";
 import { getDate } from "../../helpers/getDate";
 import { monthsReturnValue } from "../../helpers/monthsValues";
 import dynamic from "next/dynamic";
+import { Button, Loading } from "@nextui-org/react";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -57,6 +58,7 @@ const FormExperience = ({
   const [nivelExp, setNivelExp] = useState(
     editMode ? currentExperience?.level : ""
   );
+  const [isLoading, setIsLoading] = useState(false);
   const [areaValue, setAreaValue] = useState("");
   const [subAreaValue, setSubAreaValue] = useState("");
   const [monthValue, setMonthValue] = useState("");
@@ -142,6 +144,7 @@ const FormExperience = ({
         yearValue,
         montFinal,
         yearFinal,
+        description,
       ].includes("")
     ) {
       setError(false);
@@ -166,6 +169,7 @@ const FormExperience = ({
       countryRef,
       phoneRef,
     };
+    setIsLoading(true);
     if (editMode) {
       updateExperience(
         "experiences",
@@ -177,26 +181,28 @@ const FormExperience = ({
         const filterArrUpdate = dataListExperiences.filter(
           (exp) => exp._id !== res._id
         );
+        setIsLoading(false);
         setDataListExperiences([...filterArrUpdate, res]);
         setTimeout(() => {
-          // openExperience();
           closeEditMode();
         }, 2000);
       });
     } else {
       if (yearValue > yearFinal) {
+        setIsLoading(false);
         notifyErrorYear();
         return;
       }
       if (yearValue === yearFinal) {
         if (monthsReturnValue[monthValue] > monthsReturnValue[montFinal]) {
+          setIsLoading(false);
           notifyErrorMonth();
           return;
         }
       }
       createExperienceApi("experiences", dataForm, idEmployee).then((res) => {
-        console.log(res);
         notifySuccess();
+        setIsLoading(false);
         setDataListExperiences([...dataListExperiences, res]);
         setTimeout(() => {
           openExperience();
@@ -432,12 +438,10 @@ const FormExperience = ({
           ></textarea>
         </div>
       </div>
-      <ButtonPrimary
-        color="dark"
-        content="Guardar datos"
-        onClick={() => console.log("jeje")}
-        type="submit"
-      />
+      <Button type="submit" style={{ background: "#11181C" }}>
+        {isLoading && <Loading />}
+        Guardar
+      </Button>
     </form>
   );
 };

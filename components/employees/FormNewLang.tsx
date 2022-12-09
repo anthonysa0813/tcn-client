@@ -13,9 +13,6 @@ const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
 );
 
-const ButtonPrimary = dynamic(() =>
-  import("../buttons/Button").then((res) => res.default)
-);
 interface Prop {
   openLang: () => void;
   setStateListLang: (state: any) => void;

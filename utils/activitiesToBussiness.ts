@@ -165,11 +165,11 @@ export const Area = [
   },
   {
     id: uuidv4(),
-    value: "Administración}, Contabilidad y Finanzas",
+    value: "Administración, Contabilidad y Finanzas",
   },
   {
     id: uuidv4(),
-    value: "Atención al Cliente}, Call Center y Telemarketing",
+    value: "Atención al Cliente, Call Center y Telemarketing",
   },
   {
     id: uuidv4(),
@@ -177,11 +177,11 @@ export const Area = [
   },
   {
     id: uuidv4(),
-    value: "Comercial}, Ventas y Negocios",
+    value: "Comercial, Ventas y Negocios",
   },
   {
     id: uuidv4(),
-    value: "Comunicación}, Relaciones institucionales y Públicas",
+    value: "Comunicación, Relaciones institucionales y Públicas",
   },
   {
     id: uuidv4(),
@@ -193,7 +193,7 @@ export const Area = [
   },
   {
     id: uuidv4(),
-    value: "Educación}, Docencia e investigación",
+    value: "Educación, Docencia e investigación",
   },
   {
     id: uuidv4(),
@@ -229,7 +229,7 @@ export const Area = [
   },
   {
     id: uuidv4(),
-    value: "Minería}, Petróleo y Gas",
+    value: "Minería, Petróleo y Gas",
   },
   {
     id: uuidv4(),

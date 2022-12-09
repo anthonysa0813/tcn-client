@@ -119,9 +119,11 @@ const CreateNewUser = () => {
               Sí lo es
             </div>
           </div>
-          <button type="submit" className={styles.buttonSubmit}>
-            submit
-          </button>
+          <div className="field">
+            <button type="submit" className={styles.buttonSubmit}>
+              CREAR USUARIO
+            </button>
+          </div>
         </form>
       </div>
     </LayoutDashboard>
