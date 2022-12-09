@@ -21,10 +21,11 @@
 }
 
 .title {
-  color: var(--bg-purple);
+  color: var(--bg-bluePrimary);
 }
 .companyTitle {
-  color: var(--bg-black);
+  color: var(--bg-blue200);
+  font-size: 1rem;
 }
 
 /* Service Card */

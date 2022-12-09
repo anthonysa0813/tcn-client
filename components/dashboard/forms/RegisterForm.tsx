@@ -75,6 +75,7 @@ const RegisterForm = ({ data }: Prop) => {
   const [cvValue, setCvValue] = useState("" as any);
   const [isLoading, setIsLoading] = useState(false);
   const notifySuccess = () => toast.success("Se registró satisfactoriamente!");
+  console.log("datita", data);
 
   const { errors, touched, getFieldProps, values } = useFormik({
     initialValues: {

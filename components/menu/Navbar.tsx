@@ -56,9 +56,16 @@ const Navbar = () => {
             </div>
             <nav className={styles.menu}>
               {!name && (
-                <Link href="/campaign" className={styles.ancle}>
+                <a
+                  onClick={() =>
+                    window.location.replace(
+                      "https://client-bpo.vercel.app/campaign"
+                    )
+                  }
+                  className={styles.ancle}
+                >
                   <span>Puestos disponibles</span>
-                </Link>
+                </a>
               )}
               {name && (
                 <span className={styles.iconUser}>
