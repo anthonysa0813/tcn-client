@@ -2,8 +2,6 @@
   background: var(--bg-blueLight);
   padding: 2rem;
   border-radius: 0.5rem;
-  /* display: flex;
-  flex-direction: column; */
   row-gap: 1rem;
   position: relative;
   height: auto;
@@ -12,8 +10,9 @@
 }
 
 .formLang h2 {
-  color: var(--bg-blue200);
   font-size: 24px;
+  color: var(--bg-blue200);
+  text-align: center;
 }
 
 .field {
