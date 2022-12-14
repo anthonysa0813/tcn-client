@@ -102,7 +102,7 @@ const AsideDash = () => {
         <div className={styles.asideContainer}>
           <nav
             className={`${styles.menu}  animate__animated  border ${
-              showMenu ? "animate__fadeInLeft" : "animate__fadeInRight"
+              showMenu ? "animate__fadeInLeft" : ""
             }`}
           >
             <Tooltip title="Ver lista de empleadores" arrow placement="right">

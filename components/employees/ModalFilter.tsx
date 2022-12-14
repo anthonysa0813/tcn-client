@@ -20,6 +20,7 @@ const CloseIcon = dynamic(() =>
 interface Prop {
   setShowModalFilters: React.Dispatch<React.SetStateAction<boolean>>;
   setEmployeeData: React.Dispatch<React.SetStateAction<EmployeeInterface[]>>;
+  setDataList: React.Dispatch<React.SetStateAction<EmployeeInterface[] | []>>;
 }
 
 const options = [
@@ -36,7 +37,11 @@ const optionStatusJob = [
   { id: uuidv4(), value: "CONTRATADO" },
 ];
 
-const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
+const ModalFilter = ({
+  setShowModalFilters,
+  setEmployeeData,
+  setDataList,
+}: Prop) => {
   const [mainValue, setMainValue] = useState("");
   const [showLangInput, setShowLangInput] = useState(false);
   const [lang, setLang] = useState("");
@@ -110,7 +115,7 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
         const filterArr = res.filter((user: any) => user.employee !== null);
         const getEmployee = filterArr.map((user: any) => user.employee);
         console.log("data=====> :D", getEmployee);
-        // setEmployeeData(filterArr);
+        setDataList(getEmployee);
         setEmployeeData(getEmployee);
       });
     }
@@ -119,11 +124,13 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
       getEmployeeByFilterHability("knoledge", skillValue).then((res) => {
         let newArr = res.map((userResponse: any) => userResponse.employee);
         setEmployeeData(newArr);
+        setDataList(newArr);
       });
     }
     if (dniState) {
       searchEmployeeByFilter("employees/search", "dni", dni).then((res) => {
         setEmployeeData(res);
+        setDataList(res);
       });
     }
 
@@ -131,6 +138,7 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
       searchEmployeeByFilter("employees/search", "statusJob", statusJob).then(
         (res) => {
           setEmployeeData(res);
+          setDataList(res);
         }
       );
     }
@@ -139,6 +147,7 @@ const ModalFilter = ({ setShowModalFilters, setEmployeeData }: Prop) => {
       searchEmployeeByFilter("employees/search", "email", email).then((res) => {
         console.log("res email", res);
         setEmployeeData(res);
+        setDataList(res);
       });
     }
   };

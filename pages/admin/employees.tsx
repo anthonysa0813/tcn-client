@@ -6,6 +6,8 @@ import { EmployeeInterface } from "../../interfaces";
 import styles from "../../styles/employees/ListEmployee.module.css";
 import { generateExcelFile } from "../../helpers/exportFileExcel";
 import dynamic from "next/dynamic";
+import { GetServerSideProps } from "next/types";
+import { API_URL } from "../../utils/constanstApi";
 interface PropCSV {
   nombre: string;
   apellidos: string;
@@ -46,18 +48,16 @@ const ModalFilter = dynamic(() =>
 );
 
 const Employees = () => {
-  const token = Cookies.get("token");
-  const router = useRouter();
   const [employeeData, setEmployeeData] = useState<EmployeeInterface[]>([]);
   const [showModalFilters, setShowModalFilters] = useState(false);
   const [totalEmployee, setTotalEmployee] = useState(1);
   const [exportData, setExportData] = useState<PropCSV[] | []>([]);
-  const [totalEmployees, setTotalEmployees] = useState<EmployeeInterface[]>([]);
+  const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
+  const [totalEmployees, setTotalEmployees] = useState<
+    EmployeeInterface[] | []
+  >([]);
 
   useEffect(() => {
-    if (!token) {
-      router.push("/admin/login");
-    }
     getFetchApi("employees").then((res) => {
       setEmployeeData(res.users);
       setTotalEmployees(res.users);
@@ -65,18 +65,18 @@ const Employees = () => {
     });
     const arrToExportExcel = employeeData.map((employee) => {
       return {
-        nombre: employee.name || "",
-        apellidos: employee.surnames || "",
-        dni: employee.dni || "",
-        celular: employee.phone || "",
-        pais: employee.country || "",
-        codigo: employee.callingCode || "",
-        email: employee.email || "",
-        estado: employee.statusJob || "",
+        nombre: employee?.name || "",
+        apellidos: employee?.surnames || "",
+        dni: employee?.dni || "",
+        celular: employee?.phone || "",
+        pais: employee?.country || "",
+        codigo: employee?.callingCode || "",
+        email: employee?.email || "",
+        estado: employee?.statusJob || "",
       };
     });
     setExportData(arrToExportExcel);
-  }, []);
+  }, [employeeData]);
 
   return (
     <>
@@ -100,18 +100,35 @@ const Employees = () => {
             iconName="filter"
           />
         </div>
-        <TableToEmployee total={totalEmployee} endpoint="employees" />
+        <TableToEmployee
+          total={totalEmployee}
+          endpoint="employees"
+          employeesData={employeeData}
+          dataList={dataList}
+          setDataList={setDataList}
+        />
       </LayoutDashboard>
       {showModalFilters && (
         <ModalComponent>
           <ModalFilter
             setShowModalFilters={setShowModalFilters}
             setEmployeeData={setEmployeeData}
+            setDataList={setDataList}
           />
         </ModalComponent>
       )}
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const response = await fetch(`${API_URL}/services`);
+  const data = await response.json();
+  return {
+    props: {
+      services: data.services,
+    },
+  };
 };
 
 export default Employees;

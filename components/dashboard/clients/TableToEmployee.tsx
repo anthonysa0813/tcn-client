@@ -18,16 +18,25 @@ import DropDownSelect from "../../buttons/DrownDownSelect";
 
 type Props = {
   total: string | number;
+  employeesData: EmployeeInterface[] | [];
   endpoint?: string;
+  dataList: EmployeeInterface[] | [];
+  setDataList: React.Dispatch<React.SetStateAction<EmployeeInterface[] | []>>;
 };
 
-const TableToEmployee = ({ total, endpoint = "" }: Props) => {
+const TableToEmployee = ({
+  total,
+  endpoint = "",
+  employeesData,
+  dataList,
+  setDataList,
+}: Props) => {
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
   );
   const { userGlobal } = useContext(UserContext);
-  const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
+
   const [loading, setLoading] = useState(false);
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -59,6 +68,12 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
       }
     );
   }, [pageNumber, endpoint]);
+
+  useEffect(() => {
+    // if (employeesData.length > 0) {
+    //   setDataList(employeesData);
+    // }
+  }, [employeesData]);
 
   return (
     <>
@@ -93,10 +108,10 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
             ) : (
               dataList.map((user: EmployeeInterface) => {
                 return (
-                  <Table.Row key={user.id}>
-                    <Table.Cell>{user.name}</Table.Cell>
-                    <Table.Cell>{user.email}</Table.Cell>
-                    <Table.Cell>{user.phone}</Table.Cell>
+                  <Table.Row key={user?.id}>
+                    <Table.Cell>{user?.name}</Table.Cell>
+                    <Table.Cell>{user?.email}</Table.Cell>
+                    <Table.Cell>{user?.phone}</Table.Cell>
                     <Table.Cell>
                       <Button
                         color="primary"
@@ -112,11 +127,11 @@ const TableToEmployee = ({ total, endpoint = "" }: Props) => {
                     <Table.Cell>
                       {userGlobal.role === "ADMIN_ROLE" ? (
                         <DropDownSelect
-                          statusUser={user.statusJob ? user.statusJob : ""}
-                          idUser={user.id}
+                          statusUser={user?.statusJob ? user?.statusJob : ""}
+                          idUser={user?.id}
                         />
                       ) : (
-                        <span>{user.statusJob}</span>
+                        <span>{user?.statusJob}</span>
                       )}
                     </Table.Cell>
                   </Table.Row>
