@@ -25,7 +25,7 @@ const VpnKeyIcon = dynamic(() =>
 );
 
 const AsideMenuEmployee = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const router = useRouter();
   const arrAsPath = router.asPath;
   const pathActive = (path: string) => {
@@ -42,13 +42,7 @@ const AsideMenuEmployee = () => {
         <MenuIcon />
       </div>
       {showMenu && (
-        <nav
-          className={`${
-            styles.navigation
-          } animate__animated animate__slideInLeft ${
-            !showMenu ? "animate__slideOutLeft" : ""
-          }`}
-        >
+        <nav className={`${styles.navigation} `}>
           <Link
             href="/campaign"
             className={pathActive("/campaign") ? styles.activeLink : ""}

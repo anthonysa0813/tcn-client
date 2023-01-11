@@ -36,19 +36,24 @@ export const saveInformationGeneral = async <T>(
   idEmployee: string,
   data: T
 ) => {
-  const response = await fetch(`${API_URL}/${endpoint}/${idEmployee}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetch(
+    `${process.env.DB_URL}/${endpoint}/${idEmployee}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
   const dataResponse = await response.json();
   return dataResponse;
 };
 
 export const getEmployeeById = async (endpoint: string, idEmployee: string) => {
-  const response = await fetch(`${API_URL}/${endpoint}/${idEmployee}`);
+  const response = await fetch(
+    `${process.env.DB_URL}/${endpoint}/${idEmployee}`
+  );
   const data = await response.json();
   return data;
 };
@@ -57,7 +62,7 @@ export const sendEmailToNewPassword = async (
   endpoint: string,
   data: RequestSendNewPassword
 ) => {
-  const response = await fetch(`${API_URL}/${endpoint}`, {
+  const response = await fetch(`${process.env.DB_URL}/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -72,7 +77,7 @@ export const resetPassword = async (
   endpoint: string,
   data: RequestResetPassword
 ) => {
-  const response = await fetch(`${API_URL}/${endpoint}`, {
+  const response = await fetch(`${process.env.DB_URL}/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -87,7 +92,7 @@ export const chenageStatusJobFetch = async (
   endpoint: string,
   data: ChangeStatusRequest
 ) => {
-  const response = await fetch(`${API_URL}/${endpoint}`, {
+  const response = await fetch(`${process.env.DB_URL}/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -104,7 +109,9 @@ export const searchEmployeeByFilter = async (
   valueQuery: string
 ) => {
   // http://localhost:5050/api/employees/search?statusJob=DESCARTADO
-  const response = await fetch(`${API_URL}/${endpoint}?${query}=${valueQuery}`);
+  const response = await fetch(
+    `${process.env.DB_URL}/${endpoint}?${query}=${valueQuery}`
+  );
   const dataResponse = await response.json();
   return dataResponse;
 };
