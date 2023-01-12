@@ -30,8 +30,6 @@ const ServiceCard = ({ service }: Prop) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("user global", employeeGlobal);
-    console.log("service", service._id);
     setServisceId(employeeGlobal?.servicesId || []);
     setCurrentServiceId(service._id);
     servicesId.forEach((service) => {
