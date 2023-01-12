@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   EmployeeContext,
   EmployeeContextProps,
@@ -23,7 +23,23 @@ const ServiceCard = ({ service }: Prop) => {
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
   const [showModal, setShowModal] = useState(false);
+  const [servicesId, setServisceId] = useState<any[] | []>([]);
+  const [currentServiceId, setCurrentServiceId] = useState("");
+  const [isPostulate, setIsPostulate] = useState(false);
+
   const router = useRouter();
+
+  useEffect(() => {
+    console.log("user global", employeeGlobal);
+    console.log("service", service._id);
+    setServisceId(employeeGlobal?.servicesId || []);
+    setCurrentServiceId(service._id);
+    servicesId.forEach((service) => {
+      if (service === currentServiceId) {
+        setIsPostulate(true);
+      }
+    });
+  }, [employeeGlobal, service._id]);
 
   const applicationJob = (idJob: string = "") => {
     if (!employeeGlobal.id) {
@@ -56,7 +72,11 @@ const ServiceCard = ({ service }: Prop) => {
       {showModal && (
         <ModalShowService service={service} setShowModal={setShowModal} />
       )}
-      <div className={styles.card}>
+      <div
+        className={`${styles.card} ${
+          isPostulate ? styles.isPostulateActive : ""
+        }`}
+      >
         <ToastContainer />
         <div className={styles.titleContainer}>
           <h4 className={styles.title}>{service.title}</h4>
@@ -71,10 +91,11 @@ const ServiceCard = ({ service }: Prop) => {
             ver más a detalle
           </button>
           <button
-            className={styles.button}
+            className={`${isPostulate ? styles.buttonDisabled : styles.button}`}
             onClick={() => applicationJob(service?._id)}
+            disabled={isPostulate ? true : false}
           >
-            Postular
+            {isPostulate ? "Postulado" : "Postular"}
           </button>
         </div>
       </div>

@@ -51,11 +51,11 @@ const FormNewSkills = ({
     toast.success("Se ha agregado un nueva Habilidad 👍");
 
   useEffect(() => {
-    if (optionValue === "Habilidades en tiempo de experiencia(años)") {
+    if (optionValue === "Por años de experiencia") {
       setExpYears(true);
       setExpLevel(false);
     }
-    if (optionValue === "Habilidades por niveles") {
+    if (optionValue === "Por niveles") {
       setExpYears(false);
       setExpLevel(true);
     }
@@ -75,10 +75,12 @@ const FormNewSkills = ({
       employee: idEmployee,
       level: expYears ? yearsValue : levelValue,
     }).then((res) => {
-      console.log(res);
       notifySuccess();
       setIsLoading(false);
       setExpValue("");
+      setOptionValue("");
+      setExpYears(false);
+      setExpLevel(false);
       setKnoledgesList([...knoledgesList, res]);
     });
   };
@@ -86,11 +88,11 @@ const FormNewSkills = ({
   const options = [
     {
       id: uuidv4(),
-      value: "Habilidades en tiempo de experiencia(años)",
+      value: "Por años de experiencia",
     },
     {
       id: uuidv4(),
-      value: "Habilidades por niveles",
+      value: "Por niveles",
     },
   ];
 

@@ -188,7 +188,7 @@ const FormExperience = ({
         }, 2000);
       });
     } else {
-      if (yearValue > yearFinal) {
+      if (yearValue > yearFinal && !checkPresent) {
         setIsLoading(false);
         notifyErrorYear();
         return;
@@ -367,8 +367,8 @@ const FormExperience = ({
                 value="present"
                 onClick={() => {
                   setCheckPresent(!checkPresent);
-                  setMonthValue("--");
-                  setYearValue("--");
+                  // setMonthValue("--");
+                  // setYearValue("--");
                   setMontFinal("--");
                   setyearFinal("--");
                 }}

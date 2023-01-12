@@ -3,9 +3,10 @@
   padding: 2rem;
   border-radius: 0.5rem;
   height: auto;
-  min-height: 400px;
-  max-height: 500px;
+  /* min-height: 400px;
+  max-height: 500px; */
   position: relative;
+  border: 3px solid var(--bg-blue200);
 }
 
 .formNewSkill h1 {

@@ -235,8 +235,8 @@ const MoreDetails = () => {
         <div className={styles.alert}>
           <span className={styles.alertCotent}>
             <AlertIcon />
-            Tú información es importante para nosotros, porfavor date el tiempo
-            de completar todos los espacios.
+            Tu información es importante para nosotros, por favor tómate el
+            tiempo de completar todos los espacios.
           </span>
         </div>
         <div className={styles.menu}>

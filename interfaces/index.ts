@@ -58,6 +58,7 @@ export interface EmployeeInterface {
   callingCode?: string;
   typeJob?: string;
   service?: string[] | [];
+  servicesId?: string[] | [];
   password: string;
   message?: string;
   linkedin?: string;
@@ -73,13 +74,13 @@ export interface ChangeStatusRequest {
 }
 
 export interface Service {
-  _id?: string;
+  _id?: any;
   title: string;
   company: string;
   description: string;
   createdAt?: string;
   updatedAt?: string;
-  employees?: any;
+  employees?: EmployeeInterface[] | [];
   __v?: number;
 }
 

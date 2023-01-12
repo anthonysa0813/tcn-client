@@ -118,6 +118,7 @@
   .asideMenu {
     padding: 2rem;
     position: static;
+    z-index: 10;
   }
 }
 

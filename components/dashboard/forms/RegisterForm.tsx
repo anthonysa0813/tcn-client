@@ -74,7 +74,8 @@ const RegisterForm = ({ data }: Prop) => {
     useContext<EmployeeContextProps>(EmployeeContext);
   const [cvValue, setCvValue] = useState("" as any);
   const [isLoading, setIsLoading] = useState(false);
-  const notifySuccess = () => toast.success("Se registró satisfactoriamente!");
+  const notifySuccess = () =>
+    toast.success("Hemos enviado un correo para la activación de la cuenta");
   console.log("datita", data);
 
   const { errors, touched, getFieldProps, values } = useFormik({
@@ -135,11 +136,11 @@ const RegisterForm = ({ data }: Prop) => {
         if (resposeLogin) {
           // console.log("responseLogin", resposeLogin);
           notifySuccess();
-          Cookies.set("token", resposeLogin.token, { expires: 7 });
+          // Cookies.set("token", resposeLogin.token, { expires: 7 });
           setIsLoading(false);
-          setTimeout(() => {
-            router.push("/campaign");
-          }, 1500);
+          // setTimeout(() => {
+          //   router.push("/campaign");
+          // }, 1500);
         }
       });
       console.log("dataaaa ====>", data);

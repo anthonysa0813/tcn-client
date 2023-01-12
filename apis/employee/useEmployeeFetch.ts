@@ -37,7 +37,7 @@ export const saveInformationGeneral = async <T>(
   data: T
 ) => {
   const response = await fetch(
-    `${process.env.DB_URL}/${endpoint}/${idEmployee}`,
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`,
     {
       method: "PUT",
       headers: {
@@ -52,7 +52,7 @@ export const saveInformationGeneral = async <T>(
 
 export const getEmployeeById = async (endpoint: string, idEmployee: string) => {
   const response = await fetch(
-    `${process.env.DB_URL}/${endpoint}/${idEmployee}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`
   );
   const data = await response.json();
   return data;
@@ -62,13 +62,16 @@ export const sendEmailToNewPassword = async (
   endpoint: string,
   data: RequestSendNewPassword
 ) => {
-  const response = await fetch(`${process.env.DB_URL}/${endpoint}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
   const dataResponse = await response.json();
   return dataResponse;
 };
@@ -77,13 +80,16 @@ export const resetPassword = async (
   endpoint: string,
   data: RequestResetPassword
 ) => {
-  const response = await fetch(`${process.env.DB_URL}/${endpoint}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
   const dataResponse = await response.json();
   return dataResponse;
 };
@@ -92,13 +98,16 @@ export const chenageStatusJobFetch = async (
   endpoint: string,
   data: ChangeStatusRequest
 ) => {
-  const response = await fetch(`${process.env.DB_URL}/${endpoint}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
   const dataResponse = await response.json();
   return dataResponse;
 };
@@ -110,7 +119,27 @@ export const searchEmployeeByFilter = async (
 ) => {
   // http://localhost:5050/api/employees/search?statusJob=DESCARTADO
   const response = await fetch(
-    `${process.env.DB_URL}/${endpoint}?${query}=${valueQuery}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}?${query}=${valueQuery}`
+  );
+  const dataResponse = await response.json();
+  return dataResponse;
+};
+
+export const activateUser = async (
+  endpoint: string,
+  userId: any,
+  token: any
+) => {
+  // console.log(`${process.env.NEXT_PUBLIC_DB_URL}${endpoint}/${userId}`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}${endpoint}/${userId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    }
   );
   const dataResponse = await response.json();
   return dataResponse;

@@ -8,6 +8,10 @@
   margin: 0 auto;
 }
 
+.isPostulateActive {
+  border: 3px solid var(--bg-green) !important;
+}
+
 .mainContainer {
   margin-block-start: 1rem;
 }

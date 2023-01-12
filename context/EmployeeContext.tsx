@@ -4,7 +4,18 @@ import { ContextInitial, EmployeeInterface } from "../interfaces";
 export type EmployeeContextProps = {
   employeeGlobal: EmployeeInterface;
   setEmployeeGlobal: Dispatch<
-    SetStateAction<{id: string, email: string, name: string, surnames: string, phone: string, cv: string, callingCode: string, typeJob: string, service: string[] | [] | any, password: string }>
+    SetStateAction<{
+      id: string;
+      email: string;
+      name: string;
+      surnames: string;
+      phone: string;
+      cv: string;
+      callingCode: string;
+      typeJob: string;
+      service: string[] | [] | any;
+      password: string;
+    }>
   >;
 };
 
