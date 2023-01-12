@@ -59,6 +59,7 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
     showPassword: false,
   });
   const notifySuccess = () => toast.success("Bienvenido!");
+  const notifyError = () => toast.error("Tu cuenta no ha sido activada");
   // const notifyError = () => toast.warning("email y/o password son incorrectos");
   const { setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
@@ -79,15 +80,21 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
           setLoading(false);
         }
         if (res.employee) {
-          localStorage.setItem("employee", JSON.stringify(res.employee));
-          sessionStorage.setItem("token", res.token);
-          setLoading(false);
-          Cookies.set("token", res.token, { expires: 7 });
-          setEmployeeGlobal(res.employee);
-          notifySuccess();
-          setTimeout(() => {
-            router.push("/employee/edit");
-          }, 500);
+          console.log(res.employee);
+          if (res.employee.status) {
+            localStorage.setItem("employee", JSON.stringify(res.employee));
+            sessionStorage.setItem("token", res.token);
+            setLoading(false);
+            Cookies.set("token", res.token, { expires: 7 });
+            setEmployeeGlobal(res.employee);
+            notifySuccess();
+            setTimeout(() => {
+              router.push("/employee/edit");
+            }, 500);
+          } else {
+            notifyError();
+            setLoading(false);
+          }
         }
       });
     },

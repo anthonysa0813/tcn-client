@@ -23,7 +23,7 @@ const ServiceCard = ({ service }: Prop) => {
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
   const [showModal, setShowModal] = useState(false);
-  const [servicesId, setServisceId] = useState<any[] | []>([]);
+  const [servicesId, setServisceId] = useState([] as string[]);
   const [currentServiceId, setCurrentServiceId] = useState("");
   const [isPostulate, setIsPostulate] = useState(false);
 
@@ -32,12 +32,16 @@ const ServiceCard = ({ service }: Prop) => {
   useEffect(() => {
     setServisceId(employeeGlobal?.servicesId || []);
     setCurrentServiceId(service._id);
-    servicesId.forEach((service) => {
-      if (service === currentServiceId) {
-        setIsPostulate(true);
-      }
-    });
-  }, [employeeGlobal, service._id]);
+    // servicesId.forEach((service) => {
+    //   if (service === currentServiceId) {
+    //     setIsPostulate(true);
+    //     console.log("isPostulate", isPostulate);
+    //   }
+    // });
+    const isValid = servicesId.includes(currentServiceId);
+    setIsPostulate(isValid);
+    console.log("isPostulate", isPostulate);
+  }, [currentServiceId]);
 
   const applicationJob = (idJob: string = "") => {
     if (!employeeGlobal.id) {
