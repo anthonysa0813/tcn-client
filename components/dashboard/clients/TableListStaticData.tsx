@@ -12,7 +12,7 @@ import { UserContext } from "../../../context/UserContext";
 
 type Props = {
   data: EmployeeInterface[];
-  total: string | number;
+  total?: string | number;
   offsetSliceValue: number;
 };
 

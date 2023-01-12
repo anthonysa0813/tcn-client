@@ -48,6 +48,7 @@ const ListServicesPage = () => {
         <h1 className={styles.title}>Lista de Campañas</h1>
         <hr />
         {servicesArr.map((service: Service) => {
+          console.log(service);
           return (
             <div key={service._id} className={styles.tableService}>
               <div className={styles.tableHead}>
@@ -56,15 +57,15 @@ const ListServicesPage = () => {
                   size={"xs"}
                   style={{ padding: ".5rem" }}
                   color={"secondary"}
-                  onClick={() => watchAllEmployee(service.employees)}
+                  onClick={() => watchAllEmployee(service.employees || [])}
                 >
                   {" "}
                   Ver Todos
                 </Button>
               </div>
               <TableListStaticData
-                data={service.employees}
-                total={service.employees.length}
+                data={service.employees || []}
+                // total={service.employees.length}
                 offsetSliceValue={offsetSliceValue}
               />
             </div>
