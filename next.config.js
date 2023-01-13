@@ -5,6 +5,10 @@ const nextConfig = {
   images: {
     domains: ["www.contactbpo.pe"],
   },
+  i18n: {
+    locales: ["es", "en"],
+    defaultLocale: "es",
+  },
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

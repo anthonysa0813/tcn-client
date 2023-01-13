@@ -144,3 +144,16 @@ export interface RequestResetPassword {
   password: string;
   token: string | string[];
 }
+
+export interface PropMessageNavbarLangs {
+  en: {
+    simple: string;
+    greeting: string;
+    plural: string;
+  };
+  es: {
+    simple: string;
+    greeting: string;
+    plural: string;
+  };
+}

@@ -8,6 +8,7 @@ interface Prop {
   title: string;
   description: string;
   borderActive?: boolean;
+  titleButton: string;
 }
 
 const Image = dynamic(() => import("next/image").then((res) => res.default));
@@ -17,6 +18,7 @@ const ServiceIconCard = ({
   imageUrl,
   title,
   borderActive,
+  titleButton,
 }: Prop) => {
   return (
     <div
@@ -33,7 +35,7 @@ const ServiceIconCard = ({
       </div>
       <div className={styles.actions}>
         <Button variant="outlined" style={{ background: "white" }}>
-          ver más
+          {titleButton}
         </Button>
       </div>
     </div>

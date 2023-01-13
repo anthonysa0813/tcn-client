@@ -112,6 +112,11 @@
   transform: scale(0.9);
 }
 
+.selectButton {
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
 @media screen and (min-width: 540px) {
   .headerContainer {
     flex-direction: row;
