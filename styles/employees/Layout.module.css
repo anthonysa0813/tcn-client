@@ -1,5 +1,4 @@
 .mainLayout {
-  /* border: 3px solid brown; */
   position: relative;
 }
 
@@ -27,6 +26,9 @@
   background-color: var(--bg-blueLight);
   position: absolute;
   top: 0;
+  /* border: 2px solid brown; */
+  z-index: 10px;
+
   /* grid-column: 1/-1; */
 }
 
@@ -36,7 +38,7 @@
   height: 100vh;
   background-color: var(--bg-blueLight);
 
-  z-index: 50000;
+  /* z-index: 50000; */
 }
 
 .mainProfile {

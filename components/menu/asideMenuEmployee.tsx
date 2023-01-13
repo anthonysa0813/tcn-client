@@ -44,8 +44,10 @@ const AsideMenuEmployee = () => {
       {showMenu && (
         <nav className={`${styles.navigation} `}>
           <Link
-            href="/campaign"
-            className={pathActive("/campaign") ? styles.activeLink : ""}
+            href="/employee/campaign"
+            className={
+              pathActive("/employee/campaign") ? styles.activeLink : ""
+            }
           >
             <WorkIcon style={{ width: "20px", height: "20px" }} />
             Ver Puestos Disponibles

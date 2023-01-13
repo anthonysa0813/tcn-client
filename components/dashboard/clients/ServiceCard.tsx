@@ -32,12 +32,6 @@ const ServiceCard = ({ service }: Prop) => {
   useEffect(() => {
     setServisceId(employeeGlobal?.servicesId || []);
     setCurrentServiceId(service._id);
-    // servicesId.forEach((service) => {
-    //   if (service === currentServiceId) {
-    //     setIsPostulate(true);
-    //     console.log("isPostulate", isPostulate);
-    //   }
-    // });
     const isValid = servicesId.includes(currentServiceId);
     setIsPostulate(isValid);
     console.log("isPostulate", isPostulate);
