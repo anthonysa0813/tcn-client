@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { API_URL } from "../../../utils/constanstApi";
 import dynamic from "next/dynamic";
+import { getEmployeeById } from "../../../apis/employee/useEmployeeFetch";
 
 interface Prop {
   service: Service;
@@ -26,15 +27,21 @@ const ServiceCard = ({ service }: Prop) => {
   const [servicesId, setServisceId] = useState([] as string[]);
   const [currentServiceId, setCurrentServiceId] = useState("");
   const [isPostulate, setIsPostulate] = useState(false);
+  const [idEmployee, setIdEmployee] = useState("");
 
   const router = useRouter();
 
   useEffect(() => {
-    setServisceId(employeeGlobal?.servicesId || []);
-    setCurrentServiceId(service._id);
-    const isValid = servicesId.includes(currentServiceId);
-    setIsPostulate(isValid);
-    console.log("isPostulate", isPostulate);
+    // setServisceId(employeeGlobal?.servicesId || []);
+    if (employeeGlobal.id) {
+      getEmployeeById("employees", employeeGlobal.id).then((res) => {
+        console.log("res", res);
+        setServisceId(res?.servicesId || []);
+        setCurrentServiceId(service._id);
+        const isValid = servicesId.includes(currentServiceId);
+        setIsPostulate(isValid);
+      });
+    }
   }, [currentServiceId]);
 
   const applicationJob = (idJob: string = "") => {
