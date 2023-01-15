@@ -5,6 +5,7 @@ import { API_URL } from "../utils/constanstApi";
 const token = Cookies.get("token");
 
 export const loginFetchApi = async (endpoint: string, dataUser: FormProp) => {
+  console.log(`${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
     {
