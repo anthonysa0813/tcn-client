@@ -124,7 +124,8 @@ const RegisterForm = ({ data }: Prop) => {
   }, [country, email, name, password, phone, surnames]);
   const sendData = async (dataObject: FormData) => {
     try {
-      const res = await fetch(`${API_URL}/employees`, {
+      console.log(`${process.env.NEXT_PUBLIC_DB_URL}/employees`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees`, {
         method: "POST",
         body: dataObject,
       });

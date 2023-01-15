@@ -34,7 +34,7 @@ const ActivateAccountPage = () => {
           />
         </div>
         <div className={styles.text}>
-          <h1>¡Bienvenido, tu cuenta ya está activa!</h1>
+          <h1>¡Bienvenido, tu cuenta está activa!</h1>
         </div>
       </main>
     </>
