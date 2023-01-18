@@ -8,7 +8,6 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { API_URL } from "../../utils/constanstApi";
 import { loginFetchApi } from "../../helpers/useFetch";
 import Cookies from "js-cookie";
 import { EmployeeInterface } from "../../interfaces";
@@ -109,7 +108,7 @@ const RegisterPage: NextPage = ({ data }: any) => {
   }, [country, email, name, password, phone, surnames]);
   const sendData = async (dataObject: FormData) => {
     try {
-      const res = await fetch(`${API_URL}/employees`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees`, {
         method: "POST",
         body: dataObject,
       });

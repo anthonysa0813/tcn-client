@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import styles from "../../../styles/users/RegisterUser.module.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { API_URL } from "../../../utils/constanstApi";
 import { loginFetchApi } from "../../../helpers/useFetch";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";

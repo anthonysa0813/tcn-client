@@ -6,7 +6,6 @@ import styles from "../../styles/admin/ListServices.module.css";
 import { EmployeeInterface } from "../../interfaces/index";
 import { userAgent } from "next/server";
 import Link from "next/link";
-import { API_URL } from "../../utils/constanstApi";
 import { randomId } from "../../helpers/randomID";
 import TableListStaticData from "../../components/dashboard/clients/TableListStaticData";
 
@@ -31,7 +30,7 @@ const ListServicesPage = () => {
   });
 
   useEffect(() => {
-    fetch(`${API_URL}/services`)
+    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/services`)
       .then((res) => res.json())
       .then((data) => {
         setServicesArr(data.services);

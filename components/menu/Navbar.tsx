@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import { IntlProvider } from "react-intl";
 import translate, { changeLanguage, messages } from "../../lang/home";
 import { PropMessageNavbarLangs } from "../../interfaces";
+import { EmployeeInterface } from "../../interfaces/index";
 import {
   CurrentLangContext,
   CurrentLangContextType,
@@ -38,7 +39,6 @@ const Navbar = ({ data }: Prop) => {
   const { currentLangState, setCurrenLangState } =
     useContext<CurrentLangContextType>(CurrentLangContext);
   const { name, surnames } = employeeGlobal;
-  const [currentLang, setCurrentLang] = useState("");
   const router = useRouter();
   const logout = () => {
     setEmployeeGlobal({
@@ -53,23 +53,23 @@ const Navbar = ({ data }: Prop) => {
       password: "",
       service: [],
     });
+    localStorage.removeItem("countries");
+    localStorage.removeItem("employee");
+    localStorage.removeItem("email");
     Cookies.remove("token");
     router.push("/");
   };
 
-  useEffect(() => {
-    // console.log(currentLangState);
-    console.log("currenLangState", currentLangState);
-    changeLanguage(currentLangState);
-  }, [currentLangState]);
+  // useEffect(() => {
+  //   if (!name && !surnames) {
+  //     const localStoraEmployee = JSON.parse(
+  //       window.localStorage.getItem("employee") || ""
+  //     );
+  //     console.log("localStoraEmployee", localStoraEmployee);
 
-  const changeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    router.push(router.pathname, router.pathname, {
-      locale: e.target.value,
-    });
-    // setCurrentLang(e.target.value);
-    setCurrenLangState(e.target.value);
-  };
+  //     setEmployeeGlobal(localStoraEmployee);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -90,9 +90,7 @@ const Navbar = ({ data }: Prop) => {
                 />
               </div>
               <nav className={styles.menu}>
-                {!name && (
-                  <Link href="/campaign">{translate("jobPosition")}</Link>
-                )}
+                {!name && <Link href="/campaign">Puestos de trabajo</Link>}
                 {name && (
                   <span className={styles.iconUser}>
                     {/* <User set="bold" primaryColor="black" /> */}
@@ -107,7 +105,7 @@ const Navbar = ({ data }: Prop) => {
                 {!name && (
                   <>
                     <Link href="/login" className={styles.btn}>
-                      <span>{translate("login")}</span>
+                      <span>Iniciar sesión</span>
                     </Link>
                   </>
                 )}
@@ -122,10 +120,6 @@ const Navbar = ({ data }: Prop) => {
                     <LogoutIcon />
                   </button>
                 )}
-                <select onChange={changeLang} className={styles.selectButton}>
-                  <option value="es">{translate("langEs")}</option>
-                  <option value="en">{translate("langEn")}</option>
-                </select>
               </nav>
             </div>
           </div>

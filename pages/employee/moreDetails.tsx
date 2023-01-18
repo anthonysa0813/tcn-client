@@ -9,7 +9,12 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { Experience, KnoledgeInterface, LangResponse } from "../../interfaces";
+import {
+  EmployeeInterface,
+  Experience,
+  KnoledgeInterface,
+  LangResponse,
+} from "../../interfaces";
 import { getExperienceByEmployee } from "../../apis/experience/useFecthExperience";
 import {
   getKnoledges,
@@ -189,28 +194,35 @@ const MoreDetails = () => {
   };
 
   useEffect(() => {
-    getAllLanguagesByEmployee(idEmployee).then((res) => {
-      setStateListLang(res);
-    });
-    getExperienceByEmployee("experiences", idEmployee).then((res) => {
-      setDataListExperiences(res);
-    });
-    getKnoledges("knoledge", idEmployee).then((res) => {
-      setKnoledgesList(res);
-    });
-    getEmployeeById("employees", idEmployee).then((res) => {
-      setInitialForm({
-        phone: res.phone || "",
-        linkedin: res.linkedin || "",
-        github: res.github,
+    if (window.localStorage) {
+      const getId: EmployeeInterface = JSON.parse(
+        localStorage.getItem("employee") || ""
+      );
+      setEmployeeGlobal(getId);
+      console.log("employee id :D:", getId);
+      getAllLanguagesByEmployee(getId.id).then((res) => {
+        setStateListLang(res);
       });
-      setFormValue({
-        phone: res.phone || "",
-        linkedin: res.linkedin || "",
-        github: res.github,
+      getExperienceByEmployee("experiences", getId.id).then((res) => {
+        setDataListExperiences(res);
       });
-    });
-  }, [idEmployee]);
+      getKnoledges("knoledge", getId.id).then((res) => {
+        setKnoledgesList(res);
+      });
+      getEmployeeById("employees", getId.id).then((res) => {
+        setInitialForm({
+          phone: res.phone || "",
+          linkedin: res.linkedin || "",
+          github: res.github,
+        });
+        setFormValue({
+          phone: res.phone || "",
+          linkedin: res.linkedin || "",
+          github: res.github,
+        });
+      });
+    }
+  }, []);
 
   const deleteLangCall = (idLang: string) => {
     deleteLangByEmployee(idLang).then((res) => {

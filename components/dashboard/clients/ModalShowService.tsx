@@ -8,7 +8,6 @@ import {
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
 import { toast } from "react-toastify";
-import { API_URL } from "../../../utils/constanstApi";
 import dynamic from "next/dynamic";
 
 const CloseIcon = dynamic(() =>
@@ -38,9 +37,12 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
       }, 1500);
     }
     const employeeId = employeeGlobal.id;
-    await fetch(`${API_URL}/employees/${employeeId}/${idJob}`, {
-      method: "POST",
-    })
+    await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/employees/${employeeId}/${idJob}`,
+      {
+        method: "POST",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         const notify = () => toast.success("Aplicaste a este puesto");

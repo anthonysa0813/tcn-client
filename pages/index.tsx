@@ -42,7 +42,11 @@ const Home: NextPage = () => {
           <Hero id="main">
             <div className={`${styles.heroContainer} ${styles.heroPortada}`}>
               <div className="wrapper ">
-                <h1>{translate("hero")}</h1>
+                <h1>
+                  Ofrecemos soluciones tecnológicas multicanal y desarrollo de
+                  plataformas digitales utilizando la innovación como base para
+                  diseñar y ejecutar cada proyecto.
+                </h1>
               </div>
             </div>
           </Hero>
@@ -51,8 +55,10 @@ const Home: NextPage = () => {
               <div className={styles.textContainer}>
                 <div className={styles.textContent}>
                   <h1>
-                    {translate("subHeroFirst")}
-                    <span> {translate("subHeroSecond")}</span>
+                    Nos encanta lo que hacemos, por eso tenemos los mejores{" "}
+                    <span>
+                      servicios adecuados a la necesidad de cada cliente.
+                    </span>
                   </h1>
                 </div>
               </div>
@@ -62,33 +68,33 @@ const Home: NextPage = () => {
             <div className="wrapper">
               <div className={styles.servicesGrid}>
                 <ServiceIconCard
-                  description={translate("inboundResumen")}
-                  title={translate("inboundTitle")}
+                  title="ATENCIÓN INBOUND"
+                  description="Sabemos que somos la cara de nuestros clientes. La calidad de servicio es lo más importante."
                   imageUrl="https://www.contactbpo.pe/img/service1.png"
                   borderActive
-                  titleButton={translate("titleButton")}
+                  titleButton="Ver más"
                 />
 
                 <ServiceIconCard
-                  description={translate("multipleChannelResumen")}
-                  title={translate("multipleChannelTitle")}
+                  title="VENTAS MULTICANAl"
+                  description="Consolidamos todos los canales digitales y tradicionales con Inbound Marketing para maximizar tus ventas."
                   imageUrl="https://www.contactbpo.pe/img/service2.png"
                   borderActive
-                  titleButton={translate("titleButton")}
+                  titleButton="Ver más"
                 />
 
                 <ServiceIconCard
-                  description={translate("collectResumen")}
-                  title={translate("collectTitle")}
+                  title="COBRANZAS"
+                  description="Gestionamos cobranzas preventivas, medias y tardías utilizando diversos canales de comunicación."
                   imageUrl="https://www.contactbpo.pe/img/service3.png"
                   borderActive
-                  titleButton={translate("titleButton")}
+                  titleButton="Ver más"
                 />
 
                 <ServiceIconCard
-                  description={translate("innovationResumen")}
-                  title={translate("innovationTitle")}
-                  titleButton={translate("titleButton")}
+                  title="INNOVACIÓN DIGITAL"
+                  description="Desarrollamos plataformas Web, Móvil e Inteligencia Artificial para generar eficiencia en los negocios."
+                  titleButton="Ver más"
                   imageUrl="https://www.contactbpo.pe/img/service4.png"
                 />
               </div>
@@ -105,7 +111,7 @@ const Home: NextPage = () => {
                   marginBottom: "1.5rem",
                 }}
               >
-                {translate("titleSlider")}
+                Ellos confían en nosotros
               </h2>
               <Slider />
             </div>

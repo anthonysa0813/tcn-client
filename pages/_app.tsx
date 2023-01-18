@@ -12,22 +12,10 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Head from "next/head";
 import "animate.css";
-import { IntlProvider } from "react-intl";
-import en from "../lang/en.json";
-import es from "../lang/es.json";
-import { useRouter } from "next/dist/client/router";
-import CurrentLangContextProvider from "../context/CurrentLang";
-
-const messages = {
-  en,
-  es,
-};
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { locale } = useRouter();
-
   return (
-    <CurrentLangContextProvider>
+    <>
       <CurrentUsersContextProvider>
         <UserContextProvider>
           <EmployeeContextProvider>
@@ -40,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </EmployeeContextProvider>
         </UserContextProvider>
       </CurrentUsersContextProvider>
-    </CurrentLangContextProvider>
+    </>
   );
 }
 

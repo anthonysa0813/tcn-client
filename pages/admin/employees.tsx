@@ -7,7 +7,7 @@ import styles from "../../styles/employees/ListEmployee.module.css";
 import { generateExcelFile } from "../../helpers/exportFileExcel";
 import dynamic from "next/dynamic";
 import { GetServerSideProps } from "next/types";
-import { API_URL } from "../../utils/constanstApi";
+
 interface PropCSV {
   nombre: string;
   apellidos: string;
@@ -122,7 +122,7 @@ const Employees = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const response = await fetch(`${API_URL}/services`);
+  const response = await fetch(`${process.env.DB_URL}/services`);
   const data = await response.json();
   return {
     props: {

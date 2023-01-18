@@ -4,7 +4,6 @@ import Navbar from "../components/menu/Navbar";
 import styles from "../styles/client/Campaign.module.css";
 import { Service } from "../interfaces";
 import dynamic from "next/dynamic";
-import { API_URL } from "../utils/constanstApi";
 
 interface ServiceProp {
   services: Service[] | [];

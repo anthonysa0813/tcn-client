@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import { ClientInterface, FormProp } from "../interfaces";
-import { API_URL } from "../utils/constanstApi";
 
 const token = Cookies.get("token");
 

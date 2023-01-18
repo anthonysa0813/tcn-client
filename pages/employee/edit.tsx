@@ -15,8 +15,8 @@ import {
 import { GetServerSideProps } from "next";
 import DatalistInput from "react-datalist-input";
 import { countriesDataResponse } from "../../utils/activitiesToBussiness";
-import { API_URL } from "../../utils/constanstApi";
 import dynamic from "next/dynamic";
+import { EmployeeInterface } from "../../interfaces";
 
 // new icons material ui
 
@@ -76,22 +76,69 @@ const EditPage = ({ data }: any) => {
   const [countryCurrent, setCountryCurrent] = useState("");
   const router = useRouter();
   const notify = () => toast.success("Se actualizó satisfactoriamente!");
-  const { employeeGlobal } = useContext<EmployeeContextProps>(EmployeeContext);
+  const { employeeGlobal, setEmployeeGlobal } =
+    useContext<EmployeeContextProps>(EmployeeContext);
+  const [idLocalStorage, setIdLocalStorage] = useState("");
+  const [localEmployee, setlocalEmployee] = useState({} as EmployeeInterface);
+  const [allCountries, setAllCountries] = useState<any>({});
 
   const { id } = employeeGlobal;
 
   useEffect(() => {
-    fetch(`${API_URL}/employees/${id}`)
+    if (window.localStorage) {
+      const getId: EmployeeInterface = JSON.parse(
+        localStorage.getItem("employee") || ""
+      );
+      setlocalEmployee(getId);
+      setIdLocalStorage(getId.id || "");
+      setEmployeeGlobal(getId);
+
+      // const localCountries = JSON.parse(
+      //   window.localStorage.getItem("countries") || ""
+      // );
+      // setAllCountries(localCountries);
+      console.log("getId", getId);
+      setCountryCurrent(getId.country || "");
+    }
+    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`)
       .then((res) => res.json())
       .then((data) => {
-        setCountryCurrent(data.country);
+        setFormValues(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (window.localStorage) {
+      const getId: EmployeeInterface = JSON.parse(
+        localStorage.getItem("employee") || ""
+      );
+      setIdLocalStorage(getId.id);
+      console.log("getId", getId);
+    }
+    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // setCountryCurrent(data.country);
         setFormValues(data);
       });
     localStorage.setItem(
       "countries",
       JSON.stringify(data.countriesNames || "")
     );
-  }, [id, data]);
+  }, [idLocalStorage]);
+
+  // useEffect(() => {
+  //   fetch(`${API_URL}/employees/${idLocalStorage}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCountryCurrent(data.country);
+  //       setFormValues(data);
+  //     });
+  //   localStorage.setItem(
+  //     "countries",
+  //     JSON.stringify(data.countriesNames || "")
+  //   );
+  // }, [id, data]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -101,7 +148,7 @@ const EditPage = ({ data }: any) => {
       [e.target.name]: e.target.value,
     });
   };
-  
+
   const readInputTypeFile = (e: any) => {
     setFormValues({
       ...formValues,
@@ -127,10 +174,13 @@ const EditPage = ({ data }: any) => {
 
   const sendData = async (dataObject: FormData) => {
     try {
-      const res = await fetch(`${API_URL}/employees/${id}`, {
-        method: "PUT",
-        body: dataObject,
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_DB_URL}/employees/${id}`,
+        {
+          method: "PUT",
+          body: dataObject,
+        }
+      );
       const data = await res.json();
       notify();
       return data;
@@ -258,47 +308,6 @@ const EditPage = ({ data }: any) => {
             </a>
           </div>
         </div>
-        {/* <div className={styles.optionsJob}>
-          <h5 className={styles.titleJob}>
-            ¿En qué modo le gustaría trabajar?
-          </h5>
-
-          <div className={styles.fieldJob}>
-            <label>
-              <input
-                type="radio"
-                value="PRESENCIAL"
-                name="typeJob"
-                id="typeJob"
-                checked={typeJob === "PRESENCIAL" ? true : false}
-                onChange={handleChange}
-              />
-              Presencial
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="REMOTO"
-                name="typeJob"
-                id="typeJob"
-                checked={typeJob === "REMOTO" ? true : false}
-                onChange={handleChange}
-              />
-              Remoto
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="HIBRIDO"
-                name="typeJob"
-                checked={typeJob === "HIBRIDO" ? true : false}
-                id="typeJob"
-                onChange={handleChange}
-              />
-              Híbrido
-            </label>
-          </div>
-        </div> */}
         <div className={styles.buttonField}>
           <button type="submit" className={styles.register}>
             Editar

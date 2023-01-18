@@ -3,20 +3,7 @@ import { ContextInitial, EmployeeInterface } from "../interfaces";
 
 export type EmployeeContextProps = {
   employeeGlobal: EmployeeInterface;
-  setEmployeeGlobal: Dispatch<
-    SetStateAction<{
-      id: string;
-      email: string;
-      name: string;
-      surnames: string;
-      phone: string;
-      cv: string;
-      callingCode: string;
-      typeJob: string;
-      service: string[] | [] | any;
-      password: string;
-    }>
-  >;
+  setEmployeeGlobal: Dispatch<SetStateAction<EmployeeInterface>>;
 };
 
 export const EmployeeContext = createContext<EmployeeContextProps>(
@@ -28,18 +15,7 @@ type ChildrenType = {
 };
 
 const EmployeeContextProvider = ({ children }: ChildrenType) => {
-  const [employeeGlobal, setEmployeeGlobal] = useState({
-    id: "",
-    name: "",
-    surnames: "",
-    email: "",
-    phone: "",
-    cv: "",
-    callingCode: "",
-    typeJob: "",
-    password: "",
-    service: [],
-  });
+  const [employeeGlobal, setEmployeeGlobal] = useState({} as EmployeeInterface);
 
   return (
     <EmployeeContext.Provider value={{ employeeGlobal, setEmployeeGlobal }}>

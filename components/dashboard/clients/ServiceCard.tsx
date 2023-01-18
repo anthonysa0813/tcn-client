@@ -1,15 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
-import { Service } from "../../../interfaces/index";
+import { EmployeeInterface, Service } from "../../../interfaces/index";
 import styles from "../../../styles/client/Campaign.module.css";
 // import ModalShowService from "./ModalShowService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-import { API_URL } from "../../../utils/constanstApi";
 import dynamic from "next/dynamic";
 import { getEmployeeById } from "../../../apis/employee/useEmployeeFetch";
 
@@ -28,21 +27,36 @@ const ServiceCard = ({ service }: Prop) => {
   const [currentServiceId, setCurrentServiceId] = useState("");
   const [isPostulate, setIsPostulate] = useState(false);
   const [idEmployee, setIdEmployee] = useState("");
+  const [employeeUnparse, setEmployeeUnparse] = useState("");
 
   const router = useRouter();
 
   useEffect(() => {
+    setEmployeeUnparse(window.localStorage.getItem("employee") || "");
+    console.log("employeeUnparse", Boolean(employeeUnparse));
+    if (Boolean(employeeUnparse)) {
+      console.log("entree :D ");
+      const getId: EmployeeInterface = JSON.parse(
+        localStorage.getItem("employee") || ""
+      );
+      setEmployeeGlobal(getId);
+      setIdEmployee(getId.id);
+      console.log("employee global", employeeGlobal.id);
+    }
+  }, []);
+
+  useEffect(() => {
     // setServisceId(employeeGlobal?.servicesId || []);
-    if (employeeGlobal.id) {
-      getEmployeeById("employees", employeeGlobal.id).then((res) => {
-        console.log("res", res);
+    if (idEmployee) {
+      getEmployeeById("employees", idEmployee).then((res) => {
         setServisceId(res?.servicesId || []);
         setCurrentServiceId(service._id);
         const isValid = servicesId.includes(currentServiceId);
+        console.log("isValid", isValid);
         setIsPostulate(isValid);
       });
     }
-  }, [currentServiceId]);
+  }, [currentServiceId, idEmployee]);
 
   const applicationJob = (idJob: string = "") => {
     if (!employeeGlobal.id) {
@@ -53,9 +67,12 @@ const ServiceCard = ({ service }: Prop) => {
       }, 700);
     }
     const employeeId = employeeGlobal.id;
-    fetch(`${API_URL}/employees/${employeeId}/${idJob}`, {
-      method: "POST",
-    })
+    fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/employees/${employeeId}/${idJob}`,
+      {
+        method: "POST",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("data", data);

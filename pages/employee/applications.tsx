@@ -1,13 +1,12 @@
 // import { GetServerSideProps } from "next";
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, { useContext, useLayoutEffect, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { Service } from "../../interfaces";
+import { EmployeeInterface, Service } from "../../interfaces";
 import styles from "../../styles/employees/Applications.module.css";
-import { API_URL } from "../../utils/constanstApi";
 
 const CardCollapse = dynamic(
   () => import("../../components/dashboard/employee/CardCollapse"),
@@ -21,17 +20,33 @@ const LayoutEmployee = dynamic(() => import("./layoutEmployee"), {
 });
 
 const ApplicationsPage = () => {
-  const { employeeGlobal } = useContext<EmployeeContextProps>(EmployeeContext);
+  const { employeeGlobal, setEmployeeGlobal } =
+    useContext<EmployeeContextProps>(EmployeeContext);
   const [applicationsState, setApplicationsState] = useState<Service[] | []>(
     []
   );
+  useEffect(() => {
+    if (window.localStorage) {
+      const getId: EmployeeInterface = JSON.parse(
+        localStorage.getItem("employee") || ""
+      );
+      setEmployeeGlobal(getId);
+    }
+  }, []);
 
-  useLayoutEffect(() => {
-    getInfo(employeeGlobal.id);
+  useEffect(() => {
+    if (Boolean(Object.values(employeeGlobal).length)) {
+      getInfo(employeeGlobal.id);
+    }
   }, [employeeGlobal]);
+  // useLayoutEffect(() => {
+  //   getInfo(employeeGlobal.id);
+  // }, [employeeGlobal]);
 
   const getInfo = async (id: string) => {
-    const res = await fetch(`${API_URL}/employees/${id}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/employees/${id}`
+    );
     const data = await res.json();
     setApplicationsState(data.service);
   };

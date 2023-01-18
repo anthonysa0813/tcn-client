@@ -3,7 +3,6 @@ import {
   RequestResetPassword,
   RequestSendNewPassword,
 } from "../../interfaces";
-import { API_URL } from "../../utils/constanstApi";
 
 // http://localhost:5050/api/knoledge/?hability=Desarrollador front-end
 export const getEmployeeByFilterHability = async (
@@ -11,7 +10,7 @@ export const getEmployeeByFilterHability = async (
   habilityValue: string
 ) => {
   const response = await fetch(
-    `${API_URL}/${endpoint}/?hability=${habilityValue}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/?hability=${habilityValue}`
   );
   const dataResponse = await response.json();
   return dataResponse;
@@ -24,7 +23,7 @@ export const getEmployeeFilterByLanguage = async (
   level: string
 ) => {
   const response = await fetch(
-    `${API_URL}/${endpoint}/filter?language=${lang}&nivel=${level}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/filter?language=${lang}&nivel=${level}`
   );
   const dataResponse = await response.json();
   return dataResponse;
