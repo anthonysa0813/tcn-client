@@ -60,16 +60,16 @@ const Navbar = ({ data }: Prop) => {
     router.push("/");
   };
 
-  // useEffect(() => {
-  //   if (!name && !surnames) {
-  //     const localStoraEmployee = JSON.parse(
-  //       window.localStorage.getItem("employee") || ""
-  //     );
-  //     console.log("localStoraEmployee", localStoraEmployee);
+  useEffect(() => {
+    if (!name && !surnames) {
+      const localStoraEmployee = JSON.parse(
+        window.localStorage.getItem("employee") || ""
+      );
+      console.log("localStoraEmployee", localStoraEmployee);
 
-  //     setEmployeeGlobal(localStoraEmployee);
-  //   }
-  // }, []);
+      setEmployeeGlobal(localStoraEmployee);
+    }
+  }, []);
 
   return (
     <>

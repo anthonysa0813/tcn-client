@@ -33,8 +33,10 @@ const ServiceCard = ({ service }: Prop) => {
 
   useEffect(() => {
     setEmployeeUnparse(window.localStorage.getItem("employee") || "");
-    console.log("employeeUnparse", Boolean(employeeUnparse));
-    if (Boolean(employeeUnparse)) {
+    const resEmployeeLocalStorage = JSON.parse(
+      window.localStorage.getItem("employee") || ""
+    );
+    if (Boolean(Object.values(resEmployeeLocalStorage).length > 0)) {
       console.log("entree :D ");
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
