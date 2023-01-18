@@ -61,7 +61,12 @@ const Navbar = ({ data }: Prop) => {
   };
 
   useEffect(() => {
-    if (!name && !surnames) {
+    // setEmployeeUnparse(window.localStorage.getItem("employee") || "");
+    const resEmployeeLocalStorage =
+      window.localStorage.getItem("employee") || "";
+    console.log("resEmployeeLocalStorage", resEmployeeLocalStorage);
+    console.log("type", Boolean(resEmployeeLocalStorage));
+    if (Boolean(resEmployeeLocalStorage)) {
       const localStoraEmployee = JSON.parse(
         window.localStorage.getItem("employee") || ""
       );
