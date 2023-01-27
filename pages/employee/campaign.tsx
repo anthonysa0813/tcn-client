@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/client/Campaign.module.css";
 import { GetServerSideProps } from "next/types";
-import { Service } from "../../interfaces";
+import { Service, ServiceI } from "../../interfaces";
 import dynamic from "next/dynamic";
 
 interface ServiceProp {
-  services: Service[] | [];
+  services: ServiceI[] | [];
 }
 
 const ServiceCard = dynamic(

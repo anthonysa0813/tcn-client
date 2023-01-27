@@ -52,7 +52,7 @@ const ServiceCard = ({ service }: Prop) => {
     if (idEmployee) {
       getEmployeeById("employees", idEmployee).then((res) => {
         setServisceId(res?.servicesId || []);
-        setCurrentServiceId(service._id);
+        setCurrentServiceId(service._id || "");
         const isValid = servicesId.includes(currentServiceId);
         console.log("isValid", isValid);
         setIsPostulate(isValid);
