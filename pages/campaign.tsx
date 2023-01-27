@@ -2,11 +2,11 @@ import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Navbar from "../components/menu/Navbar";
 import styles from "../styles/client/Campaign.module.css";
-import { Service } from "../interfaces";
+import { Service, ServiceI } from "../interfaces";
 import dynamic from "next/dynamic";
 
 interface ServiceProp {
-  services: Service[] | [];
+  services: ServiceI[] | [];
 }
 
 const ServiceCard = dynamic(

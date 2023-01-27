@@ -3,7 +3,11 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
-import { EmployeeInterface, Service } from "../../../interfaces/index";
+import {
+  EmployeeInterface,
+  Service,
+  ServiceI,
+} from "../../../interfaces/index";
 import styles from "../../../styles/client/Campaign.module.css";
 // import ModalShowService from "./ModalShowService";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,7 +17,7 @@ import dynamic from "next/dynamic";
 import { getEmployeeById } from "../../../apis/employee/useEmployeeFetch";
 
 interface Prop {
-  service: Service;
+  service: ServiceI;
 }
 const ModalShowService = dynamic(() =>
   import("./ModalShowService").then((res) => res.default)
@@ -32,10 +36,10 @@ const ServiceCard = ({ service }: Prop) => {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("services :D", service);
     const resEmployeeLocalStorage =
       window.localStorage.getItem("employee") || "";
     if (Boolean(resEmployeeLocalStorage)) {
-      console.log("entree :D ");
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
@@ -45,7 +49,6 @@ const ServiceCard = ({ service }: Prop) => {
   }, []);
 
   useEffect(() => {
-    // setServisceId(employeeGlobal?.servicesId || []);
     if (idEmployee) {
       getEmployeeById("employees", idEmployee).then((res) => {
         setServisceId(res?.servicesId || []);
@@ -79,7 +82,7 @@ const ServiceCard = ({ service }: Prop) => {
           const notifyError = () => toast.error(data.messageError);
           notifyError();
         } else {
-          const notify = () => toast.success("Aplicaste a este puesto");
+          const notify = () => toast.success(data.message);
           notify();
         }
       })
@@ -99,10 +102,13 @@ const ServiceCard = ({ service }: Prop) => {
         <ToastContainer />
         <div className={styles.titleContainer}>
           <h4 className={styles.title}>{service.title}</h4>
-          <h4 className={styles.companyTitle}>{service.company}</h4>
+          <span
+            className={!service.status ? `${styles.desactiveAnnounce}` : ""}
+          >
+            {service.status ? "Activo" : "Finalizado"}
+          </span>
         </div>
         <div className={styles.infoContainer}>
-          {/* <p>{service.description}</p> */}
           <p dangerouslySetInnerHTML={{ __html: service.description }}></p>
         </div>
         <div className={styles.actions}>

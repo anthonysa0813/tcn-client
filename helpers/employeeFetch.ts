@@ -1,4 +1,4 @@
-import { FormProp, Service } from "../interfaces";
+import { FormProp, Service, ServiceI } from "../interfaces";
 
 // export const loginFetchApi = async (endpoint: string, dataUser: FormProp) => {
 //     const response = await fetch(`http://localhost:5050/api/${endpoint}`, {
@@ -12,7 +12,7 @@ import { FormProp, Service } from "../interfaces";
 //     return data;
 //   };
 
-export const createNewServicefetch = async (body: Service) => {
+export const createNewServicefetch = async (body: ServiceI) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/services`, {
     method: "POST",
     headers: {

@@ -33,7 +33,7 @@ interface Prop {
   data?: any;
 }
 
-const Navbar = ({ data }: Prop) => {
+const Navbar = () => {
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
   const { currentLangState, setCurrenLangState } =
@@ -64,8 +64,6 @@ const Navbar = ({ data }: Prop) => {
     // setEmployeeUnparse(window.localStorage.getItem("employee") || "");
     const resEmployeeLocalStorage =
       window.localStorage.getItem("employee") || "";
-    console.log("resEmployeeLocalStorage", resEmployeeLocalStorage);
-    console.log("type", Boolean(resEmployeeLocalStorage));
     if (Boolean(resEmployeeLocalStorage)) {
       const localStoraEmployee = JSON.parse(
         window.localStorage.getItem("employee") || ""
@@ -78,10 +76,6 @@ const Navbar = ({ data }: Prop) => {
 
   return (
     <>
-      <IntlProvider
-        locale={currentLangState}
-        messages={messages[currentLangState as keyof PropMessageNavbarLangs]}
-      >
         <header className={styles.header}>
           <div className="wrapper">
             <div className={styles.headerContainer}>
@@ -129,21 +123,21 @@ const Navbar = ({ data }: Prop) => {
             </div>
           </div>
         </header>
-      </IntlProvider>
+     
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  console.log("ctx", ctx);
-  // const response = await import(`../../lang/${locale}.json`);
-  // console.log(response);
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   console.log("ctx", ctx);
+//   // const response = await import(`../../lang/${locale}.json`);
+//   // console.log(response);
 
-  return {
-    props: {
-      data: "",
-    },
-  };
-};
+//   return {
+//     props: {
+//       data: "",
+//     },
+//   };
+// };
 
 export default Navbar;

@@ -84,6 +84,18 @@ export interface Service {
   __v?: number;
 }
 
+export interface ServiceI {
+  _id?: string;
+  createdAt?: string;
+  employees?: EmployeeInterface[] | [];
+  requirements: string;
+  salary: string;
+  schedule: string;
+  status?: boolean;
+  title: string;
+  description: string;
+}
+
 export interface CourntriesDataResponse {
   countriesNames: any;
   callingCode: string;

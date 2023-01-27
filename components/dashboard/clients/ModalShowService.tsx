@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { formatDate } from "../../../helpers/formatDate";
-import { Service } from "../../../interfaces";
+import { ServiceI } from "../../../interfaces";
 import styles from "../../../styles/client/Campaign.module.css";
 import { useRouter } from "next/router";
 import {
@@ -15,11 +15,12 @@ const CloseIcon = dynamic(() =>
 );
 
 interface Prop {
-  service: Service;
+  service: ServiceI;
   setShowModal: (state: boolean) => void;
 }
 
 const ModalShowService = ({ service, setShowModal }: Prop) => {
+  console.log({ service });
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
   const router = useRouter();
@@ -56,10 +57,22 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
         <CloseIcon onClick={closeModal} />
         <div className="headModal">
           <h4>{service.title}</h4>
-          <h4>{service.company}</h4>
         </div>
         <div className={styles.infoBody}>
           <p dangerouslySetInnerHTML={{ __html: service.description }}></p>
+        </div>
+        <div className={styles.infoGeneral}>
+          <p>Horario: {service.schedule}</p>
+          <p>Salario: S/.{service.salary}</p>
+        </div>
+
+        <div className={styles.requirements}>
+          <h3>Requerimientos:</h3>
+          <ul>
+            <li>
+              <p dangerouslySetInnerHTML={{ __html: service.requirements }}></p>
+            </li>
+          </ul>
         </div>
         <div className="infoDate">
           <span>Fecha de Publicación: {formatDate(service.createdAt)}</span>

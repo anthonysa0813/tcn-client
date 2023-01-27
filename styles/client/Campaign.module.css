@@ -39,7 +39,7 @@
 .card {
   border: 1px solid #e1e1e1;
   border-radius: 0.5rem;
-  padding-block: 1rem;
+  /* padding-block: 1rem; */
 
   /* width: 100%; */
 }
@@ -51,6 +51,26 @@
 .titleContainer {
   border-bottom: 1px solid #e1e1e1;
   padding-inline: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.titleContainer h4 {
+  margin: 0;
+}
+
+.titleContainer span {
+  border: 1px solid var(--bg-green);
+  color: var(--bg-green);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.desactiveAnnounce {
+  border: 1px solid var(--bg-red) !important;
+  color: var(--bg-red) !important;
 }
 
 .infoContainer {
@@ -117,8 +137,24 @@
 
 .infoBody {
   overflow: auto;
-  height: 200px;
+  height: auto;
   /* border: 3px solid blue; */
+}
+
+.requirements {
+  margin-block: 0.5rem;
+}
+
+.requirements h3 {
+  margin: 0;
+}
+
+.requirements p {
+  margin: 0;
+}
+
+.infoGeneral p {
+  font-weight: 700;
 }
 
 .modalContainer svg {

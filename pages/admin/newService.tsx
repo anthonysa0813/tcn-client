@@ -21,7 +21,9 @@ const LayoutDashboard = dynamic(
 );
 interface FormProp {
   title: string;
-  company: string;
+  schedule: string;
+  salary: string;
+  requirements: string;
   description?: string;
 }
 
@@ -30,10 +32,15 @@ const notifyWarning = (message: string) => toast.warning(message);
 
 const NewServicePage = () => {
   const [descriptionState, setDescriptionState] = useState("");
-  const { title, company, form, onChange } = useForm<FormProp>({
+
+  const [initialValues, setInitialValues] = useState({
     title: "",
-    company: "",
+    schedule: "",
+    salary: "",
+    requirements: "",
   });
+  const { title, salary, schedule, requirements, form, onChange } =
+    useForm<FormProp>(initialValues);
   const [error, setError] = useState(false);
   const { userGlobal } = useContext(UserContext);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -51,7 +58,9 @@ const NewServicePage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if ([title, company, descriptionState].includes("")) {
+    if (
+      [title, salary, schedule, requirements, descriptionState].includes("")
+    ) {
       setError(true);
       notifyWarning("Están vaciós algunos campos...");
       setTimeout(() => {
@@ -62,10 +71,20 @@ const NewServicePage = () => {
     setError(false);
     createNewServicefetch({
       title,
-      company,
+      salary,
+      schedule,
+      requirements,
       description: descriptionState,
     }).then((res) => {
+      console.log({ res });
       notify();
+      setDescriptionState("");
+      setInitialValues({
+        title: "",
+        schedule: "",
+        salary: "",
+        requirements: "",
+      });
     });
   };
 
@@ -75,7 +94,7 @@ const NewServicePage = () => {
 
       <div className="wrapper">
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h1 className={styles.title}>Crear un nuevo servicio</h1>
+          <h1 className={styles.title}>Crear un nuevo puesto laboral</h1>
           {role !== "ADMIN_ROLE" && (
             <p className={styles.alert}>
               Únicamente los usuarios con un role <span>ADMIN_ROLE</span>,
@@ -95,33 +114,64 @@ const NewServicePage = () => {
               />
             </div>
             <div className={styles.field}>
-              <label>Nombre de la compañia:</label>
+              <label>Requerimientos:</label>
               <Input
                 type="text"
                 clearable
                 underlined
-                name="company"
-                value={company}
+                name="requirements"
+                value={requirements}
                 onChange={onChange}
+                placeholder="habilidades blandas, experiencia en ventas,etc..."
               />
             </div>
+
+            <div className={styles.fieldSecondary}>
+              <div className={styles.subField}>
+                <label>Horario:</label>
+                <Input
+                  type="text"
+                  clearable
+                  underlined
+                  name="schedule"
+                  value={schedule}
+                  onChange={onChange}
+                  placeholder="L - V (8am -6pm)"
+                />
+              </div>
+              <div className={styles.subField}>
+                <label>Salario:</label>
+                <Input
+                  type="text"
+                  clearable
+                  underlined
+                  name="salary"
+                  value={salary}
+                  onChange={onChange}
+                  placeholder="2000"
+                />
+              </div>
+            </div>
+            <div className={styles.field} style={{ marginBlock: "3rem" }}>
+              <label style={{ marginBlockEnd: "1rem" }}>
+                Descripción del puesto:
+              </label>
+              <QuillNoSSRWrapper
+                value={descriptionState}
+                onChange={handleChange}
+                theme="snow"
+              />
+            </div>
+            <button
+              type={role !== "ADMIN_ROLE" ? "button" : "submit"}
+              className={`${styles.button} ${
+                role !== "ADMIN_ROLE" ? styles.inactive : ""
+              }`}
+              // disabled={true}
+            >
+              Crear
+            </button>
           </div>
-          <div className={styles.field} style={{ marginBlock: "3rem" }}>
-            <QuillNoSSRWrapper
-              value={descriptionState}
-              onChange={handleChange}
-              theme="snow"
-            />
-          </div>
-          <button
-            type={role !== "ADMIN_ROLE" ? "button" : "submit"}
-            className={`${styles.button} ${
-              role !== "ADMIN_ROLE" ? styles.inactive : ""
-            }`}
-            // disabled={true}
-          >
-            Crear
-          </button>
         </form>
       </div>
     </LayoutDashboard>

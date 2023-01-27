@@ -105,7 +105,11 @@ const AsideDash = () => {
               showMenu ? "animate__fadeInLeft" : ""
             }`}
           >
-            <Tooltip title="Ver lista de empleadores" arrow placement="right">
+            <Tooltip
+              title="Ver lista de colaboradores (no empleadores)"
+              arrow
+              placement="right"
+            >
               <Link
                 href="/admin/employees"
                 className={pathActive("employees") ? styles.activeLink : ""}
@@ -116,7 +120,7 @@ const AsideDash = () => {
                   className={`${showMenu ? styles.textBlock : styles.textNone}`}
                 >
                   {" "}
-                  Lista de Empleados
+                  Lista de Colaboradores (no empleadores)
                 </span>
               </Link>
             </Tooltip>
@@ -135,24 +139,6 @@ const AsideDash = () => {
                 </span>
               </Link>
             </Tooltip>
-            <Tooltip title="Cambiar contraseña" arrow placement="right">
-              <Link
-                href="/admin/changePassword"
-                className={
-                  pathActive("changePassword") ? styles.activeLink : ""
-                }
-              >
-                <KeyIcon />
-
-                <span
-                  className={`${showMenu ? styles.textBlock : styles.textNone}`}
-                >
-                  {" "}
-                  Editar información
-                </span>
-              </Link>
-            </Tooltip>
-
             <Tooltip
               title="Puestos Disponibles"
               arrow
@@ -214,6 +200,23 @@ const AsideDash = () => {
                 </Tooltip>
               </>
             )}
+            <Tooltip title="Cambiar contraseña" arrow placement="right">
+              <Link
+                href="/admin/changePassword"
+                className={
+                  pathActive("changePassword") ? styles.activeLink : ""
+                }
+              >
+                <KeyIcon />
+
+                <span
+                  className={`${showMenu ? styles.textBlock : styles.textNone}`}
+                >
+                  {" "}
+                  Editar mi contraseña
+                </span>
+              </Link>
+            </Tooltip>
           </nav>
           <div className={styles.profile}>
             <h4
