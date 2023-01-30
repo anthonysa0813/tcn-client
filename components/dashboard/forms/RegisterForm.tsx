@@ -3,7 +3,6 @@ import styles from "../../../styles/users/RegisterUser.module.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { loginFetchApi } from "../../../helpers/useFetch";
-import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/dist/client/router";
 import {
@@ -14,6 +13,12 @@ import {
 // import Link from "next/link";
 // import { BeatLoader } from "react-spinners";
 import dynamic from "next/dist/shared/lib/dynamic";
+// import { CountriesDataI } from "../../../interfaces";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+// import TextField from "@mui/material/TextField";
+
+import { countriesDataMaterial } from "../../../interfaces/countries";
 
 interface Prop {
   data: any;
@@ -73,11 +78,11 @@ const RegisterForm = ({ data }: Prop) => {
     useContext<EmployeeContextProps>(EmployeeContext);
   const [cvValue, setCvValue] = useState("" as any);
   const [isLoading, setIsLoading] = useState(false);
+
   const notifySuccess = () =>
     toast.success("Hemos enviado un correo para la activación de la cuenta");
-  console.log("datita", data);
 
-  const { errors, touched, getFieldProps, values } = useFormik({
+  const { errors, touched, getFieldProps, values, handleChange } = useFormik({
     initialValues: {
       name: "",
       surnames: "",
@@ -115,15 +120,19 @@ const RegisterForm = ({ data }: Prop) => {
 
   const { country, email, name, password, phone, surnames } = values;
   useEffect(() => {
-    if ([country, email, name, password, phone, surnames].includes("")) {
+    console.log({
+      country,
+    });
+    if (
+      [country, email, name, password, phone, surnames, cvValue].includes("")
+    ) {
       setIsDesabled(true);
     } else {
       setIsDesabled(false);
     }
-  }, [country, email, name, password, phone, surnames]);
+  }, [country, email, name, password, phone, surnames, cvValue]);
   const sendData = async (dataObject: FormData) => {
     try {
-      console.log(`${process.env.NEXT_PUBLIC_DB_URL}/employees`);
       const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees`, {
         method: "POST",
         body: dataObject,
@@ -164,7 +173,7 @@ const RegisterForm = ({ data }: Prop) => {
     dataform.append("cv", cvValue);
     //  dataform.append("typeJob", typeJob || "");
     dataform.append("phone", phone || "");
-    console.log("dataform", dataform);
+
     setIsLoading(true);
     sendData(dataform);
   };
@@ -325,7 +334,7 @@ const RegisterForm = ({ data }: Prop) => {
 
           <div className={`${styles.field} ${styles.country}`}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">País</InputLabel>
+              {/* <InputLabel id="demo-simple-select-label">País</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -342,7 +351,46 @@ const RegisterForm = ({ data }: Prop) => {
                     </MenuItem>
                   );
                 })}
-              </Select>
+              </Select> */}
+              <Autocomplete
+                id="country-select-demo"
+                sx={{
+                  width: "100%",
+                  padding: 0,
+                }}
+                size="small"
+                options={countriesDataMaterial}
+                getOptionLabel={(option) => option.label}
+                renderOption={(props, option) => (
+                  <Box
+                    component="li"
+                    // sx={{
+                    //   "& > img": { mr: 0, flexShrink: 0 },
+                    // }}
+                    {...props}
+                  >
+                    <img
+                      loading="lazy"
+                      width="20"
+                      src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                      srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                      alt=""
+                    />
+                    {option.label} ({option.code}) +{option.phone}
+                  </Box>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="País"
+                    inputProps={{
+                      ...params.inputProps,
+                      // autoComplete: "new-password", // disable autocomplete and autofill
+                    }}
+                    {...getFieldProps("country")}
+                  />
+                )}
+              />
             </FormControl>
             {errors.country && touched.country && (
               <span className="text-danger ">{errors.country} </span>

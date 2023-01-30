@@ -73,6 +73,11 @@ export interface ChangeStatusRequest {
   statusOption: string;
 }
 
+export interface CountriesDataI {
+  value?: string;
+  label?: string;
+}
+
 export interface Service {
   _id?: any;
   title: string;
