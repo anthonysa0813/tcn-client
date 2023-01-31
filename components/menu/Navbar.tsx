@@ -16,6 +16,7 @@ import {
   CurrentLangContext,
   CurrentLangContextType,
 } from "../../context/CurrentLang";
+import MenuItemCustom from "./cardMetun";
 
 const PersonIcon = dynamic(() =>
   import("@mui/icons-material/Person").then((res) => res.default)
@@ -76,54 +77,46 @@ const Navbar = () => {
 
   return (
     <>
-        <header className={styles.header}>
-          <div className="wrapper">
-            <div className={styles.headerContainer}>
-              <div className="logoContainer">
-                <Image
-                  src="/images/LogoContact.png"
-                  alt="Logo de Contact bpo"
-                  width={200}
-                  height={100}
-                  onClick={() => router.push("/")}
-                />
-              </div>
-              <nav className={styles.menu}>
-                {!name && <Link href="/campaign">Puestos de trabajo</Link>}
-                {name && (
-                  <span className={styles.iconUser}>
-                    {/* <User set="bold" primaryColor="black" /> */}
-                    <PersonIcon />
-                    {name} {surnames}
-                    <div className={styles.miniMenu}>
-                      <Link href="/employee/edit">Perfil</Link>
-                      <Link href="/employee/applications">postulaciones</Link>
-                    </div>
-                  </span>
-                )}
-                {!name && (
-                  <>
-                    <Link href="/login" className={styles.btn}>
-                      <span>Iniciar sesión</span>
-                    </Link>
-                  </>
-                )}
-                {name && (
-                  <button
-                    type="button"
-                    className={styles.buttonDark}
-                    onClick={logout}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <span>salir</span>
-                    <LogoutIcon />
-                  </button>
-                )}
-              </nav>
+      <header className={styles.header}>
+        <div className="wrapper">
+          <div className={styles.headerContainer}>
+            <div className="logoContainer">
+              <Image
+                src="/images/LogoContact.png"
+                alt="Logo de Contact bpo"
+                width={200}
+                height={100}
+                onClick={() => router.push("/")}
+              />
             </div>
+            <nav className={styles.menu}>
+              {!name && <Link href="/campaign">Puestos de trabajo</Link>}
+              {name && (
+                // <span className={styles.iconUser}>
+                //   <PersonIcon />
+                //   {name} {surnames}
+                //   <div className={styles.miniMenu}>
+                //     <Link href="/employee/edit">Perfil</Link>
+                //     <Link href="/employee/applications">postulaciones</Link>
+                //   </div>
+                // </span>
+                <MenuItemCustom
+                  name={name}
+                  surnames={surnames}
+                  logout={logout}
+                />
+              )}
+              {!name && (
+                <>
+                  <Link href="/login" className={styles.btn}>
+                    <span>Iniciar sesión</span>
+                  </Link>
+                </>
+              )}
+            </nav>
           </div>
-        </header>
-     
+        </div>
+      </header>
     </>
   );
 };

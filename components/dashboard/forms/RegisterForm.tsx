@@ -354,6 +354,7 @@ const RegisterForm = ({ data }: Prop) => {
               </Select> */}
               <Autocomplete
                 id="country-select-demo"
+                autoComplete={false}
                 sx={{
                   width: "100%",
                   padding: 0,
@@ -385,7 +386,7 @@ const RegisterForm = ({ data }: Prop) => {
                     label="País"
                     inputProps={{
                       ...params.inputProps,
-                      // autoComplete: "new-password", // disable autocomplete and autofill
+                      autoComplete: "new-password", // disable autocomplete and autofill
                     }}
                     {...getFieldProps("country")}
                   />
