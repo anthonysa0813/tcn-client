@@ -21,6 +21,7 @@ export interface ContextInitial {
 
 export interface ChildProp {
   children: JSX.Element | JSX.Element[] | boolean;
+  center?: boolean;
 }
 
 export interface ClientResponse {

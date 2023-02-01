@@ -560,19 +560,4 @@ const MoreDetails = () => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   // data de nombres de paises
-//   const response = await fetch(`${API_URL}/language/all/${idEmployee}`);
-//   const data = await response.json();
-
-//   // current User
-//   return {
-//     props: {
-//       data: {
-//         languagesList: []
-//       },
-//     },
-//   };
-// };
-
 export default MoreDetails;

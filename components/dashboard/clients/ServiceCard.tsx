@@ -36,7 +36,6 @@ const ServiceCard = ({ service }: Prop) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("services :D", service);
     const resEmployeeLocalStorage =
       window.localStorage.getItem("employee") || "";
     if (Boolean(resEmployeeLocalStorage)) {
@@ -54,7 +53,6 @@ const ServiceCard = ({ service }: Prop) => {
         setServisceId(res?.servicesId || []);
         setCurrentServiceId(service._id || "");
         const isValid = servicesId.includes(currentServiceId);
-        console.log("isValid", isValid);
         setIsPostulate(isValid);
       });
     }
@@ -81,10 +79,9 @@ const ServiceCard = ({ service }: Prop) => {
         if (data.messageError) {
           const notifyError = () => toast.error(data.messageError);
           notifyError();
-        } else {
-          const notify = () => toast.success(data.message);
-          notify();
         }
+        const notify = () => toast.success("haz aplicado a este puesto");
+        notify();
       })
       .catch((err) => console.error(err));
   };

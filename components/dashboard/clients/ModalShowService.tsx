@@ -9,6 +9,7 @@ import {
 } from "../../../context/EmployeeContext";
 import { toast } from "react-toastify";
 import dynamic from "next/dynamic";
+import ModalComponent from "../ModalComponent";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -52,7 +53,8 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
   };
 
   return (
-    <div className={styles.modal}>
+    <ModalComponent>
+      {/* <div className={styles.modal}> */}
       <div className={styles.modalContainer}>
         <CloseIcon onClick={closeModal} />
         <div className="headModal">
@@ -86,7 +88,9 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
           </button>
         </div> */}
       </div>
-    </div>
+
+      {/* </div> */}
+    </ModalComponent>
   );
 };
 

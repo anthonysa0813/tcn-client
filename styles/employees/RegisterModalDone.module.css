@@ -1,0 +1,51 @@
+.container {
+  padding: 2rem;
+  background: var(--bg-white);
+  width: 80%;
+  height: 90vh;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.logoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  margin-block-end: 2rem;
+}
+.logoSection img {
+  height: 100%;
+}
+
+.infoText {
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 3rem;
+}
+
+.infoText h1 {
+  font-size: 2.5rem;
+}
+
+.infoText span {
+  color: var(--bg-blue200);
+}
+
+.boxClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.boxClose svg {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .container {
+    height: 70%;
+  }
+}
