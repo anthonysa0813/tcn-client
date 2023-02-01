@@ -142,6 +142,7 @@ const RegisterForm = ({ setActiveModalRegisterDone }: Prop) => {
       }
       setActiveModalRegisterDone(true);
       setEmployeeGlobal(data);
+      setIsLoading(false);
       return data;
     } catch (error) {
       console.log(error);

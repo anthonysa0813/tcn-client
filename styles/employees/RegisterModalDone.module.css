@@ -33,6 +33,9 @@
 .infoText span {
   color: var(--bg-blue200);
 }
+.messageText {
+  font-size: 1.35rem;
+}
 
 .boxClose {
   position: absolute;

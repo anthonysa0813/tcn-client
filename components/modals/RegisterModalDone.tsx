@@ -29,11 +29,11 @@ const RegisterModalDone = ({ closeModal }: Prop) => {
         </div>
         <div className={styles.infoText}>
           <h1>
-            Gracias por registrarte en <span>contact BPO</span>
+            Gracias por registrarte en <span>Contact BPO</span>
           </h1>
-          <span>
-            Te hemos enviado un mensaje a tu correo para la activación de su
-            cuenta
+          <span className={styles.messageText}>
+            Te hemos enviado un email para la activación de tu cuenta. Por favor
+            revisa la carpeta de spam en caso no lo encuentres.
           </span>
         </div>
       </div>
