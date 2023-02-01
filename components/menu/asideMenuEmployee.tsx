@@ -53,29 +53,13 @@ const AsideMenuEmployee = () => {
             Ver Puestos Disponibles
           </Link>
           <Link
-            href="/employee/edit"
-            className={pathActive("/employee/edit") ? styles.activeLink : ""}
-          >
-            <EditIcon />
-            Editar Información
-          </Link>
-          <Link
             href="/employee/applications"
             className={
               pathActive("/employee/applications") ? styles.activeLink : ""
             }
           >
             <ArrowIcon />
-            Ver postulaciones
-          </Link>
-          <Link
-            href="/employee/changePassword"
-            className={
-              pathActive("/employee/changePassword") ? styles.activeLink : ""
-            }
-          >
-            <VpnKeyIcon />
-            Cambiar la contraseña
+            Ver mis postulaciones
           </Link>
         </nav>
       )}

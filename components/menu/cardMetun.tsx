@@ -97,13 +97,13 @@ export default function MenuItemCustom({ name, surnames, logout }: Prop) {
         <MenuItem onClick={handleClose} disableRipple>
           <Link href="/employee/edit">
             <EditIcon />
-            editar mi Perfil
+            Editar perfil
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
-          <Link href="/employee/applications">
-            <CheckBoxIcon />
-            Ver mis postulaciones
+          <Link href="/employee/changePassword">
+            <EditIcon />
+            Cambiar contraseña
           </Link>
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />

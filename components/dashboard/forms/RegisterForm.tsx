@@ -79,8 +79,9 @@ const RegisterForm = ({ data }: Prop) => {
   const [cvValue, setCvValue] = useState("" as any);
   const [isLoading, setIsLoading] = useState(false);
 
-  const notifySuccess = () =>
+  const notifySuccess = (message: string) =>
     toast.success("Hemos enviado un correo para la activación de la cuenta");
+  const notifyError = (message: string) => toast.error(message);
 
   const { errors, touched, getFieldProps, values, handleChange } = useFormik({
     initialValues: {
@@ -138,21 +139,24 @@ const RegisterForm = ({ data }: Prop) => {
         body: dataObject,
       });
       const data = await res.json();
-      loginFetchApi("auth/employee/login", {
-        email: email,
-        password: password,
-      }).then((resposeLogin) => {
-        if (resposeLogin) {
-          // console.log("responseLogin", resposeLogin);
-          notifySuccess();
-          // Cookies.set("token", resposeLogin.token, { expires: 7 });
-          setIsLoading(false);
-          // setTimeout(() => {
-          //   router.push("/campaign");
-          // }, 1500);
-        }
-      });
+      // loginFetchApi("auth/employee/login", {
+      //   email: email,
+      //   password: password,
+      // }).then((resposeLogin) => {
+      //   if (resposeLogin) {
+      //     // console.log("responseLogin", resposeLogin);
+      //     notifySuccess();
+      //     // Cookies.set("token", resposeLogin.token, { expires: 7 });
+      //     setIsLoading(false);
+      //     // setTimeout(() => {
+      //     //   router.push("/campaign");
+      //     // }, 1500);
+      //   }
+      // });
       console.log("dataaaa ====>", data);
+      if (data.message === "El email ya está registrado") {
+        notifyError(data.message);
+      }
       setEmployeeGlobal(data);
       return data;
     } catch (error) {
@@ -334,24 +338,6 @@ const RegisterForm = ({ data }: Prop) => {
 
           <div className={`${styles.field} ${styles.country}`}>
             <FormControl fullWidth>
-              {/* <InputLabel id="demo-simple-select-label">País</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="País"
-                size="small"
-                {...getFieldProps("country")}
-              >
-                <MenuItem value={""}>Seleccione</MenuItem>
-                {Object.keys(data.countriesNames).map((country: any, index) => {
-                  return (
-                    <MenuItem key={index} value={country}>
-                      {" "}
-                      {data.countriesNames[country]}
-                    </MenuItem>
-                  );
-                })}
-              </Select> */}
               <Autocomplete
                 id="country-select-demo"
                 autoComplete={false}
@@ -363,13 +349,7 @@ const RegisterForm = ({ data }: Prop) => {
                 options={countriesDataMaterial}
                 getOptionLabel={(option) => option.label}
                 renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    // sx={{
-                    //   "& > img": { mr: 0, flexShrink: 0 },
-                    // }}
-                    {...props}
-                  >
+                  <Box component="li" {...props}>
                     <img
                       loading="lazy"
                       width="20"
@@ -405,7 +385,6 @@ const RegisterForm = ({ data }: Prop) => {
                   name="cv"
                   aria-label="cv"
                   onChange={readInputTypeFile}
-                  // {...getFieldProps("cv")}
                 />
               </Tooltip>
             </label>
