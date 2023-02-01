@@ -77,12 +77,13 @@ const ServiceCard = ({ service }: Prop) => {
       .then((res) => res.json())
       .then((data) => {
         console.log("data", data);
-        if (data.messageError) {
-          const notifyError = () => toast.error(data.messageError);
+        if (data.message) {
+          const notifyError = () => toast.error(data.message);
           notifyError();
+        } else {
+          const notify = () => toast.success("haz aplicado a este puesto");
+          notify();
         }
-        const notify = () => toast.success("haz aplicado a este puesto");
-        notify();
       })
       .catch((err) => console.error(err));
   };
