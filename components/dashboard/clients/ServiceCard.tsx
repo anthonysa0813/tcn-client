@@ -65,6 +65,7 @@ const ServiceCard = ({ service }: Prop) => {
       setTimeout(() => {
         router.push("/user/register");
       }, 700);
+      return;
     }
     const employeeId = employeeGlobal.id;
     fetch(

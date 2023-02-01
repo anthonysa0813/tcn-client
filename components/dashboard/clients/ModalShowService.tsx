@@ -79,14 +79,6 @@ const ModalShowService = ({ service, setShowModal }: Prop) => {
         <div className="infoDate">
           <span>Fecha de Publicación: {formatDate(service.createdAt)}</span>
         </div>
-        {/* <div className="actions">
-          <button
-            className={styles.button}
-            onClick={() => applicationJob(service._id)}
-          >
-            Aplicar
-          </button>
-        </div> */}
       </div>
 
       {/* </div> */}
