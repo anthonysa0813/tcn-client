@@ -123,6 +123,10 @@
   justify-content: flex-end;
 }
 
+.activeData {
+  /* background: red; */
+}
+
 .field input {
   display: block;
   width: 100%;

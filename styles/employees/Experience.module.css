@@ -7,7 +7,6 @@
   height: 700px;
   z-index: 20000;
   overflow: auto;
-  border: 3px solid var(--bg-blue200);
 }
 
 .title {

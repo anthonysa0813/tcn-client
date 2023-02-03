@@ -5,10 +5,10 @@ import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
+import LockResetIcon from "@mui/icons-material/LockReset";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
+
 interface Prop {
   name: string;
   surnames: string;
@@ -102,7 +102,7 @@ export default function MenuItemCustom({ name, surnames, logout }: Prop) {
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <Link href="/employee/changePassword">
-            <EditIcon />
+            <LockResetIcon />
             Cambiar contraseña
           </Link>
         </MenuItem>

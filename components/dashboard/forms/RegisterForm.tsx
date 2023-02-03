@@ -2,23 +2,21 @@ import React, { useEffect, useState, useContext } from "react";
 import styles from "../../../styles/users/RegisterUser.module.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { loginFetchApi } from "../../../helpers/useFetch";
 import { toast } from "react-toastify";
 import { useRouter } from "next/dist/client/router";
 import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../../context/EmployeeContext";
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
-// import Link from "next/link";
-// import { BeatLoader } from "react-spinners";
 import dynamic from "next/dist/shared/lib/dynamic";
-// import { CountriesDataI } from "../../../interfaces";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
-// import TextField from "@mui/material/TextField";
-
-import { countriesDataMaterial } from "../../../interfaces/countries";
+import {
+  CountryType,
+  countriesDataMaterial,
+} from "../../../interfaces/countries";
+import DatalistInput from "react-datalist-input";
+import { Image } from "@nextui-org/react";
 
 const FormControl = dynamic(() =>
   import("@mui/material/FormControl").then((res) => res.default)
@@ -78,6 +76,7 @@ const RegisterForm = ({ setActiveModalRegisterDone }: Prop) => {
     useContext<EmployeeContextProps>(EmployeeContext);
   const [cvValue, setCvValue] = useState("" as any);
   const [isLoading, setIsLoading] = useState(false);
+  const [countryValue, setCountryValue] = useState("");
 
   const notifySuccess = (message: string) =>
     toast.success("Hemos enviado un correo para la activación de la cuenta");
@@ -331,7 +330,7 @@ const RegisterForm = ({ setActiveModalRegisterDone }: Prop) => {
             </div>
 
             <div className={`${styles.field} ${styles.country}`}>
-              <FormControl fullWidth>
+              {/* <FormControl fullWidth>
                 <Autocomplete
                   id="country-select-demo"
                   autoComplete={false}
@@ -366,7 +365,33 @@ const RegisterForm = ({ setActiveModalRegisterDone }: Prop) => {
                     />
                   )}
                 />
-              </FormControl>
+              </FormControl> */}
+
+              <input
+                list="countries"
+                placeholder="País"
+                className={styles.activeData}
+                style={{
+                  padding: "5px",
+
+                  border: "1px solid #b1afaffc",
+                  outline: "none",
+                  borderRadius: "4px",
+                }}
+                {...getFieldProps("country")}
+              />
+              <datalist id="countries">
+                {countriesDataMaterial.map((c: CountryType) => {
+                  return (
+                    <option key={c.id} value={c.value}>
+                      <p>
+                        {c.value} ({c.code}) +{c.phone}
+                      </p>
+                    </option>
+                  );
+                })}
+              </datalist>
+
               {errors.country && touched.country && (
                 <span className="text-danger ">{errors.country} </span>
               )}

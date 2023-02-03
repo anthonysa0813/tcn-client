@@ -107,6 +107,9 @@
   height: 1em;
   margin-left: 0.5rem;
 }
+.dataList {
+  padding: 16px;
+}
 
 /* hero portada */
 
