@@ -17,6 +17,9 @@ import DatalistInput from "react-datalist-input";
 import { countriesDataResponse } from "../../utils/activitiesToBussiness";
 import dynamic from "next/dynamic";
 import { EmployeeInterface } from "../../interfaces";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import { Input } from "@material-ui/core";
+import { InputFileUpload } from "../../components/buttons";
 
 // new icons material ui
 
@@ -127,19 +130,6 @@ const EditPage = ({ data }: any) => {
     );
   }, [idLocalStorage]);
 
-  // useEffect(() => {
-  //   fetch(`${API_URL}/employees/${idLocalStorage}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setCountryCurrent(data.country);
-  //       setFormValues(data);
-  //     });
-  //   localStorage.setItem(
-  //     "countries",
-  //     JSON.stringify(data.countriesNames || "")
-  //   );
-  // }, [id, data]);
-
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -218,9 +208,17 @@ const EditPage = ({ data }: any) => {
             </span>
           </div>
           <div className={styles.buttonContent}>
-            <input
+            {/* <input
               type="text"
               name="name"
+              value={name}
+              onChange={handleChange}
+            /> */}
+            <OutlinedInput
+              style={{ width: "100%" }}
+              type="text"
+              name="name"
+              size="small"
               value={name}
               onChange={handleChange}
             />
@@ -234,9 +232,17 @@ const EditPage = ({ data }: any) => {
             </span>
           </div>
           <div className={styles.buttonContent}>
-            <input
+            {/* <input
               type="text"
               name="surnames"
+              value={surnames}
+              onChange={handleChange}
+            /> */}
+            <OutlinedInput
+              style={{ width: "100%" }}
+              type="text"
+              name="surnames"
+              size="small"
               value={surnames}
               onChange={handleChange}
             />
@@ -251,9 +257,17 @@ const EditPage = ({ data }: any) => {
             <span className={styles.subText}>Mantén un correo actualizado</span>
           </div>
           <div className={styles.buttonContent}>
-            <input
+            {/* <input
               type="email"
               name="email"
+              value={email}
+              onChange={handleChange}
+            /> */}
+            <OutlinedInput
+              style={{ width: "100%" }}
+              type="email"
+              name="email"
+              size="small"
               value={email}
               onChange={handleChange}
             />
@@ -297,15 +311,16 @@ const EditPage = ({ data }: any) => {
             </span>
           </div>
           <div className={styles.buttonContent}>
-            <input type="file" name="cv" onChange={readInputTypeFile} />
-            <a
+            {/* <input type="file" name="cv" onChange={readInputTypeFile} /> */}
+            <InputFileUpload cv={employeeGlobal.cv} />
+            {/* <a
               href={employeeGlobal.cv}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.cvText}
             >
               Ver mi cv
-            </a>
+            </a> */}
           </div>
         </div>
         <div className={styles.buttonField}>

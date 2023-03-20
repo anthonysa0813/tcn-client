@@ -4,7 +4,7 @@
   border-radius: 0.5rem;
   position: relative;
   min-width: 50%;
-  height: 700px;
+  height: 100%;
   z-index: 20000;
   overflow: auto;
 }
@@ -17,7 +17,7 @@
 .boxClose {
   width: 25px;
   height: 25px;
-  /* border: 2px solid brown; */
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,48 +40,46 @@
 }
 
 .field {
-  /* border: 2px solid brown; */
 }
 
 .field input {
-  padding: 0.25rem 0.5rem;
+  /* padding: 0.25rem 0.5rem; */
   width: 100%;
+
+  padding: 9px;
   border-radius: 0.5rem;
   border: none;
   outline: none;
-  border: 1px solid #e1e1e1;
+  /* border: 1px solid #e1e1e1; */
 }
 
-.field input:focus {
-  border: 2px solid var(--bg-blue200);
+.field datalist:focus {
+  border: 2px solid var(--bg-blue200) !important;
 }
 
 .fieldSecondaryGrid {
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr); */
-  gap: 1rem;
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
 }
 
 .firstInput,
 .secondInput {
   display: flex;
   gap: 1rem;
+  margin-block: 0.5rem;
 }
 
 .fieldSecond span {
-  color: var(--bg-gray300);
+  /* color: var(--bg-gray300); */
 }
 
 .fieldSecond input {
   padding: 0.25rem 0.5rem;
-  width: 50%;
+  /* width: 50%; */
   border-radius: 0.5rem;
   border: none;
-  outline: none;
-  border: 1px solid #e1e1e1;
+  /* outline: none; */
+  /* border: 1px solid #e1e1e1; */
 }
 
 .presentField input {
@@ -113,6 +111,29 @@
 
 .titleReference {
   grid-column: 1/-1;
+}
+
+.fieldSecond {
+  grid-column: 1/-1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  /* border: 2px solid brown; */
+}
+
+@media screen and (min-width: 768px) {
+  .fieldSecondaryGrid {
+    display: flex;
+    /* flex-direction: row; */
+  }
+
+  .fieldSecond {
+    grid-column: 1/2;
+  }
+  .fieldSecondary {
+    display: flex;
+    align-items: center;
+  }
 }
 
 @media screen and (min-width: 1850px) {

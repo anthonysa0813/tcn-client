@@ -3,11 +3,12 @@ import styles from "../../styles/employees/FormNewLang.module.css";
 import { Languages, nivels } from "../../utils/activitiesToBussiness";
 import { EmployeeInterface, LangResponse } from "../../interfaces";
 import { createLang } from "../../apis/languages/useFetchLang";
-import { Button, Loading } from "@nextui-org/react";
+import { Loading } from "@nextui-org/react";
 import DatalistInput from "react-datalist-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
+import Button from "@mui/material/Button";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -84,7 +85,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       </div>
       <div className={styles.field}>
         <DatalistInput
-          placeholder="Nivel"
+          placeholder="Seleccione el nivel"
           label=" Escritura"
           onSelect={(item) => setFormWriter(item.value)}
           items={nivels}
@@ -92,7 +93,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       </div>
       <div className={styles.field}>
         <DatalistInput
-          placeholder="Nivel"
+          placeholder="Seleccione el nivel"
           label="Oral"
           onSelect={(item) => setFormOral(item.value)}
           items={nivels}
@@ -100,7 +101,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       </div>
       <div className={styles.field}>
         <DatalistInput
-          placeholder="Nivel"
+          placeholder="Seleccione el nivel"
           label=" Escucha"
           onSelect={(item) => setFormListen(item.value)}
           items={nivels}
@@ -108,13 +109,13 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
       </div>
       <div className={styles.field}>
         <DatalistInput
-          placeholder="Nivel"
+          placeholder="Seleccione el nivel"
           label=" Lectura"
           onSelect={(item) => setFormRead(item.value)}
           items={nivels}
         />
       </div>
-      <Button type="submit" style={{ background: "#11181C" }}>
+      <Button type="submit" variant="contained" style={{ margin: 0 }}>
         {isLoading && <Loading />}
         Guardar
       </Button>

@@ -1,4 +1,4 @@
-// import { GetServerSideProps } from "next";
+import { GetServerSideProps } from "next";
 import React, { useContext, useLayoutEffect, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
@@ -25,11 +25,13 @@ const ApplicationsPage = () => {
   const [applicationsState, setApplicationsState] = useState<Service[] | []>(
     []
   );
+
   useEffect(() => {
     if (window.localStorage) {
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
+      console.log({ getId });
       setEmployeeGlobal(getId);
     }
   }, []);
@@ -39,9 +41,6 @@ const ApplicationsPage = () => {
       getInfo(employeeGlobal.id);
     }
   }, [employeeGlobal]);
-  // useLayoutEffect(() => {
-  //   getInfo(employeeGlobal.id);
-  // }, [employeeGlobal]);
 
   const getInfo = async (id: string) => {
     const res = await fetch(
@@ -55,6 +54,22 @@ const ApplicationsPage = () => {
       <LayoutEmployee name="aplicaciones de trabajo">
         <div className={styles.wrapper}>
           <h4>Mis Postulaciones</h4>
+
+          <div className={styles.status}>
+            <strong>Estado:</strong>
+            {employeeGlobal.statusJob === "VISTO" ? (
+              <span className=" btn bg-2 purple">VISTO</span>
+            ) : null}
+            {employeeGlobal.statusJob === "CONTRATADO" ? (
+              <span className=" btn bg-2 primary">CONTRATADO</span>
+            ) : null}
+            {employeeGlobal.statusJob === "SELECCIONADO" ? (
+              <span className=" btn bg-2 green">SELECCIONADO</span>
+            ) : null}
+            {employeeGlobal.statusJob === "DESCARTADO" ? (
+              <span className=" btn bg-2 red">DESCARTADO</span>
+            ) : null}
+          </div>
           <div className={styles.applicationsGrid}>
             {applicationsState.map((service: Service, index) => {
               return <CardCollapse key={service._id} service={service} />;

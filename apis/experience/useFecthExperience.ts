@@ -6,6 +6,7 @@ export const createExperienceApi = async (
   dataExp: Experience,
   idEmployee: string
 ) => {
+  console.log(`${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`,
     {

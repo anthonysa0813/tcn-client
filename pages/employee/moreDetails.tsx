@@ -27,6 +27,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
+import FormExperienceSecondary from "./FormExperienceSecondary";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 const LayoutEmployee = dynamic(() =>
   import("./layoutEmployee").then((res) => res.default)
@@ -88,10 +90,6 @@ const ModalComponent = dynamic(() =>
   import("../../components/dashboard/ModalComponent").then((res) => res.default)
 );
 
-const FormExperience = dynamic(() =>
-  import("../../components/employees/FormExperience").then((res) => res.default)
-);
-
 const FormNewLang = dynamic(() =>
   import("../../components/employees/FormNewLang").then((res) => res.default)
 );
@@ -123,7 +121,6 @@ interface PropSaveInfo {
 
 const MoreDetails = () => {
   const router = useRouter();
-
   const [showModalToLang, setShowModalToLang] = useState(false);
   const [showModalExperience, setshowModalExperience] = useState(false);
   const [showModalSkills, setShowModalSkills] = useState(false);
@@ -158,6 +155,11 @@ const MoreDetails = () => {
   const [editMode, setEditMode] = useState(false);
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccessEdit = () => toast.success("Se ha editado 👌");
+
+  // close and open modals
+  const [openLangModal, setOpenLangModal] = useState(false);
+
+  // END close and opens modals
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValue({
@@ -270,12 +272,20 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              <input
+              {/* <input
                 type="number"
                 className={styles.input}
                 name="phone"
                 onChange={handleChangeInput}
                 value={phone}
+              /> */}
+              <OutlinedInput
+                style={{ width: "100%" }}
+                type="number"
+                name="phone"
+                size="small"
+                value={phone}
+                onChange={handleChangeInput}
               />
             </div>
           </div>
@@ -296,12 +306,20 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              <input
+              {/* <input
                 type="text"
                 className={styles.input}
                 name="linkedin"
                 onChange={handleChangeInput}
                 value={linkedin}
+              /> */}
+              <OutlinedInput
+                style={{ width: "100%" }}
+                type="text"
+                name="linkedin"
+                size="small"
+                value={linkedin}
+                onChange={handleChangeInput}
               />
             </div>
           </div>
@@ -322,12 +340,20 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              <input
+              {/* <input
                 type="text"
                 className={styles.input}
                 name="github"
                 onChange={handleChangeInput}
                 value={github}
+              /> */}
+              <OutlinedInput
+                style={{ width: "100%" }}
+                type="text"
+                name="github"
+                size="small"
+                value={github}
+                onChange={handleChangeInput}
               />
             </div>
           </div>
@@ -508,7 +534,12 @@ const MoreDetails = () => {
 
       {showModalExperience && (
         <ModalComponent>
-          <FormExperience
+          {/* <FormExperience
+            openExperience={openExperience}
+            dataListExperiences={dataListExperiences}
+            setDataListExperiences={setDataListExperiences}
+          /> */}
+          <FormExperienceSecondary
             openExperience={openExperience}
             dataListExperiences={dataListExperiences}
             setDataListExperiences={setDataListExperiences}
@@ -526,7 +557,7 @@ const MoreDetails = () => {
       )}
       {editMode && (
         <ModalComponent>
-          <FormExperience
+          <FormExperienceSecondary
             openExperience={openExperience}
             dataListExperiences={dataListExperiences}
             setDataListExperiences={setDataListExperiences}

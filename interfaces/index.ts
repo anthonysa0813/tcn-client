@@ -126,7 +126,7 @@ export interface LangResponse {
 }
 
 export interface Experience {
-  activyBussiness: string;
+  activytyBussiness: string;
   area: string;
   country: string;
   currentJob: boolean;
@@ -138,6 +138,7 @@ export interface Experience {
   nameBussiness: string;
   subarea: string;
   title: string;
+  __v?: number;
   _id?: string;
   nameRef?: string;
   emailRef?: string;

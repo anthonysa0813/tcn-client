@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import dynamic from "next/dynamic";
 import { Loading } from "@nextui-org/react";
+import { Button } from "@mui/material";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -151,7 +152,7 @@ const FormNewSkills = ({
           </>
         )}
 
-        <ButtonPrimary
+        {/* <ButtonPrimary
           color="dark"
           content="Guardar"
           onClick={() => console.log("guardando skills")}
@@ -159,7 +160,11 @@ const FormNewSkills = ({
         />
         <div className="field" style={{ marginBlock: "1rem" }}>
           {isLoading && <Loading />}
-        </div>
+        </div> */}
+        <Button type="submit" variant="contained" style={{ margin: 0 }}>
+          {isLoading && <Loading />}
+          Guardar
+        </Button>
       </div>
     </form>
   );

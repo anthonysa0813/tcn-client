@@ -34,12 +34,15 @@
   column-gap: 0.5rem;
 }
 
-.buttonContent input:focus {
+/* .buttonContent input:focus {
   border: 2px solid var(--bg-blue200);
-}
+} */
 
 .buttonContent {
   width: 100%;
+}
+.buttonContent input {
+  width: 100% !important;
 }
 .textInfo {
   display: flex;
@@ -61,7 +64,7 @@
 }
 
 .fieldJob input {
-  margin-inline-end: 0.25rem;
+  /* margin-inline-end: 0.25rem; */
 }
 
 .titleJob {

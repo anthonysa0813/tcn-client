@@ -38,14 +38,24 @@ const ShowServiceById = ({
         />
       </div>
       <div className={styles.infoHead}>
-        <h1>{experence.title}</h1>
-        <p className={styles.nameBussiness}>{experence.nameBussiness}</p>
-        <p>
-          {experence.dateStart} - {experence.dateEnd}
-        </p>
+        <h1>
+          {experence.title} - {experence.nameBussiness}
+        </h1>
+        <div className={styles.field}>
+          <p style={{ display: "flex", gap: "1rem" }}>
+            <strong>Fecha de Inicio: </strong>
+            <p>{experence.dateStart}</p>
+          </p>
+        </div>
+        <div className={styles.field}>
+          <p style={{ display: "flex", gap: "1rem" }}>
+            <strong>Fecha de Finalización: </strong>
+            <p>{experence.dateEnd}</p>
+          </p>
+        </div>
         <div className={styles.field}>
           <p>ACTIVIDAD DE LA EMPRESA:</p>
-          <span>{experence.activyBussiness}</span>
+          <span>{experence.activytyBussiness}</span>
         </div>
         <div className={styles.field}>
           <p>ÁREA:</p>

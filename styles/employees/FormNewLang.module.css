@@ -30,7 +30,7 @@
 }
 
 .field input:focus {
-  border: 2px solid var(--bg-blue200);
+  border: 2px solid var(--bg-blueSecondary100);
 }
 
 .boxClose {

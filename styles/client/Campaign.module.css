@@ -11,7 +11,7 @@
 }
 
 .isPostulateActive {
-  border: 3px solid var(--bg-green) !important;
+  border: 3px solid var(--bg-blueSecondary100) !important;
 }
 
 .mainContainer {
@@ -62,8 +62,8 @@
 }
 
 .titleContainer span {
-  border: 1px solid var(--bg-green);
-  color: var(--bg-green);
+  border: 1px solid var(--bg-blueSecondary100);
+  color: var(--bg-blueSecondary100);
   padding: 0.25rem;
   border-radius: 0.25rem;
 }

@@ -19,6 +19,16 @@
   align-items: center;
 }
 
+.status {
+  margin-block-end: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.status span {
+  margin-inline-start: 1rem;
+}
+
 .serviceCard {
   border: 2px solid var(--bg-blue200);
   padding: 1rem;

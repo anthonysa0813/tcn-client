@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 
-export const dataListActivities = [
+export interface activityI {
+  id: string;
+  value: string;
+}
+export const dataListActivities: activityI[] = [
   {
     id: uuidv4(),
     value: "AFP",

@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Modal, Table, Text, useModal } from "@nextui-org/react";
-import { useRouter } from "next/router";
 import { EmployeeInterface } from "../../../interfaces";
-// import { changeStatus, getFetchApi } from "../../../helpers/useFetch";
-// import Link from "next/link";
-// import ModalUser from "../employee/ModalUser";
 import styles from "../../../styles/admin/TableEmployee.module.css";
-// import { calculatePagination } from "../../../helpers/calculatePagination";
 import DropDownSelect from "../../buttons/DrownDownSelect";
 import { UserContext } from "../../../context/UserContext";
+import Link from "next/link";
+import { EmployeeApi } from "../../../apis/employee";
 
 type Props = {
   data: EmployeeInterface[];
@@ -17,22 +14,25 @@ type Props = {
 };
 
 const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
-  // const router = useRouter();
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
   );
-  // const [dataList, setDataList] = useState<EmployeeInterface[] | []>([]);
-  // const [loading, setLoading] = useState(false);
+
   const [currentData, setcurrentData] = useState<EmployeeInterface[] | []>([]);
   const [initialSliceValue, setInitialSliceValue] = useState(0);
   const { userGlobal } = useContext(UserContext);
 
-  // const [pageNumber, setPageNumber] = useState(1);
-
   useEffect(() => {
     setcurrentData(data.slice(initialSliceValue, offsetSliceValue));
   }, [data, offsetSliceValue, initialSliceValue]);
+
+  const changeStatusJob = async (id: string) => {
+    EmployeeApi.post("/employees/change-status-job", {
+      statusOption: "VISTO",
+      idEmployee: id,
+    });
+  };
 
   return (
     <>
@@ -64,7 +64,6 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
                     onClick={() => {
                       setVisible(true);
                       setCurrentEmployee(user);
-                      console.log("current", user);
                     }}
                   >
                     <span>Ver información</span>
@@ -130,11 +129,11 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
               auto
               size="sm"
               style={{ marginBlock: "1rem" }}
+              onClick={() => changeStatusJob(currentEmployee.id)}
             >
-              {/* <Link href={currentEmployee.cv || ""}>
-                <a target="_blank">abrir el enlace del cv</a>
-              </Link> */}
-              ejeje cv
+              <Link href={currentEmployee.cv || ""} target="_blank">
+                abrir el enlace del cv
+              </Link>
             </Button>
           </div>
           <div className={styles.field}>

@@ -23,6 +23,7 @@
   --bg-blueSecondary300: #5ea2ef;
   --bg-blueSecondary400: #0072f5;
   --bg-blueSecondary500: #009ada;
+  --bg-blueSecondary100: #1976d2;
 
   --bg-blue100: #cce6f4;
   --bg-blueLight: #f2f6f7;
@@ -30,6 +31,16 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.btn {
+  border-radius: 0.25rem;
+  color: white;
+  font-size: 12px;
+}
+
+.bg-2 {
+  padding: 0.5rem 0.25rem;
 }
 
 .gray {
@@ -183,7 +194,7 @@ a {
 
 input:focus {
   border-width: 2px;
-  border-color: var(--bg-blue200);
+  border-color: #1976d2;
 }
 
 @media screen and (min-width: 768px) {
