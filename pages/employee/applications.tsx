@@ -5,8 +5,13 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from "../../context/EmployeeContext";
-import { EmployeeInterface, Service } from "../../interfaces";
+import {
+  EmployeeInterface,
+  IApplicationJobResponse,
+  Service,
+} from "../../interfaces";
 import styles from "../../styles/employees/Applications.module.css";
+import { EmployeeApi } from "../../apis/employee";
 
 const CardCollapse = dynamic(
   () => import("../../components/dashboard/employee/CardCollapse"),
@@ -25,6 +30,9 @@ const ApplicationsPage = () => {
   const [applicationsState, setApplicationsState] = useState<Service[] | []>(
     []
   );
+  const [currentApplicationByUser, setCurrentApplicationByUser] = useState<
+    IApplicationJobResponse[] | []
+  >([]);
 
   useEffect(() => {
     if (window.localStorage) {
@@ -47,6 +55,11 @@ const ApplicationsPage = () => {
       `${process.env.NEXT_PUBLIC_DB_URL}/employees/${id}`
     );
     const data = await res.json();
+    const { data: getInfoApplication } = await EmployeeApi.get(
+      `/employees/get-applications-jobs/${employeeGlobal.id}`
+    );
+    console.log(getInfoApplication);
+    setCurrentApplicationByUser(getInfoApplication);
     setApplicationsState(data.service);
   };
   return (
@@ -55,24 +68,15 @@ const ApplicationsPage = () => {
         <div className={styles.wrapper}>
           <h4>Mis Postulaciones</h4>
 
-          <div className={styles.status}>
-            <strong>Estado:</strong>
-            {employeeGlobal.statusJob === "VISTO" ? (
-              <span className=" btn bg-2 purple">VISTO</span>
-            ) : null}
-            {employeeGlobal.statusJob === "CONTRATADO" ? (
-              <span className=" btn bg-2 primary">CONTRATADO</span>
-            ) : null}
-            {employeeGlobal.statusJob === "SELECCIONADO" ? (
-              <span className=" btn bg-2 green">SELECCIONADO</span>
-            ) : null}
-            {employeeGlobal.statusJob === "DESCARTADO" ? (
-              <span className=" btn bg-2 red">DESCARTADO</span>
-            ) : null}
-          </div>
           <div className={styles.applicationsGrid}>
             {applicationsState.map((service: Service, index) => {
-              return <CardCollapse key={service._id} service={service} />;
+              return (
+                <CardCollapse
+                  key={service._id}
+                  service={service}
+                  applications={currentApplicationByUser}
+                />
+              );
             })}
           </div>
         </div>

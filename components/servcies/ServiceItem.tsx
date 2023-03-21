@@ -15,6 +15,7 @@ const ServiceItem = ({ service, changeStatusService }: Prop) => {
 
   useEffect(() => {
     setCurrentService(service);
+    console.log({ service });
   }, [service]);
 
   const watchAllEmployee = (data: EmployeeInterface[] | []) => {
@@ -47,6 +48,7 @@ const ServiceItem = ({ service, changeStatusService }: Prop) => {
       <TableListStaticData
         data={currentService.employees || []}
         // total={service.employees.length}
+        idService={currentService._id || ""}
         offsetSliceValue={offsetSliceValue}
       />
     </div>

@@ -89,7 +89,6 @@ export interface Service {
   employees?: EmployeeInterface[] | [];
   __v?: number;
 }
-
 export interface ServiceI {
   _id?: string;
   createdAt?: string;
@@ -122,6 +121,14 @@ export interface LangResponse {
   levelWriter: string;
   levelOral: string;
   employee: string;
+  __v?: number;
+}
+
+export interface IApplicationJobResponse {
+  _id: string;
+  employee: string;
+  service: string;
+  status: string;
   __v?: number;
 }
 

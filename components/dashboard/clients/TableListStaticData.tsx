@@ -11,9 +11,23 @@ type Props = {
   data: EmployeeInterface[];
   total?: string | number;
   offsetSliceValue: number;
+  idService: string;
 };
 
-const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
+interface IResponseApplication {
+  _id?: string;
+  employee: string;
+  service: string;
+  status: string;
+  __v?: number;
+}
+
+const TableListStaticData = ({
+  data,
+  total,
+  offsetSliceValue = 5,
+  idService,
+}: Props) => {
   const { setVisible, bindings } = useModal();
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
@@ -72,6 +86,8 @@ const TableListStaticData = ({ data, total, offsetSliceValue = 5 }: Props) => {
                 <Table.Cell>
                   {userGlobal.role === "ADMIN_ROLE" ? (
                     <DropDownSelect
+                      key={user.id}
+                      idService={idService}
                       idUser={user.id}
                       statusUser={user.statusJob || ""}
                     />

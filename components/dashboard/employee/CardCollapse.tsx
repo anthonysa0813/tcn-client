@@ -1,24 +1,52 @@
-import React, { useState } from "react";
+import { GetServerSideProps } from "next";
+import React, { useState, useEffect } from "react";
 import styles from "../../../styles/employees/Applications.module.css";
-import { Service } from "../../../interfaces/index";
+import { IApplicationJobResponse, Service } from "../../../interfaces/index";
 import dynamic from "next/dynamic";
 
 interface Prop {
   service: Service;
+  applications: IApplicationJobResponse[] | [];
 }
 
 const IoIosArrowUp = dynamic(
   () => import("@mui/icons-material/KeyboardArrowUp")
 );
 
-const CardCollapse = ({ service }: Prop) => {
+const CardCollapse = ({ service, applications }: Prop) => {
   const [activeDetails, setActiveDetails] = useState(false);
   const [currentService, setCurrentService] = useState("");
+  const [totalServiceInfo, setTotalServiceInfo] = useState("");
+
+  useEffect(() => {
+    applications.forEach((app) => {
+      if (app.service === service._id) {
+        setTotalServiceInfo(app.status);
+      }
+    });
+  }, []);
 
   return (
     <div key={service._id} className={styles.serviceCard}>
       <div className={styles.serviceCardHead}>
-        <h3>{service.title}</h3>
+        <div className="title">
+          <h3>{service.title}</h3>
+          <div className={styles.status}>
+            <strong>Estado:</strong>
+            {totalServiceInfo === "VISTO" ? (
+              <span className=" btn bg-2 purple">VISTO</span>
+            ) : null}
+            {totalServiceInfo === "CONTRATADO" ? (
+              <span className=" btn bg-2 primary">CONTRATADO</span>
+            ) : null}
+            {totalServiceInfo === "SELECCIONADO" ? (
+              <span className=" btn bg-2 green">SELECCIONADO</span>
+            ) : null}
+            {totalServiceInfo === "DESCARTADO" ? (
+              <span className=" btn bg-2 red">DESCARTADO</span>
+            ) : null}
+          </div>
+        </div>
         <IoIosArrowUp
           className={`${styles.icon} ${
             currentService === service._id
@@ -47,6 +75,17 @@ const CardCollapse = ({ service }: Prop) => {
       )}
     </div>
   );
+};
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const data = await fetch("");
+
+  return {
+    props: {},
+  };
 };
 
 export default CardCollapse;
