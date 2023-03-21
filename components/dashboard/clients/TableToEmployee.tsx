@@ -127,6 +127,7 @@ const TableToEmployee = ({
                     <Table.Cell>
                       {userGlobal.role === "ADMIN_ROLE" ? (
                         <DropDownSelect
+                        
                           statusUser={user?.statusJob ? user?.statusJob : ""}
                           idUser={user?.id}
                         />

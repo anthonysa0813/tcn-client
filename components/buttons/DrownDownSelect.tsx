@@ -9,7 +9,7 @@ import { API_URL } from "../../utils/constanstApi";
 interface Prop {
   statusUser: string;
   idUser: string;
-  idService: string;
+  idService?: string;
 }
 
 interface IResponseApplication {
@@ -20,12 +20,6 @@ interface IResponseApplication {
   __v?: number;
 }
 
-interface IresponseStatusJob {
-  idEmployee: string;
-  idService: string;
-  statusValue: string;
-}
-
 const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
   const menuItems = [
     { key: "DESCARTADO", name: "DESCARTADO" },
@@ -33,27 +27,32 @@ const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
     { key: "CONTRATADO", name: "CONTRATADO" },
   ];
   const [stateStatus, setStateStatus] = useState("");
+  const [currentJobInfo, setCurrentJobInfo] = useState<IResponseApplication>(
+    {} as IResponseApplication
+  );
 
   useEffect(() => {
     getJobApplication(`/employees/get-applications-jobs/${idUser}`);
+    console.log({ idService });
   }, [statusUser]);
 
   const getJobApplication = async (url: string) => {
     const { data } = await EmployeeApi.get<IResponseApplication[] | []>(url);
 
     const value = data.filter((v) => v.service === idService);
-
+    setCurrentJobInfo(value[0]);
     // console.log({ value: valueStatus });
     setStateStatus(value[0]?.status || "");
   };
 
   const changeStatus = async (value: string) => {
     setStateStatus(value);
-    const response = await EmployeeApi.post("/employees/status-job", {
-      idEmployee: idUser,
-      idService: idService,
-      statusValue: value,
-    });
+    const response = await EmployeeApi.put(
+      `/employees/status-job/${currentJobInfo._id}`,
+      {
+        status: value,
+      }
+    );
 
     console.log(response);
     // chenageStatusJobFetch("employees/change-status-job", {
