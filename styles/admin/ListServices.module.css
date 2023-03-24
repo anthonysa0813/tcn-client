@@ -17,3 +17,7 @@
 .tableHead h4 {
   margin: 0;
 }
+
+.field span {
+  color: var(--bg-blue200);
+}

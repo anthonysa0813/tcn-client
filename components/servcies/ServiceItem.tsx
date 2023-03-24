@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal, Table, Text, useModal } from "@nextui-org/react";
+import { Button, Modal, useModal } from "@nextui-org/react";
 import { EmployeeInterface, Service, ServiceI } from "../../interfaces";
 import styles from "../../styles/admin/ListServices.module.css";
 import TableListStaticData from "../dashboard/clients/TableListStaticData";
+import { generateExcelFile } from "../../helpers/exportFileExcel";
+import { ServiceApi } from "../../apis/services";
 
 interface Prop {
   service: ServiceI;
   changeStatusService: () => Promise<void>;
+  setServicesArr: React.Dispatch<React.SetStateAction<[] | ServiceI[]>>;
 }
 
-const ServiceItem = ({ service, changeStatusService }: Prop) => {
+interface IDeleteResponse {
+  message: string;
+}
+
+const ServiceItem = ({
+  service,
+  changeStatusService,
+  setServicesArr,
+}: Prop) => {
   const [offsetSliceValue, setOffsetSliceValue] = useState(5);
   const [currentService, setCurrentService] = useState({} as ServiceI);
+  const { setVisible, bindings } = useModal();
+  const [currentPuesto, setCurrentPuesto] = useState("");
 
   useEffect(() => {
     setCurrentService(service);
@@ -22,36 +35,97 @@ const ServiceItem = ({ service, changeStatusService }: Prop) => {
     setOffsetSliceValue(data.length);
   };
 
+  const setInfoJob = async (name: string) => {
+    setCurrentPuesto(name);
+    setVisible(true);
+  };
+
+  const deleteJob = async (id: string) => {
+    const { data } = await ServiceApi.delete(`/${id}`);
+    setServicesArr((service) => {
+      const removeSericeArr = service.filter((serv) => serv._id !== id);
+      return removeSericeArr;
+    });
+  };
+
   return (
-    <div key={currentService._id} className={styles.tableService}>
-      <div className={styles.tableHead}>
-        <h4>{currentService.title}</h4>
-        <Button
-          size={"xs"}
-          style={{ padding: ".5rem" }}
-          color={currentService.status ? "success" : "error"}
-          onClick={() => changeStatusService()}
-        >
-          {" "}
-          {currentService.status ? "Activo" : "Finalizado"}
-        </Button>
-        <Button
-          size={"xs"}
-          style={{ padding: ".5rem" }}
-          color={"secondary"}
-          onClick={() => watchAllEmployee(currentService.employees || [])}
-        >
-          {" "}
-          Ver Todos
-        </Button>
+    <>
+      <div key={currentService._id} className={styles.tableService}>
+        <div className={styles.tableHead}>
+          <h4>{currentService.title}</h4>
+          <Button
+            size={"xs"}
+            style={{ padding: ".5rem" }}
+            color={currentService.status ? "success" : "error"}
+            onClick={() => changeStatusService()}
+          >
+            {" "}
+            {currentService.status ? "Activo" : "Finalizado"}
+          </Button>
+          <Button
+            size={"xs"}
+            style={{ padding: ".5rem" }}
+            color={"gradient"}
+            onClick={() => watchAllEmployee(currentService.employees || [])}
+          >
+            {" "}
+            Ver Todos
+          </Button>
+          <Button
+            size={"xs"}
+            style={{ padding: ".5rem" }}
+            color={"default"}
+            onClick={() => generateExcelFile(currentService.employees)}
+          >
+            {" "}
+            Descargar Lista
+          </Button>
+          <Button
+            size={"xs"}
+            style={{ padding: ".5rem" }}
+            color={"warning"}
+            onClick={() => setInfoJob(currentService.title)}
+          >
+            {" "}
+            Eliminar Puesto
+          </Button>
+        </div>
+        <TableListStaticData
+          data={currentService.employees || []}
+          // total={service.employees.length}
+          idService={currentService._id || ""}
+          offsetSliceValue={offsetSliceValue}
+        />
       </div>
-      <TableListStaticData
-        data={currentService.employees || []}
-        // total={service.employees.length}
-        idService={currentService._id || ""}
-        offsetSliceValue={offsetSliceValue}
-      />
-    </div>
+      <Modal
+        scroll
+        width="600px"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        {...bindings}
+      >
+        <Modal.Body>
+          <div className={styles.field}>
+            <strong>
+              ¿Seguro que desea Eliminar el Puesto <span>{currentPuesto}</span>?
+            </strong>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            auto
+            flat
+            color="primary"
+            onClick={() => deleteJob(currentService._id || "")}
+          >
+            Sí, eliminar
+          </Button>
+          <Button auto flat color="error" onClick={() => setVisible(false)}>
+            Cancelar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

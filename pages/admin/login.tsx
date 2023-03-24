@@ -83,7 +83,7 @@ const LoginAdminForm = () => {
           Cookies.set("token", token, { expires: 7 });
           toastSuccess("Bienvenido...");
           if (token && Boolean(Object.keys(user).length > 0)) {
-            router.push("/admin/employees");
+            router.push("/admin/listServices");
             setShowLoading(false);
           }
         }

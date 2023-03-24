@@ -7,7 +7,6 @@ import { Service, ServiceI } from "../../interfaces";
 import styles from "../../styles/admin/ListServices.module.css";
 import { EmployeeInterface } from "../../interfaces/index";
 import ServiceItem from "../../components/servcies/ServiceItem";
-import { EmployeeApi } from "../../apis/employee";
 
 interface ServiceResponse {
   total: number;
@@ -20,27 +19,24 @@ interface Prop {
 
 const ListServicesPage = ({ services }: Prop) => {
   const [servicesArr, setServicesArr] = useState<ServiceI[] | []>([]);
-  const { setVisible, bindings } = useModal();
-  const [offsetSliceValue, setOffsetSliceValue] = useState(5);
-  const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>({
-    id: "",
-    name: "",
-    surnames: "",
-    email: "",
-    phone: "",
-    status: true,
-    cv: "",
-    callingCode: "",
-    typeJob: "",
-    service: [],
-    password: "",
-    message: "",
-    country: "",
-  });
+
+  // const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>({
+  //   id: "",
+  //   name: "",
+  //   surnames: "",
+  //   email: "",
+  //   phone: "",
+  //   status: true,
+  //   cv: "",
+  //   callingCode: "",
+  //   typeJob: "",
+  //   service: [],
+  //   password: "",
+  //   message: "",
+  //   country: "",
+  // });
 
   useEffect(() => {
-    console.log(services);
-
     if (services.length > 0) {
       setServicesArr(services);
     }
@@ -73,6 +69,7 @@ const ListServicesPage = ({ services }: Prop) => {
             <ServiceItem
               key={service._id}
               service={service}
+              setServicesArr={setServicesArr}
               changeStatusService={() => changeStatusService(service)}
             />
           );
@@ -90,7 +87,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     `https://contactbpo-server-production.up.railway.app/api/services`
   );
   const data = await response.json();
-  console.log({ data });
 
   return {
     props: {

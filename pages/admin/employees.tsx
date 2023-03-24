@@ -81,7 +81,7 @@ const Employees = () => {
   return (
     <>
       <LayoutDashboard>
-        <h1 className={styles.title}>Lista de Empleados</h1>
+        <h1 className={styles.title}>Lista de todos los Postulantes</h1>
         <div className={styles.menu}>
           <div className={styles.actions}>
             <button
