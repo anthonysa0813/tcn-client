@@ -6,7 +6,8 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const jwt = request.cookies.get("token");
 
-  if (!jwt) return NextResponse.redirect(new URL("/", request.url));
+  if (!jwt)
+    return NextResponse.redirect(new URL("/trabaja-con-nosotros", request.url));
 
   // this condition avoid to show the login page if the user is logged in
   // if (jwt) {
@@ -34,11 +35,16 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    // "/admin",
     "/admin/clients",
     "/admin/employees",
     "/admin/index",
     "/admin/listServices",
+    "/admin/listServices/:path*",
     "/admin/newService",
+    "/admin/changePassword",
+    "/admin/changeRole",
+    "/admin/createNewUser",
     "/employee/profile",
     "/employee/:path*",
   ],

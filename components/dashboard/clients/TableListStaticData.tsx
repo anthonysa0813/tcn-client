@@ -14,13 +14,13 @@ type Props = {
   idService: string;
 };
 
-interface IResponseApplication {
-  _id?: string;
-  employee: string;
-  service: string;
-  status: string;
-  __v?: number;
-}
+// interface IResponseApplication {
+//   _id?: string;
+//   employee: string;
+//   service: string;
+//   status: string;
+//   __v?: number;
+// }
 
 const TableListStaticData = ({
   data,

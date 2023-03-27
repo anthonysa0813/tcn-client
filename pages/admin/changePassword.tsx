@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
+import { Button } from "@mui/material";
 
 const LayoutDashboard = dynamic(
   import("../../components/dashboard/LayoutDashboard").then(
@@ -70,7 +71,15 @@ const ChangePassword = () => {
           />
         </div>
         <div className={styles.fieldButton}>
-          <button type="submit">Editar</button>
+          {/* <button type="submit">Editar</button> */}
+          <Button
+            color="primary"
+            sx={{ width: "100%" }}
+            variant="contained"
+            type="submit"
+          >
+            Editar
+          </Button>
         </div>
       </form>
     </LayoutDashboard>

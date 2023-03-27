@@ -2,11 +2,11 @@ import { GetServerSideProps } from "next";
 
 import React, { useEffect, useState, useContext } from "react";
 import { Button, Modal, Table, Text, useModal } from "@nextui-org/react";
-import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
-import { Service, ServiceI } from "../../interfaces";
-import styles from "../../styles/admin/ListServices.module.css";
-import { EmployeeInterface } from "../../interfaces/index";
-import ServiceItem from "../../components/servcies/ServiceItem";
+import LayoutDashboard from "../../../components/dashboard/LayoutDashboard";
+import { Service, ServiceI } from "../../../interfaces";
+import styles from "../../../styles/admin/ListServices.module.css";
+import { EmployeeInterface } from "../../../interfaces/index";
+import ServiceItem from "../../../components/servcies/ServiceItem";
 
 interface ServiceResponse {
   total: number;
@@ -19,22 +19,6 @@ interface Prop {
 
 const ListServicesPage = ({ services }: Prop) => {
   const [servicesArr, setServicesArr] = useState<ServiceI[] | []>([]);
-
-  // const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>({
-  //   id: "",
-  //   name: "",
-  //   surnames: "",
-  //   email: "",
-  //   phone: "",
-  //   status: true,
-  //   cv: "",
-  //   callingCode: "",
-  //   typeJob: "",
-  //   service: [],
-  //   password: "",
-  //   message: "",
-  //   country: "",
-  // });
 
   useEffect(() => {
     if (services.length > 0) {
@@ -62,7 +46,7 @@ const ListServicesPage = ({ services }: Prop) => {
   return (
     <LayoutDashboard>
       <>
-        <h1 className={styles.title}>Lista de Campañas</h1>
+        <h1 className={styles.title}>Puestos de trabajo</h1>
         <hr />
         {servicesArr.map((service: ServiceI) => {
           return (

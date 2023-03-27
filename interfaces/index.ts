@@ -82,7 +82,7 @@ export interface CountriesDataI {
 export interface Service {
   _id?: any;
   title: string;
-  company: string;
+  company?: string;
   description: string;
   createdAt?: string;
   updatedAt?: string;

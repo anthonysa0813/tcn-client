@@ -5,6 +5,7 @@ import styles from "../../styles/admin/AsideDashboard.module.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
+import { UserResponse } from "../../interfaces";
 
 const Image = dynamic(() => import("next/image").then((res) => res.default));
 
@@ -54,10 +55,17 @@ const IconButton = dynamic(() =>
 );
 
 const AsideDash = () => {
-  const { userGlobal } = useContext(UserContext);
+  const { userGlobal, setUserGlobal } = useContext(UserContext);
   const router = useRouter();
   const arrAsPath = router.asPath.split("/");
   const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {
+    if (window.localStorage) {
+      const auth: UserResponse = JSON.parse(localStorage.getItem("auth") || "");
+      setUserGlobal(auth);
+    }
+  }, []);
 
   const pathActive = (path: string) => {
     const pathName = arrAsPath[arrAsPath.length - 1];
@@ -71,6 +79,7 @@ const AsideDash = () => {
   const outSession = () => {
     Cookies.remove("token");
     sessionStorage.clear();
+    sessionStorage.removeItem("auth");
     router.push("/admin");
   };
 

@@ -5,6 +5,7 @@ import styles from "../../styles/admin/ListServices.module.css";
 import TableListStaticData from "../dashboard/clients/TableListStaticData";
 import { generateExcelFile } from "../../helpers/exportFileExcel";
 import { ServiceApi } from "../../apis/services";
+import Link from "next/link";
 
 interface Prop {
   service: ServiceI;
@@ -62,15 +63,18 @@ const ServiceItem = ({
             {" "}
             {currentService.status ? "Activo" : "Finalizado"}
           </Button>
-          <Button
-            size={"xs"}
-            style={{ padding: ".5rem" }}
-            color={"gradient"}
-            onClick={() => watchAllEmployee(currentService.employees || [])}
-          >
-            {" "}
-            Ver Todos
-          </Button>
+          <Link href={`/admin/listServices/${currentService._id}`}>
+            <Button
+              size={"xs"}
+              style={{ padding: ".5rem" }}
+              color={"gradient"}
+              type="button"
+              // onClick={() => watchAllEmployee(currentService.employees || [])}
+            >
+              {" "}
+              Ver Todos
+            </Button>
+          </Link>
           <Button
             size={"xs"}
             style={{ padding: ".5rem" }}

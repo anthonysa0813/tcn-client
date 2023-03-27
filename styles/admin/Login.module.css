@@ -31,6 +31,7 @@
 
 .imageContainer {
   position: relative;
+  cursor: pointer;
 }
 
 .imageContainer h5 {
@@ -38,4 +39,9 @@
   right: 25%;
   top: 70%;
   color: var(--bg-blue200);
+}
+
+.field span:hover {
+  color: var(--bg-gray300);
+  cursor: pointer;
 }
