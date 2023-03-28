@@ -82,7 +82,7 @@ const Navbar = () => {
           <div className={styles.headerContainer}>
             <div className="logoContainer">
               <Image
-                src="/images/logoContact.png"
+                src="/images/LogoContact.png"
                 alt="Logo de Contact bpo"
                 width={200}
                 height={100}
