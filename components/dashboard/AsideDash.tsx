@@ -98,7 +98,7 @@ const AsideDash = () => {
                 src="https://www.contactbpo.pe/img/logo.png"
                 alt="Logo de Contact bpo"
                 width={150}
-                height={100}
+                height={30}
                 onClick={() => router.push("/")}
               />
               <CloseIcon className={styles.svgMenu} />
