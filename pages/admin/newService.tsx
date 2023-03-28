@@ -14,6 +14,8 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   loading: () => <p>Loading ...</p>,
 });
 
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 const LayoutDashboard = dynamic(
   import("../../components/dashboard/LayoutDashboard").then(
     (res) => res.default
@@ -89,92 +91,97 @@ const NewServicePage = () => {
   };
 
   return (
-    <LayoutDashboard>
-      <ToastContainer />
+    <>
+      <Head>
+        <title>Contact Bpo Admin | Crea un Nuevo Puesto</title>
+      </Head>
+      <LayoutDashboard>
+        <ToastContainer />
 
-      <div className="wrapper">
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <h1 className={styles.title}>Crear un nuevo puesto laboral</h1>
-          {role !== "ADMIN_ROLE" && (
-            <p className={styles.alert}>
-              Únicamente los usuarios con un role <span>ADMIN_ROLE</span>,
-              podrán crear.
-            </p>
-          )}
-          <div className={styles.subwrapper}>
-            <div className={styles.field}>
-              <label>Título:</label>
-              <Input
-                type="text"
-                clearable
-                underlined
-                name="title"
-                value={title}
-                onChange={onChange}
-              />
-            </div>
-            <div className={styles.field}>
-              <label>Requerimientos:</label>
-              <Input
-                type="text"
-                clearable
-                underlined
-                name="requirements"
-                value={requirements}
-                onChange={onChange}
-                placeholder="habilidades blandas, experiencia en ventas,etc..."
-              />
-            </div>
-
-            <div className={styles.fieldSecondary}>
-              <div className={styles.subField}>
-                <label>Horario:</label>
+        <div className="wrapper">
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <h1 className={styles.title}>Crear un nuevo puesto laboral</h1>
+            {role !== "ADMIN_ROLE" && (
+              <p className={styles.alert}>
+                Únicamente los usuarios con un role <span>ADMIN_ROLE</span>,
+                podrán crear.
+              </p>
+            )}
+            <div className={styles.subwrapper}>
+              <div className={styles.field}>
+                <label>Título:</label>
                 <Input
                   type="text"
                   clearable
                   underlined
-                  name="schedule"
-                  value={schedule}
+                  name="title"
+                  value={title}
                   onChange={onChange}
-                  placeholder="L - V (8am -6pm)"
                 />
               </div>
-              <div className={styles.subField}>
-                <label>Salario:</label>
+              <div className={styles.field}>
+                <label>Requerimientos:</label>
                 <Input
                   type="text"
                   clearable
                   underlined
-                  name="salary"
-                  value={salary}
+                  name="requirements"
+                  value={requirements}
                   onChange={onChange}
-                  placeholder="2000"
+                  placeholder="habilidades blandas, experiencia en ventas,etc..."
                 />
               </div>
+
+              <div className={styles.fieldSecondary}>
+                <div className={styles.subField}>
+                  <label>Horario:</label>
+                  <Input
+                    type="text"
+                    clearable
+                    underlined
+                    name="schedule"
+                    value={schedule}
+                    onChange={onChange}
+                    placeholder="L - V (8am -6pm)"
+                  />
+                </div>
+                <div className={styles.subField}>
+                  <label>Salario:</label>
+                  <Input
+                    type="text"
+                    clearable
+                    underlined
+                    name="salary"
+                    value={salary}
+                    onChange={onChange}
+                    placeholder="2000"
+                  />
+                </div>
+              </div>
+              <div className={styles.field} style={{ marginBlock: "3rem" }}>
+                <label style={{ marginBlockEnd: "1rem" }}>
+                  Descripción del puesto:
+                </label>
+                <QuillNoSSRWrapper
+                  value={descriptionState}
+                  onChange={handleChange}
+                  theme="snow"
+                />
+              </div>
+              <button
+                type={role !== "ADMIN_ROLE" ? "button" : "submit"}
+                className={`${styles.button} ${
+                  role !== "ADMIN_ROLE" ? styles.inactive : ""
+                }`}
+                // disabled={true}
+              >
+                Crear
+              </button>
             </div>
-            <div className={styles.field} style={{ marginBlock: "3rem" }}>
-              <label style={{ marginBlockEnd: "1rem" }}>
-                Descripción del puesto:
-              </label>
-              <QuillNoSSRWrapper
-                value={descriptionState}
-                onChange={handleChange}
-                theme="snow"
-              />
-            </div>
-            <button
-              type={role !== "ADMIN_ROLE" ? "button" : "submit"}
-              className={`${styles.button} ${
-                role !== "ADMIN_ROLE" ? styles.inactive : ""
-              }`}
-              // disabled={true}
-            >
-              Crear
-            </button>
-          </div>
-        </form>
-      </div>
-    </LayoutDashboard>
+          </form>
+        </div>
+      </LayoutDashboard>
+    </>
   );
 };
 

@@ -1,6 +1,4 @@
-import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { getFetchApi } from "../../helpers/useFetch";
 import { EmployeeInterface } from "../../interfaces";
 import styles from "../../styles/employees/ListEmployee.module.css";
@@ -22,6 +20,8 @@ interface PropCSV {
 const DownloadIcon = dynamic(() =>
   import("@mui/icons-material/FileDownload").then((res) => res.default)
 );
+
+const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 const LayoutDashboard = dynamic(() =>
   import("../../components/dashboard/LayoutDashboard").then(
@@ -80,6 +80,13 @@ const Employees = () => {
 
   return (
     <>
+      <Head>
+        <title>Contact Bpo Admin | Lista de Postulantes</title>
+        <meta
+          name="description"
+          content="Contact BPO página administrador de Contact BPO - lista de postulantes"
+        />
+      </Head>
       <LayoutDashboard>
         <h1 className={styles.title}>Lista de todos los Postulantes</h1>
         <div className={styles.menu}>

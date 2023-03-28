@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 const KeyIcon = dynamic(() =>
   import("@mui/icons-material/Key").then((res) => res.default)
 );
+const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 const LayoutDashboard = dynamic(() =>
   import("../../components/dashboard/LayoutDashboard").then(
@@ -70,63 +71,77 @@ const CreateNewUser = () => {
   };
 
   return (
-    <LayoutDashboard>
-      <div className={styles.main}>
-        <h1>Crea un nuevo usuario y elige su role</h1>
-        {message && (
-          <span>Hemos enviado un correo al usuario con sus datos.</span>
-        )}
-        <form className={styles.form} onSubmit={onSubmit}>
-          <ToastContainer />
-          <div className={styles.field}>
-            <label htmlFor="name">Nombres:</label>
-            <input type="text" name="names" value={names} onChange={onChange} />
-          </div>
-          <div className={styles.field}>
-            <label htmlFor="name">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <div className={styles.headField}>
-              <label htmlFor="name">Password:</label>
-              <button onClick={generatePassword} type="button">
-                {" "}
-                <KeyIcon style={{ fontSize: "16px" }} />
-                <span>Generar Password</span>
+    <>
+      <Head>
+        <title>Contact Bpo Admin | Crear un nuevo usuario </title>
+      </Head>
+      <LayoutDashboard>
+        <div className={styles.main}>
+          <h1>Crea un nuevo usuario y elige su role</h1>
+          {message && (
+            <span>Hemos enviado un correo al usuario con sus datos.</span>
+          )}
+          <form className={styles.form} onSubmit={onSubmit}>
+            <ToastContainer />
+            <div className={styles.field}>
+              <label htmlFor="name">Nombres:</label>
+              <input
+                type="text"
+                name="names"
+                value={names}
+                onChange={onChange}
+              />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="name">Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChange}
+              />
+            </div>
+            <div className={styles.field}>
+              <div className={styles.headField}>
+                <label htmlFor="name">Password:</label>
+                <button onClick={generatePassword} type="button">
+                  {" "}
+                  <KeyIcon style={{ fontSize: "16px" }} />
+                  <span>Generar Password</span>
+                </button>
+              </div>
+              <input type="text" ref={passwordInputRef} />
+            </div>
+            <div className={styles.field}>
+              <DatalistInput
+                placeholder="role"
+                label="Elige el role"
+                onSelect={(item) => setRoleValue(item.value)}
+                items={roles}
+              />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="name">
+                ¿Es superAdmin?: <span>(Opcional)</span>
+              </label>
+              <div className="option">
+                <input
+                  type="checkbox"
+                  checked={isSuperAdmin}
+                  onClick={isAdmin}
+                />{" "}
+                Sí lo es
+              </div>
+            </div>
+            <div className="field">
+              <button type="submit" className={styles.buttonSubmit}>
+                CREAR USUARIO
               </button>
             </div>
-            <input type="text" ref={passwordInputRef} />
-          </div>
-          <div className={styles.field}>
-            <DatalistInput
-              placeholder="role"
-              label="Elige el role"
-              onSelect={(item) => setRoleValue(item.value)}
-              items={roles}
-            />
-          </div>
-          <div className={styles.field}>
-            <label htmlFor="name">
-              ¿Es superAdmin?: <span>(Opcional)</span>
-            </label>
-            <div className="option">
-              <input type="checkbox" checked={isSuperAdmin} onClick={isAdmin} />{" "}
-              Sí lo es
-            </div>
-          </div>
-          <div className="field">
-            <button type="submit" className={styles.buttonSubmit}>
-              CREAR USUARIO
-            </button>
-          </div>
-        </form>
-      </div>
-    </LayoutDashboard>
+          </form>
+        </div>
+      </LayoutDashboard>
+    </>
   );
 };
 

@@ -5,6 +5,8 @@ import { GetServerSideProps } from "next/types";
 import { Service, ServiceI } from "../../interfaces";
 import dynamic from "next/dynamic";
 
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 interface ServiceProp {
   services: ServiceI[] | [];
 }
@@ -20,6 +22,13 @@ const CampaignEmployees = ({ services }: ServiceProp) => {
   // useEffect(() => {}, []);
   return (
     <>
+      <Head>
+        <title>Contact BPO | Puestos Disponibles</title>
+        <meta
+          name="description"
+          content="Puestos de trabajo disponibles con relación a Contact BPO."
+        />
+      </Head>
       <LayoutEmployee>
         <main className={styles.main}>
           <div className={styles.wrapper}>

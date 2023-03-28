@@ -15,6 +15,8 @@ const LayoutDashboard = dynamic(
   )
 );
 
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 const ChangePassword = () => {
   const { userGlobal } = useContext(UserContext);
   const { id } = userGlobal;
@@ -56,33 +58,38 @@ const ChangePassword = () => {
   };
 
   return (
-    <LayoutDashboard>
-      <h3 className={styles.title}>Edita tu información Personal</h3>
-      <form className={styles.info} onSubmit={onSubmit}>
-        {error && <span>Debes de ingresar una clave</span>}
-        <ToastContainer />
-        <div className={styles.field}>
-          <label>Nueva Contraseña: </label>
-          <input
-            type="text"
-            name="password"
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-        <div className={styles.fieldButton}>
-          {/* <button type="submit">Editar</button> */}
-          <Button
-            color="primary"
-            sx={{ width: "100%" }}
-            variant="contained"
-            type="submit"
-          >
-            Editar
-          </Button>
-        </div>
-      </form>
-    </LayoutDashboard>
+    <>
+      <Head>
+        <title>Contact Bpo Admin | Cambiar la contraseña</title>
+      </Head>
+      <LayoutDashboard>
+        <h3 className={styles.title}>Edita tu información Personal</h3>
+        <form className={styles.info} onSubmit={onSubmit}>
+          {error && <span>Debes de ingresar una clave</span>}
+          <ToastContainer />
+          <div className={styles.field}>
+            <label>Nueva Contraseña: </label>
+            <input
+              type="text"
+              name="password"
+              value={password}
+              onChange={onChange}
+            />
+          </div>
+          <div className={styles.fieldButton}>
+            {/* <button type="submit">Editar</button> */}
+            <Button
+              color="primary"
+              sx={{ width: "100%" }}
+              variant="contained"
+              type="submit"
+            >
+              Editar
+            </Button>
+          </div>
+        </form>
+      </LayoutDashboard>
+    </>
   );
 };
 

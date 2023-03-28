@@ -13,6 +13,8 @@ import {
 import styles from "../../styles/employees/Applications.module.css";
 import { EmployeeApi } from "../../apis/employee";
 
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 const CardCollapse = dynamic(
   () => import("../../components/dashboard/employee/CardCollapse"),
   {
@@ -64,10 +66,16 @@ const ApplicationsPage = () => {
   };
   return (
     <>
+      <Head>
+        <title>Contact Bpo | Mis Postulaciones</title>
+        <meta
+          name="description"
+          content="Página de mis postulaciones en Contact BPO"
+        />
+      </Head>
       <LayoutEmployee name="aplicaciones de trabajo">
         <div className={styles.wrapper}>
           <h4>Mis Postulaciones</h4>
-
           <div className={styles.applicationsGrid}>
             {applicationsState.map((service: Service, index) => {
               return (

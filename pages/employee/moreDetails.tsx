@@ -34,6 +34,8 @@ const LayoutEmployee = dynamic(() =>
   import("./layoutEmployee").then((res) => res.default)
 );
 
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 const ArrowLeft = dynamic(() =>
   import("@mui/icons-material/KeyboardBackspace").then((res) => res.default)
 );
@@ -244,6 +246,13 @@ const MoreDetails = () => {
 
   return (
     <>
+      <Head>
+        <title>Contact Bpo | Dashboard Contact</title>
+        <meta
+          name="description"
+          content="Dashboard de Contact BPO para futuros empleadores."
+        />
+      </Head>
       <ToastContainer />
       <LayoutEmployee name="Seguir editando">
         <div className={styles.alert}>

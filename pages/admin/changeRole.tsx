@@ -14,6 +14,8 @@ import { Loading } from "@nextui-org/react";
 import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
 
+const Head = dynamic(() => import("next/head").then((res) => res.default));
+
 const ChangeRole = () => {
   const { email, onChange } = useForm({ email: "" });
   const toastWarning = (message: string) => toast.warning(message);
@@ -106,42 +108,47 @@ const ChangeRole = () => {
   };
 
   return (
-    <LayoutDashboard>
-      <div className={styles.mainGrid}>
-        <h1>Busca y activa una cuenta como administrador</h1>
-        <ToastContainer />
+    <>
+      <Head>
+        <title>Contact Bpo Admin | Cambia de role a un usuario admin</title>
+      </Head>
+      <LayoutDashboard>
+        <div className={styles.mainGrid}>
+          <h1>Busca y activa una cuenta como administrador</h1>
+          <ToastContainer />
 
-        <SearchForm onSubmit={onSubmit} email={email} onChange={onChange} />
-        <div className="actionWatchAllUsers">
-          <button
-            className={styles.watchAllUsersButton}
-            onClick={() => {
-              setShowAllUsers((state) => !state);
-              setShowUniqueUser(false);
-            }}
-          >
-            {showAllUsers ? "ocultar lista" : "Ver todos los usuarios"}
-          </button>
+          <SearchForm onSubmit={onSubmit} email={email} onChange={onChange} />
+          <div className="actionWatchAllUsers">
+            <button
+              className={styles.watchAllUsersButton}
+              onClick={() => {
+                setShowAllUsers((state) => !state);
+                setShowUniqueUser(false);
+              }}
+            >
+              {showAllUsers ? "ocultar lista" : "Ver todos los usuarios"}
+            </button>
+          </div>
+          {loading && <Loading />}
+          {showUniqueUser && (
+            <UniqueUser
+              userUniqueInfo={userUniqueInfo}
+              changeStatusFunction={changeStatusFunction}
+            />
+          )}
+          {showAllUsers &&
+            usersData.map((user) => {
+              return (
+                <UniqueUser
+                  key={user.id}
+                  userUniqueInfo={user}
+                  changeStatusFunction={changeStatusFunction}
+                />
+              );
+            })}
         </div>
-        {loading && <Loading />}
-        {showUniqueUser && (
-          <UniqueUser
-            userUniqueInfo={userUniqueInfo}
-            changeStatusFunction={changeStatusFunction}
-          />
-        )}
-        {showAllUsers &&
-          usersData.map((user) => {
-            return (
-              <UniqueUser
-                key={user.id}
-                userUniqueInfo={user}
-                changeStatusFunction={changeStatusFunction}
-              />
-            );
-          })}
-      </div>
-    </LayoutDashboard>
+      </LayoutDashboard>
+    </>
   );
 };
 

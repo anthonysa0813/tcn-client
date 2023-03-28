@@ -45,6 +45,7 @@ const ArrowForwardIcon = dynamic(() =>
 const Button = dynamic(() =>
   import("@mui/material/Button").then((res) => res.default)
 );
+const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 const Tooltip = dynamic(() =>
   import("@mui/material/Tooltip").then((res) => res.default)
@@ -95,11 +96,6 @@ const EditPage = ({ data }: any) => {
       setlocalEmployee(getId);
       setIdLocalStorage(getId.id || "");
       setEmployeeGlobal(getId);
-
-      // const localCountries = JSON.parse(
-      //   window.localStorage.getItem("countries") || ""
-      // );
-      // setAllCountries(localCountries);
       console.log("getId", getId);
       setCountryCurrent(getId.country || "");
     }
@@ -180,156 +176,167 @@ const EditPage = ({ data }: any) => {
   };
 
   return (
-    <LayoutEmployee name="editar información">
-      <h1>Edita tu información</h1>
-      <div className={styles.nextAction}>
-        <Button
-          color="primary"
-          onClick={() => router.push("/employee/moreDetails")}
-        >
-          <Tooltip
+    <>
+      <Head>
+        <title>Contact Bpo | Dashboard Contact</title>
+        <meta
+          name="description"
+          content="Dashboard de Contact BPO para futuros empleadores."
+        />
+      </Head>
+      <LayoutEmployee name="editar información">
+        <h1>Edita tu información</h1>
+        <div className={styles.nextAction}>
+          <Button
             color="primary"
-            title="Sí ha realizado un cambio, asegúrese en guardarlo antes de salir de ésta pestaña"
-            arrow
+            onClick={() => router.push("/employee/moreDetails")}
           >
-            <span className={styles.buttonText}>
-              agrega más información <ArrowForwardIcon />
-            </span>
-          </Tooltip>
-        </Button>
-      </div>
-      <ToastContainer />
-      <form className={styles.formContainer} onSubmit={handleSubmit}>
-        <div className={styles.field}>
-          <div className={styles.textInfo}>
-            <label>Nombres:</label>
-            <span className={styles.subText}>
-              Porfavor, escribir tus nombres completos.
-            </span>
-          </div>
-          <div className={styles.buttonContent}>
-            {/* <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={handleChange}
-            /> */}
-            <OutlinedInput
-              style={{ width: "100%" }}
-              type="text"
-              name="name"
-              size="small"
-              value={name}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className={styles.field}>
-          <div className={styles.textInfo}>
-            <label htmlFor="">Apellidos:</label>
-            <span className={styles.subText}>
-              Porfavor, escribir tus Apellidos completos
-            </span>
-          </div>
-          <div className={styles.buttonContent}>
-            {/* <input
-              type="text"
-              name="surnames"
-              value={surnames}
-              onChange={handleChange}
-            /> */}
-            <OutlinedInput
-              style={{ width: "100%" }}
-              type="text"
-              name="surnames"
-              size="small"
-              value={surnames}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className={styles.field}>
-          <div className={styles.textInfo}>
-            <label htmlFor="" className={styles.label}>
-              <MailIcon style={{ height: "30px", width: 30 }} />
-              Email:
-            </label>
-            <span className={styles.subText}>Mantén un correo actualizado</span>
-          </div>
-          <div className={styles.buttonContent}>
-            {/* <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-            /> */}
-            <OutlinedInput
-              style={{ width: "100%" }}
-              type="email"
-              name="email"
-              size="small"
-              value={email}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <div className={styles.field}>
-          <div className={styles.textInfo}>
-            <label
-              htmlFor="
-            "
-              className={styles.label}
+            <Tooltip
+              color="primary"
+              title="Sí ha realizado un cambio, asegúrese en guardarlo antes de salir de ésta pestaña"
+              arrow
             >
-              <PublicIcon style={{ height: "30px", width: 30 }} />
-              Dónde vives:
-            </label>
-            <span className={styles.subText}>
-              Conocer tu país nos dará mejor cobertura para informarnos con
-              usted.
-            </span>
-          </div>
-          <div className={styles.buttonContent}>
-            <DatalistInput
-              className="dataList"
-              placeholder=""
-              label="País"
-              onSelect={(item) => setCountryCurrent(item.value)}
-              items={countriesDataResponse}
-              value={countryCurrent}
-            />
-          </div>
+              <span className={styles.buttonText}>
+                agrega más información <ArrowForwardIcon />
+              </span>
+            </Tooltip>
+          </Button>
         </div>
-        <div className={styles.field}>
-          <div className={styles.textInfo}>
-            <label htmlFor="" className={styles.label}>
-              <FileIcon style={{ height: "30px", width: 30 }} />
-              CV:
-            </label>
-            <span className={styles.subText}>
-              Comparte tu cv para conocer un poco más sobre ti
-            </span>
+        <ToastContainer />
+        <form className={styles.formContainer} onSubmit={handleSubmit}>
+          <div className={styles.field}>
+            <div className={styles.textInfo}>
+              <label>Nombres:</label>
+              <span className={styles.subText}>
+                Porfavor, escribir tus nombres completos.
+              </span>
+            </div>
+            <div className={styles.buttonContent}>
+              {/* <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleChange}
+            /> */}
+              <OutlinedInput
+                style={{ width: "100%" }}
+                type="text"
+                name="name"
+                size="small"
+                value={name}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div className={styles.buttonContent}>
-            {/* <input type="file" name="cv" onChange={readInputTypeFile} /> */}
-            <InputFileUpload cv={employeeGlobal.cv} />
-            {/* <a
+          <div className={styles.field}>
+            <div className={styles.textInfo}>
+              <label htmlFor="">Apellidos:</label>
+              <span className={styles.subText}>
+                Porfavor, escribir tus Apellidos completos
+              </span>
+            </div>
+            <div className={styles.buttonContent}>
+              {/* <input
+              type="text"
+              name="surnames"
+              value={surnames}
+              onChange={handleChange}
+            /> */}
+              <OutlinedInput
+                style={{ width: "100%" }}
+                type="text"
+                name="surnames"
+                size="small"
+                value={surnames}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className={styles.field}>
+            <div className={styles.textInfo}>
+              <label htmlFor="" className={styles.label}>
+                <MailIcon style={{ height: "30px", width: 30 }} />
+                Email:
+              </label>
+              <span className={styles.subText}>
+                Mantén un correo actualizado
+              </span>
+            </div>
+            <div className={styles.buttonContent}>
+              {/* <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            /> */}
+              <OutlinedInput
+                style={{ width: "100%" }}
+                type="email"
+                name="email"
+                size="small"
+                value={email}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <div className={styles.textInfo}>
+              <label
+                htmlFor="
+              "
+                className={styles.label}
+              >
+                <PublicIcon style={{ height: "30px", width: 30 }} />
+                Dónde vives:
+              </label>
+              <span className={styles.subText}>
+                Conocer tu país nos dará mejor cobertura para informarnos con
+                usted.
+              </span>
+            </div>
+            <div className={styles.buttonContent}>
+              <DatalistInput
+                className="dataList"
+                placeholder=""
+                label="País"
+                onSelect={(item) => setCountryCurrent(item.value)}
+                items={countriesDataResponse}
+                value={countryCurrent}
+              />
+            </div>
+          </div>
+          <div className={styles.field}>
+            <div className={styles.textInfo}>
+              <label htmlFor="" className={styles.label}>
+                <FileIcon style={{ height: "30px", width: 30 }} />
+                CV:
+              </label>
+              <span className={styles.subText}>
+                Comparte tu cv para conocer un poco más sobre ti
+              </span>
+            </div>
+            <div className={styles.buttonContent}>
+              {/* <input type="file" name="cv" onChange={readInputTypeFile} /> */}
+              <InputFileUpload cv={employeeGlobal.cv} />
+              {/* <a
               href={employeeGlobal.cv}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.cvText}
-            >
+              >
               Ver mi cv
             </a> */}
+            </div>
           </div>
-        </div>
-        <div className={styles.buttonField}>
-          <button type="submit" className={styles.register}>
-            Editar
-          </button>
-        </div>
-      </form>
-    </LayoutEmployee>
+          <div className={styles.buttonField}>
+            <button type="submit" className={styles.register}>
+              Editar
+            </button>
+          </div>
+        </form>
+      </LayoutEmployee>
+    </>
   );
 };
 
