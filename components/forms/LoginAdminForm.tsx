@@ -104,10 +104,10 @@ const LoginAdminFormComponent = ({ setShowForgetPass }: Prop) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.imageContainer}>
           <Image
-            src="/images/LogoContact.png"
+            src="https://www.contactbpo.pe/img/logo.png"
             alt="Logo de Contact bpo"
             width={200}
-            height={100}
+            height={30}
             onClick={() => router.push("/trabaja-con-nosotros")}
           />
           <h5>ADMIN</h5>

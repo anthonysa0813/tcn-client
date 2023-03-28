@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../../styles/components/carousel/SlidesInfinite.module.css";
+import Image from "next/image";
+// import dynamic from "next/dynamic";
 
-import dynamic from "next/dynamic";
-
-const Image = dynamic(() => import("next/image").then((res) => res.default));
+// const Image = dynamic(() => import("next/image").then((res) => res.default));
 
 const Slider = () => {
   return (

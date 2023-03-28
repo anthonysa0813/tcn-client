@@ -7,11 +7,8 @@ import {
 import styles from "../../styles/client/Navbar.module.css";
 import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
-import { GetServerSideProps } from "next";
-import { IntlProvider } from "react-intl";
-import translate, { changeLanguage, messages } from "../../lang/home";
-import { PropMessageNavbarLangs } from "../../interfaces";
-import { EmployeeInterface } from "../../interfaces/index";
+import Image from "next/image";
+
 import {
   CurrentLangContext,
   CurrentLangContextType,
@@ -26,7 +23,7 @@ const LogoutIcon = dynamic(() =>
   import("@mui/icons-material/Logout").then((res) => res.default)
 );
 
-const Image = dynamic(() => import("next/image").then((res) => res.default));
+// const Image = dynamic(() => import("next/image").then((res) => res.default));
 
 const Link = dynamic(() => import("next/link").then((res) => res.default));
 
@@ -80,12 +77,12 @@ const Navbar = () => {
       <header className={styles.header}>
         <div className="wrapper">
           <div className={styles.headerContainer}>
-            <div className="logoContainer">
+            <div className={styles.logoContainer}>
               <Image
-                src="/images/LogoContact.png"
-                alt="Logo de Contact bpo"
+                src="https://www.contactbpo.pe/img/logo.png"
+                alt="Logo de Contact BPO"
                 width={200}
-                height={100}
+                height={30}
                 onClick={() => router.push("/")}
               />
             </div>

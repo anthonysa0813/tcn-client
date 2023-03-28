@@ -95,7 +95,7 @@ const AsideDash = () => {
           {showMenu ? (
             <>
               <Image
-                src="/images/LogoContact.png"
+                src="https://www.contactbpo.pe/img/logo.png"
                 alt="Logo de Contact bpo"
                 width={150}
                 height={100}
