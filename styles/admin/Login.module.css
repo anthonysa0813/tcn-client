@@ -32,11 +32,13 @@
 .imageContainer {
   position: relative;
   cursor: pointer;
+  margin-block-end: 1rem;
+  text-align: center;
 }
 
 .imageContainer h5 {
   position: absolute;
-  right: 25%;
+  right: 10%;
   top: 70%;
   color: var(--bg-blue200);
 }
