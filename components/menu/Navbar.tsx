@@ -82,7 +82,7 @@ const Navbar = () => {
                 src="https://www.contactbpo.pe/img/logo.png"
                 alt="Logo de Contact BPO"
                 width={200}
-                height={30}
+                height={35}
                 onClick={() => router.push("/")}
               />
             </div>

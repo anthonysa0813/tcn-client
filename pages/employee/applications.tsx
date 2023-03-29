@@ -75,8 +75,11 @@ const ApplicationsPage = () => {
       </Head>
       <LayoutEmployee name="aplicaciones de trabajo">
         <div className={styles.wrapper}>
-          <h4>Mis Postulaciones</h4>
+          {applicationsState.length > 0 && <h4>Mis Postulaciones</h4>}
           <div className={styles.applicationsGrid}>
+            {applicationsState.length === 0 && (
+              <h3>No tienes postulaciones abiertas</h3>
+            )}
             {applicationsState.map((service: Service, index) => {
               return (
                 <CardCollapse

@@ -4,6 +4,7 @@ import styles from "../../styles/client/Campaign.module.css";
 import { GetServerSideProps } from "next/types";
 import { Service, ServiceI } from "../../interfaces";
 import dynamic from "next/dynamic";
+import NotFoundJobs from "../../components/cards/NotFoundJobs";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
@@ -33,8 +34,9 @@ const CampaignEmployees = ({ services }: ServiceProp) => {
         <main className={styles.main}>
           <div className={styles.wrapper}>
             <div className={styles.mainContainer}>
-              <h3>Puestos de trabajos</h3>
+              {services.length > 0 && <h3>Puestos de trabajos</h3>}
               <div className={styles.servicesGrid}>
+                {services.length === 0 && <NotFoundJobs />}
                 {services?.map((service) => {
                   return (
                     <>
