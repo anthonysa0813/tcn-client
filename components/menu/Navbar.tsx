@@ -88,7 +88,7 @@ const Navbar = () => {
             </div>
             <nav className={styles.menu}>
               {!name && (
-                <Link href="/trabaja-con-nosotros">Puestos de trabajo</Link>
+                <Link href="/">Puestos de trabajos</Link>
               )}
               {name && (
                 // <span className={styles.iconUser}>

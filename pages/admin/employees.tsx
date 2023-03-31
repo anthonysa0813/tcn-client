@@ -76,7 +76,7 @@ const Employees = () => {
       };
     });
     setExportData(arrToExportExcel);
-  }, [employeeData]);
+  }, []);
 
   return (
     <>

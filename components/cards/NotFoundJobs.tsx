@@ -15,7 +15,7 @@ const NotFoundJobs = () => {
     <>
       <div className={styles.modalJob}>
         <div className={styles.modalContent}>
-          <h3>Por el momento No contamos con puestos disponinles,</h3>
+          <h3>Por el momento No contamos con puestos disponibles,</h3>
           <span>Te invitamos a seguirnos en nuestras redes sociales</span>
           <div className={styles.socialIcons}>
             <div className={styles.boxIcon}>

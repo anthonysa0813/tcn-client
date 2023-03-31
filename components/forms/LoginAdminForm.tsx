@@ -108,7 +108,7 @@ const LoginAdminFormComponent = ({ setShowForgetPass }: Prop) => {
             alt="Logo de Contact bpo"
             width={200}
             height={30}
-            onClick={() => router.push("/trabaja-con-nosotros")}
+            onClick={() => router.push("/")}
           />
           <h5>ADMIN</h5>
         </div>
