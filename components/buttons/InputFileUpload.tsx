@@ -9,7 +9,7 @@ interface Prop {
 const LINK_BACKEND = "https://contactbpo-server-production.up.railway.app/";
 
 export const InputFileUpload = ({ cv }: Prop) => {
-  const link = cv.slice(1);
+  const link = cv.slice(5);
   return (
     <button className={styles.button} type="button">
       <Link
