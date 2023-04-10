@@ -6,10 +6,17 @@ interface Prop {
   cv: string;
 }
 
+const LINK_BACKEND = "https://contactbpo-server-production.up.railway.app/";
+
 export const InputFileUpload = ({ cv }: Prop) => {
+  const link = cv.slice(1);
   return (
     <button className={styles.button} type="button">
-      <Link className={styles.text} target="_blank" href={cv}>
+      <Link
+        className={styles.text}
+        target="_blank"
+        href={`${LINK_BACKEND}${link}`}
+      >
         Ver mi CV
       </Link>
     </button>
