@@ -1,7 +1,8 @@
 //https://contactbpo-server-production.up.railway.app/api
 // http://localhost:5050/api
 export const API_URL = "http://localhost:5050/api";
-export const API_URL_DEPLOYMENT = "";
+export const LINK_BACKEND =
+  "https://contactbpo-server-production.up.railway.app/";
 
 export const ENDPOINT_EMPLOYEE = "";
 export const ENDPOINT_AUTH = "";

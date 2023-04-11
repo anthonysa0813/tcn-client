@@ -1,7 +1,7 @@
 .button {
   padding: 5px 5px;
   border: unset;
-  width: 30%;
+  width: 100%;
   border-radius: 15px;
   color: #212121;
   z-index: 1;
@@ -40,4 +40,10 @@
 
 .button:hover::before {
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .button {
+    width: 40%;
+  }
 }

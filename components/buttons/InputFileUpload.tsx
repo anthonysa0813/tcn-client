@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/components/buttons/InputFileUpload.module.css";
 import Link from "next/link";
-
+import { LINK_BACKEND } from "../../utils/constanstApi";
+import { getLinkToCv } from "../../helpers/getLinkCv";
 interface Prop {
   cv: string;
 }
 
-const LINK_BACKEND = "https://contactbpo-server-production.up.railway.app/";
-
 export const InputFileUpload = ({ cv }: Prop) => {
-  const link = cv.slice(5);
+  // const link = cv.slice(5);
+  useEffect(() => {
+    console.log(getLinkToCv(cv, true));
+  }, []);
+
   return (
     <button className={styles.button} type="button">
       <Link
         className={styles.text}
         target="_blank"
-        href={`${LINK_BACKEND}${link}`}
+        href={getLinkToCv(cv, true)}
       >
         Ver mi CV
       </Link>

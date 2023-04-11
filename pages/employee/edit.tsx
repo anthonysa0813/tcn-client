@@ -18,8 +18,10 @@ import { countriesDataResponse } from "../../utils/activitiesToBussiness";
 import dynamic from "next/dynamic";
 import { EmployeeInterface } from "../../interfaces";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { Input } from "@material-ui/core";
+import { Input, TextField } from "@material-ui/core";
 import { InputFileUpload } from "../../components/buttons";
+import ModalComponent from "../../components/dashboard/ModalComponent";
+import ChangeCv from "../../components/forms/ChangeCv";
 
 // new icons material ui
 
@@ -52,6 +54,7 @@ const Tooltip = dynamic(() =>
 );
 
 const EditPage = ({ data }: any) => {
+  const [showModalToChangeCv, setShowModalToChangeCv] = useState(false);
   const [formValues, setFormValues] = useState({
     name: "",
     surnames: "",
@@ -82,7 +85,7 @@ const EditPage = ({ data }: any) => {
   const notify = () => toast.success("Se actualizó satisfactoriamente!");
   const { employeeGlobal, setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
-  const [idLocalStorage, setIdLocalStorage] = useState("");
+  const [idLocalStorage, setIdLocalStorage] = useState({} as any);
   const [localEmployee, setlocalEmployee] = useState({} as EmployeeInterface);
   const [allCountries, setAllCountries] = useState<any>({});
 
@@ -177,6 +180,11 @@ const EditPage = ({ data }: any) => {
 
   return (
     <>
+      {/* {showModalToChangeCv && (
+        <ModalComponent>
+          <ChangeCv idEmployee={localEmployee.id} />
+        </ModalComponent>
+      )} */}
       <Head>
         <title>Contact Bpo | Dashboard Contact</title>
         <meta
@@ -319,14 +327,9 @@ const EditPage = ({ data }: any) => {
             <div className={styles.buttonContent}>
               {/* <input type="file" name="cv" onChange={readInputTypeFile} /> */}
               <InputFileUpload cv={employeeGlobal.cv} />
-              {/* <a
-              href={employeeGlobal.cv}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.cvText}
-              >
-              Ver mi cv
-            </a> */}
+              {/* <button onClick={() => setShowModalToChangeCv(true)}>
+                cambiar cv
+              </button> */}
             </div>
           </div>
           <div className={styles.buttonField}>

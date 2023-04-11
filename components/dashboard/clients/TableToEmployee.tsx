@@ -15,6 +15,7 @@ import styles from "../../../styles/admin/TableEmployee.module.css";
 import { calculatePagination } from "../../../helpers/calculatePagination";
 import { UserContext } from "../../../context/UserContext";
 import DropDownSelect from "../../buttons/DrownDownSelect";
+import { getLinkToCv } from "../../../helpers/getLinkCv";
 
 type Props = {
   total: string | number;
@@ -127,7 +128,6 @@ const TableToEmployee = ({
                     <Table.Cell>
                       {userGlobal.role === "ADMIN_ROLE" ? (
                         <DropDownSelect
-                        
                           statusUser={user?.statusJob ? user?.statusJob : ""}
                           idUser={user?.id}
                         />
@@ -194,7 +194,12 @@ const TableToEmployee = ({
               size="sm"
               style={{ marginBlock: "1rem" }}
             >
-              <Link href={currentEmployee.cv || ""}>abrir CV</Link>
+              <Link
+                href={getLinkToCv(currentEmployee.cv, true) || ""}
+                target="_blank"
+              >
+                abrir CV
+              </Link>
             </Button>
           </div>
           <div className={styles.field}>
