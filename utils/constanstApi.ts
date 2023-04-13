@@ -1,6 +1,9 @@
 //https://contactbpo-server-production.up.railway.app/api
 // http://localhost:5050/api
-export const API_URL = "http://localhost:5050/api";
+export const API_URL =
+  "https://contactbpo-server-production.up.railway.app/api";
+// export const LINK_BACKEND =
+//   "https://contactbpo-server-production.up.railway.app/";
 export const LINK_BACKEND =
   "https://contactbpo-server-production.up.railway.app/";
 

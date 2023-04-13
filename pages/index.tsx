@@ -52,11 +52,12 @@ const CampaignPage = ({ services }: ServiceProp) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const response = await fetch(`${process.env.DB_URL}/services`);
-  const data = await response.json();
+  // const response = await fetch(`${process.env.DB_URL}/services`);
+  // const data = await response.json();
   return {
     props: {
-      services: data.services,
+      // services: [data.services],
+      services: [],
     },
   };
 };

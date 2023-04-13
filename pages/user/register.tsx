@@ -36,7 +36,7 @@ const RegisterForm = dynamic(() =>
 );
 
 const RegisterPage: NextPage = ({ data }: any) => {
-  const [activeModalRegisterDone, setActiveModalRegisterDone] = useState(false);
+  const [activeModalRegisterDone, setActiveModalRegisterDone] = useState(true);
   const [cvValue, setCvValue] = useState("" as any);
   const router = useRouter();
 
