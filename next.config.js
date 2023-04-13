@@ -6,10 +6,10 @@ const nextConfig = {
     domains: ["www.contactbpo.pe"],
   },
   swcMinify: false,
-  //  serveOptions: {
-  //   http: true,
-  //   https: false,
-  // },
+  serveOptions: {
+    http: true,
+    https: false,
+  },
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
