@@ -423,7 +423,7 @@ const RegisterForm = ({ setActiveModalRegisterDone }: Prop) => {
               </div>
               <div className={styles.field}>
                 <Button color="primary" type="button">
-                  <Link href="/login">Ya tengo cuenta</Link>
+                  <Link href="/">Ya tengo cuenta</Link>
                 </Button>
               </div>
               {isLoading && <BeatLoader color="#0072f5" />}
