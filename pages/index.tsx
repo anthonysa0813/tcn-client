@@ -51,7 +51,10 @@ const LoginPage = () => {
           />
         </div>
         <div className={styles.formContainer}>
-          <div className={styles.back} onClick={() => router.push("/")}>
+          <div
+            className={styles.back}
+            onClick={() => router.push("https://contactamericas.com/")}
+          >
             <span>
               <ArrowBackIosNewIcon />
               Volver a la página principal
