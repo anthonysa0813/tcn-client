@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
 import { Button } from "@mui/material";
+import { TokenContext } from "../../context/CurrentToken";
 
 const LayoutDashboard = dynamic(
   import("../../components/dashboard/LayoutDashboard").then(
@@ -19,6 +20,8 @@ const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 const ChangePassword = () => {
   const { userGlobal } = useContext(UserContext);
+  const { privateToken } = useContext(TokenContext);
+
   const { id } = userGlobal;
   const alertDanger = (message: string) => {
     return toast.error(message);
@@ -48,7 +51,11 @@ const ChangePassword = () => {
     }
     setError(false);
     const token = Cookies.get("token");
-    updateUserAuth("auth", { ...userGlobal, password: password }, token || "")
+    updateUserAuth(
+      "auth",
+      { ...userGlobal, password: password },
+      privateToken.token
+    )
       .then((res) => {
         alertSuccess("Se ha actualizado");
       })

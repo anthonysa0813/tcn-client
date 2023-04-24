@@ -59,15 +59,12 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // setEmployeeUnparse(window.localStorage.getItem("employee") || "");
     const resEmployeeLocalStorage =
       window.localStorage.getItem("employee") || "";
     if (Boolean(resEmployeeLocalStorage)) {
       const localStoraEmployee = JSON.parse(
         window.localStorage.getItem("employee") || ""
       );
-      console.log("localStoraEmployee", localStoraEmployee);
-
       setEmployeeGlobal(localStoraEmployee);
     }
   }, []);
@@ -79,26 +76,16 @@ const Navbar = () => {
           <div className={styles.headerContainer}>
             <div className={styles.logoContainer}>
               <Image
-                src="https://www.contactbpo.pe/img/logo.png"
+                src={"/images/logos/LogoContact.png"}
                 alt="Logo de Contact BPO"
-                width={200}
-                height={35}
+                width={150}
+                height={70}
                 onClick={() => router.push("/")}
               />
             </div>
             <nav className={styles.menu}>
-              {!name && (
-                <Link href="/">Puestos de trabajos</Link>
-              )}
+              {!name && <Link href="/">Puestos de trabajos</Link>}
               {name && (
-                // <span className={styles.iconUser}>
-                //   <PersonIcon />
-                //   {name} {surnames}
-                //   <div className={styles.miniMenu}>
-                //     <Link href="/employee/edit">Perfil</Link>
-                //     <Link href="/employee/applications">postulaciones</Link>
-                //   </div>
-                // </span>
                 <MenuItemCustom
                   name={name}
                   surnames={surnames}

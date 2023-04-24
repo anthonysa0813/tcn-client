@@ -25,7 +25,7 @@ const VpnKeyIcon = dynamic(() =>
 );
 
 const AsideMenuEmployee = () => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const arrAsPath = router.asPath;
   const pathActive = (path: string) => {

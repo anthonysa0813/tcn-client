@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import generator from "generate-password";
 import styles from "../../styles/admin/CreateNewUser.module.css";
 import DatalistInput from "react-datalist-input";
@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastSuccess, toastWarning } from "../../helpers/alerts";
 import { createUserAuth } from "../../apis/auth/fetchFunctions";
 import dynamic from "next/dynamic";
+import { TokenContext } from "../../context/CurrentToken";
 
 const KeyIcon = dynamic(() =>
   import("@mui/icons-material/Key").then((res) => res.default)
@@ -37,6 +38,7 @@ const CreateNewUser = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState(false);
+  const { privateToken } = useContext(TokenContext);
 
   const generatePassword = () => {
     const passRandom = generator.generate({
@@ -55,13 +57,17 @@ const CreateNewUser = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordInputRef.current) {
-      createUserAuth("auth/register", {
-        name: names,
-        email,
-        password: passwordInputRef.current.value,
-        role: roleValue,
-        superAdmin: isSuperAdmin,
-      }).then((res) => {
+      createUserAuth(
+        "auth/register",
+        {
+          name: names,
+          email,
+          password: passwordInputRef.current.value,
+          role: roleValue,
+          superAdmin: isSuperAdmin,
+        },
+        privateToken.token
+      ).then((res) => {
         if (Object.keys(res).length > 0) {
           toastSuccess(`El usuario  ${res.name} ha sido creado`);
           setMessage(true);

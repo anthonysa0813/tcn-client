@@ -1,10 +1,11 @@
 import { GetServerSideProps } from "next";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Dropdown } from "@nextui-org/react";
 import { chenageStatusJobFetch } from "../../apis/employee/useEmployeeFetch";
 import { ServiceApi } from "../../apis/services";
 import { EmployeeApi } from "../../apis/employee/employeeApi";
 import { API_URL } from "../../utils/constanstApi";
+import { TokenContext } from "../../context/CurrentToken";
 
 interface Prop {
   statusUser: string;
@@ -30,18 +31,21 @@ const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
   const [currentJobInfo, setCurrentJobInfo] = useState<IResponseApplication>(
     {} as IResponseApplication
   );
+  const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
     getJobApplication(`/employees/get-applications-jobs/${idUser}`);
-    console.log({ idService });
   }, [statusUser]);
 
   const getJobApplication = async (url: string) => {
-    const { data } = await EmployeeApi.get<IResponseApplication[] | []>(url);
+    const { data } = await EmployeeApi.get<IResponseApplication[] | []>(url, {
+      headers: {
+        Authorization: privateToken.token,
+      },
+    });
 
     const value = data.filter((v) => v.service === idService);
     setCurrentJobInfo(value[0]);
-    // console.log({ value: valueStatus });
     setStateStatus(value[0]?.status || "");
   };
 
@@ -53,18 +57,6 @@ const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
         status: value,
       }
     );
-
-    console.log(response);
-    // chenageStatusJobFetch("employees/change-status-job", {
-    //   idEmployee: idUser,
-    //   statusOption: value,
-    // }).then((res) => {
-    //   console.log(res);
-    //   console.log("data: D", {
-    //     idEmployee: idUser,
-    //     statusOption: value,
-    //   });
-    // });
   };
 
   return (

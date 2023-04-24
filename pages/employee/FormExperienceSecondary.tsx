@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState, useEffect } from "react";
+import React, { SetStateAction, useState, useEffect, useContext } from "react";
 import { NextPage } from "next";
 import { EmployeeInterface, Experience } from "../../interfaces";
 import styles from "../../styles/employees/Experience.module.css";
@@ -23,6 +23,7 @@ import { EmployeeApi } from "../../apis/employee";
 
 import { Notify } from "../../utils";
 import { useRouter } from "next/router";
+import { TokenContext } from "../../context/CurrentToken";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -80,6 +81,7 @@ const FormExperienceSecondary: NextPage<Prop> = ({
     currentExperience?.currentJob || false
   );
   const router = useRouter();
+  const { privateToken } = useContext(TokenContext);
 
   const notifySuccess = (message: string) => {
     return toast.success(message);
@@ -196,7 +198,6 @@ const FormExperienceSecondary: NextPage<Prop> = ({
         dataForm
       )
         .then((res: any) => {
-          console.log(res);
           notifySuccess("Se ha actualizado la experiencia.");
           setIsLoading(false);
           setDataListExperiences([...dataListExperiences, res]);
@@ -211,9 +212,12 @@ const FormExperienceSecondary: NextPage<Prop> = ({
           console.log(err);
         });
     } else {
-      EmployeeApi.post(`/experiences/${idEmployee}`, dataForm)
+      EmployeeApi.post(`/experiences/${idEmployee}`, dataForm, {
+        headers: {
+          Authorization: privateToken.token,
+        },
+      })
         .then((res: any) => {
-          console.log(res);
           notifySuccess("Se ha guardado la experiencia...");
           setIsLoading(false);
           setDataListExperiences([...dataListExperiences, res]);
@@ -228,19 +232,6 @@ const FormExperienceSecondary: NextPage<Prop> = ({
           console.log(err);
         });
     }
-
-    // createExperienceApi("experiences", dataForm, idEmployee)
-    //   .then((res) => {
-    //     notifySuccess("Se ha guardado la experiencia...");
-    //     setIsLoading(false);
-    //     setDataListExperiences([...dataListExperiences, res]);
-    //     setTimeout(() => {
-    //       openExperience();
-    //     }, 2000);
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   });
   };
 
   const [error, setError] = React.useState<DateValidationError | null>(null);
@@ -251,11 +242,9 @@ const FormExperienceSecondary: NextPage<Prop> = ({
       case "minDate": {
         return "Please select a date in the first quarter of 2022";
       }
-
       case "invalidDate": {
         return "Your date is not valid";
       }
-
       default: {
         return "";
       }
@@ -272,7 +261,6 @@ const FormExperienceSecondary: NextPage<Prop> = ({
     <form className={styles.formGrid} onSubmit={handleSubmit}>
       <ToastContainer />
       <div className="experienceHead">
-        {/* <ToastContainer /> */}
         <h1 className={styles.title}>
           {editMode ? "Editar" : "Añade una nueva Experiencia"}
         </h1>

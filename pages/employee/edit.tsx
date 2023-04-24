@@ -22,6 +22,7 @@ import { Input, TextField } from "@material-ui/core";
 import { InputFileUpload } from "../../components/buttons";
 import ModalComponent from "../../components/dashboard/ModalComponent";
 import ChangeCv from "../../components/forms/ChangeCv";
+import { TokenContext } from "../../context/CurrentToken";
 
 // new icons material ui
 
@@ -88,6 +89,8 @@ const EditPage = ({ data }: any) => {
   const [idLocalStorage, setIdLocalStorage] = useState({} as any);
   const [localEmployee, setlocalEmployee] = useState({} as EmployeeInterface);
   const [allCountries, setAllCountries] = useState<any>({});
+  const [tokenUser, setTokenUser] = useState("");
+  const { privateToken } = useContext(TokenContext);
 
   const { id } = employeeGlobal;
 
@@ -96,10 +99,10 @@ const EditPage = ({ data }: any) => {
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
+      console.log(getId);
       setlocalEmployee(getId);
       setIdLocalStorage(getId.id || "");
       setEmployeeGlobal(getId);
-      console.log("getId", getId);
       setCountryCurrent(getId.country || "");
     }
     fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`)
@@ -115,9 +118,12 @@ const EditPage = ({ data }: any) => {
         localStorage.getItem("employee") || ""
       );
       setIdLocalStorage(getId.id);
-      console.log("getId", getId);
     }
-    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`)
+    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`, {
+      headers: {
+        Authorization: privateToken.token,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         // setCountryCurrent(data.country);
@@ -168,6 +174,9 @@ const EditPage = ({ data }: any) => {
         {
           method: "PUT",
           body: dataObject,
+          headers: {
+            Authorization: privateToken.token,
+          },
         }
       );
       const data = await res.json();
@@ -180,11 +189,6 @@ const EditPage = ({ data }: any) => {
 
   return (
     <>
-      {/* {showModalToChangeCv && (
-        <ModalComponent>
-          <ChangeCv idEmployee={localEmployee.id} />
-        </ModalComponent>
-      )} */}
       <Head>
         <title>Contact Bpo | Dashboard Contact</title>
         <meta
@@ -220,12 +224,6 @@ const EditPage = ({ data }: any) => {
               </span>
             </div>
             <div className={styles.buttonContent}>
-              {/* <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={handleChange}
-            /> */}
               <OutlinedInput
                 style={{ width: "100%" }}
                 type="text"
@@ -244,12 +242,6 @@ const EditPage = ({ data }: any) => {
               </span>
             </div>
             <div className={styles.buttonContent}>
-              {/* <input
-              type="text"
-              name="surnames"
-              value={surnames}
-              onChange={handleChange}
-            /> */}
               <OutlinedInput
                 style={{ width: "100%" }}
                 type="text"
@@ -271,12 +263,6 @@ const EditPage = ({ data }: any) => {
               </span>
             </div>
             <div className={styles.buttonContent}>
-              {/* <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-            /> */}
               <OutlinedInput
                 style={{ width: "100%" }}
                 type="email"
@@ -325,11 +311,7 @@ const EditPage = ({ data }: any) => {
               </span>
             </div>
             <div className={styles.buttonContent}>
-              {/* <input type="file" name="cv" onChange={readInputTypeFile} /> */}
               <InputFileUpload cv={employeeGlobal.cv} />
-              {/* <button onClick={() => setShowModalToChangeCv(true)}>
-                cambiar cv
-              </button> */}
             </div>
           </div>
           <div className={styles.buttonField}>

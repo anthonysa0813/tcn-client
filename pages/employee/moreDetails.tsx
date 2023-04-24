@@ -29,6 +29,7 @@ import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
 import FormExperienceSecondary from "./FormExperienceSecondary";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { TokenContext } from "../../context/CurrentToken";
 
 const LayoutEmployee = dynamic(() =>
   import("./layoutEmployee").then((res) => res.default)
@@ -157,6 +158,7 @@ const MoreDetails = () => {
   const [editMode, setEditMode] = useState(false);
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccessEdit = () => toast.success("Se ha editado 👌");
+  const { privateToken } = useContext(TokenContext);
 
   // close and open modals
   const [openLangModal, setOpenLangModal] = useState(false);
@@ -182,11 +184,16 @@ const MoreDetails = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    saveInformationGeneral<PropSaveInfo>("employees", idEmployee, {
-      phone,
-      github,
-      linkedin,
-    })
+    saveInformationGeneral<PropSaveInfo>(
+      "employees",
+      idEmployee,
+      {
+        phone,
+        github,
+        linkedin,
+      },
+      privateToken.token
+    )
       .then((res) => {
         setIsLoading(false);
         notifySuccessEdit();
@@ -203,17 +210,18 @@ const MoreDetails = () => {
         localStorage.getItem("employee") || ""
       );
       setEmployeeGlobal(getId);
-      console.log("employee id :D:", getId);
-      getAllLanguagesByEmployee(getId.id).then((res) => {
+      getAllLanguagesByEmployee(getId.id, privateToken.token).then((res) => {
         setStateListLang(res);
       });
-      getExperienceByEmployee("experiences", getId.id).then((res) => {
-        setDataListExperiences(res);
-      });
-      getKnoledges("knoledge", getId.id).then((res) => {
+      getExperienceByEmployee("experiences", getId.id, privateToken.token).then(
+        (res) => {
+          setDataListExperiences(res);
+        }
+      );
+      getKnoledges("knoledge", getId.id, privateToken.token).then((res) => {
         setKnoledgesList(res);
       });
-      getEmployeeById("employees", getId.id).then((res) => {
+      getEmployeeById("employees", getId.id, privateToken.token).then((res) => {
         setInitialForm({
           phone: res.phone || "",
           linkedin: res.linkedin || "",
@@ -229,19 +237,21 @@ const MoreDetails = () => {
   }, []);
 
   const deleteLangCall = (idLang: string) => {
-    deleteLangByEmployee(idLang).then((res) => {
+    deleteLangByEmployee(idLang, privateToken.token).then((res) => {
       const filterLang = stateListLang.filter((l) => l._id !== idLang);
       setStateListLang(filterLang);
     });
   };
 
   const deleteKnoledges = (idKnowledge: string) => {
-    deleteKnoledgesFetch("knoledge", idKnowledge).then((res) => {
-      const filterKnowledges = knoledgesList.filter(
-        (l) => l._id !== idKnowledge
-      );
-      setKnoledgesList(filterKnowledges);
-    });
+    deleteKnoledgesFetch("knoledge", idKnowledge, privateToken.token).then(
+      (res) => {
+        const filterKnowledges = knoledgesList.filter(
+          (l) => l._id !== idKnowledge
+        );
+        setKnoledgesList(filterKnowledges);
+      }
+    );
   };
 
   return (
@@ -281,13 +291,6 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              {/* <input
-                type="number"
-                className={styles.input}
-                name="phone"
-                onChange={handleChangeInput}
-                value={phone}
-              /> */}
               <OutlinedInput
                 style={{ width: "100%" }}
                 type="number"
@@ -315,13 +318,6 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              {/* <input
-                type="text"
-                className={styles.input}
-                name="linkedin"
-                onChange={handleChangeInput}
-                value={linkedin}
-              /> */}
               <OutlinedInput
                 style={{ width: "100%" }}
                 type="text"
@@ -349,13 +345,6 @@ const MoreDetails = () => {
               </span>
             </div>
             <div className={styles.inputSection}>
-              {/* <input
-                type="text"
-                className={styles.input}
-                name="github"
-                onChange={handleChangeInput}
-                value={github}
-              /> */}
               <OutlinedInput
                 style={{ width: "100%" }}
                 type="text"
@@ -543,11 +532,6 @@ const MoreDetails = () => {
 
       {showModalExperience && (
         <ModalComponent>
-          {/* <FormExperience
-            openExperience={openExperience}
-            dataListExperiences={dataListExperiences}
-            setDataListExperiences={setDataListExperiences}
-          /> */}
           <FormExperienceSecondary
             openExperience={openExperience}
             dataListExperiences={dataListExperiences}

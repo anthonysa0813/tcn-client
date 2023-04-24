@@ -25,20 +25,32 @@ export const updateUserAuth = async (
   return dataResponse;
 };
 
-export const getAllUsers = async (endpoint: string) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`);
+export const getAllUsers = async (endpoint: string, token: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
   const data = await response.json();
   return data;
 };
 
 // http://localhost:5050/api/auth/register
-export const createUserAuth = async (endpoint: string, data: UserResponse) => {
+export const createUserAuth = async (
+  endpoint: string,
+  data: UserResponse,
+  token: string
+) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify(data),
     }

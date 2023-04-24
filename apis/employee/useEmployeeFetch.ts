@@ -20,10 +20,17 @@ export const getEmployeeByFilterHability = async (
 export const getEmployeeFilterByLanguage = async (
   endpoint: string,
   lang: string,
-  level: string
+  level: string,
+  token: string
 ) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/filter?language=${lang}&nivel=${level}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/filter?language=${lang}&nivel=${level}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: token,
+      },
+    }
   );
   const dataResponse = await response.json();
   return dataResponse;
@@ -33,7 +40,8 @@ export const getEmployeeFilterByLanguage = async (
 export const saveInformationGeneral = async <T>(
   endpoint: string,
   idEmployee: string,
-  data: T
+  data: T,
+  token: string
 ) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`,
@@ -41,6 +49,7 @@ export const saveInformationGeneral = async <T>(
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify(data),
     }
@@ -49,9 +58,18 @@ export const saveInformationGeneral = async <T>(
   return dataResponse;
 };
 
-export const getEmployeeById = async (endpoint: string, idEmployee: string) => {
+export const getEmployeeById = async (
+  endpoint: string,
+  idEmployee: string,
+  token: string
+) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
   );
   const data = await response.json();
   return data;

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { getFetchApi } from "../../helpers/useFetch";
 import { EmployeeInterface } from "../../interfaces";
 import styles from "../../styles/employees/ListEmployee.module.css";
 import { generateExcelFile } from "../../helpers/exportFileExcel";
 import dynamic from "next/dynamic";
 import { GetServerSideProps } from "next/types";
+import { TokenContext } from "../../context/CurrentToken";
 
 interface PropCSV {
   nombre: string;
@@ -56,9 +57,10 @@ const Employees = () => {
   const [totalEmployees, setTotalEmployees] = useState<
     EmployeeInterface[] | []
   >([]);
+  const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
-    getFetchApi("employees").then((res) => {
+    getFetchApi("employees", privateToken.token).then((res) => {
       setEmployeeData(res.users);
       setTotalEmployees(res.users);
       setTotalEmployee(res.total);

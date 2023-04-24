@@ -1,10 +1,11 @@
 import { GetServerSideProps } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import LayoutDashboard from "../../../components/dashboard/LayoutDashboard";
 import { ServiceI } from "../../../interfaces";
 import styles from "../../../styles/admin/ListServices.module.css";
 import ServiceItem from "../../../components/servcies/ServiceItem";
 import dynamic from "next/dynamic";
+import { TokenContext } from "../../../context/CurrentToken";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
@@ -14,6 +15,7 @@ interface Prop {
 
 const ListServicesPage = ({ services }: Prop) => {
   const [servicesArr, setServicesArr] = useState<ServiceI[] | []>([]);
+  const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
     if (services.length > 0) {
@@ -26,6 +28,9 @@ const ListServicesPage = ({ services }: Prop) => {
       `${process.env.NEXT_PUBLIC_DB_URL}/services/${currentService._id}`,
       {
         method: "PUT",
+        headers: {
+          Authorization: privateToken.token,
+        },
       }
     ).then((resServ) => {
       if (resServ.status === 200) {

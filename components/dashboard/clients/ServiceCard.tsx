@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { getEmployeeById } from "../../../apis/employee/useEmployeeFetch";
+import { TokenContext } from "../../../context/CurrentToken";
 
 interface Prop {
   service: ServiceI;
@@ -32,6 +33,7 @@ const ServiceCard = ({ service }: Prop) => {
   const [isPostulate, setIsPostulate] = useState(false);
   const [idEmployee, setIdEmployee] = useState("");
   const [employeeUnparse, setEmployeeUnparse] = useState("");
+  const { privateToken } = useContext(TokenContext);
 
   const router = useRouter();
 
@@ -49,12 +51,14 @@ const ServiceCard = ({ service }: Prop) => {
 
   useEffect(() => {
     if (idEmployee) {
-      getEmployeeById("employees", idEmployee).then((res) => {
-        setServisceId(res?.servicesId || []);
-        setCurrentServiceId(service._id || "");
-        const isValid = servicesId.includes(currentServiceId);
-        setIsPostulate(isValid);
-      });
+      getEmployeeById("employees", idEmployee, privateToken.token).then(
+        (res) => {
+          setServisceId(res?.servicesId || []);
+          setCurrentServiceId(service._id || "");
+          const isValid = servicesId.includes(currentServiceId);
+          setIsPostulate(isValid);
+        }
+      );
     }
   }, [currentServiceId, idEmployee]);
 

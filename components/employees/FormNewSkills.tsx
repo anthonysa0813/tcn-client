@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../../styles/employees/FormNewSkills.module.css";
 import {
   HabilitiesInNivelsExperience,
@@ -12,10 +12,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { createKnoledge } from "../../apis/knoledges/useKnoledges";
 import { KnoledgeInterface } from "../../interfaces";
 import { v4 as uuidv4 } from "uuid";
-
 import dynamic from "next/dynamic";
 import { Loading } from "@nextui-org/react";
 import { Button } from "@mui/material";
+import { TokenContext } from "../../context/CurrentToken";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -50,6 +50,7 @@ const FormNewSkills = ({
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccess = () =>
     toast.success("Se ha agregado un nueva Habilidad 👍");
+  const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
     if (optionValue === "Por años de experiencia") {
@@ -71,11 +72,16 @@ const FormNewSkills = ({
       return;
     }
     setIsLoading(true);
-    createKnoledge("knoledge", idEmployee, {
-      name: expValue,
-      employee: idEmployee,
-      level: expYears ? yearsValue : levelValue,
-    }).then((res) => {
+    createKnoledge(
+      "knoledge",
+      idEmployee,
+      {
+        name: expValue,
+        employee: idEmployee,
+        level: expYears ? yearsValue : levelValue,
+      },
+      privateToken.token
+    ).then((res) => {
       notifySuccess();
       setIsLoading(false);
       setExpValue("");

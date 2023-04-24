@@ -8,6 +8,7 @@ import styles from "../../styles/admin/form/NewServiceForm.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../context/UserContext";
+import { TokenContext } from "../../context/CurrentToken";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -45,6 +46,8 @@ const NewServicePage = () => {
     useForm<FormProp>(initialValues);
   const [error, setError] = useState(false);
   const { userGlobal } = useContext(UserContext);
+  const { privateToken } = useContext(TokenContext);
+
   const [isDisabled, setIsDisabled] = useState(false);
   const { role } = userGlobal;
 
@@ -71,13 +74,16 @@ const NewServicePage = () => {
       return;
     }
     setError(false);
-    createNewServicefetch({
-      title,
-      salary,
-      schedule,
-      requirements,
-      description: descriptionState,
-    }).then((res) => {
+    createNewServicefetch(
+      {
+        title,
+        salary,
+        schedule,
+        requirements,
+        description: descriptionState,
+      },
+      privateToken.token
+    ).then((res) => {
       console.log({ res });
       notify();
       setDescriptionState("");
