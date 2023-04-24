@@ -94,7 +94,7 @@ const Navbar = () => {
               )}
               {!name && (
                 <>
-                  <Link href="/login" className={styles.btn}>
+                  <Link href="/" className={styles.btn}>
                     <span>Iniciar sesión</span>
                   </Link>
                 </>
