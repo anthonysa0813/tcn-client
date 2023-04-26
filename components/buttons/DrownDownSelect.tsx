@@ -11,7 +11,7 @@ interface Prop {
   statusUser: string;
   idUser: string;
   idService?: string;
-  idJob: string;
+  idJob?: string;
 }
 
 interface IResponseApplication {
@@ -23,7 +23,12 @@ interface IResponseApplication {
   __v?: number;
 }
 
-const DropDownSelect = ({ statusUser, idUser, idService, idJob }: Prop) => {
+const DropDownSelect = ({
+  statusUser,
+  idUser,
+  idService,
+  idJob = "",
+}: Prop) => {
   const menuItems = [
     { key: "DESCARTADO", name: "DESCARTADO" },
     { key: "SELECCIONADO", name: "SELECCIONADO" },
@@ -36,7 +41,6 @@ const DropDownSelect = ({ statusUser, idUser, idService, idJob }: Prop) => {
   const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
-    console.log({ idUser });
     getJobApplication(`/employees/get-applications-jobs/${idUser}`);
   }, [statusUser]);
 
