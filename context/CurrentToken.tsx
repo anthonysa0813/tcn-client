@@ -1,4 +1,10 @@
-import { createContext, useState, Dispatch, SetStateAction } from "react";
+import {
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 
 type ChildrenType = {
   children: JSX.Element | JSX.Element[];
@@ -19,6 +25,14 @@ export const TokenContext = createContext<TokenContextProps>(
 
 export const TokenContextProvider = ({ children }: ChildrenType) => {
   const [privateToken, setPrivateToken] = useState({} as ContextType);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const tokenSecret = sessionStorage.getItem("token");
+      console.log("token", tokenSecret);
+      setPrivateToken({ token: tokenSecret || "" });
+    }
+  }, []);
 
   return (
     <TokenContext.Provider value={{ privateToken, setPrivateToken }}>

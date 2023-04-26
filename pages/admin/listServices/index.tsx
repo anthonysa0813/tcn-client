@@ -18,6 +18,7 @@ const ListServicesPage = ({ services }: Prop) => {
   const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
+    console.log({ services });
     if (services.length > 0) {
       setServicesArr(services);
     }
@@ -76,10 +77,9 @@ const ListServicesPage = ({ services }: Prop) => {
 // - Only if you need to pre-render a page whose data must be fetched at request time
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const response = await fetch(
-    `https://contactbpo-server-production.up.railway.app/api/services`
-  );
+  const response = await fetch(`${process.env.DB_URL}/services`);
   const data = await response.json();
+  console.log({ data });
 
   return {
     props: {

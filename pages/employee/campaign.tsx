@@ -12,7 +12,6 @@ const Head = dynamic(() => import("next/head").then((res) => res.default));
 interface ServiceProp {
   services: ServiceI[] | [];
 }
-
 const ServiceCard = dynamic(
   () => import("../../components/dashboard/clients/ServiceCard"),
   {

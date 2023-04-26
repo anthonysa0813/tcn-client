@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
+import nc from "next-connect";
 
 import type { NextRequest } from "next/server";
+import myMiddleware from "./mymiddleware";
 
 //3S1unaM3ssagePubl1c
 export async function middleware(request: NextRequest) {
   const jwt = request.cookies.get("token");
-
-  if (!jwt)
-    return NextResponse.redirect(new URL("/trabaja-con-nosotros", request.url));
+  if (!jwt) return NextResponse.redirect(new URL("/", request.url));
 
   // this condition avoid to show the login page if the user is logged in
   // if (jwt) {

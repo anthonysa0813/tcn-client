@@ -13,8 +13,11 @@ import "@fontsource/roboto/700.css";
 import Head from "next/head";
 import "animate.css";
 import { TokenContextProvider } from "../context/CurrentToken";
+import myMiddleware from "../mymiddleware";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const middlewares = [myMiddleware];
+
   return (
     <>
       <CurrentUsersContextProvider>

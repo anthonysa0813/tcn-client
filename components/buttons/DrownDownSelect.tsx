@@ -11,6 +11,7 @@ interface Prop {
   statusUser: string;
   idUser: string;
   idService?: string;
+  idJob: string;
 }
 
 interface IResponseApplication {
@@ -18,10 +19,11 @@ interface IResponseApplication {
   employee: string;
   service: string;
   status: string;
+
   __v?: number;
 }
 
-const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
+const DropDownSelect = ({ statusUser, idUser, idService, idJob }: Prop) => {
   const menuItems = [
     { key: "DESCARTADO", name: "DESCARTADO" },
     { key: "SELECCIONADO", name: "SELECCIONADO" },
@@ -34,6 +36,7 @@ const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
   const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
+    console.log({ idUser });
     getJobApplication(`/employees/get-applications-jobs/${idUser}`);
   }, [statusUser]);
 
@@ -45,18 +48,16 @@ const DropDownSelect = ({ statusUser, idUser, idService }: Prop) => {
     });
 
     const value = data.filter((v) => v.service === idService);
+    console.log({ value });
     setCurrentJobInfo(value[0]);
     setStateStatus(value[0]?.status || "");
   };
 
   const changeStatus = async (value: string) => {
     setStateStatus(value);
-    const response = await EmployeeApi.put(
-      `/employees/status-job/${currentJobInfo._id}`,
-      {
-        status: value,
-      }
-    );
+    const response = await EmployeeApi.put(`/employees/status-job/${idJob}`, {
+      status: value,
+    });
   };
 
   return (

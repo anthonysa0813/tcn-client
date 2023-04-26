@@ -99,10 +99,9 @@ const EditPage = ({ data }: any) => {
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
-      console.log(getId);
       setlocalEmployee(getId);
       setIdLocalStorage(getId.id || "");
-      setEmployeeGlobal(getId);
+
       setCountryCurrent(getId.country || "");
     }
     fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`)
@@ -113,13 +112,7 @@ const EditPage = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
-    if (window.localStorage) {
-      const getId: EmployeeInterface = JSON.parse(
-        localStorage.getItem("employee") || ""
-      );
-      setIdLocalStorage(getId.id);
-    }
-    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${idLocalStorage}`, {
+    fetch(`${process.env.NEXT_PUBLIC_DB_URL}/employees/${employeeGlobal.id}`, {
       headers: {
         Authorization: privateToken.token,
       },
@@ -311,7 +304,7 @@ const EditPage = ({ data }: any) => {
               </span>
             </div>
             <div className={styles.buttonContent}>
-              <InputFileUpload cv={employeeGlobal.cv} />
+              <InputFileUpload cv={employeeGlobal.cv || ""} />
             </div>
           </div>
           <div className={styles.buttonField}>

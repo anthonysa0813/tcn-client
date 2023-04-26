@@ -158,7 +158,7 @@ const MoreDetails = () => {
   const [editMode, setEditMode] = useState(false);
   const notifyError = () => toast.error("Todos los campos son obligatorios");
   const notifySuccessEdit = () => toast.success("Se ha editado 👌");
-  const { privateToken } = useContext(TokenContext);
+  const { privateToken, setPrivateToken } = useContext(TokenContext);
 
   // close and open modals
   const [openLangModal, setOpenLangModal] = useState(false);
@@ -205,36 +205,54 @@ const MoreDetails = () => {
   };
 
   useEffect(() => {
+    if (typeof window.sessionStorage !== undefined) {
+      const tok = sessionStorage.getItem("token");
+      setPrivateToken({ token: tok || "" });
+    }
     if (window.localStorage) {
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
       setEmployeeGlobal(getId);
-      getAllLanguagesByEmployee(getId.id, privateToken.token).then((res) => {
-        setStateListLang(res);
-      });
-      getExperienceByEmployee("experiences", getId.id, privateToken.token).then(
-        (res) => {
-          setDataListExperiences(res);
-        }
-      );
-      getKnoledges("knoledge", getId.id, privateToken.token).then((res) => {
-        setKnoledgesList(res);
-      });
-      getEmployeeById("employees", getId.id, privateToken.token).then((res) => {
-        setInitialForm({
-          phone: res.phone || "",
-          linkedin: res.linkedin || "",
-          github: res.github,
-        });
-        setFormValue({
-          phone: res.phone || "",
-          linkedin: res.linkedin || "",
-          github: res.github,
-        });
-      });
     }
   }, []);
+
+  useEffect(() => {
+    if (privateToken.token && employeeGlobal.id) {
+      getAllLanguagesByEmployee(employeeGlobal.id, privateToken.token).then(
+        (res) => {
+          setStateListLang(res);
+        }
+      );
+      getExperienceByEmployee(
+        "experiences",
+        employeeGlobal.id,
+        privateToken.token
+      ).then((res) => {
+        setDataListExperiences(res);
+      });
+      getKnoledges("knoledge", employeeGlobal.id, privateToken.token).then(
+        (res) => {
+          console.log(res);
+          setKnoledgesList(res);
+        }
+      );
+      getEmployeeById("employees", employeeGlobal.id, privateToken.token).then(
+        (res) => {
+          setInitialForm({
+            phone: res.phone || "",
+            linkedin: res.linkedin || "",
+            github: res.github,
+          });
+          setFormValue({
+            phone: res.phone || "",
+            linkedin: res.linkedin || "",
+            github: res.github,
+          });
+        }
+      );
+    }
+  }, [privateToken.token, employeeGlobal.id]);
 
   const deleteLangCall = (idLang: string) => {
     deleteLangByEmployee(idLang, privateToken.token).then((res) => {
