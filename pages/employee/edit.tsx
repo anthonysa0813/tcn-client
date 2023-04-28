@@ -325,11 +325,8 @@ const EditPage = ({ data }: any) => {
               </span>
             </div>
             <div className={styles.buttonContent}>
-              {/* <input type="file" name="cv" onChange={readInputTypeFile} /> */}
-              <InputFileUpload cv={employeeGlobal.cv} />
-              {/* <button onClick={() => setShowModalToChangeCv(true)}>
-                cambiar cv
-              </button> */}
+      <InputFileUpload cv={employeeGlobal.cv} />
+            
             </div>
           </div>
           <div className={styles.buttonField}>
@@ -364,3 +361,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default EditPage;
+

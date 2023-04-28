@@ -8,7 +8,10 @@ interface Prop {
 }
 
 export const InputFileUpload = ({ cv }: Prop) => {
-  return (
+	useEffect(() => {
+	console.log(cv);
+}, [])  
+return (
     <button className={styles.button} type="button">
       <Link className={styles.text} target="_blank" href={cv}>
         Ver mi CV
