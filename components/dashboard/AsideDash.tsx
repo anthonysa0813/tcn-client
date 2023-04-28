@@ -95,10 +95,10 @@ const AsideDash = () => {
           {showMenu ? (
             <>
               <Image
-                src="https://www.contactbpo.pe/img/logo.png"
+                src="/images/logos/LogoContact.png"
                 alt="Logo de Contact bpo"
                 width={150}
-                height={30}
+                height={70}
                 onClick={() => router.push("/")}
               />
               <CloseIcon className={styles.svgMenu} />
@@ -114,7 +114,7 @@ const AsideDash = () => {
               showMenu ? "animate__fadeInLeft" : ""
             }`}
           >
-            <Tooltip
+            {/* <Tooltip
               title="Ver lista de colaboradores (no empleadores)"
               arrow
               placement="right"
@@ -132,7 +132,7 @@ const AsideDash = () => {
                   Lista de Colaboradores (no empleadores)
                 </span>
               </Link>
-            </Tooltip>
+            </Tooltip> */}
             <Tooltip title="Crear Nuevo Puesto" arrow placement="right">
               <Link
                 href="/admin/newService"

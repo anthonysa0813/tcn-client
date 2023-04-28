@@ -12,6 +12,7 @@ import {
 } from "../../interfaces";
 import styles from "../../styles/employees/Applications.module.css";
 import { EmployeeApi } from "../../apis/employee";
+import { TokenContext } from "../../context/CurrentToken";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
@@ -35,13 +36,13 @@ const ApplicationsPage = () => {
   const [currentApplicationByUser, setCurrentApplicationByUser] = useState<
     IApplicationJobResponse[] | []
   >([]);
+  const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
     if (window.localStorage) {
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
-      console.log({ getId });
       setEmployeeGlobal(getId);
     }
   }, []);
@@ -54,13 +55,23 @@ const ApplicationsPage = () => {
 
   const getInfo = async (id: string) => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/employees/${id}`
+      `${process.env.NEXT_PUBLIC_DB_URL}/employees/${id}`,
+      {
+        headers: {
+          Authorization: privateToken.token,
+        },
+      }
     );
     const data = await res.json();
+
     const { data: getInfoApplication } = await EmployeeApi.get(
-      `/employees/get-applications-jobs/${employeeGlobal.id}`
+      `/employees/get-applications-jobs/${employeeGlobal.id}`,
+      {
+        headers: {
+          Authorization: privateToken.token,
+        },
+      }
     );
-    console.log(getInfoApplication);
     setCurrentApplicationByUser(getInfoApplication);
     setApplicationsState(data.service);
   };

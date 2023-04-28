@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../../styles/employees/FormNewLang.module.css";
 import { Languages, nivels } from "../../utils/activitiesToBussiness";
 import { EmployeeInterface, LangResponse } from "../../interfaces";
@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
 import Button from "@mui/material/Button";
+import { TokenContext } from "../../context/CurrentToken";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -32,6 +33,7 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
   const notifySuccess = () =>
     toast.success("Se ha agregado un nuevo idioma 👍");
   const [isLoading, setIsLoading] = useState(false);
+  const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
     let id: EmployeeInterface | null = null;
@@ -48,14 +50,19 @@ const FormNewLang = ({ openLang, setStateListLang, stateListLang }: Prop) => {
     }
     setIsLoading(true);
 
-    createLang("language", idEmployee, {
-      lang: formLang,
-      levelOral: formOral,
-      levelWriter: formWriter,
-      levelRead: formRead,
-      levelListen: formListen,
+    createLang(
+      "language",
       idEmployee,
-    }).then((res) => {
+      {
+        lang: formLang,
+        levelOral: formOral,
+        levelWriter: formWriter,
+        levelRead: formRead,
+        levelListen: formListen,
+        idEmployee,
+      },
+      privateToken.token
+    ).then((res) => {
       const existLang = stateListLang.find((l) => l._id === res._id);
       if (!existLang) {
         setStateListLang([...stateListLang, res]);

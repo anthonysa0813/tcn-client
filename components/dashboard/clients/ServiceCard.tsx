@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { getEmployeeById } from "../../../apis/employee/useEmployeeFetch";
+import { TokenContext } from "../../../context/CurrentToken";
+import { EmployeeApi } from "../../../apis/employee";
 
 interface Prop {
   service: ServiceI;
@@ -32,10 +34,15 @@ const ServiceCard = ({ service }: Prop) => {
   const [isPostulate, setIsPostulate] = useState(false);
   const [idEmployee, setIdEmployee] = useState("");
   const [employeeUnparse, setEmployeeUnparse] = useState("");
+  const { privateToken, setPrivateToken } = useContext(TokenContext);
 
   const router = useRouter();
 
   useEffect(() => {
+    if (typeof window.sessionStorage !== undefined) {
+      const token = sessionStorage.getItem("token");
+      setPrivateToken({ token: token || "" });
+    }
     const resEmployeeLocalStorage =
       window.localStorage.getItem("employee") || "";
     if (Boolean(resEmployeeLocalStorage)) {
@@ -48,17 +55,19 @@ const ServiceCard = ({ service }: Prop) => {
   }, []);
 
   useEffect(() => {
-    if (idEmployee) {
-      getEmployeeById("employees", idEmployee).then((res) => {
-        setServisceId(res?.servicesId || []);
-        setCurrentServiceId(service._id || "");
-        const isValid = servicesId.includes(currentServiceId);
-        setIsPostulate(isValid);
-      });
+    if (idEmployee && privateToken.token) {
+      getEmployeeById("employees", idEmployee, privateToken.token).then(
+        (res) => {
+          setServisceId(res?.servicesId || []);
+          setCurrentServiceId(service._id || "");
+          const isValid = servicesId.includes(currentServiceId);
+          setIsPostulate(isValid);
+        }
+      );
     }
   }, [currentServiceId, idEmployee]);
 
-  const applicationJob = (idJob: string = "") => {
+  const applicationJob = async (idJob: string = "") => {
     if (!employeeGlobal.id) {
       const notify = () => toast.error("Necesitas de una cuenta registrada");
       notify();
@@ -68,10 +77,26 @@ const ServiceCard = ({ service }: Prop) => {
       return;
     }
     const employeeId = employeeGlobal.id;
+    await EmployeeApi.post(
+      "/employees/status-job",
+      {
+        idEmployee: employeeGlobal.id,
+        idService: idJob,
+      },
+      {
+        headers: {
+          Authorization: privateToken.token,
+        },
+      }
+    );
+
     fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/employees/${employeeId}/${idJob}`,
       {
         method: "POST",
+        headers: {
+          Authorization: privateToken.token,
+        },
       }
     )
       .then((res) => res.json())

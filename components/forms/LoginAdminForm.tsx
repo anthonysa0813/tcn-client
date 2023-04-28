@@ -8,6 +8,7 @@ import { loginFetchApi } from "../../helpers/useFetch";
 import { UserContext } from "../../context/UserContext";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { TokenContext } from "../../context/CurrentToken";
 const BeatLoader = dynamic(() =>
   import("react-spinners/BeatLoader").then((res) => res.default)
 );
@@ -57,6 +58,7 @@ const LoginAdminFormComponent = ({ setShowForgetPass }: Prop) => {
   const toastWarning = (message: string) => toast.warning(message);
   const toastSuccess = (message: string) => toast.success(message);
   const { userGlobal, setUserGlobal } = useContext(UserContext);
+  const { setPrivateToken } = useContext(TokenContext);
 
   const router = useRouter();
 
@@ -75,6 +77,7 @@ const LoginAdminFormComponent = ({ setShowForgetPass }: Prop) => {
         } else {
           const { token, user } = res;
           setUserGlobal(user);
+          setPrivateToken({ token });
           localStorage.setItem("auth", JSON.stringify(user));
           sessionStorage.setItem("token", token);
           Cookies.set("token", token, { expires: 7 });
@@ -104,10 +107,10 @@ const LoginAdminFormComponent = ({ setShowForgetPass }: Prop) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.imageContainer}>
           <Image
-            src="https://www.contactbpo.pe/img/logo.png"
+            src="/images/logos/LogoContact.png"
             alt="Logo de Contact bpo"
             width={200}
-            height={30}
+            height={80}
             onClick={() => router.push("/")}
           />
           <h5>ADMIN</h5>

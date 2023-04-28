@@ -4,7 +4,6 @@ import { ClientInterface, FormProp } from "../interfaces";
 const token = Cookies.get("token");
 
 export const loginFetchApi = async (endpoint: string, dataUser: FormProp) => {
-  console.log(`${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
     {
@@ -19,8 +18,15 @@ export const loginFetchApi = async (endpoint: string, dataUser: FormProp) => {
   return data;
 };
 
-export const getFetchApi = async (endpoint: string) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`);
+export const getFetchApi = async (endpoint: string, token: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
   const data = await response.json();
   return data;
 };

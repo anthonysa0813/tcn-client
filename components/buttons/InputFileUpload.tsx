@@ -13,7 +13,7 @@ export const InputFileUpload = ({ cv }: Prop) => {
 }, [])  
 return (
     <button className={styles.button} type="button">
-      <Link className={styles.text} target="_blank" href={cv}>
+      <Link className={styles.text} target="_blank" href={cv || ""}>
         Ver mi CV
       </Link>
     </button>

@@ -37,8 +37,7 @@
   position: fixed;
   height: 100vh;
   background-color: var(--bg-blueLight);
-
-  /* z-index: 50000; */
+  z-index: 50000;
 }
 
 .mainProfile {

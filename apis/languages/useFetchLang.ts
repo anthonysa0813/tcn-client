@@ -4,7 +4,8 @@ import { LangObject } from "../../interfaces";
 export const createLang = async (
   ENDPOINT: string,
   idEmployee: string,
-  data: LangObject
+  data: LangObject,
+  token: string
 ) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${ENDPOINT}/${idEmployee}`,
@@ -12,6 +13,7 @@ export const createLang = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify(data),
     }
@@ -21,19 +23,31 @@ export const createLang = async (
 };
 
 // http://localhost:5050/api/language/all/633a64c57aea5ece75d1a02e
-export const getAllLanguagesByEmployee = async (idEmployee: string) => {
+export const getAllLanguagesByEmployee = async (
+  idEmployee: string,
+  token: string
+) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/language/all/${idEmployee}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/language/all/${idEmployee}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: token,
+      },
+    }
   );
   const data = await response.json();
   return data;
 };
 
-export const deleteLangByEmployee = async (idLang: string) => {
+export const deleteLangByEmployee = async (idLang: string, token: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/language/${idLang}`,
     {
       method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
     }
   );
   const data = await response.json();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LayoutDashboard from "../../components/dashboard/LayoutDashboard";
 import useForm from "../../hooks/useForm";
 import styles from "../../styles/admin/ChangeRole.module.css";
@@ -13,6 +13,7 @@ import { UserResponse } from "../../interfaces";
 import { Loading } from "@nextui-org/react";
 import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
+import { TokenContext } from "../../context/CurrentToken";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
@@ -28,6 +29,8 @@ const ChangeRole = () => {
   const [showAllUsers, setShowAllUsers] = useState(false);
   const [showUniqueUser, setShowUniqueUser] = useState(false);
   const [userUniqueInfo, setUserUniqueInfo] = useState({} as UserResponse);
+  const { privateToken } = useContext(TokenContext);
+
   const SearchForm = dynamic(() =>
     import("../../components/dashboard/forms/SearchUserForm").then(
       (res) => res.default
@@ -40,7 +43,7 @@ const ChangeRole = () => {
   );
 
   useEffect(() => {
-    getAllUsers("auth").then((res) => {
+    getAllUsers("auth", privateToken.token).then((res) => {
       setUsersData(res);
     });
   }, []);
@@ -96,12 +99,12 @@ const ChangeRole = () => {
   const changeStatusFunction = (user: UserResponse) => {
     if (user.role === "ADMIN_ROLE") {
       desactiveUser(user);
-      getAllUsers("auth").then((res) => {
+      getAllUsers("auth", privateToken.token).then((res) => {
         setUsersData(res);
       });
     } else {
       activeUser(user);
-      getAllUsers("auth").then((res) => {
+      getAllUsers("auth", privateToken.token).then((res) => {
         setUsersData(res);
       });
     }

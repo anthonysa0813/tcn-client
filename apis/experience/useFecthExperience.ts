@@ -23,10 +23,16 @@ export const createExperienceApi = async (
 
 export const getExperienceByEmployee = async (
   endpoint: string,
-  idEmployee: string
+  idEmployee: string,
+  token: string
 ) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`
+    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
   );
   const data = await response.json();
   return data;

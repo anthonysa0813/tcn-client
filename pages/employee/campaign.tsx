@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/client/Campaign.module.css";
 import { GetServerSideProps } from "next/types";
 import { Service, ServiceI } from "../../interfaces";
 import dynamic from "next/dynamic";
 import NotFoundJobs from "../../components/cards/NotFoundJobs";
+import { TokenContext } from "../../context/CurrentToken";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 interface ServiceProp {
   services: ServiceI[] | [];
 }
-
 const ServiceCard = dynamic(
   () => import("../../components/dashboard/clients/ServiceCard"),
   {
@@ -20,7 +20,6 @@ const ServiceCard = dynamic(
 );
 
 const CampaignEmployees = ({ services }: ServiceProp) => {
-  // useEffect(() => {}, []);
   return (
     <>
       <Head>

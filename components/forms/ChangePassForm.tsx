@@ -21,8 +21,10 @@ const ChangePassForm = () => {
   const [tokenValue, setTokenValue] = useState("");
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    setTokenValue(token || "");
+    if (typeof window.sessionStorage !== "undefined") {
+      const token = sessionStorage.getItem("token");
+      setTokenValue(token || "");
+    }
   }, []);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

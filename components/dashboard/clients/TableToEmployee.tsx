@@ -16,6 +16,7 @@ import { calculatePagination } from "../../../helpers/calculatePagination";
 import { UserContext } from "../../../context/UserContext";
 import DropDownSelect from "../../buttons/DrownDownSelect";
 import { getLinkToCv } from "../../../helpers/getLinkCv";
+import { TokenContext } from "../../../context/CurrentToken";
 
 type Props = {
   total: string | number;
@@ -36,6 +37,8 @@ const TableToEmployee = ({
   const [currentEmployee, setCurrentEmployee] = useState<EmployeeInterface>(
     {} as EmployeeInterface
   );
+  const { privateToken } = useContext(TokenContext);
+
   const { userGlobal } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
@@ -44,30 +47,36 @@ const TableToEmployee = ({
 
   useEffect(() => {
     if (pageNumber === 1) {
-      getFetchApi(`${endpoint}?offset=${0}&limit=${5}`).then((res) => {
+      getFetchApi(
+        `${endpoint}?offset=${0}&limit=${5}`,
+        privateToken.token
+      ).then((res) => {
         setDataList(res.users);
       });
     } else {
-      getFetchApi(`${endpoint}?offset=${pageNumber * 5}&limit=${5}`).then(
-        (res) => {
-          setDataList(res.users);
-        }
-      );
+      getFetchApi(
+        `${endpoint}?offset=${pageNumber * 5}&limit=${5}`,
+        privateToken.token
+      ).then((res) => {
+        setDataList(res.users);
+      });
     }
   }, [endpoint]);
 
   useEffect(() => {
     setLoading(true);
-    getFetchApi(`${endpoint}?offset=${pageNumber * 5}&limit=${5}`).then(
-      (res) => {
-        setDataList(res.users);
-        if (res.users.length > 0) {
-          setLoading(false);
-        } else {
-          setLoading(false);
-        }
+    getFetchApi(
+      `${endpoint}?offset=${pageNumber * 5}&limit=${5}`,
+      privateToken.token
+    ).then((res) => {
+      console.log(res);
+      setDataList(res.users);
+      if (res.users.length > 0) {
+        setLoading(false);
+      } else {
+        setLoading(false);
       }
-    );
+    });
   }, [pageNumber, endpoint]);
 
   useEffect(() => {

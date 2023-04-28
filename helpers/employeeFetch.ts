@@ -12,11 +12,12 @@ import { FormProp, Service, ServiceI } from "../interfaces";
 //     return data;
 //   };
 
-export const createNewServicefetch = async (body: ServiceI) => {
+export const createNewServicefetch = async (body: ServiceI, token: string) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/services`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: token,
     },
     body: JSON.stringify(body),
   });

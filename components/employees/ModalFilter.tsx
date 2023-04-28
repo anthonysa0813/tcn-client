@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import DatalistInput from "react-datalist-input";
 import styles from "../../styles/admin/ModalFilter.module.css";
 import { v4 as uuidv4 } from "uuid";
@@ -12,6 +12,7 @@ import {
 } from "../../apis/employee/useEmployeeFetch";
 import useForm from "../../hooks/useForm";
 import dynamic from "next/dynamic";
+import { TokenContext } from "../../context/CurrentToken";
 
 const CloseIcon = dynamic(() =>
   import("@mui/icons-material/Close").then((res) => res.default)
@@ -52,9 +53,7 @@ const ModalFilter = ({
   const [emailState, setEmailState] = useState(false);
   const [stateJobState, setStateJobState] = useState(false);
   const [statusJob, setStatusJob] = useState("");
-  // const [emailValue, setEmailValue] = useState("")
-  // getEmployeeByFilterHability;
-  // getEmployeeFilterByLanguage;
+  const { privateToken } = useContext(TokenContext);
 
   const { dni, email, onChange } = useForm({
     email: "",
@@ -111,10 +110,14 @@ const ModalFilter = ({
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (showLangInput) {
-      getEmployeeFilterByLanguage("language", lang, nivelLang).then((res) => {
+      getEmployeeFilterByLanguage(
+        "language",
+        lang,
+        nivelLang,
+        privateToken.token
+      ).then((res) => {
         const filterArr = res.filter((user: any) => user.employee !== null);
         const getEmployee = filterArr.map((user: any) => user.employee);
-        console.log("data=====> :D", getEmployee);
         setDataList(getEmployee);
         setEmployeeData(getEmployee);
       });
@@ -145,7 +148,6 @@ const ModalFilter = ({
 
     if (email) {
       searchEmployeeByFilter("employees/search", "email", email).then((res) => {
-        console.log("res email", res);
         setEmployeeData(res);
         setDataList(res);
       });

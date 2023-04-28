@@ -11,6 +11,7 @@ import {
 } from "../../../context/EmployeeContext";
 import { loginFetchApi } from "../../../helpers/useFetch";
 import dynamic from "next/dynamic";
+import { TokenContext } from "../../../context/CurrentToken";
 
 interface Prop {
   setShowForgetPasswordForm: Dispatch<SetStateAction<boolean>>;
@@ -63,6 +64,7 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
   // const notifyError = () => toast.warning("email y/o password son incorrectos");
   const { setEmployeeGlobal } =
     useContext<EmployeeContextProps>(EmployeeContext);
+  const { setPrivateToken } = useContext(TokenContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -80,10 +82,12 @@ const LoginClient = ({ setShowForgetPasswordForm }: Prop) => {
           setLoading(false);
         }
         if (res.employee) {
-          console.log(res.employee);
           if (res.employee.status) {
             localStorage.setItem("employee", JSON.stringify(res.employee));
             sessionStorage.setItem("token", res.token);
+            setPrivateToken({
+              token: res.token,
+            });
             setLoading(false);
             Cookies.set("token", res.token, { expires: 7 });
             setEmployeeGlobal(res.employee);

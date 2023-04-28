@@ -89,6 +89,7 @@ const TableListStaticData = ({
                       key={user.id}
                       idService={idService}
                       idUser={user.id}
+                      idJob={idService}
                       statusUser={user.statusJob || ""}
                     />
                   ) : (
