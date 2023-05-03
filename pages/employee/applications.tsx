@@ -13,6 +13,8 @@ import {
 import styles from "../../styles/employees/Applications.module.css";
 import { EmployeeApi } from "../../apis/employee";
 import { TokenContext } from "../../context/CurrentToken";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
@@ -37,9 +39,10 @@ const ApplicationsPage = () => {
     IApplicationJobResponse[] | []
   >([]);
   const { privateToken } = useContext(TokenContext);
+  const router = useRouter();
 
   useEffect(() => {
-    if (window.localStorage) {
+    if (window.localStorage !== undefined) {
       const getId: EmployeeInterface = JSON.parse(
         localStorage.getItem("employee") || ""
       );
@@ -87,6 +90,7 @@ const ApplicationsPage = () => {
       <LayoutEmployee name="aplicaciones de trabajo">
         <div className={styles.wrapper}>
           {applicationsState.length > 0 && <h4>Mis Postulaciones</h4>}
+           
           <div className={styles.applicationsGrid}>
             {applicationsState.length === 0 && (
               <h3>No tienes postulaciones abiertas</h3>

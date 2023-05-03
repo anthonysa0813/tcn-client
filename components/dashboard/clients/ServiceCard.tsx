@@ -9,7 +9,6 @@ import {
   ServiceI,
 } from "../../../interfaces/index";
 import styles from "../../../styles/client/Campaign.module.css";
-// import ModalShowService from "./ModalShowService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
@@ -68,6 +67,7 @@ const ServiceCard = ({ service }: Prop) => {
   }, [currentServiceId, idEmployee]);
 
   const applicationJob = async (idJob: string = "") => {
+    console.log("click :d");
     if (!employeeGlobal.id) {
       const notify = () => toast.error("Necesitas de una cuenta registrada");
       notify();
@@ -153,3 +153,4 @@ const ServiceCard = ({ service }: Prop) => {
 };
 
 export default ServiceCard;
+

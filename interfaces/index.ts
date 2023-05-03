@@ -67,6 +67,8 @@ export interface EmployeeInterface {
   confirmPassword?: string;
   statusJob?: string;
   dni?: string;
+  languages?: LangObject[] | [];
+  experiences: Experience[] | [];
 }
 
 export interface ChangeStatusRequest {
@@ -133,18 +135,18 @@ export interface IApplicationJobResponse {
 }
 
 export interface Experience {
-  activytyBussiness: string;
-  area: string;
-  country: string;
-  currentJob: boolean;
-  dateEnd: string;
-  dateStart: string;
-  description: string;
-  employee: string;
-  level: string;
-  nameBussiness: string;
-  subarea: string;
-  title: string;
+  activytyBussiness?: string;
+  area?: string;
+  country?: string;
+  currentJob?: boolean;
+  dateEnd?: string;
+  dateStart?: string;
+  description?: string;
+  employee?: string;
+  level?: string;
+  nameBussiness?: string;
+  subarea?: string;
+  title?: string;
   __v?: number;
   _id?: string;
   nameRef?: string;
@@ -183,3 +185,4 @@ export interface PropMessageNavbarLangs {
     plural: string;
   };
 }
+

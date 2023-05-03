@@ -14,6 +14,7 @@ import {
   CurrentLangContextType,
 } from "../../context/CurrentLang";
 import MenuItemCustom from "./cardMetun";
+import { EmployeeInterface } from "../../interfaces";
 
 const PersonIcon = dynamic(() =>
   import("@mui/icons-material/Person").then((res) => res.default)
@@ -37,18 +38,7 @@ const Navbar = () => {
   const { name, surnames } = employeeGlobal;
   const router = useRouter();
   const logout = () => {
-    setEmployeeGlobal({
-      id: "",
-      name: "",
-      surnames: "",
-      email: "",
-      phone: "",
-      cv: "",
-      callingCode: "",
-      typeJob: "",
-      password: "",
-      service: [],
-    });
+    setEmployeeGlobal({} as EmployeeInterface);
     localStorage.removeItem("countries");
     localStorage.removeItem("employee");
     localStorage.removeItem("email");
