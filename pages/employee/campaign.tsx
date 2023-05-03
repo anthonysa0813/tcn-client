@@ -6,7 +6,6 @@ import { Service, ServiceI } from "../../interfaces";
 import dynamic from "next/dynamic";
 import NotFoundJobs from "../../components/cards/NotFoundJobs";
 import { TokenContext } from "../../context/CurrentToken";
-
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
 interface ServiceProp {

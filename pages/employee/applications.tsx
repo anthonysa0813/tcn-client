@@ -90,7 +90,7 @@ const ApplicationsPage = () => {
       <LayoutEmployee name="aplicaciones de trabajo">
         <div className={styles.wrapper}>
           {applicationsState.length > 0 && <h4>Mis Postulaciones</h4>}
-           
+
           <div className={styles.applicationsGrid}>
             {applicationsState.length === 0 && (
               <h3>No tienes postulaciones abiertas</h3>
@@ -112,3 +112,4 @@ const ApplicationsPage = () => {
 };
 
 export default ApplicationsPage;
+

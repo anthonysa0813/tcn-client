@@ -91,7 +91,6 @@ const FormExperienceSecondary: NextPage<Prop> = ({
     let id: EmployeeInterface | null = null;
     id = JSON.parse(localStorage.getItem("employee") || "");
     setIdEmployee(id?.id || "");
-    // console.log({ dataListExperiences });
     console.log({ currentExperience });
   }, []);
 
@@ -203,7 +202,6 @@ const FormExperienceSecondary: NextPage<Prop> = ({
           setDataListExperiences([...dataListExperiences, res]);
           setTimeout(() => {
             openExperience();
-            router.reload();
           }, 2000);
         })
         .catch((err) => {
