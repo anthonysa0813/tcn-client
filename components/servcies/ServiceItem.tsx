@@ -31,7 +31,7 @@ const ServiceItem = ({
 
   useEffect(() => {
     setCurrentService(service);
-    console.log({ service });
+    console.log("service", service);
   }, [service]);
 
   const watchAllEmployee = (data: EmployeeInterface[] | []) => {

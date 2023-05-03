@@ -22,7 +22,7 @@ const FormToDeleteExp = ({
   const deleteFunc = () => {
     deleteExperience(
       "experiences",
-      currentExperience.employee,
+      currentExperience.employee || "",
       currentExperience._id || ""
     ).then((res) => {
       console.log(res);

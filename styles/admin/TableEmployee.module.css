@@ -1,3 +1,10 @@
+.gridBody {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-rows: 100px;
+  column-gap: 1rem;
+}
+
 .actions {
   display: flex;
   justify-content: space-between;
@@ -25,4 +32,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.experienceField {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleExp p {
+  font-weight: bold;
+}
+
+.titleExp span {
+  font-weight: normal;
 }
