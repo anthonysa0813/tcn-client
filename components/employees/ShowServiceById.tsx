@@ -12,22 +12,18 @@ interface Prop {
   idService: string;
   idEmployee?: string;
   setShowService: React.Dispatch<React.SetStateAction<boolean>>;
+  exp?: Experience;
 }
 
 const ShowServiceById = ({
   idService = "",
   idEmployee = "",
   setShowService,
+  exp
 }: Prop) => {
-  const [experence, setExperence] = useState<Experience>({} as Experience);
+  const [experence, setExperence] = useState<Experience>(exp as Experience);
 
-  useEffect(() => {
-    getUniqueExperience("experiences/unique", idEmployee, idService).then(
-      (res) => {
-        setExperence(res);
-      }
-    );
-  }, [idEmployee, idService]);
+ 
 
   return (
     <section className={styles.showServiceGrid}>
