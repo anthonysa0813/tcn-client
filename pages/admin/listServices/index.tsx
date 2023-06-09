@@ -1,4 +1,3 @@
-import { GetServerSideProps } from "next";
 import React, { useEffect, useState, useContext } from "react";
 import LayoutDashboard from "../../../components/dashboard/LayoutDashboard";
 import { ServiceI } from "../../../interfaces";
@@ -6,6 +5,7 @@ import styles from "../../../styles/admin/ListServices.module.css";
 import ServiceItem from "../../../components/servcies/ServiceItem";
 import dynamic from "next/dynamic";
 import { TokenContext } from "../../../context/CurrentToken";
+import { API_URL } from "../../../utils/constanstApi";
 
 const Head = dynamic(() => import("next/head").then((res) => res.default));
 
@@ -13,16 +13,19 @@ interface Prop {
   services: ServiceI[] | [];
 }
 
-const ListServicesPage = ({ services }: Prop) => {
+const ListServicesPage = () => {
   const [servicesArr, setServicesArr] = useState<ServiceI[] | []>([]);
   const { privateToken } = useContext(TokenContext);
 
   useEffect(() => {
-    console.log({ services });
-    if (services.length > 0) {
-      setServicesArr(services);
-    }
+    fetch(`https://work.contactamericas.com/api/services`).then((res) => {
+      return res.json();
+    }).then((res) => {
+      setServicesArr(res.services);
+    })
   }, []);
+
+  
 
   const changeStatusService = async (currentService: ServiceI) => {
     await fetch(
@@ -73,19 +76,5 @@ const ListServicesPage = ({ services }: Prop) => {
   );
 };
 
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const response = await fetch(`${process.env.DB_URL}/services`);
-  const data = await response.json();
-  console.log({ data });
-
-  return {
-    props: {
-      services: data.services,
-    },
-  };
-};
-
 export default ListServicesPage;
+

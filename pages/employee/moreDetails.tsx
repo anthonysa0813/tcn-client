@@ -143,6 +143,7 @@ const MoreDetails = () => {
     setshowModalExperience((state) => !state);
   };
   const [initialForm, setInitialForm] = useState({} as PropSaveInfo);
+  const [currentExpToMoDal, setCurrentExpToMoDal] = useState({} as Experience )
 
   const [formValue, setFormValue] = useState({
     phone: "",
@@ -503,7 +504,8 @@ const MoreDetails = () => {
                             onClick={() => {
                               setShowService(true);
                               setCurrentIdExperience(exp._id || "");
-                            }}
+                              setCurrentExpToMoDal(exp); 
+			   }}
                           >
                             Leer completo
                           </span>
@@ -563,7 +565,8 @@ const MoreDetails = () => {
             idService={currentIdExperience}
             idEmployee={employeeGlobal.id}
             setShowService={setShowService}
-          />
+            exp={currentExpToMoDal}
+	  />
         </ModalComponent>
       )}
       {editMode && (

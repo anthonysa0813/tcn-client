@@ -1,4 +1,5 @@
 import { Experience } from "../../interfaces";
+import { API_URL } from "../../utils/constanstApi";
 
 // http://localhost:5050/api/experiences/633a64c57aea5ece75d1a02e
 export const createExperienceApi = async (
@@ -80,8 +81,9 @@ export const getUniqueExperience = async (
   idExperience: string
 ) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}/${idExperience}`
+    `${API_URL}/experiences/${endpoint}/${idEmployee}/${idExperience}`
   );
+  console.log(`${API_URL}/experiences/${endpoint}/${idEmployee}/${idExperience}`);
   const data = await response.json();
   return data;
 };

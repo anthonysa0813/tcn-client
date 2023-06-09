@@ -76,6 +76,7 @@ const LoginAdminFormComponent = ({ setShowForgetPass }: Prop) => {
           toastWarning(res.message);
         } else {
           const { token, user } = res;
+          console.log({res});
           setUserGlobal(user);
           setPrivateToken({ token });
           localStorage.setItem("auth", JSON.stringify(user));

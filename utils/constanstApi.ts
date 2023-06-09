@@ -3,7 +3,7 @@
 //https://contactbpo-server-production.up.railway.app/api
 // http://localhost:5000/api
 // "https://work.contactamericas.com/api"
-export const API_URL = "https://work.contactamericas.com/api";
+export const API_URL = "http://172.25.120.19/api";
 // export const LINK_BACKEND =
 //   "https://contactbpo-server-production.up.railway.app/";
 export const LINK_BACKEND = "https://work.contactamericas.com/api/";

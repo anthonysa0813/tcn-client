@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/client/Campaign.module.css";
 import { GetServerSideProps } from "next/types";
@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import NotFoundJobs from "../../components/cards/NotFoundJobs";
 import { TokenContext } from "../../context/CurrentToken";
 const Head = dynamic(() => import("next/head").then((res) => res.default));
+import { API_URL } from "../../utils/constanstApi";
 
 interface ServiceProp {
   services: ServiceI[] | [];
@@ -18,8 +19,20 @@ const ServiceCard = dynamic(
   }
 );
 
-const CampaignEmployees = ({ services }: ServiceProp) => {
-  return (
+const CampaignEmployees = () => {
+  const [services, setServices] = useState([]);
+
+useEffect(() => {
+
+   fetch("https://work.contactamericas.com/api/services").then((res) => {
+	return res.json();
+}).then((serv) => {
+	console.log(serv.services);
+	setServices(serv.services);
+});
+}, [])
+	  
+ return (
     <>
       <Head>
         <title>Contact BPO | Puestos Disponibles</title>
@@ -34,7 +47,6 @@ const CampaignEmployees = ({ services }: ServiceProp) => {
             <div className={styles.mainContainer}>
               {services.length > 0 && <h3>Puestos de trabajos</h3>}
               <div className={styles.servicesGrid}>
-                {services.length === 0 && <NotFoundJobs />}
                 {services?.map((service) => {
                   return (
                     <>
@@ -50,16 +62,4 @@ const CampaignEmployees = ({ services }: ServiceProp) => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const response = await fetch(`${process.env.DB_URL}/services`);
-  const data = await response.json();
-
-  return {
-    props: {
-      services: data.services,
-    },
-  };
-};
-
 export default CampaignEmployees;
