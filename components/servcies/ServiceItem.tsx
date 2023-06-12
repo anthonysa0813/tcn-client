@@ -59,7 +59,7 @@ const ServiceItem = ({
     <>
       <div key={currentService._id} className={styles.tableService}>
         <div className={styles.tableHead}>
-          <h4>{currentService.title}</h4>
+          <h4 className={styles.title} >{currentService.title}</h4>
           <Button
             size={"xs"}
             style={{ padding: ".5rem" }}

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import LayoutEmployee from "./layoutEmployee";
 import styles from "../../styles/client/Campaign.module.css";
 import { GetServerSideProps } from "next/types";
@@ -21,10 +21,10 @@ const ServiceCard = dynamic(
 
 const CampaignEmployees = () => {
   const [services, setServices] = useState([]);
+  const { privateToken: {token}, setPrivateToken } = useContext(TokenContext);
 
 useEffect(() => {
-
-   fetch("https://work.contactamericas.com/api/services").then((res) => {
+   fetch(`${API_URL}/services`).then((res) => {
 	return res.json();
 }).then((serv) => {
 	console.log(serv.services);
@@ -45,7 +45,7 @@ useEffect(() => {
         <main className={styles.main}>
           <div className={styles.wrapper}>
             <div className={styles.mainContainer}>
-              {services.length > 0 && <h3>Puestos de trabajos</h3>}
+              {services?.length > 0 ? <h3>Puestos de trabajos</h3> : <h3>No hay puestos disponibles por el momento</h3>} 
               <div className={styles.servicesGrid}>
                 {services?.map((service) => {
                   return (

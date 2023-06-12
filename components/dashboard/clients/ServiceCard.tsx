@@ -68,6 +68,7 @@ const ServiceCard = ({ service }: Prop) => {
 
   const applicationJob = async (idJob: string = "") => {
     console.log("click :d");
+    console.log({employeeGlobal});
     if (!employeeGlobal.id) {
       const notify = () => toast.error("Necesitas de una cuenta registrada");
       notify();
@@ -82,12 +83,8 @@ const ServiceCard = ({ service }: Prop) => {
       {
         idEmployee: employeeGlobal.id,
         idService: idJob,
-      },
-      {
-        headers: {
-          Authorization: privateToken.token,
-        },
-      }
+	status: ""      
+},      
     );
 
     fetch(

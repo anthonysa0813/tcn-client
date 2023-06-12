@@ -70,10 +70,10 @@ const TableListStaticData = ({
     console.log(currentData);
   }, [data, offsetSliceValue, initialSliceValue]);
 
-  const changeStatusJob = async (id: string) => {
-    EmployeeApi.post("/employees/change-status-job", {
-      statusOption: "VISTO",
-      idEmployee: id,
+  const changeStatusJob = async (idJob: string, idEmployee: string) => {
+    console.log({message: "change status", idJob, idEmployee});
+    EmployeeApi.put(`/employees/status-job/${idJob}/${idEmployee}`, {
+      status: "VISTO",
     });
   };
 
@@ -196,7 +196,7 @@ const TableListStaticData = ({
                 auto
                 size="sm"
                 style={{ marginBlock: "1rem" }}
-                onClick={() => changeStatusJob(currentEmployee.id)}
+                onClick={() => changeStatusJob(idService, currentEmployee.id)}
               >
                 <Link href={currentEmployee.cv || ""} target="_blank">
                   abrir el enlace del cv

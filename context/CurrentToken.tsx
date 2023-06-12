@@ -29,7 +29,6 @@ export const TokenContextProvider = ({ children }: ChildrenType) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const tokenSecret = sessionStorage.getItem("token");
-      console.log("token", tokenSecret);
       setPrivateToken({ token: tokenSecret || "" });
     }
   }, []);

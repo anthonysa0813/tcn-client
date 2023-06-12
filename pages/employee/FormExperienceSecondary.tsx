@@ -86,6 +86,13 @@ const FormExperienceSecondary: NextPage<Prop> = ({
   const notifySuccess = (message: string) => {
     return toast.success(message);
   };
+  const [tokenValue, setTokenValue] = useState("");
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    setTokenValue(token || "");
+  }, []);
+
 
   useEffect(() => {
     let id: EmployeeInterface | null = null;
@@ -192,11 +199,13 @@ const FormExperienceSecondary: NextPage<Prop> = ({
     };
 
     if (editMode !== undefined) {
+      console.log({dataForm});
       EmployeeApi.put(
         `/experiences/${idEmployee}/${currentExperience?._id}`,
         dataForm
       )
         .then((res: any) => {
+          router.reload();
           notifySuccess("Se ha actualizado la experiencia.");
           setIsLoading(false);
           setDataListExperiences([...dataListExperiences, res]);

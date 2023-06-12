@@ -58,8 +58,10 @@ const DropDownSelect = ({
   };
 
   const changeStatus = async (value: string) => {
+     console.log(value);
+     console.log({idJob, idUser});
     setStateStatus(value);
-    const response = await EmployeeApi.put(`/employees/status-job/${idJob}`, {
+    const response = await EmployeeApi.put(`/employees/status-unique-job/${idJob}/${idUser}`, {
       status: value,
     });
   };

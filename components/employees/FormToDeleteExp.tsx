@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { deleteExperience } from "../../apis/experience/useFecthExperience";
 import { Experience } from "../../interfaces";
 import styles from "../../styles/employees/FormToDeleteExp.module.css";
 import ButtonPrimary from "../buttons/Button";
+import { TokenContext } from "../../context/CurrentToken";
 
 interface Prop {
   setshowModalToDelete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,11 +20,13 @@ const FormToDeleteExp = ({
   setDataListExperiences,
   dataListExperiences,
 }: Prop) => {
+   const { privateToken: {token}, setPrivateToken } = useContext(TokenContext);
   const deleteFunc = () => {
     deleteExperience(
       "experiences",
       currentExperience.employee || "",
-      currentExperience._id || ""
+      currentExperience._id || "",
+      token
     ).then((res) => {
       console.log(res);
       setshowModalToDelete((state) => !state);

@@ -42,12 +42,16 @@ export const getExperienceByEmployee = async (
 export const deleteExperience = async (
   endpoint: string,
   idEmployee: string,
-  idExperience: string
+  idExperience: string,
+  token: string
 ) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}/${idExperience}`,
     {
       method: "DELETE",
+      headers: {
+    	 Authorization: token,
+       },
     }
   );
   const data = await response.json();
@@ -59,7 +63,8 @@ export const updateExperience = async (
   endpoint: string,
   idEmployee: string,
   idExperience: string,
-  dataExp: Experience
+  dataExp: Experience,
+  token: string
 ) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/${endpoint}/${idEmployee}/${idExperience}`,
@@ -67,6 +72,7 @@ export const updateExperience = async (
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+	Authorization: token
       },
       body: JSON.stringify(dataExp),
     }
